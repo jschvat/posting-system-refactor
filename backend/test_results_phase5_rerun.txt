@@ -1,0 +1,909 @@
+
+> posting-system-backend@1.0.0 test
+> jest
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546713_nhp7s
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546740_6a884
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546781_ssg68
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546831_rusek
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546805_hzgrk
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546800_0snql
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546810_uycc2
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546821_45vxi
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546900_qaa4q
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546868_2tn6u
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546873_qe3d1
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546878_8ke19
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546854_at1jv
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546873_5ue5m
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1762969546903_7jofg
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.error
+    Failed to clean up file: /home/jason/Development/claude/posting-system-refactor/backend/src/uploads/images/ce3e5b58-ce83-477b-9fb5-3640768b9180.jpg Error: ENOENT: no such file or directory, unlink '/home/jason/Development/claude/posting-system-refactor/backend/src/uploads/images/ce3e5b58-ce83-477b-9fb5-3640768b9180.jpg'
+        at Object.unlink (node:internal/fs/promises:1064:10)
+        at /home/jason/Development/claude/posting-system-refactor/backend/src/routes/media.js:237:13 {
+      errno: -2,
+      code: 'ENOENT',
+      syscall: 'unlink',
+      path: '/home/jason/Development/claude/posting-system-refactor/backend/src/uploads/images/ce3e5b58-ce83-477b-9fb5-3640768b9180.jpg'
+    }
+
+      237 |             await fs.unlink(file.path);
+      238 |           } catch (unlinkError) {
+    > 239 |             console.error('Failed to clean up file:', file.path, unlinkError);
+          |                     ^
+      240 |           }
+      241 |         }
+      242 |       }
+
+      at src/routes/media.js:239:21
+
+PASS src/__tests__/utils.test.js (42.096 s)
+  Validation Utils
+    validatePassword
+      ✓ should validate strong password (3 ms)
+      ✓ should reject weak password
+      ✓ should reject empty password (1 ms)
+    validateUsername
+      ✓ should validate good username
+      ✓ should reject short username
+      ✓ should reject reserved username
+    validateEmail
+      ✓ should validate good email (1 ms)
+      ✓ should reject invalid email format
+    sanitizeContent
+      ✓ should sanitize HTML content
+      ✓ should return empty string for null input
+    validatePagination
+      ✓ should return valid pagination params (1 ms)
+      ✓ should handle invalid page numbers
+    cleanText
+      ✓ should clean text content
+      ✓ should limit text length
+  Response Utils
+    createSuccessResponse
+      ✓ should create success response with data
+      ✓ should create success response without data
+    createErrorResponse
+      ✓ should create error response
+      ✓ should create error response with details
+
+  console.warn
+    Optional authentication failed: invalid token
+
+      149 |     } catch (tokenError) {
+      150 |       // Token is invalid, but we continue without authentication
+    > 151 |       console.warn('Optional authentication failed:', tokenError.message);
+          |               ^
+      152 |     }
+      153 |
+      154 |     next();
+
+      at optionalAuthenticate (src/middleware/auth.js:151:15)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:46:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Comment creation error: Error: Maximum comment nesting depth exceeded
+        at Comment.create (/home/jason/Development/claude/posting-system-refactor/backend/src/models/Comment.js:38:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at /home/jason/Development/claude/posting-system-refactor/backend/src/routes/comments.js:679:23
+
+      744 |
+      745 |     } catch (error) {
+    > 746 |       console.error('Comment creation error:', error);
+          |               ^
+      747 |
+      748 |       // Handle specific validation errors
+      749 |       if (error.message.includes('Maximum comment nesting depth exceeded')) {
+
+      at src/routes/comments.js:746:15
+
+  console.error
+    Error: {
+      message: 'Test error',
+      stack: 'Error: Test error\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:458:21\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at src/__tests__/middleware.test.js:461:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Error: {
+      message: 'Validation failed',
+      stack: 'Error: Validation failed\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:466:21\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/validation-error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at src/__tests__/middleware.test.js:470:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Error: {
+      message: 'Unknown error',
+      stack: 'Error: Unknown error\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:475:13\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/unknown-error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:97:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.log
+    404 - Route not found: GET /non-existent-route
+
+      at notFound (src/middleware/notFound.js:14:11)
+
+  console.error
+    Error: {
+      message: 'Route not found - GET /non-existent-route',
+      stack: 'Error: Route not found - GET /non-existent-route\n' +
+        '    at notFound (/home/jason/Development/claude/posting-system-refactor/backend/src/middleware/notFound.js:17:17)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/non-existent-route',
+      method: 'GET',
+      body: undefined,
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at notFound (src/middleware/notFound.js:22:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.log
+    404 - Route not found: POST /api/non-existent
+
+      at notFound (src/middleware/notFound.js:14:11)
+
+  console.error
+    Error: {
+      message: 'Route not found - POST /api/non-existent',
+      stack: 'Error: Route not found - POST /api/non-existent\n' +
+        '    at notFound (/home/jason/Development/claude/posting-system-refactor/backend/src/middleware/notFound.js:17:17)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/api/non-existent',
+      method: 'POST',
+      body: undefined,
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at notFound (src/middleware/notFound.js:22:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.warn
+    Geocoding failed for user address update: Address not found
+
+      346 |             }
+      347 |           } else {
+    > 348 |             console.warn('Geocoding failed for user address update:', geocodeResult.error);
+          |                     ^
+      349 |             // Continue with update even if geocoding fails
+      350 |           }
+      351 |         } catch (geocodeError) {
+
+      at src/routes/users.js:348:21
+
+  console.warn
+    Geocoding failed for user address update: Address not found
+
+      346 |             }
+      347 |           } else {
+    > 348 |             console.warn('Geocoding failed for user address update:', geocodeResult.error);
+          |                     ^
+      349 |             // Continue with update even if geocoding fails
+      350 |           }
+      351 |         } catch (geocodeError) {
+
+      at src/routes/users.js:348:21
+
+Terminated

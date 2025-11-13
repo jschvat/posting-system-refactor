@@ -1,0 +1,200 @@
+      ✓ should validate privacy level (3383 ms)
+      ✓ should trim whitespace from content (3341 ms)
+    PUT /api/posts/:id
+      ✓ should update post by owner (7551 ms)
+      ✓ should allow partial updates (7625 ms)
+      ✓ should reject update without authentication (7376 ms)
+      ✓ should reject update by non-owner (7517 ms)
+      ✓ should allow admin to update any post (7513 ms)
+      ✓ should return 404 for non-existent post (7630 ms)
+      ✓ should validate update data (7541 ms)
+    DELETE /api/posts/:id
+      ✓ should delete post by owner (7541 ms)
+      ✓ should reject delete without authentication (7588 ms)
+      ✓ should reject delete by non-owner (7560 ms)
+      ✓ should allow admin to delete any post (7545 ms)
+      ✓ should return 404 for non-existent post (7629 ms)
+      ✓ should cascade delete comments and reactions (7506 ms)
+      ✓ should validate post ID parameter (7373 ms)
+    Post visibility and privacy
+      ✓ should respect privacy levels for unauthenticated users (7517 ms)
+      ✓ should handle unpublished posts correctly (7324 ms)
+
+PASS src/__tests__/groupPosts.test.js (257.918 s)
+  Group Posts Routes
+    POST /api/groups/:slug/posts - Create Post
+      ✓ should create a text post successfully (5561 ms)
+      ✓ should create a link post successfully (5561 ms)
+      ✓ should require title (5368 ms)
+      ✓ should require authentication (5594 ms)
+      ✓ should create pending post if approval required (5764 ms)
+      ✓ should allow moderator to bypass approval (5661 ms)
+    GET /api/groups/:slug/posts - List Posts
+      ✓ should list all published posts (7153 ms)
+      ✓ should support hot sorting (3640 ms)
+      ✓ should support new sorting (3676 ms)
+      ✓ should support pagination (3716 ms)
+    GET /api/groups/:slug/posts/:postId - Get Single Post
+      ✓ should get post by ID (3808 ms)
+      ✓ should return 404 for non-existent post (3738 ms)
+    PUT /api/groups/:slug/posts/:postId - Update Post
+      ✓ should allow author to update their post (3652 ms)
+      ✓ should allow moderator to update any post (3629 ms)
+      ✓ should prevent non-author non-moderator from updating post (3696 ms)
+    DELETE /api/groups/:slug/posts/:postId - Delete Post
+      ✓ should allow author to delete their post (3677 ms)
+      ✓ should allow moderator to delete any post (3718 ms)
+      ✓ should prevent non-author non-moderator from deleting post (3712 ms)
+    POST /api/groups/:slug/posts/:postId/vote - Vote on Post
+      ✓ should allow upvoting a post (3719 ms)
+      ✓ should allow downvoting a post (3658 ms)
+      ✓ should toggle vote if same vote type (4344 ms)
+      ✓ should change vote if different vote type (8009 ms)
+      ✓ should require authentication (7953 ms)
+      ✓ should validate vote_type (7745 ms)
+    DELETE /api/groups/:slug/posts/:postId/vote - Remove Vote
+      ✓ should remove existing vote (7880 ms)
+    POST /api/groups/:slug/posts/:postId/pin - Pin Post (Moderator)
+      ✓ should allow moderator to pin post (7950 ms)
+      ✓ should allow moderator to unpin post (8053 ms)
+      ✓ should prevent regular member from pinning (7908 ms)
+    POST /api/groups/:slug/posts/:postId/lock - Lock Post (Moderator)
+      ✓ should allow moderator to lock post (7999 ms)
+      ✓ should prevent non-moderator from locking (7995 ms)
+    POST /api/groups/:slug/posts/:postId/remove - Remove Post (Moderator)
+      ✓ should allow moderator to remove post with reason (7835 ms)
+      ✓ should prevent regular member from removing post (7979 ms)
+      ✓ should require removal_reason (8000 ms)
+    POST /api/groups/:slug/posts/:postId/approve - Approve Post (Moderator)
+      ✓ should allow moderator to approve pending post (7781 ms)
+      ✓ should prevent regular member from approving (7900 ms)
+    GET /api/groups/:slug/posts/pending - List Pending Posts (Moderator)
+      ✓ should allow moderator to view pending posts (7860 ms)
+      ✓ should prevent regular member from viewing pending posts (7653 ms)
+    GET /api/groups/:slug/posts/top - Top Posts by Period
+      ✓ should get top posts for day (7463 ms)
+      ✓ should get top posts for week (7578 ms)
+      ✓ should default to all time if no period (7906 ms)
+
+PASS src/__tests__/auth.test.js (257.936 s)
+  Authentication Routes
+    POST /api/auth/register
+      ✓ should register a new user with valid data (4988 ms)
+      ✓ should reject registration with invalid email (4799 ms)
+      ✓ should reject registration with weak password (4636 ms)
+      ✓ should reject registration with short username (4870 ms)
+      ✓ should reject registration with non-alphanumeric username (4845 ms)
+      ✓ should reject registration with duplicate username (5026 ms)
+      ✓ should reject registration with duplicate email (5800 ms)
+      ✓ should normalize email to lowercase (5539 ms)
+      ✓ should trim whitespace from string fields (3095 ms)
+      ✓ should validate bio length if provided (2846 ms)
+      ✓ should accept valid avatar URL (3084 ms)
+      ✓ should reject invalid avatar URL (2865 ms)
+    POST /api/auth/login
+      ✓ should login with valid username and password (3353 ms)
+      ✓ should login with valid email and password (3347 ms)
+      ✓ should reject login with invalid username (3069 ms)
+      ✓ should reject login with invalid password (3229 ms)
+      ✓ should reject login for inactive account (3061 ms)
+      ✓ should handle remember_me option (3227 ms)
+      ✓ should validate required fields (3056 ms)
+      ✓ should normalize email case in identifier (3189 ms)
+    POST /api/auth/logout
+      ✓ should logout authenticated user (3072 ms)
+      ✓ should reject logout without authentication (3164 ms)
+      ✓ should reject logout with invalid token (3187 ms)
+    GET /api/auth/me
+      ✓ should return user profile when authenticated (3162 ms)
+      ✓ should reject request when not authenticated (6445 ms)
+      ✓ should reject request with invalid token (7485 ms)
+      ✓ should reject request with expired token (7280 ms)
+    POST /api/auth/refresh
+      ✓ should refresh token for authenticated user (7317 ms)
+      ✓ should reject refresh without authentication (7188 ms)
+    POST /api/auth/forgot-password
+      ✓ should handle forgot password request for existing user (7467 ms)
+      ✓ should handle forgot password request for non-existing user (7354 ms)
+      ✓ should validate email format (7238 ms)
+      ✓ should require email field (7354 ms)
+    POST /api/auth/reset-password
+      ✓ should reset password with valid token (7970 ms)
+      ✓ should reject invalid reset token (7310 ms)
+      ✓ should reject expired reset token (7227 ms)
+      ✓ should validate new password strength (7439 ms)
+      ✓ should require both token and password (7262 ms)
+    POST /api/auth/change-password
+      ✓ should change password for authenticated user (7784 ms)
+      ✓ should reject change with wrong current password (7525 ms)
+      ✓ should reject change without authentication (6968 ms)
+      ✓ should validate new password strength (7047 ms)
+      ✓ should require both passwords (6787 ms)
+    POST /api/auth/verify-email
+      ✓ should verify email with valid token (7030 ms)
+      ✓ should reject invalid verification token (7285 ms)
+      ✓ should require verification token (6684 ms)
+
+PASS src/__tests__/reactions.test.js (257.984 s)
+  Reactions Routes
+    POST /api/reactions/post/:postId
+      ✓ should add reaction to post with emoji name only (5242 ms)
+      ✓ should add reaction with both name and unicode (5174 ms)
+      ✓ should toggle reaction (remove if exists) (5001 ms)
+      ✓ should validate required fields (5248 ms)
+      ✓ should validate emoji name length (5192 ms)
+      ✓ should return 404 for non-existent post (5312 ms)
+      ✓ should ignore user_id in request body and use authenticated user (7007 ms)
+      ✓ should normalize emoji names (3992 ms)
+      ✓ should use common emoji mappings (3269 ms)
+    POST /api/reactions/comment/:commentId
+      ✓ should add reaction to comment (3274 ms)
+      ✓ should toggle comment reaction (3246 ms)
+      ✓ should return 404 for non-existent comment (3373 ms)
+      ✓ should validate comment ID parameter (3390 ms)
+    GET /api/reactions/post/:postId
+      ✓ should return reaction counts for post (3314 ms)
+      ✓ should include detailed reactions when requested (3259 ms)
+      ✓ should return 404 for non-existent post (3262 ms)
+      ✓ should validate query parameters (3263 ms)
+      ✓ should return empty counts for post with no reactions (3252 ms)
+    GET /api/reactions/comment/:commentId
+      ✓ should return reaction counts for comment (3230 ms)
+      ✓ should include user details when requested (3334 ms)
+      ✓ should return 404 for non-existent comment (3316 ms)
+    GET /api/reactions/user/:userId
+      ✓ should return paginated user reactions (3374 ms)
+      ✓ should support filtering by reaction type (3332 ms)
+      ✓ should support pagination (7747 ms)
+      ✓ should return 404 for non-existent user (7589 ms)
+      ✓ should validate query parameters (7389 ms)
+      ✓ should include associated post/comment author information (7517 ms)
+    DELETE /api/reactions/:id
+      ✓ should delete a reaction (7408 ms)
+      ✓ should return updated reaction counts after deletion (7697 ms)
+      ✓ should return 404 for non-existent reaction (7597 ms)
+      ✓ should validate reaction ID parameter (7489 ms)
+    GET /api/reactions/emoji-list
+      ✓ should return available emoji list (7589 ms)
+      ✓ should include common emojis (7508 ms)
+      ✓ should format display names properly (7377 ms)
+    GET /api/reactions/stats/popular
+      ✓ should return popular emoji statistics (7661 ms)
+      ✓ should support custom time period (7516 ms)
+      ✓ should support custom limit (7363 ms)
+      ✓ should validate query parameters (7570 ms)
+      ✓ should order by usage count descending (7344 ms)
+    Reaction normalization and validation
+      ✓ should handle emoji unicode properly (7245 ms)
+      ✓ should sanitize emoji names (7107 ms)
+      ✓ should convert emoji names to lowercase (6997 ms)
+      ✓ should map alternative emoji names to standard unicode (7433 ms)
+    Reaction aggregation and counting
+      ✓ should properly aggregate multiple reactions of same type (7537 ms)
+      ✓ should handle mixed reaction types (5331 ms)
+
+Test Suites: 15 passed, 15 total
+Tests:       501 passed, 501 total
+Snapshots:   0 total
+Time:        258.121 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
