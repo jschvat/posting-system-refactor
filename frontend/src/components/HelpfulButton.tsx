@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaThumbsUp } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import reputationApi from '../services/reputationApi';
+import reputationApi from '../services/api/reputationApi';
 import { useAuth } from '../contexts/AuthContext';
 import { getTheme } from '../utils/themeHelpers';
 

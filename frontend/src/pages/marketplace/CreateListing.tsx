@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import marketplaceApi from '../../services/marketplaceApi';
 import { ImageUpload, ImageFile } from '../../components/marketplace/ImageUpload';
+import { ListingBasicInfo } from '../../components/marketplace/forms/ListingBasicInfo';
+import { ListingPricing } from '../../components/marketplace/forms/ListingPricing';
+import { ListingLocation } from '../../components/marketplace/forms/ListingLocation';
 
 const Container = styled.div`
   max-width: 800px;
@@ -51,108 +54,6 @@ const SectionTitle = styled.h2`
   border-bottom: 2px solid #ecf0f1;
 `;
 
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const Label = styled.label`
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 8px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #ecf0f1;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-  }
-
-  &:disabled {
-    background: #f8f9fa;
-    cursor: not-allowed;
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #ecf0f1;
-  border-radius: 8px;
-  font-size: 15px;
-  font-family: inherit;
-  resize: vertical;
-  min-height: 120px;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #ecf0f1;
-  border-radius: 8px;
-  font-size: 15px;
-  background: white;
-  cursor: pointer;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-  }
-`;
-
-const Row = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  margin-right: 8px;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  color: #2c3e50;
-  cursor: pointer;
-`;
-
-const HelpText = styled.p`
-  font-size: 13px;
-  color: #7f8c8d;
-  margin: 6px 0 0 0;
-`;
-
 const ButtonGroup = styled.div`
   display: flex;
   gap: 12px;
@@ -187,92 +88,6 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 
   &:disabled {
     opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const LocationStatus = styled.div`
-  background: #e8f5e9;
-  border: 1px solid #4caf50;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const LocationStatusIcon = styled.span`
-  font-size: 20px;
-`;
-
-const LocationStatusText = styled.div`
-  flex: 1;
-`;
-
-const LocationStatusTitle = styled.div`
-  font-weight: 600;
-  color: #2e7d32;
-  margin-bottom: 4px;
-`;
-
-const LocationStatusSubtitle = styled.div`
-  font-size: 13px;
-  color: #558b2f;
-`;
-
-const LocationDetecting = styled.div`
-  background: #fff3e0;
-  border: 1px solid #ff9800;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const DetectingText = styled.div`
-  color: #e65100;
-  font-weight: 500;
-`;
-
-const ChangeLocationButton = styled.button`
-  background: transparent;
-  color: #3498db;
-  border: 1px solid #3498db;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-
-  &:hover {
-    background: #3498db;
-    color: white;
-  }
-`;
-
-const DetectLocationButton = styled.button`
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  &:hover {
-    background: #2980b9;
-  }
-
-  &:disabled {
-    background: #bdc3c7;
     cursor: not-allowed;
   }
 `;
@@ -576,73 +391,11 @@ export const CreateListing: React.FC = () => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         {success && <SuccessMessage>{success}</SuccessMessage>}
 
-        <Section>
-          <SectionTitle>Basic Information</SectionTitle>
-
-          <FormGroup>
-            <Label htmlFor="title">Title *</Label>
-            <Input
-              id="title"
-              name="title"
-              type="text"
-              value={formData.title}
-              onChange={handleChange}
-              placeholder="iPhone 14 Pro Max - Like New"
-              maxLength={100}
-              required
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="description">Description *</Label>
-            <TextArea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Describe your item in detail..."
-              maxLength={2000}
-              required
-            />
-            <HelpText>{formData.description.length}/2000 characters</HelpText>
-          </FormGroup>
-
-          <Row>
-            <FormGroup>
-              <Label htmlFor="category_id">Category</Label>
-              <Select
-                id="category_id"
-                name="category_id"
-                value={formData.category_id}
-                onChange={handleChange}
-              >
-                <option value="">Select a category</option>
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </Select>
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="condition">Condition *</Label>
-              <Select
-                id="condition"
-                name="condition"
-                value={formData.condition}
-                onChange={handleChange}
-                required
-              >
-                <option value="new">New</option>
-                <option value="like_new">Like New</option>
-                <option value="good">Good</option>
-                <option value="fair">Fair</option>
-                <option value="poor">Poor</option>
-              </Select>
-            </FormGroup>
-          </Row>
-        </Section>
+        <ListingBasicInfo
+          formData={formData}
+          categories={categories}
+          onChange={handleChange}
+        />
 
         <Section>
           <SectionTitle>Photos</SectionTitle>
@@ -654,215 +407,22 @@ export const CreateListing: React.FC = () => {
           />
         </Section>
 
-        <Section>
-          <SectionTitle>Pricing</SectionTitle>
+        <ListingPricing
+          formData={formData}
+          onChange={handleChange}
+        />
 
-          <Row>
-            <FormGroup>
-              <Label htmlFor="price">Price *</Label>
-              <Input
-                id="price"
-                name="price"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.price}
-                onChange={handleChange}
-                placeholder="99.99"
-                required
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="original_price">Original Price (Optional)</Label>
-              <Input
-                id="original_price"
-                name="original_price"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.original_price}
-                onChange={handleChange}
-                placeholder="149.99"
-              />
-              <HelpText>Show how much you paid originally</HelpText>
-            </FormGroup>
-          </Row>
-
-          <FormGroup>
-            <CheckboxLabel>
-              <Checkbox
-                name="allow_offers"
-                checked={formData.allow_offers}
-                onChange={handleChange}
-              />
-              Allow buyers to make offers
-            </CheckboxLabel>
-          </FormGroup>
-
-          {formData.allow_offers && (
-            <FormGroup>
-              <Label htmlFor="min_offer_price">Minimum Offer Price</Label>
-              <Input
-                id="min_offer_price"
-                name="min_offer_price"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.min_offer_price}
-                onChange={handleChange}
-                placeholder="80.00"
-              />
-              <HelpText>Reject offers below this amount automatically</HelpText>
-            </FormGroup>
-          )}
-
-          <FormGroup>
-            <Label htmlFor="quantity">Quantity Available</Label>
-            <Input
-              id="quantity"
-              name="quantity"
-              type="number"
-              min="1"
-              value={formData.quantity}
-              onChange={handleChange}
-            />
-          </FormGroup>
-        </Section>
-
-        <Section>
-          <SectionTitle>Location</SectionTitle>
-
-          {locationDetecting && (
-            <LocationDetecting>
-              <LocationStatusIcon>📍</LocationStatusIcon>
-              <DetectingText>Detecting your location...</DetectingText>
-            </LocationDetecting>
-          )}
-
-          {locationDetected && !useManualLocation && (
-            <LocationStatus>
-              <LocationStatusIcon>✅</LocationStatusIcon>
-              <LocationStatusText>
-                <LocationStatusTitle>Location detected</LocationStatusTitle>
-                <LocationStatusSubtitle>
-                  {detectedLocation.city}, {detectedLocation.state}
-                </LocationStatusSubtitle>
-              </LocationStatusText>
-              <ChangeLocationButton
-                type="button"
-                onClick={() => setUseManualLocation(true)}
-              >
-                Change Location
-              </ChangeLocationButton>
-            </LocationStatus>
-          )}
-
-          {(!locationDetected || useManualLocation) && !locationDetecting && (
-            <div style={{ marginBottom: '16px' }}>
-              <DetectLocationButton
-                type="button"
-                onClick={detectUserLocation}
-                disabled={locationDetecting}
-              >
-                <span>📍</span>
-                <span>Detect My Location</span>
-              </DetectLocationButton>
-            </div>
-          )}
-
-          <Row>
-            <FormGroup>
-              <Label htmlFor="location_city">City *</Label>
-              <Input
-                id="location_city"
-                name="location_city"
-                type="text"
-                value={formData.location_city}
-                onChange={(e) => {
-                  handleChange(e);
-                  if (!useManualLocation) setUseManualLocation(true);
-                }}
-                placeholder="San Francisco"
-                required
-                disabled={locationDetected && !useManualLocation}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label htmlFor="location_state">State *</Label>
-              <Input
-                id="location_state"
-                name="location_state"
-                type="text"
-                value={formData.location_state}
-                onChange={(e) => {
-                  handleChange(e);
-                  if (!useManualLocation) setUseManualLocation(true);
-                }}
-                placeholder="CA"
-                maxLength={2}
-                required
-                disabled={locationDetected && !useManualLocation}
-              />
-            </FormGroup>
-          </Row>
-
-          <FormGroup>
-            <Label htmlFor="location_zip">ZIP Code (Optional)</Label>
-            <Input
-              id="location_zip"
-              name="location_zip"
-              type="text"
-              value={formData.location_zip}
-              onChange={handleChange}
-              placeholder="94102"
-              maxLength={10}
-            />
-          </FormGroup>
-        </Section>
-
-        <Section>
-          <SectionTitle>Shipping</SectionTitle>
-
-          <FormGroup>
-            <CheckboxLabel>
-              <Checkbox
-                name="shipping_available"
-                checked={formData.shipping_available}
-                onChange={handleChange}
-              />
-              Offer shipping
-            </CheckboxLabel>
-          </FormGroup>
-
-          {formData.shipping_available && (
-            <FormGroup>
-              <Label htmlFor="shipping_cost">Shipping Cost</Label>
-              <Input
-                id="shipping_cost"
-                name="shipping_cost"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.shipping_cost}
-                onChange={handleChange}
-                placeholder="15.00"
-              />
-            </FormGroup>
-          )}
-
-          <FormGroup>
-            <CheckboxLabel>
-              <Checkbox
-                name="local_pickup_only"
-                checked={formData.local_pickup_only}
-                onChange={handleChange}
-              />
-              Local pickup only
-            </CheckboxLabel>
-          </FormGroup>
-        </Section>
+        <ListingLocation
+          formData={formData}
+          onChange={handleChange}
+          locationDetecting={locationDetecting}
+          locationDetected={locationDetected}
+          detectedLocation={detectedLocation}
+          useManualLocation={useManualLocation}
+          onDetectLocation={detectUserLocation}
+          onChangeLocation={() => setUseManualLocation(true)}
+          onManualEdit={() => setUseManualLocation(true)}
+        />
 
         <ButtonGroup>
           <Button type="button" variant="secondary" onClick={() => navigate('/marketplace')}>

@@ -3,8 +3,8 @@
  * Handles all reputation-related API calls
  */
 
-import { apiClient } from './api';
-import { ApiResponse } from '../types';
+import { apiClient } from '../api';
+import { ApiResponse } from '../../types';
 
 export interface Reputation {
   user_id: number;

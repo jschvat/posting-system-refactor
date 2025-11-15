@@ -9,7 +9,7 @@ import { getTheme } from '../utils/themeHelpers';
 import { createPortal } from 'react-dom';
 import { FaStar, FaTimes } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import ratingsApi from '../services/ratingsApi';
+import ratingsApi from '../services/api/ratingsApi';
 import { useAuth } from '../contexts/AuthContext';
 
 interface RatingModalProps {

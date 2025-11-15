@@ -3,8 +3,8 @@
  * Handles all rating-related API calls
  */
 
-import { apiClient } from './api';
-import { ApiResponse } from '../types';
+import { apiClient } from '../api';
+import { ApiResponse } from '../../types';
 
 export interface Rating {
   id: number;
