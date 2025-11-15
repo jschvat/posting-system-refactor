@@ -5,6 +5,9 @@ import { Media } from '../../types';
 import { mediaApi } from '../../services/api';
 import { useToast } from '../Toast';
 import PollCreator from '../PollCreator';
+import { ComposerTextInputs } from './composer/ComposerTextInputs';
+import { ComposerMediaUpload } from './composer/ComposerMediaUpload';
+import { ComposerActions } from './composer/ComposerActions';
 
 interface GroupPostComposerProps {
   onSubmit: (data: CreatePostData) => Promise<void>;
@@ -232,177 +235,52 @@ const GroupPostComposer: React.FC<GroupPostComposerProps> = ({
       )}
 
       <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Input
-            type="text"
-            placeholder="Title (optional)"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            maxLength={300}
-          />
-        </FormGroup>
+        <ComposerTextInputs
+          title={title}
+          content={content}
+          linkUrl={linkUrl}
+          showLinkInput={showLinkInput}
+          onTitleChange={setTitle}
+          onContentChange={setContent}
+          onLinkUrlChange={setLinkUrl}
+          onPaste={handlePaste}
+          onRemoveLink={() => {
+            setShowLinkInput(false);
+            setLinkUrl('');
+          }}
+        />
 
-        <FormGroup>
-          <TextArea
-            placeholder="What's on your mind? (You can paste images here)"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            onPaste={handlePaste}
-            rows={4}
-          />
-        </FormGroup>
-
-        {showLinkInput && (
-          <FormGroup>
-            <LinkInputContainer>
-              <Input
-                type="url"
-                placeholder="https://example.com"
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-              />
-              <RemoveLinkButton type="button" onClick={() => { setShowLinkInput(false); setLinkUrl(''); }}>
-                ×
-              </RemoveLinkButton>
-            </LinkInputContainer>
-          </FormGroup>
-        )}
-
-        {uploadedMedia.length > 0 && (
-          <FormGroup>
-            <UploadedMediaList>
-              {uploadedMedia.map((media) => (
-                <UploadedMediaItem key={media.id}>
-                  {media.media_type === 'image' && media.file_url && (
-                    <MediaThumbnail src={media.file_url} alt={media.alt_text || 'Uploaded image'} />
-                  )}
-                  {media.media_type === 'video' && (
-                    <VideoThumbnail>
-                      <VideoIcon>🎥</VideoIcon>
-                      <VideoName>{media.filename}</VideoName>
-                    </VideoThumbnail>
-                  )}
-                  <RemoveMediaButton onClick={() => handleRemoveUploadedMedia(media.id)}>×</RemoveMediaButton>
-                </UploadedMediaItem>
-              ))}
-            </UploadedMediaList>
-          </FormGroup>
-        )}
-
-        {selectedFiles.length > 0 && uploading && (
-          <FormGroup>
-            <UploadingText>Uploading {selectedFiles.length} file(s)...</UploadingText>
-          </FormGroup>
-        )}
+        <ComposerMediaUpload
+          uploadedMedia={uploadedMedia}
+          uploading={uploading}
+          selectedFiles={selectedFiles}
+          showAttachMenu={showAttachMenu}
+          allowedTypes={allowedTypes}
+          fileInputRef={fileInputRef}
+          onFileSelect={handleFileSelect}
+          onRemoveUploadedMedia={handleRemoveUploadedMedia}
+          onToggleAttachMenu={setShowAttachMenu}
+          onMenuItemClick={(fileType, accept) => {
+            if (fileInputRef.current) {
+              fileInputRef.current.accept = accept;
+              fileInputRef.current.click();
+            }
+          }}
+          onLinkClick={() => {
+            setShowLinkInput(true);
+            setShowAttachMenu(false);
+          }}
+          onPollClick={() => {
+            setShowPollCreator(!showPollCreator);
+            setShowAttachMenu(false);
+          }}
+        />
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <FormActions>
-          <AttachmentSection>
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              onChange={handleFileSelect}
-              style={{ display: 'none' }}
-            />
-
-            <AttachMenuContainer data-attach-menu>
-              <AttachButton
-                type="button"
-                onClick={() => setShowAttachMenu(!showAttachMenu)}
-                title="Add attachment"
-              >
-                <PlusIcon>+</PlusIcon>
-              </AttachButton>
-
-              {showAttachMenu && (
-                <AttachMenu>
-                  {allowedTypes.image && (
-                    <>
-                      <MenuItem onClick={() => {
-                        if (fileInputRef.current) {
-                          fileInputRef.current.accept = 'image/*';
-                          fileInputRef.current.click();
-                        }
-                      }}>
-                        <MenuIcon>📷</MenuIcon>
-                        <MenuText>Photo</MenuText>
-                      </MenuItem>
-                      <MenuItem onClick={() => {
-                        if (fileInputRef.current) {
-                          fileInputRef.current.accept = 'video/*';
-                          fileInputRef.current.click();
-                        }
-                      }}>
-                        <MenuIcon>🎥</MenuIcon>
-                        <MenuText>Video</MenuText>
-                      </MenuItem>
-                    </>
-                  )}
-                  {allowedTypes.link && (
-                    <MenuItem onClick={() => {
-                      setShowLinkInput(true);
-                      setShowAttachMenu(false);
-                    }}>
-                      <MenuIcon>🔗</MenuIcon>
-                      <MenuText>Link</MenuText>
-                    </MenuItem>
-                  )}
-                  <MenuItem onClick={() => {
-                    if (fileInputRef.current) {
-                      fileInputRef.current.accept = '.pdf';
-                      fileInputRef.current.click();
-                    }
-                  }}>
-                    <MenuIcon>📄</MenuIcon>
-                    <MenuText>PDF</MenuText>
-                  </MenuItem>
-                  <MenuItem onClick={() => {
-                    if (fileInputRef.current) {
-                      fileInputRef.current.accept = '.doc,.docx,.xls,.xlsx,.ppt,.pptx';
-                      fileInputRef.current.click();
-                    }
-                  }}>
-                    <MenuIcon>📊</MenuIcon>
-                    <MenuText>Office Document</MenuText>
-                  </MenuItem>
-                  <MenuItem onClick={() => {
-                    if (fileInputRef.current) {
-                      fileInputRef.current.accept = '.skp,.dae,.3ds,.obj,.fbx,.stl';
-                      fileInputRef.current.click();
-                    }
-                  }}>
-                    <MenuIcon>🏗️</MenuIcon>
-                    <MenuText>3D Model</MenuText>
-                  </MenuItem>
-                  <MenuItem onClick={() => {
-                    if (fileInputRef.current) {
-                      fileInputRef.current.accept = '.zip,.rar,.7z,.tar,.gz';
-                      fileInputRef.current.click();
-                    }
-                  }}>
-                    <MenuIcon>📦</MenuIcon>
-                    <MenuText>Archive</MenuText>
-                  </MenuItem>
-                  {allowedTypes.poll && (
-                    <MenuItem onClick={() => {
-                      setShowPollCreator(!showPollCreator);
-                      setShowAttachMenu(false);
-                    }}>
-                      <MenuIcon>📊</MenuIcon>
-                      <MenuText>Poll</MenuText>
-                    </MenuItem>
-                  )}
-                </AttachMenu>
-              )}
-            </AttachMenuContainer>
-          </AttachmentSection>
-
-          <SubmitButton type="submit" disabled={submitting || uploading}>
-            {submitting ? 'Posting...' : 'Post'}
-          </SubmitButton>
-        </FormActions>
+        <ComposerActions submitting={submitting} uploading={uploading}>
+          {/* Attach menu is rendered within ComposerMediaUpload */}
+        </ComposerActions>
 
         {/* Poll Creator */}
         {showPollCreator && (
@@ -444,76 +322,6 @@ const Form = styled.form`
   gap: 16px;
 `;
 
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Input = styled.input`
-  padding: 12px;
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 8px;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
-  font-size: 16px;
-
-  &:focus {
-    outline: none;
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.colors.text.secondary};
-  }
-`;
-
-const TextArea = styled.textarea`
-  padding: 12px;
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 8px;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
-  font-size: 16px;
-  font-family: inherit;
-  resize: vertical;
-  min-height: 100px;
-
-  &:focus {
-    outline: none;
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.colors.text.secondary};
-  }
-`;
-
-const LinkInputContainer = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-`;
-
-const RemoveLinkButton = styled.button`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: ${props => props.theme.colors.error};
-  color: white;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  &:hover {
-    background: #d32f2f;
-  }
-`;
-
 const ErrorMessage = styled.div`
   padding: 12px;
   background: rgba(244, 67, 54, 0.1);
@@ -521,215 +329,6 @@ const ErrorMessage = styled.div`
   border-radius: 4px;
   color: #f44336;
   font-size: 14px;
-`;
-
-const FormActions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding-top: 8px;
-  border-top: 1px solid ${props => props.theme.colors.border};
-`;
-
-const AttachmentSection = styled.div`
-  flex: 1;
-`;
-
-const AttachMenuContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const AttachButton = styled.button`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid ${props => props.theme.colors.primary};
-  background: ${props => props.theme.colors.primary};
-  color: white;
-  font-size: 24px;
-  font-weight: 300;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    transform: rotate(90deg) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active {
-    transform: rotate(90deg) scale(0.95);
-  }
-`;
-
-const PlusIcon = styled.span`
-  line-height: 1;
-  margin-top: -2px;
-`;
-
-const AttachMenu = styled.div`
-  position: absolute;
-  bottom: 48px;
-  left: 0;
-  background: ${props => props.theme.colors.surface};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  min-width: 200px;
-  padding: 8px;
-  z-index: 1000;
-  animation: slideUp 0.2s ease;
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
-const MenuItem = styled.button`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border: none;
-  background: transparent;
-  color: ${props => props.theme.colors.text};
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  text-align: left;
-
-  &:hover {
-    background: ${props => props.theme.colors.background};
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-`;
-
-const MenuIcon = styled.span`
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-`;
-
-const MenuText = styled.span`
-  flex: 1;
-  font-weight: 500;
-`;
-
-const SubmitButton = styled.button`
-  padding: 10px 32px;
-  border-radius: 8px;
-  border: none;
-  background: ${props => props.theme.colors.primary};
-  color: white;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-
-  &:hover:not(:disabled) {
-    opacity: 0.9;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const UploadingText = styled.div`
-  text-align: center;
-  color: ${props => props.theme.colors.primary};
-  font-weight: 600;
-  padding: 12px;
-  background: ${props => props.theme.colors.background};
-  border-radius: 8px;
-`;
-
-const UploadedMediaList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 12px;
-`;
-
-const UploadedMediaItem = styled.div`
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid ${props => props.theme.colors.border};
-`;
-
-const MediaThumbnail = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const VideoThumbnail = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: ${props => props.theme.colors.background};
-  padding: 8px;
-`;
-
-const VideoIcon = styled.div`
-  font-size: 32px;
-  margin-bottom: 4px;
-`;
-
-const VideoName = styled.div`
-  font-size: 11px;
-  color: ${props => props.theme.colors.text.secondary};
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-`;
-
-const RemoveMediaButton = styled.button`
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(244, 67, 54, 0.9);
-  color: white;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    background: #d32f2f;
-  }
 `;
 
 export default GroupPostComposer;

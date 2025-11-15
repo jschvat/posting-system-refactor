@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import marketplaceApi, { MarketplaceListing, MarketplaceCategory } from '../../services/marketplaceApi';
-import { ListingCard } from '../../components/marketplace/ListingCard';
 import { FilterSidebar, FilterState } from '../../components/marketplace/FilterSidebar';
-// Using Unicode symbols instead of react-icons for compatibility
-const SearchIcon = () => <span>🔍</span>;
+import { SearchBar } from '../../components/marketplace/browse/SearchBar';
+import { ListingGrid } from '../../components/marketplace/browse/ListingGrid';
 
 const Container = styled.div`
   max-width: 100%;
@@ -104,44 +103,6 @@ const CreateButton = styled.button`
   }
 `;
 
-const SearchBar = styled.div`
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  padding: 14px 20px 14px 48px;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-
-  &:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
-  }
-`;
-
-const SearchWrapper = styled.div`
-  position: relative;
-  flex: 1;
-
-  svg {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #95a5a6;
-    font-size: 18px;
-  }
-`;
 
 const FilterButton = styled.button<{ active?: boolean }>`
   padding: 14px 24px;
@@ -280,55 +241,6 @@ const SortSelect = styled.select`
   }
 `;
 
-const ListingsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 40px;
-
-  @media (min-width: 1600px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 2200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-`;
-
-const LoadingMessage = styled.div`
-  text-align: center;
-  padding: 60px 20px;
-  color: #7f8c8d;
-  font-size: 18px;
-`;
-
-const EmptyState = styled.div`
-  text-align: center;
-  padding: 80px 20px;
-  color: #7f8c8d;
-
-  h3 {
-    font-size: 24px;
-    margin-bottom: 12px;
-    color: #2c3e50;
-  }
-
-  p {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-`;
 
 const Pagination = styled.div`
   display: flex;
@@ -514,18 +426,11 @@ export const MarketplaceBrowse: React.FC = () => {
         </CreateButton>
       </Header>
 
-      <SearchBar>
-        <SearchWrapper>
-          <SearchIcon />
-          <SearchInput
-            type="text"
-            placeholder="Search for items..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && loadListings()}
-          />
-        </SearchWrapper>
-      </SearchBar>
+      <SearchBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onSearch={loadListings}
+      />
 
       {categories.length > 0 && (
         <CategoryTags>
@@ -556,57 +461,42 @@ export const MarketplaceBrowse: React.FC = () => {
             </ResultsCount>
           </ResultsHeader>
 
-          {loading ? (
-            <LoadingMessage>Loading listings...</LoadingMessage>
-          ) : listings.length === 0 ? (
-            <EmptyState>
-              <h3>No items found</h3>
-              <p>Try adjusting your search or filters</p>
-            </EmptyState>
-          ) : (
-            <>
-              <ListingsGrid>
-                {listings.map((listing) => (
-                  <ListingCard
-                    key={listing.id}
-                    listing={listing}
-                    onSave={handleSaveListing}
-                    onClick={handleListingClick}
-                  />
-                ))}
-              </ListingsGrid>
+          <ListingGrid
+            listings={listings}
+            loading={loading}
+            onListingClick={handleListingClick}
+            onSaveListing={handleSaveListing}
+          />
 
-              {pagination.pages > 1 && (
-                <Pagination>
+          {!loading && pagination.pages > 1 && (
+            <Pagination>
+              <PageButton
+                onClick={() => setPage(page - 1)}
+                disabled={page === 1}
+              >
+                Previous
+              </PageButton>
+
+              {[...Array(Math.min(pagination.pages, 5))].map((_, i) => {
+                const pageNum = i + 1;
+                return (
                   <PageButton
-                    onClick={() => setPage(page - 1)}
-                    disabled={page === 1}
+                    key={pageNum}
+                    active={page === pageNum}
+                    onClick={() => setPage(pageNum)}
                   >
-                    Previous
+                    {pageNum}
                   </PageButton>
+                );
+              })}
 
-                  {[...Array(Math.min(pagination.pages, 5))].map((_, i) => {
-                    const pageNum = i + 1;
-                    return (
-                      <PageButton
-                        key={pageNum}
-                        active={page === pageNum}
-                        onClick={() => setPage(pageNum)}
-                      >
-                        {pageNum}
-                      </PageButton>
-                    );
-                  })}
-
-                  <PageButton
-                    onClick={() => setPage(page + 1)}
-                    disabled={!pagination.hasMore}
-                  >
-                    Next
-                  </PageButton>
-                </Pagination>
-              )}
-            </>
+              <PageButton
+                onClick={() => setPage(page + 1)}
+                disabled={!pagination.hasMore}
+              >
+                Next
+              </PageButton>
+            </Pagination>
           )}
         </ContentArea>
 
