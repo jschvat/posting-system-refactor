@@ -10,13 +10,7 @@ import { GroupChatSection } from '../components/groups/settings/GroupChatSection
 import { PostTypesSection } from '../components/groups/settings/PostTypesSection';
 import { ModeratorPermissionsSection } from '../components/groups/settings/ModeratorPermissionsSection';
 import { RulesSection } from '../components/groups/settings/RulesSection';
-
-const getErrorMessage = (err: any): string => {
-  const error = err.response?.data?.error;
-  if (typeof error === 'string') return error;
-  if (error?.message) return error.message;
-  return err.message || 'An error occurred';
-};
+import { getErrorMessage } from '../utils/errorHandlers';
 
 const GroupSettingsPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

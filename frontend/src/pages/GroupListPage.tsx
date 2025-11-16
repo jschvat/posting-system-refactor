@@ -7,13 +7,7 @@ import groupsApi from '../services/groupsApi';
 import { Group } from '../types/group';
 import GroupCard from '../components/groups/GroupCard';
 import { usePagination } from '../hooks/usePagination';
-
-const getErrorMessage = (err: any): string => {
-  const error = err.response?.data?.error;
-  if (typeof error === 'string') return error;
-  if (error?.message) return error.message;
-  return err.message || 'An error occurred';
-};
+import { getErrorMessage } from '../utils/errorHandlers';
 
 type FilterType = 'all' | 'joined' | 'pending' | 'available' | 'unavailable';
 

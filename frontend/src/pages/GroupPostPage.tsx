@@ -12,13 +12,7 @@ import groupCommentsApi from '../services/groupCommentsApi';
 import { GroupPost, GroupComment, VoteType } from '../types/group';
 import { FaArrowUp, FaArrowDown, FaComment, FaArrowLeft } from 'react-icons/fa6';
 import GroupCommentThread from '../components/groups/GroupCommentThread';
-
-const getErrorMessage = (err: any): string => {
-  const error = err.response?.data?.error;
-  if (typeof error === 'string') return error;
-  if (error?.message) return error.message;
-  return err.message || 'An error occurred';
-};
+import { getErrorMessage } from '../utils/errorHandlers';
 
 const GroupPostPage: React.FC = () => {
   const { slug, postId } = useParams<{ slug: string; postId: string }>();

@@ -11,13 +11,7 @@ import GroupHeader from '../components/groups/GroupHeader';
 import GroupChatPopup from '../components/groups/GroupChatPopup';
 import { messagesApi, Conversation, Message } from '../services/api/messagesApi';
 import { usePagination } from '../hooks/usePagination';
-
-const getErrorMessage = (err: any): string => {
-  const error = err.response?.data?.error;
-  if (typeof error === 'string') return error;
-  if (error?.message) return error.message;
-  return err.message || 'An error occurred';
-};
+import { getErrorMessage } from '../utils/errorHandlers';
 
 const GroupPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
