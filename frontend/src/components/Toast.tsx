@@ -77,14 +77,14 @@ const ToastContainer = styled.div`
 const ToastItem = styled.div<{ $type: ToastType; $isExiting?: boolean }>`
   background: ${({ theme, $type }) => {
     switch ($type) {
-      case 'success': return theme.colors.success || '#10b981';
+      case 'success': return theme.colors.success || '${props.theme.colors.success}';
       case 'error': return theme.colors.error;
-      case 'warning': return '#f59e0b';
+      case 'warning': return '${props.theme.colors.warning}';
       case 'info': return theme.colors.primary;
       default: return theme.colors.primary;
     }
   }};
-  color: white;
+  color: ${props.theme.colors.white};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: ${({ theme }) => theme.shadows.lg};
@@ -115,7 +115,7 @@ const ToastMessage = styled.div`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 1.5rem;
   cursor: pointer;
   padding: 0;

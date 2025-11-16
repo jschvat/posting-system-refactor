@@ -12,7 +12,7 @@ import { FollowUser } from '../../services/api/followsApi';
 import { ChatPopup } from '../messaging/ChatPopup';
 
 const Container = styled.div`
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 16px;
@@ -29,15 +29,15 @@ const Header = styled.div`
 const Title = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: ${props.theme.colors.text.primary};
   margin: 0;
 `;
 
 const OnlineCount = styled.span`
   font-size: 12px;
   font-weight: 500;
-  color: #44b700;
-  background: #e8f5e9;
+  color: ${props.theme.colors.success};
+  background: ${props.theme.colors.successLight};
   padding: 2px 8px;
   border-radius: 12px;
 `;
@@ -55,17 +55,17 @@ const UserList = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: ${props.theme.colors.borderLight};
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background: ${props.theme.colors.border};
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #999;
+    background: ${props => props.theme.colors.text.muted};
   }
 `;
 
@@ -79,7 +79,7 @@ const UserItem = styled.div`
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${props.theme.colors.hover};
   }
 `;
 
@@ -103,7 +103,7 @@ const DefaultAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: 600;
   font-size: 16px;
 `;
@@ -115,7 +115,7 @@ const UserInfo = styled.div`
 
 const Username = styled.div`
   font-weight: 600;
-  color: #1a1a1a;
+  color: ${props.theme.colors.text.primary};
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
@@ -124,7 +124,7 @@ const Username = styled.div`
 
 const FullName = styled.div`
   font-size: 12px;
-  color: #666;
+  color: ${props.theme.colors.text.secondary};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -132,8 +132,8 @@ const FullName = styled.div`
 
 const MessageButton = styled.button`
   padding: 6px 12px;
-  background: #1da1f2;
-  color: white;
+  background: ${props.theme.colors.info};
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: 4px;
   font-size: 12px;
@@ -142,28 +142,28 @@ const MessageButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: #1a91da;
+    background: ${props.theme.colors.infoDark};
   }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: #666;
+  color: ${props.theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const LoadingState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: #666;
+  color: ${props.theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const ErrorState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: #d32f2f;
+  color: ${props.theme.colors.error};
   font-size: 14px;
 `;
 

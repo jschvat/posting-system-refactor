@@ -1,0 +1,1561 @@
+
+> posting-system-backend@1.0.0 test
+> jest
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database...
+
+      at Object.<anonymous> (src/__tests__/setup.js:20:11)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    Setup: Initializing test database with PostgreSQL...
+
+      at initTestDb (src/__tests__/testDb.js:38:13)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954398_iqjgo
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954507_391z4
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954597_7yhm2
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954587_boejw
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954536_k2vo9
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954614_76i59
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954545_6u9jd
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954605_dj6v0
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954551_71xsd
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954605_lj3b3
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954585_arowg
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954615_5fzy9
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954589_p0iq4
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954578_i3d1s
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    ✅ Test database initialized with PostgreSQL: test_posting_system_1763096954608_pu8sf
+
+      at initTestDb (src/__tests__/testDb.js:97:15)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.log
+    Setup: Test database initialized
+
+      at Object.<anonymous> (src/__tests__/setup.js:22:11)
+
+  console.error
+    Failed to clean up file: /home/jason/Development/claude/posting-system-refactor/backend/uploads/posts/post-media-823dd64e-91e4-4fde-9aa5-18092512f548.jpg ReferenceError: fs is not defined
+        at /home/jason/Development/claude/posting-system-refactor/backend/src/routes/media.js:166:13
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+      166 |             await fs.unlink(file.path);
+      167 |           } catch (unlinkError) {
+    > 168 |             console.error('Failed to clean up file:', file.path, unlinkError);
+          |                     ^
+      169 |           }
+      170 |           throw error;
+      171 |         }
+
+      at src/routes/media.js:168:21
+
+  console.error
+    Failed to clean up file: /home/jason/Development/claude/posting-system-refactor/backend/uploads/posts/post-media-823dd64e-91e4-4fde-9aa5-18092512f548.jpg ReferenceError: fs is not defined
+        at /home/jason/Development/claude/posting-system-refactor/backend/src/routes/media.js:185:13
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+      185 |             await fs.unlink(file.path);
+      186 |           } catch (unlinkError) {
+    > 187 |             console.error('Failed to clean up file:', file.path, unlinkError);
+          |                     ^
+      188 |           }
+      189 |         }
+      190 |       }
+
+      at src/routes/media.js:187:21
+
+  console.warn
+    Optional authentication failed: invalid token
+
+      149 |     } catch (tokenError) {
+      150 |       // Token is invalid, but we continue without authentication
+    > 151 |       console.warn('Optional authentication failed:', tokenError.message);
+          |               ^
+      152 |     }
+      153 |
+      154 |     next();
+
+      at optionalAuthenticate (src/middleware/auth.js:151:15)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:46:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Comment creation error: Error: Maximum comment nesting depth exceeded
+        at Comment.create (/home/jason/Development/claude/posting-system-refactor/backend/src/models/Comment.js:38:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at /home/jason/Development/claude/posting-system-refactor/backend/src/routes/comments.js:679:23
+
+      744 |
+      745 |     } catch (error) {
+    > 746 |       console.error('Comment creation error:', error);
+          |               ^
+      747 |
+      748 |       // Handle specific validation errors
+      749 |       if (error.message.includes('Maximum comment nesting depth exceeded')) {
+
+      at src/routes/comments.js:746:15
+
+  console.warn
+    Geocoding failed for user address update: Address not found
+
+      352 |             }
+      353 |           } else {
+    > 354 |             console.warn('Geocoding failed for user address update:', geocodeResult.error);
+          |                     ^
+      355 |             // Continue with update even if geocoding fails
+      356 |           }
+      357 |         } catch (geocodeError) {
+
+      at src/routes/users.js:354:21
+
+  console.error
+    Error: {
+      message: 'Test error',
+      stack: 'Error: Test error\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:458:21\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at src/__tests__/middleware.test.js:461:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Error: {
+      message: 'Validation failed',
+      stack: 'Error: Validation failed\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:466:21\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/validation-error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at src/__tests__/middleware.test.js:470:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Error: {
+      message: 'Unknown error',
+      stack: 'Error: Unknown error\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/src/__tests__/middleware.test.js:475:13\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:149:13)\n' +
+        '    at Route.dispatch (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/route.js:119:3)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:284:15\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at cookieParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/cookie-parser/index.js:57:14)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at jsonParser (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/body-parser/lib/types/json.js:113:7)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/unknown-error',
+      method: 'GET',
+      body: {},
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at next (node_modules/express/lib/router/route.js:141:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:97:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:113:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.log
+    404 - Route not found: GET /non-existent-route
+
+      at notFound (src/middleware/notFound.js:14:11)
+
+  console.error
+    Error: {
+      message: 'Route not found - GET /non-existent-route',
+      stack: 'Error: Route not found - GET /non-existent-route\n' +
+        '    at notFound (/home/jason/Development/claude/posting-system-refactor/backend/src/middleware/notFound.js:17:17)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/non-existent-route',
+      method: 'GET',
+      body: undefined,
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at notFound (src/middleware/notFound.js:22:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.log
+    404 - Route not found: POST /api/non-existent
+
+      at notFound (src/middleware/notFound.js:14:11)
+
+  console.error
+    Error: {
+      message: 'Route not found - POST /api/non-existent',
+      stack: 'Error: Route not found - POST /api/non-existent\n' +
+        '    at notFound (/home/jason/Development/claude/posting-system-refactor/backend/src/middleware/notFound.js:17:17)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at expressInit (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/init.js:40:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at query (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/middleware/query.js:45:5)\n' +
+        '    at Layer.handle [as handle_request] (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/layer.js:95:5)\n' +
+        '    at trim_prefix (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:328:13)\n' +
+        '    at /home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:286:9\n' +
+        '    at Function.process_params (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:346:12)\n' +
+        '    at next (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:280:10)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/router/index.js:175:3)\n' +
+        '    at Function.handle (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/application.js:181:10)\n' +
+        '    at Server.app (/home/jason/Development/claude/posting-system-refactor/backend/node_modules/express/lib/express.js:39:9)\n' +
+        '    at Server.emit (node:events:518:28)\n' +
+        '    at parserOnIncoming (node:_http_server:1153:12)\n' +
+        '    at HTTPParser.parserOnHeadersComplete (node:_http_common:117:17)',
+      url: '/api/non-existent',
+      method: 'POST',
+      body: undefined,
+      params: {},
+      query: {},
+      ip: '::ffff:127.0.0.1',
+      userAgent: undefined
+    }
+
+      16 |
+      17 |   // Log error for debugging
+    > 18 |   console.error('Error:', {
+         |           ^
+      19 |     message: err.message,
+      20 |     stack: err.stack,
+      21 |     url: req.url,
+
+      at errorHandler (src/middleware/errorHandler.js:18:11)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at notFound (src/middleware/notFound.js:22:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.warn
+    Geocoding failed for user address update: Address not found
+
+      352 |             }
+      353 |           } else {
+    > 354 |             console.warn('Geocoding failed for user address update:', geocodeResult.error);
+          |                     ^
+      355 |             // Continue with update even if geocoding fails
+      356 |           }
+      357 |         } catch (geocodeError) {
+
+      at src/routes/users.js:354:21
+
+FAIL src/__tests__/utils.test.js (307.167 s)
+
+
+  ● Test suite failed to run
+
+    thrown: "Exceeded timeout of 300000 ms for a hook.
+    Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
+
+      24 |
+      25 | // Clean up after all tests
+    > 26 | afterAll(async () => {
+         | ^
+      27 |   await cleanTestDb();
+      28 | }, 300000); // 300 second timeout for cleanup (increased for parallel test runs)
+      29 |
+
+      at Object.<anonymous> (src/__tests__/setup.js:26:1)
+
+PASS src/__tests__/location.test.js (370.157 s)
+  Location Routes
+    POST /api/location/update - Update location
+      ✓ should allow authenticated user to update their location (7766 ms)
+      ✓ should reject invalid coordinates (7501 ms)
+      ✓ should reject missing latitude (7661 ms)
+      ✓ should require authentication (7749 ms)
+    GET /api/location/me - Get my location
+      ✓ should return user's current location (7638 ms)
+      ✓ should require authentication (7631 ms)
+    GET /api/location/user/:userId - Get user location
+      ✓ should return user location when sharing is exact (7775 ms)
+      ✓ should hide coordinates when sharing is city (7801 ms)
+      ✓ should hide all location when sharing is off (7806 ms)
+    POST /api/location/nearby - Find nearby users
+      ✓ should find users within specified radius (7983 ms)
+      ✓ should validate radius range (7514 ms)
+      ✓ should validate coordinates (7673 ms)
+      ✓ should include distance in results (7835 ms)
+    PUT /api/location/preferences - Update preferences
+      ✓ should update location sharing preference (7772 ms)
+      ✓ should validate sharing level (7757 ms)
+      ✓ should accept valid sharing levels (7843 ms)
+    GET /api/location/history - Get location history
+      ✓ should return location history for user (7896 ms)
+      ✓ should limit history results (7647 ms)
+    POST /api/location/distance - Calculate distance
+      ✓ should calculate distance between two points (7670 ms)
+      ✓ should validate all coordinates (7785 ms)
+    GET /api/location/stats - Get statistics
+      ✓ should return location statistics (7632 ms)
+
+PASS src/__tests__/middleware.test.js (370.176 s)
+  Authentication Middleware
+    authenticate middleware
+      ✓ should authenticate user with valid Bearer token (7459 ms)
+      ✓ should authenticate user with cookie token (7151 ms)
+      ✓ should reject request without token (7305 ms)
+      ✓ should reject request with invalid token (7464 ms)
+      ✓ should reject request with expired token (7350 ms)
+      ✓ should reject request for inactive user (7432 ms)
+      ✓ should reject request for non-existent user (7519 ms)
+      ✓ should prefer Authorization header over cookie (7471 ms)
+    optionalAuthenticate middleware
+      ✓ should set user when valid token provided (7372 ms)
+      ✓ should continue without user when no token provided (7519 ms)
+      ✓ should continue without user when invalid token provided (7289 ms)
+      ✓ should not set user for inactive account (7104 ms)
+    requireRoles middleware
+      ✓ should allow admin user (ID = 1) (7587 ms)
+      ✓ should reject non-admin user (7394 ms)
+      ✓ should reject unauthenticated request (7539 ms)
+    requireOwnership middleware
+      ✓ should allow owner to access resource (7361 ms)
+      ✓ should reject non-owner (7592 ms)
+      ✓ should check user_id from request body (7406 ms)
+      ✓ should reject when no user_id provided (7254 ms)
+    requireModifyPermission middleware
+      ✓ should allow owner to modify resource (7328 ms)
+      ✓ should allow admin to modify any resource (7792 ms)
+      ✓ should reject non-owner non-admin (7467 ms)
+    generateToken function
+      ✓ should generate valid JWT token (7211 ms)
+      ✓ should include correct claims (7351 ms)
+      ✓ should accept custom expiration (7299 ms)
+    Cookie functions
+      ✓ should set token cookie with correct options (7425 ms)
+      ✓ should clear token cookie (7125 ms)
+  Error Handler Middleware
+    ✓ should handle known errors with status code (5 ms)
+    ✓ should handle validation errors with details (3 ms)
+    ✓ should handle unknown errors as 500 (4 ms)
+    ✓ should handle Sequelize validation errors
+    ✓ should handle Sequelize unique constraint errors (1 ms)
+    ✓ should log errors in development
+  Not Found Middleware
+    ✓ should return 404 for non-existent routes (3 ms)
+    ✓ should include request information in error (3 ms)
+    ✓ should not interfere with existing routes (1 ms)
+
+PASS src/__tests__/timeline.test.js (370.231 s)
+  Timeline Routes
+    GET /api/timeline - Get personalized timeline
+      ✓ should return personalized timeline for authenticated user (7849 ms)
+      ✓ should support min_score filtering (7688 ms)
+      ✓ should generate timeline if cache is empty (7745 ms)
+      ✓ should require authentication (7824 ms)
+      ✓ should support pagination (7682 ms)
+    GET /api/timeline/following - Get following feed
+      ✓ should return posts only from followed users (7735 ms)
+      ✓ should return empty array if not following anyone (7779 ms)
+      ✓ should require authentication (7848 ms)
+      ✓ should support pagination (7777 ms)
+    GET /api/timeline/discover - Get discover feed
+      ✓ should return popular/suggested posts (7899 ms)
+      ✓ should respect limit parameter (7476 ms)
+      ✓ should require authentication (7677 ms)
+    GET /api/timeline/trending - Get trending posts
+      ✓ should return trending posts based on engagement (7798 ms)
+      ✓ should support custom timeframe (7834 ms)
+      ✓ should work without authentication (public endpoint) (7831 ms)
+    POST /api/timeline/refresh - Refresh timeline cache
+      ✓ should regenerate timeline cache for user (7819 ms)
+      ✓ should require authentication (7888 ms)
+    GET /api/timeline/stats - Get timeline cache statistics
+      ✓ should return cache statistics (7691 ms)
+      ✓ should require authentication (7656 ms)
+    DELETE /api/timeline/cleanup - Clean up expired entries
+      ✓ should clean up expired timeline entries (7770 ms)
+      ✓ should require authentication (7626 ms)
+    Timeline Algorithm Integration
+      ✓ should score posts based on algorithm (7689 ms)
+      ✓ should prioritize posts from followed users (7786 ms)
+
+PASS src/__tests__/follows.test.js (370.494 s)
+  Follows Routes
+    POST /api/follows/:userId - Follow user
+      ✓ should allow authenticated user to follow another user (7871 ms)
+      ✓ should not allow user to follow themselves (7548 ms)
+      ✓ should not allow following the same user twice (7664 ms)
+      ✓ should require authentication (7742 ms)
+      ✓ should update follower/following counts (7640 ms)
+    DELETE /api/follows/:userId - Unfollow user
+      ✓ should allow unfollowing a user (7721 ms)
+      ✓ should update follower/following counts after unfollow (7803 ms)
+      ✓ should not allow unfollowing a user not being followed (7780 ms)
+      ✓ should require authentication (7828 ms)
+    GET /api/follows/followers/:userId - Get followers
+      ✓ should return list of followers (7956 ms)
+      ✓ should support pagination (7519 ms)
+      ✓ should work without authentication for public profiles (7661 ms)
+    GET /api/follows/following/:userId - Get following
+      ✓ should return list of users being followed (7794 ms)
+      ✓ should support pagination (7831 ms)
+    GET /api/follows/mutual - Get mutual follows
+      ✓ should return only mutual follows (7814 ms)
+      ✓ should require authentication (7860 ms)
+    GET /api/follows/check/:userId - Check if following
+      ✓ should return true if following (7829 ms)
+      ✓ should return false if not following (7641 ms)
+      ✓ should require authentication (7637 ms)
+    GET /api/follows/suggestions - Get follow suggestions
+      ✓ should return suggested users to follow (7808 ms)
+      ✓ should work without authentication (7608 ms)
+    PATCH /api/follows/:userId/mute - Mute user
+      ✓ should allow muting a followed user (7723 ms)
+      ✓ should not affect follower count when muting (7774 ms)
+      ✓ should require authentication (7680 ms)
+    PATCH /api/follows/:userId/unmute - Unmute user
+      ✓ should allow unmuting a muted user (7757 ms)
+      ✓ should require authentication (7671 ms)
+    GET /api/follows/stats/:userId - Get follow statistics
+      ✓ should return follower and following counts (7279 ms)
+      ✓ should include user_stats data (8340 ms)
+      ✓ should work without authentication (7766 ms)
+
+PASS src/__tests__/groupComments.test.js (370.519 s)
+  Group Comments Routes
+    POST /api/groups/:slug/posts/:postId/comments - Create Comment
+      ✓ should create a top-level comment (8099 ms)
+      ✓ should create a nested reply comment (7783 ms)
+      ✓ should require content (7989 ms)
+      ✓ should require authentication (8027 ms)
+      ✓ should prevent comments on locked posts for non-moderators (8014 ms)
+      ✓ should allow moderators to comment on locked posts (7941 ms)
+    GET /api/groups/:slug/posts/:postId/comments - List Comments
+      ✓ should list all comments for a post (8024 ms)
+      ✓ should support best sorting (8064 ms)
+      ✓ should support new sorting (8102 ms)
+      ✓ should support pagination (8024 ms)
+    GET /api/groups/:slug/posts/:postId/comments/nested - Nested Comments
+      ✓ should return nested comment structure (7925 ms)
+      ✓ should support max_depth parameter (7993 ms)
+    GET /api/groups/:slug/comments/:commentId - Get Single Comment
+      ✓ should get comment by ID (8037 ms)
+      ✓ should return 404 for non-existent comment (8139 ms)
+    GET /api/groups/:slug/comments/:commentId/replies - Get Replies
+      ✓ should get all direct replies (7921 ms)
+    PUT /api/groups/:slug/comments/:commentId - Update Comment
+      ✓ should allow author to update their comment (8125 ms)
+      ✓ should prevent non-author from updating comment (7992 ms)
+      ✓ should require content (7843 ms)
+    DELETE /api/groups/:slug/comments/:commentId - Delete Comment
+      ✓ should allow author to delete their comment (7986 ms)
+      ✓ should allow moderator to delete any comment (7965 ms)
+      ✓ should prevent non-author non-moderator from deleting comment (7934 ms)
+    POST /api/groups/:slug/comments/:commentId/vote - Vote on Comment
+      ✓ should allow upvoting a comment (7928 ms)
+      ✓ should allow downvoting a comment (7988 ms)
+      ✓ should toggle vote if same vote type (8035 ms)
+      ✓ should require authentication (7780 ms)
+    DELETE /api/groups/:slug/comments/:commentId/vote - Remove Vote
+      ✓ should remove existing vote (7104 ms)
+    POST /api/groups/:slug/comments/:commentId/remove - Remove Comment (Moderator)
+      ✓ should allow moderator to remove comment with reason (8490 ms)
+      ✓ should prevent regular member from removing comment (8003 ms)
+      ✓ should require removal_reason (7891 ms)
+
+PASS src/__tests__/shares.test.js (370.547 s)
+  Shares Routes
+    POST /api/shares/:postId - Share post
+      ✓ should allow authenticated user to share a post (7888 ms)
+      ✓ should allow sharing with a comment (quote) (7526 ms)
+      ✓ should not allow sharing own post (7670 ms)
+      ✓ should not allow sharing the same post twice (7825 ms)
+      ✓ should require authentication (7662 ms)
+      ✓ should update share count (7687 ms)
+    DELETE /api/shares/:postId - Unshare post
+      ✓ should allow unsharing a post (7747 ms)
+      ✓ should update share count after unshare (7839 ms)
+      ✓ should not allow unsharing a post that was not shared (7790 ms)
+      ✓ should require authentication (8008 ms)
+    GET /api/shares/user/:userId - Get user shares
+      ✓ should return list of shares by a user (7587 ms)
+      ✓ should return current user shares when no userId provided (7673 ms)
+      ✓ should support pagination (7858 ms)
+      ✓ should work without authentication (7906 ms)
+    GET /api/shares/post/:postId - Get post shares
+      ✓ should return list of shares for a post (7757 ms)
+      ✓ should support pagination (7831 ms)
+      ✓ should work without authentication (7853 ms)
+    GET /api/shares/check/:postId - Check if shared
+      ✓ should return true if post is shared (7665 ms)
+      ✓ should return false if post is not shared (7693 ms)
+      ✓ should require authentication (7761 ms)
+    GET /api/shares/popular - Get popular shares
+      ✓ should return most shared posts (7676 ms)
+      ✓ should support custom timeframe (7743 ms)
+      ✓ should work without authentication (7861 ms)
+    GET /api/shares/following - Get shares from followed users
+      ✓ should return shares from followed users only (7735 ms)
+      ✓ should require authentication (7661 ms)
+    PATCH /api/shares/:postId/comment - Update share comment
+      ✓ should allow updating share comment (7404 ms)
+      ✓ should not allow updating another user share (7616 ms)
+      ✓ should require authentication (8318 ms)
+    GET /api/shares/counts - Get share counts for multiple posts
+      ✓ should return share counts for multiple posts (7827 ms)
+      ✓ should work without authentication (7630 ms)
+
+PASS src/__tests__/posts.test.js (370.575 s)
+  Posts Routes
+    GET /api/posts
+      ✓ should return public posts for unauthenticated users (7665 ms)
+      ✓ should return appropriate posts for authenticated users (7369 ms)
+      ✓ should support pagination (7812 ms)
+      ✓ should support filtering by user_id (7607 ms)
+      ✓ should support sorting by newest/oldest (7464 ms)
+      ✓ should support privacy level filtering (7572 ms)
+      ✓ should include author information (7658 ms)
+      ✓ should include reaction counts (7593 ms)
+      ✓ should validate query parameters (7615 ms)
+      ✓ should handle empty results gracefully (7756 ms)
+    GET /api/posts/:id
+      ✓ should return post details for public post (7412 ms)
+      ✓ should return post with comments tree (7594 ms)
+      ✓ should include media attachments (7631 ms)
+      ✓ should return 404 for non-existent post (7659 ms)
+      ✓ should return 403 for private post by other user (7663 ms)
+      ✓ should allow owner to view their private post (7561 ms)
+      ✓ should validate post ID parameter (7709 ms)
+    POST /api/posts
+      ✓ should create a new post with valid data (7604 ms)
+      ✓ should create post with default privacy level (7424 ms)
+      ✓ should reject post creation without authentication (7486 ms)
+      ✓ should validate content length (7470 ms)
+      ✓ should validate privacy level (7649 ms)
+      ✓ should trim whitespace from content (7434 ms)
+    PUT /api/posts/:id
+      ✓ should update post by owner (7538 ms)
+      ✓ should allow partial updates (7645 ms)
+      ✓ should reject update without authentication (7451 ms)
+      ✓ should reject update by non-owner (6423 ms)
+      ✓ should allow admin to update any post (8166 ms)
+      ✓ should return 404 for non-existent post (7876 ms)
+      ✓ should validate update data (7523 ms)
+    DELETE /api/posts/:id
+      ✓ should delete post by owner (7330 ms)
+      ✓ should reject delete without authentication (7333 ms)
+      ✓ should reject delete by non-owner (7345 ms)
+      ✓ should allow admin to delete any post (7765 ms)
+      ✓ should return 404 for non-existent post (7497 ms)
+      ✓ should cascade delete comments and reactions (7587 ms)
+      ✓ should validate post ID parameter (7482 ms)
+    Post visibility and privacy
+      ✓ should respect privacy levels for unauthenticated users (7291 ms)
+      ✓ should handle unpublished posts correctly (7291 ms)
+
+PASS src/__tests__/groups.test.js (370.619 s)
+  Groups Routes
+    POST /api/groups - Create Group
+      ✓ should create a new group successfully (7922 ms)
+      ✓ should auto-generate slug from name (7499 ms)
+      ✓ should require authentication (7627 ms)
+      ✓ should require name and display_name (7803 ms)
+      ✓ should prevent duplicate group names (7657 ms)
+    GET /api/groups - List Groups
+      ✓ should list all public groups (7790 ms)
+      ✓ should support pagination (7766 ms)
+    GET /api/groups/:slug - Get Group Details
+      ✓ should get group details by slug (7822 ms)
+      ✓ should return 404 for non-existent group (7752 ms)
+    PUT /api/groups/:slug - Update Group (Admin Only)
+      ✓ should allow admin to update group settings (8005 ms)
+      ✓ should prevent non-admin from updating group (7523 ms)
+      ✓ should require authentication (7590 ms)
+    DELETE /api/groups/:slug - Delete Group (Admin Only)
+      ✓ should allow admin to delete group (7825 ms)
+      ✓ should prevent non-admin from deleting group (7833 ms)
+    POST /api/groups/:slug/join - Join Group
+      ✓ should allow user to join public group (7748 ms)
+      ✓ should prevent duplicate joins (7760 ms)
+      ✓ should require authentication (7832 ms)
+    POST /api/groups/:slug/leave - Leave Group
+      ✓ should allow member to leave group (7658 ms)
+      ✓ should prevent creator from leaving (7685 ms)
+      ✓ should prevent non-member from leaving (7775 ms)
+    POST /api/groups/:slug/members/:userId/role - Change Member Role (Admin Only)
+      ✓ should allow admin to promote member to moderator (7630 ms)
+      ✓ should allow admin to promote member to admin (7646 ms)
+      ✓ should prevent non-admin from changing roles (7719 ms)
+      ✓ should validate role value (7664 ms)
+    POST /api/groups/:slug/members/:userId/ban - Ban Member (Moderator/Admin)
+      ✓ should allow admin to ban member (7758 ms)
+      ✓ should allow moderator to ban member (7599 ms)
+      ✓ should prevent regular member from banning (7437 ms)
+    POST /api/groups/:slug/members/:userId/unban - Unban Member (Moderator/Admin)
+      ✓ should allow admin to unban member (8221 ms)
+      ✓ should prevent non-moderator from unbanning (7749 ms)
+    GET /api/groups/:slug/members - List Group Members
+      ✓ should list all group members (7621 ms)
+      ✓ should filter by role (7585 ms)
+      ✓ should filter by status (7561 ms)
+    GET /api/groups/search - Search Groups
+      ✓ should search groups by query (7505 ms)
+      ✓ should return empty results for no match (7848 ms)
+
+PASS src/__tests__/reactions.test.js (370.657 s)
+  Reactions Routes
+    POST /api/reactions/post/:postId
+      ✓ should add reaction to post with emoji name only (7665 ms)
+      ✓ should add reaction with both name and unicode (7415 ms)
+      ✓ should toggle reaction (remove if exists) (7528 ms)
+      ✓ should validate required fields (7668 ms)
+      ✓ should validate emoji name length (7558 ms)
+      ✓ should return 404 for non-existent post (7648 ms)
+      ✓ should ignore user_id in request body and use authenticated user (7738 ms)
+      ✓ should normalize emoji names (7610 ms)
+      ✓ should use common emoji mappings (7666 ms)
+    POST /api/reactions/comment/:commentId
+      ✓ should add reaction to comment (7765 ms)
+      ✓ should toggle comment reaction (7410 ms)
+      ✓ should return 404 for non-existent comment (7520 ms)
+      ✓ should validate comment ID parameter (7636 ms)
+    GET /api/reactions/post/:postId
+      ✓ should return reaction counts for post (7742 ms)
+      ✓ should include detailed reactions when requested (7678 ms)
+      ✓ should return 404 for non-existent post (7557 ms)
+      ✓ should validate query parameters (7817 ms)
+      ✓ should return empty counts for post with no reactions (7554 ms)
+    GET /api/reactions/comment/:commentId
+      ✓ should return reaction counts for comment (7445 ms)
+      ✓ should include user details when requested (7548 ms)
+      ✓ should return 404 for non-existent comment (7514 ms)
+    GET /api/reactions/user/:userId
+      ✓ should return paginated user reactions (7576 ms)
+      ✓ should support filtering by reaction type (7557 ms)
+      ✓ should support pagination (7921 ms)
+      ✓ should return 404 for non-existent user (7632 ms)
+      ✓ should validate query parameters (7471 ms)
+      ✓ should include associated post/comment author information (6661 ms)
+    DELETE /api/reactions/:id
+      ✓ should delete a reaction (8374 ms)
+      ✓ should return updated reaction counts after deletion (7669 ms)
+      ✓ should return 404 for non-existent reaction (7585 ms)
+      ✓ should validate reaction ID parameter (7393 ms)
+    GET /api/reactions/emoji-list
+      ✓ should return available emoji list (7375 ms)
+      ✓ should include common emojis (7370 ms)
+      ✓ should format display names properly (7602 ms)
+    GET /api/reactions/stats/popular
+      ✓ should return popular emoji statistics (7602 ms)
+      ✓ should support custom time period (7678 ms)
+      ✓ should support custom limit (7473 ms)
+      ✓ should validate query parameters (7374 ms)
+      ✓ should order by usage count descending (7159 ms)
+    Reaction normalization and validation
+      ✓ should handle emoji unicode properly (7147 ms)
+      ✓ should sanitize emoji names (7422 ms)
+      ✓ should convert emoji names to lowercase (7433 ms)
+      ✓ should map alternative emoji names to standard unicode (7409 ms)
+    Reaction aggregation and counting
+      ✓ should properly aggregate multiple reactions of same type (7337 ms)
+      ✓ should handle mixed reaction types (6658 ms)
+
+PASS src/__tests__/groupPosts.test.js (370.694 s)
+  Group Posts Routes
+    POST /api/groups/:slug/posts - Create Post
+      ✓ should create a text post successfully (8014 ms)
+      ✓ should create a link post successfully (7747 ms)
+      ✓ should require title (7875 ms)
+      ✓ should require authentication (7952 ms)
+      ✓ should create pending post if approval required (7969 ms)
+      ✓ should allow moderator to bypass approval (7984 ms)
+    GET /api/groups/:slug/posts - List Posts
+      ✓ should list all published posts (8044 ms)
+      ✓ should support hot sorting (8142 ms)
+      ✓ should support new sorting (8121 ms)
+      ✓ should support pagination (8084 ms)
+    GET /api/groups/:slug/posts/:postId - Get Single Post
+      ✓ should get post by ID (7916 ms)
+      ✓ should return 404 for non-existent post (7924 ms)
+    PUT /api/groups/:slug/posts/:postId - Update Post
+      ✓ should allow author to update their post (8062 ms)
+      ✓ should allow moderator to update any post (8067 ms)
+      ✓ should prevent non-author non-moderator from updating post (7913 ms)
+    DELETE /api/groups/:slug/posts/:postId - Delete Post
+      ✓ should allow author to delete their post (8040 ms)
+      ✓ should allow moderator to delete any post (8073 ms)
+      ✓ should prevent non-author non-moderator from deleting post (7993 ms)
+    POST /api/groups/:slug/posts/:postId/vote - Vote on Post
+      ✓ should allow upvoting a post (8055 ms)
+      ✓ should allow downvoting a post (7982 ms)
+      ✓ should toggle vote if same vote type (7962 ms)
+      ✓ should change vote if different vote type (7949 ms)
+      ✓ should require authentication (7954 ms)
+      ✓ should validate vote_type (8008 ms)
+    DELETE /api/groups/:slug/posts/:postId/vote - Remove Vote
+      ✓ should remove existing vote (7868 ms)
+    POST /api/groups/:slug/posts/:postId/pin - Pin Post (Moderator)
+      ✓ should allow moderator to pin post (7042 ms)
+      ✓ should allow moderator to unpin post (8538 ms)
+      ✓ should prevent regular member from pinning (7974 ms)
+    POST /api/groups/:slug/posts/:postId/lock - Lock Post (Moderator)
+      ✓ should allow moderator to lock post (7900 ms)
+      ✓ should prevent non-moderator from locking (7829 ms)
+    POST /api/groups/:slug/posts/:postId/remove - Remove Post (Moderator)
+      ✓ should allow moderator to remove post with reason (7799 ms)
+      ✓ should prevent regular member from removing post (7771 ms)
+      ✓ should require removal_reason (8165 ms)
+    POST /api/groups/:slug/posts/:postId/approve - Approve Post (Moderator)
+      ✓ should allow moderator to approve pending post (7968 ms)
+      ✓ should prevent regular member from approving (8074 ms)
+    GET /api/groups/:slug/posts/pending - List Pending Posts (Moderator)
+      ✓ should allow moderator to view pending posts (7608 ms)
+      ✓ should prevent regular member from viewing pending posts (7704 ms)
+    GET /api/groups/:slug/posts/top - Top Posts by Period
+      ✓ should get top posts for day (7684 ms)
+      ✓ should get top posts for week (7776 ms)
+      ✓ should default to all time if no period (7788 ms)
+
+PASS src/__tests__/comments.test.js (370.706 s)
+  Comments Routes
+    GET /api/comments/post/:postId
+      ✓ should return hierarchical comments for a post (7674 ms)
+      ✓ should support different sorting options (7365 ms)
+      ✓ should support limit parameter (7743 ms)
+      ✓ should return 404 for non-existent post (7561 ms)
+      ✓ should validate query parameters (7473 ms)
+      ✓ should only show published comments (7638 ms)
+      ✓ should include author information (7716 ms)
+      ✓ should include reaction counts (7605 ms)
+    GET /api/comments/:id
+      ✓ should return single comment with replies (7664 ms)
+      ✓ should return 404 for non-existent comment (7748 ms)
+      ✓ should validate comment ID parameter (7404 ms)
+    POST /api/comments
+      ✓ should create a new comment (7569 ms)
+      ✓ should create a reply to a comment (7628 ms)
+      ✓ should validate required fields (7677 ms)
+      ✓ should validate content length (7645 ms)
+      ✓ should return 404 for non-existent post (7542 ms)
+      ✓ should return 404 for non-existent user (7704 ms)
+      ✓ should validate parent comment exists and belongs to same post (7591 ms)
+      ✓ should prevent excessive nesting depth (7497 ms)
+    PUT /api/comments/:id
+      ✓ should update comment content (7530 ms)
+      ✓ should return 404 for non-existent comment (7483 ms)
+      ✓ should validate content length (7587 ms)
+      ✓ should validate comment ID parameter (7461 ms)
+    DELETE /api/comments/:id
+      ✓ should delete comment and count replies (7586 ms)
+      ✓ should delete comment without replies (7655 ms)
+      ✓ should return 404 for non-existent comment (7426 ms)
+      ✓ should validate comment ID parameter (6441 ms)
+    GET /api/comments/:id/replies
+      ✓ should return replies for a comment (7998 ms)
+      ✓ should support sorting replies (7873 ms)
+      ✓ should support limit parameter (7774 ms)
+      ✓ should return 404 for non-existent parent comment (7316 ms)
+      ✓ should validate parameters (7328 ms)
+      ✓ should only show published replies (7354 ms)
+      ✓ should return empty array for comment with no replies (7552 ms)
+    Comment depth validation
+      ✓ should correctly calculate comment depth (7563 ms)
+    Comment associations and includes
+      ✓ should include media attachments when available (7571 ms)
+      ✓ should handle reactions properly in hierarchical structure (7505 ms)
+
+PASS src/__tests__/media.test.js (370.747 s)
+  Media Routes
+    POST /api/media/upload
+      ✓ should upload image file to post (7417 ms)
+      ✓ should upload multiple files (7193 ms)
+      ✓ should reject upload without authentication (7301 ms)
+      ✓ should validate file type restrictions (7438 ms)
+      ✓ should validate file size limits (7331 ms)
+      ✓ should require either post_id or comment_id (7430 ms)
+      ✓ should reject both post_id and comment_id (7538 ms)
+      ✓ should validate post exists before upload (7275 ms)
+      ✓ should validate comment exists before upload (7366 ms)
+      ✓ should validate alt_text length (7568 ms)
+      ✓ should handle image processing for thumbnails (7412 ms)
+      ✓ should determine media type from MIME type (7120 ms)
+      ✓ should generate unique filenames (7375 ms)
+      ✓ should create directory structure (7447 ms)
+      ✓ should handle upload errors gracefully (7592 ms)
+    GET /api/media/:id
+      ✓ should return media details (7346 ms)
+      ✓ should return 404 for non-existent media (7443 ms)
+      ✓ should validate media ID parameter (7482 ms)
+    DELETE /api/media/:id
+      ✓ should delete media file by owner (7302 ms)
+      ✓ should reject deletion by non-owner (7413 ms)
+      ✓ should clean up files from filesystem (7440 ms)
+      ✓ should clean up thumbnail files (7215 ms)
+    Media processing
+      ✓ should extract metadata from images (7255 ms)
+      ✓ should generate thumbnails for images (7431 ms)
+      ✓ should handle different image formats (7406 ms)
+      ✓ should validate image dimensions (7322 ms)
+    File validation
+      ✓ should validate MIME types correctly (7177 ms)
+      ✓ should validate file extensions (6472 ms)
+      ✓ should sanitize filenames (8053 ms)
+    Storage management
+      ✓ should organize files by type (7492 ms)
+      ✓ should handle storage limits (7377 ms)
+      ✓ should generate proper file URLs (7149 ms)
+
+PASS src/__tests__/auth.test.js (370.789 s)
+  Authentication Routes
+    POST /api/auth/register
+      ✓ should register a new user with valid data (7408 ms)
+      ✓ should reject registration with invalid email (7078 ms)
+      ✓ should reject registration with weak password (7079 ms)
+      ✓ should reject registration with short username (7295 ms)
+      ✓ should reject registration with non-alphanumeric username (7083 ms)
+      ✓ should reject registration with duplicate username (7439 ms)
+      ✓ should reject registration with duplicate email (7486 ms)
+      ✓ should normalize email to lowercase (7325 ms)
+      ✓ should trim whitespace from string fields (7474 ms)
+      ✓ should validate bio length if provided (7397 ms)
+      ✓ should accept valid avatar URL (7289 ms)
+      ✓ should reject invalid avatar URL (6999 ms)
+    POST /api/auth/login
+      ✓ should login with valid username and password (7605 ms)
+      ✓ should login with valid email and password (7698 ms)
+      ✓ should reject login with invalid username (7535 ms)
+      ✓ should reject login with invalid password (7562 ms)
+      ✓ should reject login for inactive account (7482 ms)
+      ✓ should handle remember_me option (7568 ms)
+      ✓ should validate required fields (7206 ms)
+      ✓ should normalize email case in identifier (7473 ms)
+    POST /api/auth/logout
+      ✓ should logout authenticated user (7322 ms)
+      ✓ should reject logout without authentication (7286 ms)
+      ✓ should reject logout with invalid token (7348 ms)
+    GET /api/auth/me
+      ✓ should return user profile when authenticated (7436 ms)
+      ✓ should reject request when not authenticated (7307 ms)
+      ✓ should reject request with invalid token (7360 ms)
+      ✓ should reject request with expired token (7217 ms)
+    POST /api/auth/refresh
+      ✓ should refresh token for authenticated user (6268 ms)
+      ✓ should reject refresh without authentication (7965 ms)
+    POST /api/auth/forgot-password
+      ✓ should handle forgot password request for existing user (7512 ms)
+      ✓ should handle forgot password request for non-existing user (7448 ms)
+      ✓ should validate email format (7115 ms)
+      ✓ should require email field (7130 ms)
+    POST /api/auth/reset-password
+      ✓ should reset password with valid token (7705 ms)
+      ✓ should reject invalid reset token (7358 ms)
+      ✓ should reject expired reset token (7337 ms)
+      ✓ should validate new password strength (7363 ms)
+      ✓ should require both token and password (7426 ms)
+    POST /api/auth/change-password
+      ✓ should change password for authenticated user (7642 ms)
+      ✓ should reject change with wrong current password (7227 ms)
+      ✓ should reject change without authentication (6997 ms)
+      ✓ should validate new password strength (7105 ms)
+      ✓ should require both passwords (7202 ms)
+    POST /api/auth/verify-email
+      ✓ should verify email with valid token (7096 ms)
+      ✓ should reject invalid verification token (7125 ms)
+      ✓ should require verification token (6875 ms)
+
+PASS src/__tests__/users.test.js (370.822 s)
+  Users Routes
+    GET /api/users
+      ✓ should return paginated list of users (8056 ms)
+      ✓ should support pagination (12048 ms)
+      ✓ should support search functionality (7833 ms)
+      ✓ should filter by active status (7856 ms)
+      ✓ should include post counts (7609 ms)
+      ✓ should validate query parameters (7700 ms)
+    GET /api/users/:id
+      ✓ should return user profile with posts (7495 ms)
+      ✓ should limit posts to 10 recent ones (7750 ms)
+      ✓ should return 404 for non-existent user (7693 ms)
+      ✓ should validate user ID parameter (7493 ms)
+      ✓ should include user statistics (7386 ms)
+    POST /api/users
+      ✓ should redirect to auth/register (7595 ms)
+    PUT /api/users/:id
+      ✓ should update user profile by owner (7575 ms)
+      ✓ should allow partial updates (7608 ms)
+      ✓ should reject update without authentication (7455 ms)
+      ✓ should reject update by different user (7673 ms)
+      ✓ should allow admin to update any user (7851 ms)
+      ✓ should validate update data (7435 ms)
+      ✓ should prevent duplicate username/email (7633 ms)
+      ✓ should normalize email to lowercase (7618 ms)
+      ✓ should return 404 for non-existent user (7570 ms)
+      ✓ should update user profile with address fields (10340 ms)
+      ✓ should allow partial address field updates (12635 ms)
+      ✓ should validate address field lengths (7489 ms)
+      ✓ should update avatar_url with relative path (6700 ms)
+      ✓ should update avatar_url with full URL (7960 ms)
+      ✓ should reject invalid avatar_url format (8065 ms)
+      ✓ should geocode address and save GPS coordinates (8580 ms)
+      ✓ should geocode city/state without full address (7715 ms)
+      ✓ should handle geocoding failure gracefully (7400 ms)
+    DELETE /api/users/:id
+      ✓ should soft delete user by owner (7325 ms)
+      ✓ should reject delete without authentication (7522 ms)
+      ✓ should reject delete by different user (7551 ms)
+      ✓ should allow admin to delete any user (7814 ms)
+      ✓ should return 404 for non-existent user (7461 ms)
+    GET /api/users/:id/posts
+      ✓ should return user posts with pagination (7346 ms)
+      ✓ should return user info with posts (7194 ms)
+      ✓ should return 404 for non-existent user (7188 ms)
+      ✓ should support pagination parameters (7525 ms)
+      ✓ should only show published posts (7442 ms)
+      ✓ should include reaction counts in posts (7293 ms)
+      ✓ should validate parameters (7282 ms)
+
+Test Suites: 1 failed, 14 passed, 15 total
+Tests:       501 passed, 501 total
+Snapshots:   0 total
+Time:        370.941 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?

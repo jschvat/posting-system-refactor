@@ -19,7 +19,7 @@ const TypingContainer = styled.div`
   align-items: center;
   padding: 12px 16px;
   margin: 4px 12px;
-  background: #E5E5EA;
+  background: ${props.theme.colors.border};
   border-radius: 18px;
   border-bottom-left-radius: 4px;
   max-width: fit-content;
@@ -27,7 +27,7 @@ const TypingContainer = styled.div`
 `;
 
 const TypingText = styled.span`
-  color: #8E8E93;
+  color: ${props.theme.colors.text.muted};
   font-size: 0.813rem;
   font-weight: 500;
 `;
@@ -43,7 +43,7 @@ const Dot = styled.span<{ delay: number }>`
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #8E8E93;
+  background-color: ${props.theme.colors.text.muted};
   animation: ${bounce} 1.4s infinite ease-in-out;
   animation-delay: ${props => props.delay}s;
   will-change: transform;

@@ -73,7 +73,7 @@ const NavLink = styled(Link)<{ $isActive?: boolean }>`
 
 const CreateButton = styled(Link)`
   background: ${({ theme }) => theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   text-decoration: none;
@@ -105,7 +105,7 @@ const UserAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: bold;
   font-size: 0.9rem;
   cursor: pointer;

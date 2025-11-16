@@ -12,10 +12,10 @@ const Section = styled.div`
 const SectionTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 16px 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid ${props.theme.colors.border};
 `;
 
 const FormGroup = styled.div`
@@ -30,14 +30,14 @@ const Label = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin-bottom: 8px;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #ecf0f1;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 15px;
   transition: border-color 0.2s;
@@ -45,11 +45,11 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 
   &:disabled {
-    background: #f8f9fa;
+    background: ${props.theme.colors.hover};
     cursor: not-allowed;
   }
 `;
@@ -57,7 +57,7 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #ecf0f1;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 15px;
   font-family: inherit;
@@ -68,30 +68,30 @@ const TextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
 const Select = styled.select`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #ecf0f1;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 15px;
-  background: white;
+  background: ${props.theme.colors.white};
   cursor: pointer;
   transition: border-color 0.2s;
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
 const HelpText = styled.p`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 6px 0 0 0;
 `;
 

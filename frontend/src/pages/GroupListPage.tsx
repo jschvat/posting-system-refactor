@@ -266,7 +266,7 @@ const CreateButton = styled.button`
   border-radius: 8px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
@@ -320,7 +320,7 @@ const SearchButton = styled.button`
 
   &:hover:not(:disabled) {
     background: ${props => props.theme.colors.primary};
-    color: white;
+    color: ${props.theme.colors.white};
   }
 
   &:disabled {
@@ -351,10 +351,10 @@ const FilterSelect = styled.select`
 
 const ErrorMessage = styled.div`
   padding: 16px;
-  background: rgba(244, 67, 54, 0.1);
-  border: 1px solid #f44336;
+  background: ${props.theme.colors.errorLight};
+  border: 1px solid ${props.theme.colors.error};
   border-radius: 8px;
-  color: #f44336;
+  color: ${props.theme.colors.error};
   margin-bottom: 24px;
 `;
 

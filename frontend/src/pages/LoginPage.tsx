@@ -113,7 +113,7 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button<{ $loading?: boolean }>`
   background: ${({ theme }) => theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -142,7 +142,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
       width: 20px;
       height: 20px;
       margin: auto;
-      border: 2px solid white;
+      border: 2px solid ${props.theme.colors.white};
       border-top: 2px solid transparent;
       border-radius: 50%;
       animation: spin 1s linear infinite;

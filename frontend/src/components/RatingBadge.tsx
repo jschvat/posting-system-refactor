@@ -39,7 +39,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 900) {
     return {
       icon: FaTrophy,
-      color: '#FFD700', // Gold
+      color: '${props.theme.colors.gold}', // Gold
       label: 'Gold Trophy',
       minScore: 900,
       maxScore: 1000,
@@ -49,7 +49,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 800) {
     return {
       icon: FaTrophy,
-      color: '#C0C0C0', // Silver
+      color: '${props.theme.colors.silver}', // Silver
       label: 'Silver Trophy',
       minScore: 800,
       maxScore: 899,
@@ -59,7 +59,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 700) {
     return {
       icon: FaTrophy,
-      color: '#CD7F32', // Bronze
+      color: '${props.theme.colors.bronze}', // Bronze
       label: 'Bronze Trophy',
       minScore: 700,
       maxScore: 799,
@@ -71,7 +71,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 600) {
     return {
       icon: FaMedal,
-      color: '#FFD700', // Gold Badge
+      color: '${props.theme.colors.gold}', // Gold Badge
       label: 'Gold Badge',
       minScore: 600,
       maxScore: 699,
@@ -81,7 +81,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 500) {
     return {
       icon: FaMedal,
-      color: '#C0C0C0', // Silver Badge
+      color: '${props.theme.colors.silver}', // Silver Badge
       label: 'Silver Badge',
       minScore: 500,
       maxScore: 599,
@@ -91,7 +91,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 400) {
     return {
       icon: FaMedal,
-      color: '#CD7F32', // Bronze Badge
+      color: '${props.theme.colors.bronze}', // Bronze Badge
       label: 'Bronze Badge',
       minScore: 400,
       maxScore: 499,
@@ -103,7 +103,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 300) {
     return {
       icon: FaStar,
-      color: '#FFD700', // Gold Star
+      color: '${props.theme.colors.gold}', // Gold Star
       label: 'Gold Star',
       minScore: 300,
       maxScore: 399,
@@ -113,7 +113,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 200) {
     return {
       icon: FaStar,
-      color: '#C0C0C0', // Silver Star
+      color: '${props.theme.colors.silver}', // Silver Star
       label: 'Silver Star',
       minScore: 200,
       maxScore: 299,
@@ -123,7 +123,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   if (score >= 100) {
     return {
       icon: FaStar,
-      color: '#CD7F32', // Bronze Star
+      color: '${props.theme.colors.bronze}', // Bronze Star
       label: 'Bronze Star',
       minScore: 100,
       maxScore: 199,
@@ -134,7 +134,7 @@ const getBadgeConfig = (score: number): BadgeConfig => {
   // No badge (0-99)
   return {
     icon: FaStar,
-    color: '#95a5a6', // Gray
+    color: '${props.theme.colors.text.muted}', // Gray
     label: 'Newcomer',
     minScore: 0,
     maxScore: 99

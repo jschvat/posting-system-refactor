@@ -33,16 +33,16 @@ const ReactionBubble = styled.button<{ isCurrentUser: boolean }>`
   height: 22px;
   padding: 0 4px;
   border-radius: 11px;
-  border: 1.5px solid ${props => props.isCurrentUser ? '#007AFF' : '#E5E5EA'};
-  background: #FFFFFF;
+  border: 1.5px solid ${props => props.isCurrentUser ? props.theme.colors.messageSent : props.theme.colors.border};
+  background: ${props => props.theme.colors.white};
   cursor: pointer;
   font-size: 0.875rem;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px ${props => props.theme.colors.overlayLight};
 
   &:hover {
     transform: scale(1.15);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px ${props => props.theme.colors.overlayLight};
   }
 
   &:active {
@@ -52,7 +52,7 @@ const ReactionBubble = styled.button<{ isCurrentUser: boolean }>`
 
 const Count = styled.span`
   font-size: 0.625rem;
-  color: #000000;
+  color: ${props => props.theme.colors.black};
   font-weight: 600;
   margin-left: 2px;
 `;

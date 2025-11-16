@@ -21,18 +21,18 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 0;
 `;
 
 const Form = styled.form`
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -49,10 +49,10 @@ const Section = styled.div`
 const SectionTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 16px 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid ${props.theme.colors.border};
 `;
 
 const ButtonGroup = styled.div`
@@ -72,18 +72,18 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   border: none;
 
   ${props => props.variant === 'primary' ? `
-    background: #3498db;
-    color: white;
+    background: ${props.theme.colors.info};
+    color: ${props.theme.colors.white};
 
     &:hover:not(:disabled) {
-      background: #2980b9;
+      background: ${props.theme.colors.infoDark};
     }
   ` : `
-    background: #ecf0f1;
-    color: #2c3e50;
+    background: ${props.theme.colors.border};
+    color: ${props.theme.colors.text.primary};
 
     &:hover:not(:disabled) {
-      background: #d5dbdb;
+      background: ${props => props.theme.colors.border};
     }
   `}
 
@@ -94,8 +94,8 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: #ffe6e6;
-  color: #c0392b;
+  background: ${props.theme.colors.statusRejectedBg};
+  color: ${props.theme.colors.errorDark};
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -103,8 +103,8 @@ const ErrorMessage = styled.div`
 `;
 
 const SuccessMessage = styled.div`
-  background: #d4edda;
-  color: #155724;
+  background: ${props.theme.colors.successLight};
+  color: ${props.theme.colors.successDark};
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;

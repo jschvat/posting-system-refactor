@@ -183,13 +183,13 @@ const RemoveMediaButton = styled.button`
   height: 28px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: ${props => props.theme.colors.overlay};
+  color: ${props => props.theme.colors.white};
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: ${props => props.theme.colors.overlayDark};
     transform: scale(1.1);
   }
 `;
@@ -203,7 +203,7 @@ const SendButton = styled.button<{ $canSend: boolean }>`
   border: none;
   border-radius: 50%;
   background: ${props => props.$canSend ? props.theme.colors.primary : props.theme.colors.surface};
-  color: ${props => props.$canSend ? '#ffffff' : props.theme.colors.text.secondary};
+  color: ${props => props.$canSend ? props.theme.colors.white : props.theme.colors.text.secondary};
   cursor: ${props => props.$canSend ? 'pointer' : 'not-allowed'};
   transition: all 0.2s ease;
   flex-shrink: 0;

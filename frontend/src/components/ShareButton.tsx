@@ -131,7 +131,7 @@ const ModalButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.success : 'transparent'
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? 'white' : theme.colors.text.secondary
+    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.secondary
   };
 
   &:hover:not(:disabled) {

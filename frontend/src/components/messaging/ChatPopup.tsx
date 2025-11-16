@@ -29,9 +29,9 @@ const PopupContainer = styled.div<{ $position: Position; $size: Size; $isDraggin
   top: ${props => props.$position.y}px;
   width: ${props => props.$size.width}px;
   height: ${props => props.$size.height}px;
-  background: white;
+  background: ${props => props.theme.colors.white};
   border-radius: 8px 8px 0 0;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 16px ${props => props.theme.colors.overlayLight};
   display: flex;
   flex-direction: column;
   z-index: 1000;
@@ -53,7 +53,7 @@ const Header = styled.div`
   align-items: center;
   padding: 12px 16px;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props => props.theme.colors.white};
   border-radius: 8px 8px 0 0;
   cursor: move;
   user-select: none;
@@ -89,7 +89,7 @@ const Username = styled.div`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-size: 1.25rem;
   cursor: pointer;
   padding: 0;
@@ -113,7 +113,7 @@ const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1px;
-  background: #f0f2f5;
+  background: ${props => props.theme.colors.backgroundSecondary};
 
   /* Custom scrollbar */
   &::-webkit-scrollbar {
@@ -125,19 +125,19 @@ const MessagesContainer = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: ${props => props.theme.colors.overlayLight};
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: ${props => props.theme.colors.overlay};
   }
 `;
 
 const ComposerContainer = styled.div`
   padding: 12px;
-  background: white;
-  border-top: 1px solid #e5e5e5;
+  background: ${props => props.theme.colors.white};
+  border-top: 1px solid ${props => props.theme.colors.border};
 `;
 
 const LoadingContainer = styled.div`
@@ -176,8 +176,8 @@ const ResizeHandle = styled.div`
     bottom: 3px;
     width: 10px;
     height: 10px;
-    border-right: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
+    border-right: 2px solid ${props => props.theme.colors.border};
+    border-bottom: 2px solid ${props => props.theme.colors.border};
   }
 `;
 

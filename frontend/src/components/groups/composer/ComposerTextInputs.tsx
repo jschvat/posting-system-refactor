@@ -121,7 +121,7 @@ const RemoveLinkButton = styled.button`
   border-radius: 50%;
   border: none;
   background: ${props => props.theme.colors.error};
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
@@ -131,6 +131,6 @@ const RemoveLinkButton = styled.button`
   flex-shrink: 0;
 
   &:hover {
-    background: #d32f2f;
+    background: ${props.theme.colors.error};
   }
 `;

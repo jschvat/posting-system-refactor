@@ -57,8 +57,8 @@ const RoleBadge = styled.span<{ $isAdmin: boolean }>`
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  background: ${props => props.$isAdmin ? '#e74c3c' : '#27ae60'};
-  color: white;
+  background: ${props => props.$isAdmin ? '${props.theme.colors.error}' : '${props.theme.colors.success}'};
+  color: ${props.theme.colors.white};
 `;
 
 const TabBar = styled.div`

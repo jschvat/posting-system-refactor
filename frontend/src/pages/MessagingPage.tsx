@@ -40,7 +40,7 @@ const Title = styled.h1`
 
 const NewMessageButton = styled.button`
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   padding: 8px 16px;
   border-radius: ${props => props.theme.borderRadius.md};
@@ -56,7 +56,7 @@ const NewMessageButton = styled.button`
 
 const UnreadBadge = styled.span`
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 0.75rem;
   font-weight: 600;
   padding: 2px 8px;

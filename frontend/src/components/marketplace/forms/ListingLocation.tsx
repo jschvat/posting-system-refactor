@@ -12,15 +12,15 @@ const Section = styled.div`
 const SectionTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 16px 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid ${props.theme.colors.border};
 `;
 
 const LocationStatus = styled.div`
-  background: #e8f5e9;
-  border: 1px solid #4caf50;
+  background: ${props.theme.colors.successLight};
+  border: 1px solid ${props.theme.colors.success};
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -39,18 +39,18 @@ const LocationStatusText = styled.div`
 
 const LocationStatusTitle = styled.div`
   font-weight: 600;
-  color: #2e7d32;
+  color: ${props => props.theme.colors.successDark};
   margin-bottom: 4px;
 `;
 
 const LocationStatusSubtitle = styled.div`
   font-size: 13px;
-  color: #558b2f;
+  color: ${props.theme.colors.successDark};
 `;
 
 const LocationDetecting = styled.div`
-  background: #fff3e0;
-  border: 1px solid #ff9800;
+  background: ${props.theme.colors.warningLight};
+  border: 1px solid ${props.theme.colors.warning};
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -60,14 +60,14 @@ const LocationDetecting = styled.div`
 `;
 
 const DetectingText = styled.div`
-  color: #e65100;
+  color: ${props => props.theme.colors.warning};
   font-weight: 500;
 `;
 
 const ChangeLocationButton = styled.button`
   background: transparent;
-  color: #3498db;
-  border: 1px solid #3498db;
+  color: ${props.theme.colors.info};
+  border: 1px solid ${props.theme.colors.info};
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 13px;
@@ -76,14 +76,14 @@ const ChangeLocationButton = styled.button`
   white-space: nowrap;
 
   &:hover {
-    background: #3498db;
-    color: white;
+    background: ${props.theme.colors.info};
+    color: ${props.theme.colors.white};
   }
 `;
 
 const DetectLocationButton = styled.button`
-  background: #3498db;
-  color: white;
+  background: ${props.theme.colors.info};
+  color: ${props.theme.colors.white};
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -95,11 +95,11 @@ const DetectLocationButton = styled.button`
   gap: 8px;
 
   &:hover {
-    background: #2980b9;
+    background: ${props.theme.colors.infoDark};
   }
 
   &:disabled {
-    background: #bdc3c7;
+    background: ${props.theme.colors.backgroundDisabled};
     cursor: not-allowed;
   }
 `;
@@ -116,14 +116,14 @@ const Label = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin-bottom: 8px;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #ecf0f1;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 15px;
   transition: border-color 0.2s;
@@ -131,18 +131,18 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 
   &:disabled {
-    background: #f8f9fa;
+    background: ${props.theme.colors.hover};
     cursor: not-allowed;
   }
 `;
 
 const HelpText = styled.p`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 6px 0 0 0;
 `;
 

@@ -43,19 +43,19 @@ const ListingsGrid = styled.div`
 const LoadingMessage = styled.div`
   text-align: center;
   padding: 60px 20px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   font-size: 18px;
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 20px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
 
   h3 {
     font-size: 24px;
     margin-bottom: 12px;
-    color: #2c3e50;
+    color: ${props.theme.colors.text.primary};
   }
 
   p {

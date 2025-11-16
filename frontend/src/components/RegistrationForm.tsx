@@ -125,7 +125,7 @@ const LocationButton = styled.button`
   gap: ${props => getTheme(props).spacing.sm};
   padding: ${props => getTheme(props).spacing.sm} ${props => getTheme(props).spacing.md};
   background: ${props => getTheme(props).colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: ${props => getTheme(props).borderRadius.md};
   font-weight: ${props => getTheme(props).fontWeight.medium};
@@ -175,7 +175,7 @@ const SubmitButton = styled.button`
   width: 100%;
   padding: ${props => getTheme(props).spacing.md};
   background: ${props => getTheme(props).colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: ${props => getTheme(props).borderRadius.md};
   font-size: ${props => getTheme(props).fontSize.md};

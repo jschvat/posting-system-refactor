@@ -17,18 +17,18 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 0;
 `;
 
 const TabsContainer = styled.div`
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid ${props.theme.colors.border};
   margin-bottom: 24px;
   display: flex;
   gap: 8px;
@@ -38,8 +38,8 @@ const Tab = styled.button<{ active: boolean }>`
   padding: 12px 24px;
   background: none;
   border: none;
-  border-bottom: 3px solid ${props => props.active ? '#3498db' : 'transparent'};
-  color: ${props => props.active ? '#3498db' : '#7f8c8d'};
+  border-bottom: 3px solid ${props => props.active ? '${props.theme.colors.info}' : 'transparent'};
+  color: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.text.secondary}'};
   font-size: 15px;
   font-weight: ${props => props.active ? '600' : '500'};
   cursor: pointer;
@@ -47,8 +47,8 @@ const Tab = styled.button<{ active: boolean }>`
   white-space: nowrap;
 
   &:hover {
-    color: #3498db;
-    background: #f8f9fa;
+    color: ${props.theme.colors.info};
+    background: ${props.theme.colors.hover};
   }
 `;
 
@@ -59,8 +59,8 @@ const OffersList = styled.div`
 `;
 
 const OfferCard = styled.div`
-  background: white;
-  border: 1px solid #e1e8ed;
+  background: ${props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 12px;
   padding: 20px;
   transition: all 0.2s;
@@ -86,7 +86,7 @@ const ListingImage = styled.img`
 const ListingImagePlaceholder = styled.div`
   width: 100px;
   height: 100px;
-  background: #ecf0f1;
+  background: ${props.theme.colors.border};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -101,12 +101,12 @@ const OfferContent = styled.div`
 const ListingTitle = styled.h3`
   font-size: 18px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
   cursor: pointer;
 
   &:hover {
-    color: #3498db;
+    color: ${props.theme.colors.info};
   }
 `;
 
@@ -126,12 +126,12 @@ const PriceCompare = styled.div`
 const OfferPrice = styled.div`
   font-size: 24px;
   font-weight: 700;
-  color: #e67e22;
+  color: ${props.theme.colors.warning};
 `;
 
 const ListingPrice = styled.div`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   text-decoration: line-through;
 `;
 
@@ -139,22 +139,22 @@ const BuyerInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const TimeInfo = styled.div`
-  color: #95a5a6;
+  color: ${props.theme.colors.text.muted};
   font-size: 13px;
 `;
 
 const Message = styled.div`
   padding: 12px;
-  background: #f8f9fa;
+  background: ${props.theme.colors.hover};
   border-radius: 6px;
   margin: 12px 0;
   font-size: 14px;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   font-style: italic;
 `;
 
@@ -166,22 +166,22 @@ const StatusBadge = styled.span<{ status: string }>`
   text-transform: uppercase;
   background: ${props => {
     switch (props.status) {
-      case 'pending': return '#fff3cd';
-      case 'accepted': return '#d5f4e6';
-      case 'rejected': return '#ffe6e6';
-      case 'countered': return '#e7f3ff';
-      case 'expired': return '#f0f0f0';
-      default: return '#f8f9fa';
+      case 'pending': return '${props.theme.colors.statusPendingBg}';
+      case 'accepted': return '${props.theme.colors.statusAcceptedBg}';
+      case 'rejected': return '${props.theme.colors.statusRejectedBg}';
+      case 'countered': return '${props.theme.colors.statusInfoBg}';
+      case 'expired': return '${props.theme.colors.borderLight}';
+      default: return '${props.theme.colors.hover}';
     }
   }};
   color: ${props => {
     switch (props.status) {
-      case 'pending': return '#856404';
-      case 'accepted': return '#27ae60';
-      case 'rejected': return '#c0392b';
-      case 'countered': return '#3498db';
-      case 'expired': return '#7f8c8d';
-      default: return '#2c3e50';
+      case 'pending': return '${props.theme.colors.statusPending}';
+      case 'accepted': return '${props.theme.colors.success}';
+      case 'rejected': return '${props.theme.colors.errorDark}';
+      case 'countered': return '${props.theme.colors.info}';
+      case 'expired': return '${props.theme.colors.text.secondary}';
+      default: return '${props.theme.colors.text.primary}';
     }
   }};
 `;
@@ -206,27 +206,27 @@ const Button = styled.button<{ variant?: 'accept' | 'reject' | 'counter' | 'seco
     switch (props.variant) {
       case 'accept':
         return `
-          background: #27ae60;
-          color: white;
-          &:hover { background: #229954; }
+          background: ${props.theme.colors.success};
+          color: ${props.theme.colors.white};
+          &:hover { background: ${props => props.theme.colors.success}; }
         `;
       case 'reject':
         return `
-          background: #e74c3c;
-          color: white;
-          &:hover { background: #c0392b; }
+          background: ${props.theme.colors.error};
+          color: ${props.theme.colors.white};
+          &:hover { background: ${props.theme.colors.errorDark}; }
         `;
       case 'counter':
         return `
-          background: #3498db;
-          color: white;
-          &:hover { background: #2980b9; }
+          background: ${props.theme.colors.info};
+          color: ${props.theme.colors.white};
+          &:hover { background: ${props.theme.colors.infoDark}; }
         `;
       default:
         return `
-          background: #ecf0f1;
-          color: #2c3e50;
-          &:hover { background: #d5dbdb; }
+          background: ${props.theme.colors.border};
+          color: ${props.theme.colors.text.primary};
+          &:hover { background: ${props => props.theme.colors.border}; }
         `;
     }
   }}
@@ -239,23 +239,23 @@ const Button = styled.button<{ variant?: 'accept' | 'reject' | 'counter' | 'seco
 
 const CounterOfferInput = styled.input`
   padding: 10px;
-  border: 2px solid #ecf0f1;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 6px;
   font-size: 14px;
   width: 150px;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 20px;
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
-  border: 1px solid #e1e8ed;
+  border: 1px solid ${props => props.theme.colors.border};
 `;
 
 const EmptyIcon = styled.div`
@@ -266,13 +266,13 @@ const EmptyIcon = styled.div`
 const EmptyTitle = styled.h2`
   font-size: 24px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const EmptyText = styled.p`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 0;
 `;
 
@@ -280,7 +280,7 @@ const LoadingState = styled.div`
   text-align: center;
   padding: 60px 20px;
   font-size: 18px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
 `;
 
 interface Offer {

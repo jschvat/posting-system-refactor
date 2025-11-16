@@ -17,14 +17,14 @@ const QuantityContainer = styled.div`
 const QuantityLabel = styled.label`
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin-right: 8px;
 `;
 
 const QuantityControls = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid #e0e0e0;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   overflow: hidden;
 `;
@@ -33,8 +33,8 @@ const QuantityButton = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  background: #f8f9fa;
-  color: #2c3e50;
+  background: ${props.theme.colors.hover};
+  color: ${props.theme.colors.text.primary};
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -44,7 +44,7 @@ const QuantityButton = styled.button`
   justify-content: center;
 
   &:hover:not(:disabled) {
-    background: #e9ecef;
+    background: ${props => props.theme.colors.hover};
   }
 
   &:disabled {
@@ -53,7 +53,7 @@ const QuantityButton = styled.button`
   }
 
   &:active:not(:disabled) {
-    background: #dee2e6;
+    background: ${props => props.theme.colors.border};
   }
 `;
 
@@ -61,17 +61,17 @@ const QuantityInput = styled.input`
   width: 60px;
   height: 40px;
   border: none;
-  border-left: 1px solid #e0e0e0;
-  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid ${props.theme.colors.border};
+  border-right: 1px solid ${props.theme.colors.border};
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
-  background: white;
+  color: ${props.theme.colors.text.primary};
+  background: ${props.theme.colors.white};
 
   &:focus {
     outline: none;
-    background: #f8f9fa;
+    background: ${props.theme.colors.hover};
   }
 
   /* Remove number input arrows */
@@ -85,7 +85,7 @@ const QuantityInput = styled.input`
 
 const QuantityInfo = styled.span`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin-left: 8px;
 `;
 

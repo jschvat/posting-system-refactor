@@ -242,7 +242,7 @@ const ChatPopupHeader = styled.div`
   align-items: center;
   padding: 12px 16px;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   cursor: move;
   user-select: none;
 `;
@@ -255,7 +255,7 @@ const ChatPopupTitle = styled.div`
 const CloseButton = styled.button`
   background: none;
   border: none;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 24px;
   cursor: pointer;
   padding: 0;
@@ -279,7 +279,7 @@ const HeaderActions = styled.div`
 const MembersButton = styled.button`
   background: rgba(255, 255, 255, 0.2);
   border: none;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 14px;
   font-weight: 600;
   padding: 6px 12px;
@@ -356,7 +356,7 @@ const MemberAvatar = styled.div`
   overflow: hidden;
   flex-shrink: 0;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;

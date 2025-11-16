@@ -87,7 +87,7 @@ const Button = styled.button<{ $variant: 'primary' | 'secondary' | 'outline'; $s
       case 'primary':
         return `
           background: ${theme.colors.primary};
-          color: white;
+          color: ${props.theme.colors.white};
           border-color: ${theme.colors.primary};
 
           &:hover {

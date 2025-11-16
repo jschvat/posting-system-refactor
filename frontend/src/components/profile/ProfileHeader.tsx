@@ -57,7 +57,7 @@ const Avatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: bold;
   font-size: 2rem;
   overflow: hidden;
@@ -173,7 +173,7 @@ const ActionButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? 'white' : theme.colors.text.primary
+    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 0.95rem;

@@ -84,8 +84,8 @@ const BubbleWrapper = styled.div<{ isOwn: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
-  background: ${props => props.isOwn ? '#007AFF' : '#E5E5EA'};
-  color: ${props => props.isOwn ? '#ffffff' : '#000000'};
+  background: ${props => props.isOwn ? props.theme.colors.messageSent : props.theme.colors.messageReceived};
+  color: ${props => props.isOwn ? props.theme.colors.messageTextOwn : props.theme.colors.messageTextOther};
   border-radius: 18px;
   ${props => props.isOwn ? 'border-bottom-right-radius: 4px;' : 'border-bottom-left-radius: 4px;'}
   padding: 8px 12px;
@@ -102,13 +102,13 @@ const BubbleWrapper = styled.div<{ isOwn: boolean }>`
       right: -8px;
       width: 20px;
       height: 20px;
-      background: #007AFF;
+      background: ${props.theme.colors.messageSent};
       border-bottom-left-radius: 16px;
     ` : `
       left: -8px;
       width: 20px;
       height: 20px;
-      background: #E5E5EA;
+      background: ${props.theme.colors.messageReceived};
       border-bottom-right-radius: 16px;
     `}
   }
@@ -121,13 +121,13 @@ const BubbleWrapper = styled.div<{ isOwn: boolean }>`
       right: -10px;
       width: 10px;
       height: 20px;
-      background: white;
+      background: ${props.theme.colors.white};
       border-bottom-left-radius: 10px;
     ` : `
       left: -10px;
       width: 10px;
       height: 20px;
-      background: white;
+      background: ${props.theme.colors.white};
       border-bottom-right-radius: 10px;
     `}
   }
@@ -145,7 +145,7 @@ const ReplyPreview = styled.div`
   gap: 2px;
   padding: 6px 10px;
   margin-bottom: 6px;
-  background: rgba(0, 0, 0, 0.1);
+  background: ${props => props.theme.colors.overlayLight};
   border-left: 3px solid rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   font-size: 0.813rem;
@@ -204,7 +204,7 @@ const ImageModal = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: ${props => props.theme.colors.overlayDark};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,7 +311,7 @@ const EditButton = styled.button<{ primary?: boolean }>`
   color: ${props => props.primary ? props.theme.colors.primary : 'inherit'};
 
   &:hover {
-    background: ${props => props.primary ? '#ffffff' : 'rgba(255, 255, 255, 0.1)'};
+    background: ${props => props.primary ? props.theme.colors.white : 'rgba(255, 255, 255, 0.1)'};
   }
 `;
 
@@ -322,10 +322,10 @@ const ContextMenu = styled.div<{ x: number; y: number }>`
   display: flex;
   gap: 6px;
   padding: 10px;
-  background: #FFFFFF;
-  border: 1px solid #E5E5EA;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px ${props => props.theme.colors.overlayLight};
   z-index: 10000;
   white-space: nowrap;
 `;
@@ -344,7 +344,7 @@ const EmojiOption = styled.button`
   transition: all 0.15s ease;
 
   &:hover {
-    background: #F2F2F7;
+    background: ${props => props.theme.colors.hover};
     transform: scale(1.25);
   }
 

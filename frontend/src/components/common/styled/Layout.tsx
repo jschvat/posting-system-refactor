@@ -52,7 +52,7 @@ export const Spacer = styled.div<{ size?: string }>`
 
 export const Divider = styled.hr`
   border: none;
-  border-top: 1px solid ${({ theme }) => theme.colors.border || '#e0e0e0'};
+  border-top: 1px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
   margin: 20px 0;
 `;
 
@@ -135,16 +135,16 @@ export const ScrollContainer = styled.div<{ maxHeight?: string }>`
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.colors.backgroundSecondary || '#f1f1f1'};
+    background: ${({ theme }) => theme.colors.backgroundSecondary || '${props.theme.colors.borderLight}'};
     border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.border || '#888'};
+    background: ${({ theme }) => theme.colors.border || '${props.theme.colors.text.secondary}'};
     border-radius: 4px;
 
     &:hover {
-      background: #555;
+      background: ${props.theme.colors.text.primary};
     }
   }
 `;

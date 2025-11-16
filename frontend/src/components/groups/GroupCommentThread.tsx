@@ -327,8 +327,8 @@ const Timestamp = styled.span`
 const RemovedBadge = styled.span`
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(244, 67, 54, 0.1);
-  color: #f44336;
+  background: ${props.theme.colors.errorLight};
+  color: ${props.theme.colors.error};
   font-size: 11px;
   font-weight: 600;
 `;
@@ -377,8 +377,8 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   color: ${props =>
     props.$active
       ? props.$type === 'upvote'
-        ? '#FF6B35'
-        : '#4A90E2'
+        ? '${props.theme.colors.upvote}'
+        : '${props.theme.colors.downvote}'
       : props.theme.colors.text.secondary};
   font-size: 14px;
   cursor: pointer;
@@ -386,7 +386,7 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    color: ${props => props.$type === 'upvote' ? '#FF6B35' : '#4A90E2'};
+    color: ${props => props.$type === 'upvote' ? '${props.theme.colors.upvote}' : '${props.theme.colors.downvote}'};
   }
 
   &:disabled {
@@ -400,9 +400,9 @@ const VoteCount = styled.span<{ $score: number }>`
   font-size: 12px;
   color: ${props =>
     props.$score > 0
-      ? '#FF6B35'
+      ? '${props.theme.colors.upvote}'
       : props.$score < 0
-      ? '#4A90E2'
+      ? '${props.theme.colors.downvote}'
       : props.theme.colors.text.secondary};
   min-width: 30px;
   text-align: center;
@@ -468,7 +468,7 @@ const ReplyButton = styled.button`
   border-radius: 4px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -533,7 +533,7 @@ const EditButton = styled.button`
   border-radius: 4px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;

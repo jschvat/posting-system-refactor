@@ -27,7 +27,7 @@ const Message = styled.h2`
 const HomeLink = styled(Link)`
   display: inline-block;
   background: ${({ theme }) => theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   text-decoration: none;

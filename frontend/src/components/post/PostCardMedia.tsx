@@ -72,7 +72,7 @@ const VideoOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 24px;
   pointer-events: none;
 `;
@@ -82,7 +82,7 @@ const MediaCount = styled.div`
   bottom: 8px;
   right: 8px;
   background: rgba(0, 0, 0, 0.7);
-  color: white;
+  color: ${props.theme.colors.white};
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -125,7 +125,7 @@ const CloseModalButton = styled.button`
   top: -40px;
   right: 0;
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   width: 36px;
   height: 36px;
@@ -148,7 +148,7 @@ const NavigationButton = styled.button<{ $direction: 'prev' | 'next' }>`
   ${({ $direction }) => $direction === 'prev' ? 'left: -60px;' : 'right: -60px;'}
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   width: 48px;
   height: 48px;

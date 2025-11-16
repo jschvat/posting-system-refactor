@@ -16,41 +16,41 @@ export interface ButtonProps {
 const buttonVariants = {
   primary: css`
     background: ${({ theme }) => theme.colors.primary};
-    color: white;
+    color: ${props.theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.primaryDark || '#0056b3'};
+      background: ${({ theme }) => theme.colors.primaryDark || '${props.theme.colors.primaryDark}'};
     }
   `,
 
   secondary: css`
-    background: ${({ theme }) => theme.colors.secondary || '#6c757d'};
-    color: white;
+    background: ${({ theme }) => theme.colors.secondary || '${props.theme.colors.text.secondary}'};
+    color: ${props.theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.secondaryDark || '#545b62'};
+      background: ${({ theme }) => theme.colors.secondaryDark || '${props.theme.colors.text.primary}'};
     }
   `,
 
   danger: css`
     background: ${({ theme }) => theme.colors.error};
-    color: white;
+    color: ${props.theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: #c82333;
+      background: ${props.theme.colors.errorDark};
     }
   `,
 
   success: css`
     background: ${({ theme }) => theme.colors.success};
-    color: white;
+    color: ${props.theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: #218838;
+      background: ${props.theme.colors.successDark};
     }
   `,
 
@@ -61,7 +61,7 @@ const buttonVariants = {
 
     &:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.primary};
-      color: white;
+      color: ${props.theme.colors.white};
     }
   `,
 
@@ -83,7 +83,7 @@ const buttonVariants = {
     text-decoration: underline;
 
     &:hover:not(:disabled) {
-      color: ${({ theme }) => theme.colors.primaryDark || '#0056b3'};
+      color: ${({ theme }) => theme.colors.primaryDark || '${props.theme.colors.primaryDark}'};
     }
   `,
 };

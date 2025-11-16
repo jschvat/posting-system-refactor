@@ -50,7 +50,7 @@ const OptionButton = styled.button<{ $isSelected: boolean; $hasVoted: boolean }>
   background: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primary : theme.colors.surface};
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? 'white' : theme.colors.text.primary};
+    $isSelected ? '${props.theme.colors.white}' : theme.colors.text.primary};
   border: 1px solid ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primary : theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -128,7 +128,7 @@ const EndedBadge = styled.span`
   display: inline-block;
   padding: 2px 8px;
   background: ${({ theme }) => theme.colors.error};
-  color: white;
+  color: ${props.theme.colors.white};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 12px;
   font-weight: 600;

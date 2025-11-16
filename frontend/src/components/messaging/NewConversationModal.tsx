@@ -111,7 +111,7 @@ const UserAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: 600;
   flex-shrink: 0;
   overflow: hidden;
@@ -164,7 +164,7 @@ const Button = styled.button<{ $primary?: boolean }>`
   background: ${({ theme, $primary }) =>
     $primary ? theme.colors.primary : 'transparent'};
   color: ${({ theme, $primary }) =>
-    $primary ? 'white' : theme.colors.text.primary};
+    $primary ? '${props.theme.colors.white}' : theme.colors.text.primary};
 
   &:hover {
     background: ${({ theme, $primary }) =>

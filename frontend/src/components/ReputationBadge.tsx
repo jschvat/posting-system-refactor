@@ -26,42 +26,42 @@ interface ReputationBadgeProps {
 const LEVEL_CONFIG = {
   newcomer: {
     icon: FaSeedling,
-    color: '#95a5a6',
+    color: 'newcomer',
     label: 'Newcomer',
     minScore: 0,
     maxScore: 99,
   },
   member: {
     icon: FaUser,
-    color: '#3498db',
+    color: 'member',
     label: 'Member',
     minScore: 100,
     maxScore: 299,
   },
   contributor: {
     icon: FaUserPlus,
-    color: '#9b59b6',
+    color: 'contributor',
     label: 'Contributor',
     minScore: 300,
     maxScore: 499,
   },
   veteran: {
     icon: FaUserShield,
-    color: '#e67e22',
+    color: 'veteran',
     label: 'Veteran',
     minScore: 500,
     maxScore: 699,
   },
   expert: {
     icon: FaUserGraduate,
-    color: '#e74c3c',
+    color: 'expert',
     label: 'Expert',
     minScore: 700,
     maxScore: 849,
   },
   legend: {
     icon: FaTrophy,
-    color: '#f39c12',
+    color: 'legend',
     label: 'Legend',
     minScore: 850,
     maxScore: 1000,
@@ -127,8 +127,8 @@ const Badge = styled.div<{ $color: string; $size: 'small' | 'medium' | 'large' }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ $color }) => $color};
-  color: white;
+  background: ${(props) => (props.theme.colors as any)[props.$color]};
+  color: ${props => props.theme.colors.white};
   border-radius: 50%;
   width: ${({ $size }) => {
     switch ($size) {
@@ -151,7 +151,7 @@ const Badge = styled.div<{ $color: string; $size: 'small' | 'medium' | 'large' }
       default: return '16px';
     }
   }};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px ${props => props.theme.colors.overlayLight};
   transition: transform 0.2s ease;
 
   &:hover {
@@ -170,7 +170,7 @@ const ProgressBar = styled.div`
 const ProgressFill = styled.div<{ $progress: number; $color: string }>`
   width: ${({ $progress }) => $progress}%;
   height: 100%;
-  background: ${({ $color }) => $color};
+  background: ${(props) => (props.theme.colors as any)[props.$color]};
   transition: width 0.3s ease;
 `;
 
@@ -182,7 +182,7 @@ const LabelContainer = styled.div`
 
 const LevelLabel = styled.span<{ $size: 'small' | 'medium' | 'large'; $color: string }>`
   font-weight: ${(props) => getTheme(props).fontWeight.semibold};
-  color: ${({ $color }) => $color};
+  color: ${(props) => (props.theme.colors as any)[props.$color]};
   font-size: ${({ $size }) => {
     switch ($size) {
       case 'small': return '12px';

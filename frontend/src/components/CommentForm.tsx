@@ -56,7 +56,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? 'white' : theme.colors.text.primary
+    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 0.85rem;
@@ -73,7 +73,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   &:disabled {
     background: ${({ theme }) => theme.colors.text.muted};
     border-color: ${({ theme }) => theme.colors.text.muted};
-    color: white;
+    color: ${props.theme.colors.white};
     cursor: not-allowed;
   }
 `;
@@ -157,7 +157,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   if (!state.isAuthenticated) {
     return (
       <FormContainer>
-        <div style={{ textAlign: 'center', color: '#65676b', fontSize: '0.9rem' }}>
+        <div style={{ textAlign: 'center', color: '${props.theme.colors.text.secondary}', fontSize: '0.9rem' }}>
           Please log in to comment on this post.
         </div>
       </FormContainer>

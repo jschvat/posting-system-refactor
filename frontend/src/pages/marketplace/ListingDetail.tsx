@@ -21,7 +21,7 @@ const BackButton = styled.button`
   gap: 8px;
   background: none;
   border: none;
-  color: #3498db;
+  color: ${props.theme.colors.info};
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -29,7 +29,7 @@ const BackButton = styled.button`
   padding: 8px 0;
 
   &:hover {
-    color: #2980b9;
+    color: ${props.theme.colors.infoDark};
   }
 `;
 
@@ -46,7 +46,7 @@ const Content = styled.div`
 const LeftColumn = styled.div``;
 
 const ImageGallery = styled.div`
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 24px;
@@ -56,7 +56,7 @@ const ImageGallery = styled.div`
 const MainImage = styled.div`
   width: 100%;
   padding-top: 75%;
-  background: #f0f0f0;
+  background: ${props.theme.colors.borderLight};
   position: relative;
 `;
 
@@ -67,7 +67,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: #000;
+  background: ${props.theme.colors.black};
   cursor: pointer;
   transition: opacity 0.2s;
 
@@ -86,7 +86,7 @@ const PlaceholderImage = styled.div`
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 120px;
   font-weight: bold;
 `;
@@ -106,13 +106,13 @@ const NavigationButton = styled.button<{ direction: 'left' | 'right' }>`
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.2s;
   z-index: 1;
 
   &:hover {
-    background: white;
+    background: ${props.theme.colors.white};
     transform: translateY(-50%) scale(1.1);
   }
 
@@ -127,7 +127,7 @@ const ImageCounter = styled.div`
   bottom: 16px;
   right: 16px;
   background: rgba(0, 0, 0, 0.7);
-  color: white;
+  color: ${props.theme.colors.white};
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 13px;
@@ -139,7 +139,7 @@ const ThumbnailStrip = styled.div`
   display: flex;
   gap: 8px;
   padding: 16px;
-  background: white;
+  background: ${props.theme.colors.white};
   overflow-x: auto;
 
   &::-webkit-scrollbar {
@@ -147,11 +147,11 @@ const ThumbnailStrip = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: ${props => props.theme.colors.borderLight};
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #888;
+    background: ${props => props.theme.colors.border};
     border-radius: 3px;
   }
 `;
@@ -162,11 +162,11 @@ const Thumbnail = styled.div<{ active: boolean }>`
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  border: 3px solid ${props => props.active ? '#3498db' : 'transparent'};
+  border: 3px solid ${props => props.active ? '${props.theme.colors.info}' : 'transparent'};
   transition: all 0.2s;
 
   &:hover {
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
     opacity: 0.8;
   }
 
@@ -178,7 +178,7 @@ const Thumbnail = styled.div<{ active: boolean }>`
 `;
 
 const DetailsCard = styled.div`
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -187,7 +187,7 @@ const DetailsCard = styled.div`
 const Title = styled.h1`
   font-size: 28px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 16px 0;
   line-height: 1.3;
 `;
@@ -195,8 +195,8 @@ const Title = styled.h1`
 const Category = styled.span`
   display: inline-block;
   padding: 6px 14px;
-  background: #ecf0f1;
-  color: #7f8c8d;
+  background: ${props.theme.colors.border};
+  color: ${props.theme.colors.text.secondary};
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
@@ -213,17 +213,17 @@ const ConditionBadge = styled.span<{ condition: string }>`
   margin-left: 8px;
   background: ${props => {
     switch (props.condition) {
-      case 'new': return '#2ecc71';
-      case 'like_new': return '#3498db';
-      case 'good': return '#f39c12';
-      default: return '#95a5a6';
+      case 'new': return '${props.theme.colors.success}';
+      case 'like_new': return '${props.theme.colors.info}';
+      case 'good': return '${props.theme.colors.warning}';
+      default: return '${props.theme.colors.text.muted}';
     }
   }};
-  color: white;
+  color: ${props.theme.colors.white};
 `;
 
 const Description = styled.div`
-  color: #555;
+  color: ${props => props.theme.colors.text.secondary};
   line-height: 1.8;
   margin-bottom: 24px;
   white-space: pre-wrap;
@@ -234,15 +234,15 @@ const InfoGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   padding: 16px 0;
-  border-top: 1px solid #ecf0f1;
-  border-bottom: 1px solid #ecf0f1;
+  border-top: 1px solid ${props.theme.colors.border};
+  border-bottom: 1px solid ${props.theme.colors.border};
   margin-bottom: 24px;
 `;
 
 const InfoItem = styled.div`
   h4 {
     font-size: 12px;
-    color: #95a5a6;
+    color: ${props.theme.colors.text.muted};
     text-transform: uppercase;
     margin: 0 0 4px 0;
     font-weight: 600;
@@ -250,7 +250,7 @@ const InfoItem = styled.div`
 
   p {
     font-size: 15px;
-    color: #2c3e50;
+    color: ${props.theme.colors.text.primary};
     margin: 0;
     font-weight: 600;
   }
@@ -259,7 +259,7 @@ const InfoItem = styled.div`
 const RightColumn = styled.div``;
 
 const SellerCard = styled.div`
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -268,7 +268,7 @@ const SellerCard = styled.div`
 const SellerTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 16px 0;
 `;
 
@@ -283,7 +283,7 @@ const SellerAvatar = styled.div`
   height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: ${props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -297,13 +297,13 @@ const SellerDetails = styled.div`
   h4 {
     font-size: 16px;
     font-weight: 600;
-    color: #2c3e50;
+    color: ${props.theme.colors.text.primary};
     margin: 0 0 4px 0;
   }
 
   p {
     font-size: 13px;
-    color: #7f8c8d;
+    color: ${props.theme.colors.text.secondary};
     margin: 0;
   }
 `;
@@ -313,13 +313,13 @@ const Location = styled.div`
   align-items: center;
   gap: 8px;
   padding: 16px 0;
-  border-top: 1px solid #ecf0f1;
+  border-top: 1px solid ${props.theme.colors.border};
   margin-top: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   font-size: 15px;
 
   svg {
-    color: #e74c3c;
+    color: ${props.theme.colors.error};
     font-size: 18px;
   }
 `;
@@ -379,7 +379,7 @@ export const ListingDetail: React.FC = () => {
   if (loading) {
     return (
       <Container>
-        <div style={{ textAlign: 'center', padding: '60px 0', color: '#7f8c8d' }}>
+        <div style={{ textAlign: 'center', padding: '60px 0', color: '${props.theme.colors.text.secondary}' }}>
           Loading...
         </div>
       </Container>

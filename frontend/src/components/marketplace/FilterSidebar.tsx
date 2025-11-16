@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Sidebar = styled.div`
   width: 280px;
-  background: white;
-  border: 1px solid #e1e8ed;
+  background: ${props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 12px;
   padding: 20px;
   height: fit-content;
@@ -19,7 +19,7 @@ const Sidebar = styled.div`
 const SidebarTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 20px 0;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ const SidebarTitle = styled.h3`
 
 const ClearButton = styled.button`
   font-size: 13px;
-  color: #3498db;
+  color: ${props.theme.colors.info};
   background: none;
   border: none;
   cursor: pointer;
@@ -43,7 +43,7 @@ const ClearButton = styled.button`
 const FilterSection = styled.div`
   margin-bottom: 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #ecf0f1;
+  border-bottom: 1px solid ${props.theme.colors.border};
 
   &:last-child {
     border-bottom: none;
@@ -56,7 +56,7 @@ const FilterLabel = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin-bottom: 12px;
 `;
 
@@ -69,13 +69,13 @@ const PriceInputs = styled.div`
 const PriceInput = styled.input`
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #d5dbdb;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 6px;
   font-size: 14px;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
@@ -93,12 +93,12 @@ const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    color: #3498db;
+    color: ${props.theme.colors.info};
   }
 `;
 
@@ -119,12 +119,12 @@ const RadioLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    color: #3498db;
+    color: ${props.theme.colors.info};
   }
 `;
 
@@ -140,7 +140,7 @@ const DistanceSlider = styled.input`
 
 const DistanceValue = styled.div`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin-top: 8px;
   text-align: center;
 `;
@@ -148,9 +148,9 @@ const DistanceValue = styled.div`
 const LocationButton = styled.button`
   width: 100%;
   padding: 10px;
-  background: #e7f3ff;
-  color: #3498db;
-  border: 1px solid #3498db;
+  background: ${props.theme.colors.statusInfoBg};
+  color: ${props.theme.colors.info};
+  border: 1px solid ${props.theme.colors.info};
   border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
@@ -159,8 +159,8 @@ const LocationButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: #3498db;
-    color: white;
+    background: ${props.theme.colors.info};
+    color: ${props.theme.colors.white};
   }
 
   &:disabled {
@@ -171,14 +171,14 @@ const LocationButton = styled.button`
 
 const LocationStatus = styled.div`
   font-size: 12px;
-  color: #27ae60;
+  color: ${props.theme.colors.success};
   margin-top: 8px;
   text-align: center;
 `;
 
 const ActiveFiltersCount = styled.span`
-  background: #3498db;
-  color: white;
+  background: ${props.theme.colors.info};
+  color: ${props.theme.colors.white};
   border-radius: 10px;
   padding: 2px 8px;
   font-size: 12px;

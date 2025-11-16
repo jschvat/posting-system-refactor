@@ -12,10 +12,10 @@ interface ListingCardProps {
 }
 
 const Card = styled.div`
-  background: white;
+  background: ${props => props.theme.colors.white};
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px ${props => props.theme.colors.overlayLight};
   transition: all 0.3s ease;
   cursor: pointer;
   height: 100%;
@@ -23,7 +23,7 @@ const Card = styled.div`
   flex-direction: column;
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px ${props => props.theme.colors.overlayLight};
     transform: translateY(-2px);
   }
 `;
@@ -32,7 +32,7 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   padding-top: 75%; /* 4:3 Aspect Ratio */
-  background: #f0f0f0;
+  background: ${props => props.theme.colors.borderLight};
   overflow: hidden;
 `;
 
@@ -55,7 +55,7 @@ const PlaceholderImage = styled.div`
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-size: 48px;
   font-weight: bold;
 `;
@@ -64,7 +64,7 @@ const SaveButton = styled.button<{ isSaved?: boolean }>`
   position: absolute;
   top: 12px;
   right: 12px;
-  background: white;
+  background: ${props => props.theme.colors.white};
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -73,18 +73,18 @@ const SaveButton = styled.button<{ isSaved?: boolean }>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px ${props => props.theme.colors.overlayLight};
   z-index: 2;
   transition: all 0.2s ease;
 
   svg {
-    color: ${props => props.isSaved ? '#e74c3c' : '#95a5a6'};
+    color: ${props => props.isSaved ? props.theme.colors.error : props.theme.colors.text.muted};
     font-size: 18px;
   }
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px ${props => props.theme.colors.overlayLight};
   }
 `;
 
@@ -99,14 +99,14 @@ const ConditionBadge = styled.span<{ condition: string }>`
   text-transform: uppercase;
   background: ${props => {
     switch (props.condition) {
-      case 'new': return '#2ecc71';
-      case 'like_new': return '#3498db';
-      case 'good': return '#f39c12';
-      case 'fair': return '#e67e22';
-      default: return '#95a5a6';
+      case 'new': return props.theme.colors.success;
+      case 'like_new': return props.theme.colors.info;
+      case 'good': return props.theme.colors.warning;
+      case 'fair': return props.theme.colors.veteran;
+      default: return props.theme.colors.text.muted;
     }
   }};
-  color: white;
+  color: ${props => props.theme.colors.white};
   z-index: 2;
 `;
 
@@ -121,7 +121,7 @@ const Title = styled.h3`
   margin: 0 0 8px 0;
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props => props.theme.colors.text.primary};
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -131,7 +131,7 @@ const Title = styled.h3`
 
 const Category = styled.span`
   font-size: 12px;
-  color: #7f8c8d;
+  color: ${props => props.theme.colors.text.secondary};
   margin-bottom: 8px;
 `;
 
@@ -146,23 +146,23 @@ const PriceRow = styled.div`
 const Price = styled.span`
   font-size: 24px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props => props.theme.colors.text.primary};
 `;
 
 const OriginalPrice = styled.span`
   font-size: 14px;
-  color: #95a5a6;
+  color: ${props => props.theme.colors.text.muted};
   text-decoration: line-through;
 `;
 
 const Footer = styled.div`
   padding: 12px 16px;
-  border-top: 1px solid #ecf0f1;
+  border-top: 1px solid ${props => props.theme.colors.border};
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props => props.theme.colors.text.secondary};
 `;
 
 const Location = styled.div`
@@ -171,12 +171,12 @@ const Location = styled.div`
   gap: 6px;
 
   svg {
-    color: #e74c3c;
+    color: ${props => props.theme.colors.error};
   }
 `;
 
 const Distance = styled.span`
-  color: #3498db;
+  color: ${props => props.theme.colors.info};
   font-weight: 600;
 `;
 

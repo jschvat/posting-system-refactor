@@ -133,7 +133,7 @@ const DefaultIcon = styled.div`
   height: 48px;
   border-radius: 8px;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,9 +170,9 @@ const RoleBadge = styled.span<{ $role: 'admin' | 'moderator' | 'member' }>`
   white-space: nowrap;
   display: ${props => props.$role === 'member' ? 'none' : 'inline-block'};
   background: ${props => props.$role === 'admin'
-    ? 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'
-    : 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)'};
-  color: white;
+    ? 'linear-gradient(135deg, ${props.theme.colors.gold} 0%, #FFA500 100%)'
+    : 'linear-gradient(135deg, ${props.theme.colors.success} 0%, #2E7D32 100%)'};
+  color: ${props.theme.colors.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -186,7 +186,7 @@ const JoinButton = styled.button<{ $isMember: boolean }>`
   border-radius: 20px;
   border: 1px solid ${props => props.$isMember ? props.theme.colors.border : props.theme.colors.primary};
   background: ${props => props.$isMember ? 'transparent' : props.theme.colors.primary};
-  color: ${props => props.$isMember ? props.theme.colors.text : 'white'};
+  color: ${props => props.$isMember ? props.theme.colors.text : '${props.theme.colors.white}'};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -194,7 +194,7 @@ const JoinButton = styled.button<{ $isMember: boolean }>`
   &:hover {
     background: ${props => props.$isMember ? props.theme.colors.error : props.theme.colors.primary};
     border-color: ${props => props.$isMember ? props.theme.colors.error : props.theme.colors.primary};
-    color: ${props => props.$isMember ? props.theme.colors.error : 'white'};
+    color: ${props => props.$isMember ? props.theme.colors.error : '${props.theme.colors.white}'};
   }
 `;
 
@@ -245,8 +245,8 @@ const Badge = styled.span<{ $visibility: string }>`
     ? 'rgba(255, 152, 0, 0.1)'
     : 'rgba(156, 39, 176, 0.1)'};
   color: ${props => props.$visibility === 'private'
-    ? '#FF9800'
-    : '#9C27B0'};
+    ? '${props.theme.colors.warning}'
+    : '${props.theme.colors.contributor}'};
 `;
 
 export default GroupCard;

@@ -18,18 +18,18 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 0;
 `;
 
 const TabsContainer = styled.div`
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid ${props.theme.colors.border};
   margin-bottom: 24px;
   display: flex;
   gap: 8px;
@@ -40,8 +40,8 @@ const Tab = styled.button<{ active: boolean }>`
   padding: 12px 24px;
   background: none;
   border: none;
-  border-bottom: 3px solid ${props => props.active ? '#3498db' : 'transparent'};
-  color: ${props => props.active ? '#3498db' : '#7f8c8d'};
+  border-bottom: 3px solid ${props => props.active ? '${props.theme.colors.info}' : 'transparent'};
+  color: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.text.secondary}'};
   font-size: 15px;
   font-weight: ${props => props.active ? '600' : '500'};
   cursor: pointer;
@@ -49,8 +49,8 @@ const Tab = styled.button<{ active: boolean }>`
   white-space: nowrap;
 
   &:hover {
-    color: #3498db;
-    background: #f8f9fa;
+    color: ${props.theme.colors.info};
+    background: ${props.theme.colors.hover};
   }
 `;
 
@@ -62,8 +62,8 @@ const StatsBar = styled.div`
 `;
 
 const StatCard = styled.div`
-  background: white;
-  border: 1px solid #e1e8ed;
+  background: ${props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 12px;
   padding: 16px 24px;
   display: flex;
@@ -80,14 +80,14 @@ const StatContent = styled.div``;
 
 const StatLabel = styled.div`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin-bottom: 4px;
 `;
 
 const StatValue = styled.div`
   font-size: 24px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
 `;
 
 const ListingsGrid = styled.div`
@@ -100,9 +100,9 @@ const ListingsGrid = styled.div`
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 20px;
-  background: white;
+  background: ${props.theme.colors.white};
   border-radius: 16px;
-  border: 1px solid #e1e8ed;
+  border: 1px solid ${props => props.theme.colors.border};
 `;
 
 const EmptyIcon = styled.div`
@@ -113,20 +113,20 @@ const EmptyIcon = styled.div`
 const EmptyTitle = styled.h2`
   font-size: 24px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const EmptyText = styled.p`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   margin: 0 0 24px 0;
 `;
 
 const BrowseButton = styled.button`
   padding: 12px 32px;
-  background: #3498db;
-  color: white;
+  background: ${props.theme.colors.info};
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -135,7 +135,7 @@ const BrowseButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: #2980b9;
+    background: ${props.theme.colors.infoDark};
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
   }
@@ -145,12 +145,12 @@ const LoadingState = styled.div`
   text-align: center;
   padding: 60px 20px;
   font-size: 18px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
 `;
 
 const ErrorMessage = styled.div`
-  background: #ffe6e6;
-  color: #c0392b;
+  background: ${props.theme.colors.statusRejectedBg};
+  color: ${props.theme.colors.errorDark};
   padding: 16px;
   border-radius: 8px;
   margin-bottom: 24px;
@@ -179,19 +179,19 @@ const UnsaveButton = styled.button`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: #e74c3c;
-    color: white;
+    background: ${props.theme.colors.error};
+    color: ${props.theme.colors.white};
     transform: scale(1.1);
   }
 `;
 
 const FolderInfo = styled.div`
-  background: #f8f9fa;
+  background: ${props.theme.colors.hover};
   padding: 8px 12px;
   border-radius: 6px;
   margin-top: 8px;
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
   display: flex;
   align-items: center;
   gap: 6px;

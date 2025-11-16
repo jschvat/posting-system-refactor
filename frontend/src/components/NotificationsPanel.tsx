@@ -47,7 +47,7 @@ const Badge = styled.span`
   top: 2px;
   right: 2px;
   background: ${({ theme }) => theme.colors.error};
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 0.625rem;
   font-weight: 600;
   padding: 2px 5px;
@@ -145,7 +145,7 @@ const NotificationIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 1.125rem;
   flex-shrink: 0;
   overflow: hidden;

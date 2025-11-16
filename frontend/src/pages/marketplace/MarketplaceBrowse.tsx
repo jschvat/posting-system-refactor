@@ -66,7 +66,7 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0;
 
   @media (max-width: 768px) {
@@ -80,8 +80,8 @@ const Title = styled.h1`
 
 const CreateButton = styled.button`
   padding: 12px 24px;
-  background: #3498db;
-  color: white;
+  background: ${props.theme.colors.info};
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -93,7 +93,7 @@ const CreateButton = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    background: #2980b9;
+    background: ${props.theme.colors.infoDark};
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
   }
@@ -107,9 +107,9 @@ const CreateButton = styled.button`
 
 const FilterButton = styled.button<{ active?: boolean }>`
   padding: 14px 24px;
-  background: ${props => props.active ? '#3498db' : 'white'};
-  color: ${props => props.active ? 'white' : '#2c3e50'};
-  border: 2px solid ${props => props.active ? '#3498db' : '#e0e0e0'};
+  background: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.white}'};
+  color: ${props => props.active ? '${props.theme.colors.white}' : '${props.theme.colors.text.primary}'};
+  border: 2px solid ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.border}'};
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
@@ -120,15 +120,15 @@ const FilterButton = styled.button<{ active?: boolean }>`
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${props => props.active ? '#2980b9' : '#f8f9fa'};
-    border-color: ${props => props.active ? '#2980b9' : '#3498db'};
+    background: ${props => props.active ? '${props.theme.colors.infoDark}' : '${props.theme.colors.hover}'};
+    border-color: ${props => props.active ? '${props.theme.colors.infoDark}' : '${props.theme.colors.info}'};
   }
 `;
 
 const FiltersPanel = styled.div<{ show: boolean }>`
   display: ${props => props.show ? 'block' : 'none'};
-  background: white;
-  border: 2px solid #e0e0e0;
+  background: ${props.theme.colors.white};
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
@@ -149,30 +149,30 @@ const FilterGroup = styled.div`
 const Label = styled.label`
   font-size: 14px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
 `;
 
 const Select = styled.select`
   padding: 10px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
 const Input = styled.input`
   padding: 10px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
@@ -196,9 +196,9 @@ const CategoryTags = styled.div`
 
 const CategoryTag = styled.button<{ active?: boolean }>`
   padding: 8px 16px;
-  background: ${props => props.active ? '#3498db' : 'white'};
-  color: ${props => props.active ? 'white' : '#2c3e50'};
-  border: 2px solid ${props => props.active ? '#3498db' : '#e0e0e0'};
+  background: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.white}'};
+  color: ${props => props.active ? '${props.theme.colors.white}' : '${props.theme.colors.text.primary}'};
+  border: 2px solid ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.border}'};
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
@@ -207,8 +207,8 @@ const CategoryTag = styled.button<{ active?: boolean }>`
   white-space: nowrap;
 
   &:hover {
-    background: ${props => props.active ? '#2980b9' : '#f8f9fa'};
-    border-color: ${props => props.active ? '#2980b9' : '#3498db'};
+    background: ${props => props.active ? '${props.theme.colors.infoDark}' : '${props.theme.colors.hover}'};
+    border-color: ${props => props.active ? '${props.theme.colors.infoDark}' : '${props.theme.colors.info}'};
   }
 
   @media (max-width: 480px) {
@@ -226,19 +226,19 @@ const ResultsHeader = styled.div`
 
 const ResultsCount = styled.span`
   font-size: 16px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
 `;
 
 const SortSelect = styled.select`
   padding: 10px 16px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 
@@ -252,17 +252,17 @@ const Pagination = styled.div`
 
 const PageButton = styled.button<{ active?: boolean }>`
   padding: 10px 16px;
-  background: ${props => props.active ? '#3498db' : 'white'};
-  color: ${props => props.active ? 'white' : '#2c3e50'};
-  border: 2px solid ${props => props.active ? '#3498db' : '#e0e0e0'};
+  background: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.white}'};
+  color: ${props => props.active ? '${props.theme.colors.white}' : '${props.theme.colors.text.primary}'};
+  border: 2px solid ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.border}'};
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: ${props => props.active ? '#2980b9' : '#f8f9fa'};
-    border-color: #3498db;
+    background: ${props => props.active ? '${props.theme.colors.infoDark}' : '${props.theme.colors.hover}'};
+    border-color: ${props.theme.colors.info};
   }
 
   &:disabled {

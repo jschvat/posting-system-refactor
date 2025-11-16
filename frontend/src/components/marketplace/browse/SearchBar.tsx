@@ -26,7 +26,7 @@ const SearchWrapper = styled.div`
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    color: #95a5a6;
+    color: ${props.theme.colors.text.muted};
     font-size: 18px;
   }
 `;
@@ -35,15 +35,15 @@ const SearchInput = styled.input`
   flex: 1;
   width: 100%;
   padding: 14px 20px 14px 48px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid ${props.theme.colors.border};
   border-radius: 12px;
   font-size: 16px;
   transition: all 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+    border-color: ${props.theme.colors.info};
+    box-shadow: 0 0 0 4px ${props.theme.colors.infoLight};
   }
 `;
 

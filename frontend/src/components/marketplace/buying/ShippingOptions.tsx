@@ -17,7 +17,7 @@ const Section = styled.div`
 const SectionTitle = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin: 0 0 12px 0;
 `;
 
@@ -32,14 +32,14 @@ const ShippingOption = styled.label<{ selected: boolean }>`
   align-items: center;
   gap: 12px;
   padding: 16px;
-  border: 2px solid ${props => props.selected ? '#3498db' : '#e0e0e0'};
+  border: 2px solid ${props => props.selected ? '${props.theme.colors.info}' : '${props.theme.colors.border}'};
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
-  background: ${props => props.selected ? '#f0f8ff' : 'white'};
+  background: ${props => props.selected ? '${props.theme.colors.infoLight}' : '${props.theme.colors.white}'};
 
   &:hover {
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 
   input[type="radio"] {
@@ -53,25 +53,25 @@ const ShippingDetails = styled.div`
 
 const ShippingLabel = styled.div`
   font-weight: 600;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   margin-bottom: 4px;
 `;
 
 const ShippingDescription = styled.div`
   font-size: 13px;
-  color: #7f8c8d;
+  color: ${props.theme.colors.text.secondary};
 `;
 
 const ShippingPrice = styled.div`
   font-weight: 700;
-  color: #2c3e50;
+  color: ${props.theme.colors.text.primary};
   font-size: 16px;
 `;
 
 const AddressInput = styled.textarea`
   width: 100%;
   padding: 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${props.theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
@@ -80,7 +80,7 @@ const AddressInput = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: ${props.theme.colors.info};
   }
 `;
 

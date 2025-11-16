@@ -193,7 +193,7 @@ const Header = styled.div`
 const Title = styled.h3`
   margin: 0;
   font-size: 1.25rem;
-  color: #333;
+  color: ${props.theme.colors.text.primary};
 `;
 
 const AddButton = styled.button`
@@ -201,8 +201,8 @@ const AddButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #007bff;
-  color: white;
+  background: ${props.theme.colors.primary};
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -210,7 +210,7 @@ const AddButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background: #0056b3;
+    background: ${props.theme.colors.primaryDark};
   }
 
   svg {
@@ -221,7 +221,7 @@ const AddButton = styled.button`
 const LoadingText = styled.div`
   text-align: center;
   padding: 2rem;
-  color: #666;
+  color: ${props.theme.colors.text.secondary};
 `;
 
 export default PaymentMethodSelector;

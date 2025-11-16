@@ -73,7 +73,7 @@ const CloseButton = styled.button`
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 28px;
   cursor: pointer;
   display: flex;
@@ -106,7 +106,7 @@ const NavButton = styled.button<{ direction: 'left' | 'right' }>`
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 32px;
   cursor: pointer;
   display: flex;
@@ -140,7 +140,7 @@ const Counter = styled.div`
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  color: ${props.theme.colors.white};
   padding: 10px 24px;
   border-radius: 30px;
   font-size: 16px;
@@ -197,7 +197,7 @@ const Thumbnail = styled.div<{ active: boolean }>`
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
-  border: 3px solid ${props => props.active ? 'white' : 'transparent'};
+  border: 3px solid ${props => props.active ? '${props.theme.colors.white}' : 'transparent'};
   opacity: ${props => props.active ? 1 : 0.6};
   transition: all 0.2s;
 

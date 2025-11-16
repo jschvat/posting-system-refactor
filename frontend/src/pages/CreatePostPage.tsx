@@ -112,7 +112,7 @@ const MediaSection = styled.div`
 
 const MediaUploadButton = styled.button`
   background: ${({ theme }) => theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -157,7 +157,7 @@ const RemoveMediaButton = styled.button`
   top: 4px;
   right: 4px;
   background: ${({ theme }) => theme.colors.error};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   width: 20px;
   height: 20px;
@@ -195,7 +195,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? 'white' : theme.colors.text.primary
+    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 1rem;
@@ -212,7 +212,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   &:disabled {
     background: ${({ theme }) => theme.colors.text.muted};
     border-color: ${({ theme }) => theme.colors.text.muted};
-    color: white;
+    color: ${props.theme.colors.white};
     cursor: not-allowed;
   }
 `;
@@ -406,7 +406,7 @@ const CreatePostPage: React.FC = () => {
             <Label>Add Photos or Videos</Label>
             <MediaSection>
               <div>
-                <p style={{ marginBottom: '16px', color: '#65676b' }}>
+                <p style={{ marginBottom: '16px', color: '${props.theme.colors.text.secondary}' }}>
                   Upload up to {MAX_FILES} files (images, videos, documents)
                 </p>
                 <MediaUploadButton type="button" onClick={handleFileSelect}>
@@ -436,7 +436,7 @@ const CreatePostPage: React.FC = () => {
                           fontSize: '0.8rem',
                           padding: '8px',
                           textAlign: 'center',
-                          background: '#f0f2f5'
+                          background: '${props.theme.colors.backgroundSecondary}'
                         }}>
                           {file.name}
                         </div>

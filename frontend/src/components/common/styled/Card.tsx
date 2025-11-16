@@ -14,25 +14,25 @@ export interface CardProps {
 
 const cardVariants = {
   default: css`
-    background: ${({ theme }) => theme.colors.backgroundPrimary || 'white'};
-    border: 1px solid ${({ theme }) => theme.colors.border || '#e0e0e0'};
+    background: ${({ theme }) => theme.colors.backgroundPrimary || '${props.theme.colors.white}'};
+    border: 1px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
     box-shadow: none;
   `,
 
   elevated: css`
-    background: ${({ theme }) => theme.colors.backgroundPrimary || 'white'};
+    background: ${({ theme }) => theme.colors.backgroundPrimary || '${props.theme.colors.white}'};
     border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   `,
 
   outlined: css`
     background: transparent;
-    border: 2px solid ${({ theme }) => theme.colors.border || '#e0e0e0'};
+    border: 2px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
     box-shadow: none;
   `,
 
   flat: css`
-    background: ${({ theme }) => theme.colors.backgroundSecondary || '#f5f5f5'};
+    background: ${({ theme }) => theme.colors.backgroundSecondary || '${props.theme.colors.hover}'};
     border: none;
     box-shadow: none;
   `,
@@ -87,7 +87,7 @@ export const CardHeader = styled.div`
   justify-content: space-between;
   margin-bottom: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border || '#e0e0e0'};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
 `;
 
 export const CardTitle = styled.h3`
@@ -113,7 +113,7 @@ export const CardFooter = styled.div`
   justify-content: space-between;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid ${({ theme }) => theme.colors.border || '#e0e0e0'};
+  border-top: 1px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
 `;
 
 export const CardImage = styled.img`

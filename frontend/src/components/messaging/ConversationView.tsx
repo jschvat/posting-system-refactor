@@ -21,7 +21,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #ffffff;
+  background: ${props => props.theme.colors.white};
 `;
 
 const MessagesContainer = styled.div`
@@ -45,19 +45,19 @@ const MessagesContainer = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: ${props => props.theme.colors.overlayLight};
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: ${props => props.theme.colors.overlay};
   }
 `;
 
 const ComposerContainer = styled.div`
   padding: 12px 16px;
-  background: #f6f6f6;
-  border-top: 1px solid #e5e5e5;
+  background: ${props => props.theme.colors.hover};
+  border-top: 1px solid ${props => props.theme.colors.border};
 `;
 
 const LoadingContainer = styled.div`

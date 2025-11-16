@@ -97,7 +97,7 @@ const UserAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-weight: bold;
   overflow: hidden;
 
@@ -152,7 +152,7 @@ const ErrorState = styled.div`
 
 const RetryButton = styled.button`
   background: ${({ theme }) => theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   border-radius: ${({ theme }) => theme.borderRadius.md};

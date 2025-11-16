@@ -431,7 +431,7 @@ const Timestamp = styled.div`
 
 const PinnedBadge = styled.span`
   background: ${props => props.theme.colors.success};
-  color: white;
+  color: ${props.theme.colors.white};
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
@@ -518,7 +518,7 @@ const CommentTextarea = styled.textarea`
 const CommentButton = styled.button`
   padding: 8px 16px;
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   border: none;
   border-radius: 8px;
   font-weight: 600;

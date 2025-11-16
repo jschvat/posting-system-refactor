@@ -281,7 +281,7 @@ const SaveButton = styled.button`
   border: none;
   border-radius: ${props => props.theme.borderRadius.md};
   background: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;

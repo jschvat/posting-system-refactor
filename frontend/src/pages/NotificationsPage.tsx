@@ -56,7 +56,7 @@ const FilterTab = styled.button<{ $active: boolean }>`
   background: ${({ theme, $active }) =>
     $active ? theme.colors.primary : theme.colors.background};
   color: ${({ theme, $active }) =>
-    $active ? 'white' : theme.colors.text.secondary};
+    $active ? '${props.theme.colors.white}' : theme.colors.text.secondary};
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 999px;
@@ -126,7 +126,7 @@ const NotificationIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${props.theme.colors.white};
   font-size: 1.5rem;
   flex-shrink: 0;
   overflow: hidden;

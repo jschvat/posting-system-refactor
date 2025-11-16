@@ -254,7 +254,7 @@ const StarButton = styled.button<{ $filled: boolean }>`
   border: none;
   cursor: pointer;
   font-size: 32px;
-  color: ${({ $filled, ...props }) => ($filled ? '#ffc107' : getTheme(props).colors.border)};
+  color: ${({ $filled, ...props }) => ($filled ? '${props.theme.colors.warning}' : getTheme(props).colors.border)};
   transition: all 0.2s ease;
   padding: 0;
 
@@ -310,7 +310,7 @@ const ErrorMessage = styled.div`
   color: ${(props) => getTheme(props).colors.error};
   font-size: 14px;
   padding: ${(props) => getTheme(props).spacing.sm};
-  background: ${(props) => getTheme(props).colors.errorLight || 'rgba(244, 67, 54, 0.1)'};
+  background: ${(props) => getTheme(props).colors.errorLight || '${props.theme.colors.errorLight}'};
   border-radius: ${(props) => getTheme(props).borderRadius.md};
 `;
 
@@ -347,7 +347,7 @@ const CancelButton = styled(Button)`
 const SubmitButton = styled(Button)`
   background: ${(props) => getTheme(props).colors.primary};
   border: none;
-  color: white;
+  color: ${props.theme.colors.white};
 
   &:hover:not(:disabled) {
     background: ${(props) => getTheme(props).colors.primaryDark || getTheme(props).colors.primary};
