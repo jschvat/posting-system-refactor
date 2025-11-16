@@ -308,10 +308,10 @@ const ComposerTitle = styled.h2`
 
 const ApprovalNotice = styled.div`
   padding: 12px;
-  background: rgba(33, 150, 243, 0.1);
-  border: 1px solid #2196F3;
+  background: ${props => props.theme.colors.infoLight};
+  border: 1px solid ${props => props.theme.colors.info};
   border-radius: 4px;
-  color: #2196F3;
+  color: ${props => props.theme.colors.info};
   font-size: 14px;
   margin-bottom: 16px;
 `;
@@ -324,10 +324,10 @@ const Form = styled.form`
 
 const ErrorMessage = styled.div`
   padding: 12px;
-  background: rgba(244, 67, 54, 0.1);
-  border: 1px solid #f44336;
+  background: ${props => props.theme.colors.errorLight};
+  border: 1px solid ${props => props.theme.colors.error};
   border-radius: 4px;
-  color: #f44336;
+  color: ${props => props.theme.colors.error};
   font-size: 14px;
 `;
 

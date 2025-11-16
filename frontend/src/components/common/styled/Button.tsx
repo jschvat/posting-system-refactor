@@ -35,7 +35,7 @@ const buttonVariants = {
   `,
 
   danger: css`
-    background: #dc3545;
+    background: ${({ theme }) => theme.colors.error};
     color: white;
     border: none;
 
@@ -45,7 +45,7 @@ const buttonVariants = {
   `,
 
   success: css`
-    background: #28a745;
+    background: ${({ theme }) => theme.colors.success};
     color: white;
     border: none;
 

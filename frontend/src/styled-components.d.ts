@@ -38,6 +38,8 @@ declare module 'styled-components' {
       successLight: string;
       warning: string;
       hover: string;
+      info: string;
+      infoLight: string;
     };
     spacing: {
       xs: string;

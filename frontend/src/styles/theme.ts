@@ -31,7 +31,9 @@ export const theme: DefaultTheme = {
     success: '#00d084',
     successLight: 'rgba(0, 208, 132, 0.1)',
     warning: '#f39c12',
-    hover: '#f7f8fa'
+    hover: '#f7f8fa',
+    info: '#3498db',
+    infoLight: 'rgba(52, 152, 219, 0.1)'
   },
   spacing: {
     xs: '4px',
