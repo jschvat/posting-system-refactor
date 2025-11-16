@@ -6,6 +6,7 @@ import { useToast } from '../components/Toast';
 import groupsApi from '../services/groupsApi';
 import { Group } from '../types/group';
 import GroupCard from '../components/groups/GroupCard';
+import { usePagination } from '../hooks/usePagination';
 
 const getErrorMessage = (err: any): string => {
   const error = err.response?.data?.error;
@@ -26,33 +27,30 @@ const GroupListPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const pagination = usePagination({ initialPage: 1, itemsPerPage: 20 });
   const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
     loadGroups();
-  }, [page, filter]);
+  }, [pagination.page, filter]);
 
   const loadGroups = async () => {
     try {
       setLoading(true);
       setError(null);
-      const limit = 20;
-      const offset = (page - 1) * limit;
 
       let response;
       if (user && filter !== 'all') {
         // Use filtered endpoint for logged-in users with active filters
         response = await groupsApi.getFilteredGroups({
           filter,
-          page,
-          limit,
-          offset
+          page: pagination.page,
+          limit: pagination.itemsPerPage,
+          offset: pagination.offset
         });
       } else {
         // Use regular endpoint for 'all' filter or non-logged-in users
-        response = await groupsApi.getGroups({ page, limit, offset } as any);
+        response = await groupsApi.getGroups({ page: pagination.page, limit: pagination.itemsPerPage, offset: pagination.offset } as any);
       }
 
       if (response.success && response.data) {
@@ -60,7 +58,7 @@ const GroupListPage: React.FC = () => {
         const groupsList = data.groups || [];
         setGroups(groupsList);
         const total = data.total || 0;
-        setTotalPages(Math.ceil(total / limit));
+        pagination.setTotalItems(total);
 
         // Note: Membership status would need individual API calls per group
         // For now, users can click into groups to see full details and join
@@ -82,15 +80,14 @@ const GroupListPage: React.FC = () => {
     try {
       setIsSearching(true);
       setError(null);
-      const limit = 20;
-      const response = await groupsApi.searchGroups({ q: searchQuery, page: 1, limit, offset: 0 } as any);
+      const response = await groupsApi.searchGroups({ q: searchQuery, page: 1, limit: pagination.itemsPerPage, offset: 0 } as any);
 
       if (response.success && response.data) {
         const data = response.data as any;
         setGroups(data.groups || []);
         const total = data.total || 0;
-        setTotalPages(Math.ceil(total / limit));
-        setPage(1);
+        pagination.setTotalItems(total);
+        pagination.resetPage();
       }
     } catch (err: any) {
       setError(getErrorMessage(err) || 'Failed to search groups');
@@ -167,7 +164,7 @@ const GroupListPage: React.FC = () => {
       return;
     }
     setFilter(e.target.value as FilterType);
-    setPage(1); // Reset to first page when filter changes
+    pagination.resetPage(); // Reset to first page when filter changes
   };
 
   return (
@@ -225,20 +222,20 @@ const GroupListPage: React.FC = () => {
             ))}
           </GroupGrid>
 
-          {totalPages > 1 && (
+          {pagination.totalPages > 1 && (
             <Pagination>
               <PageButton
-                onClick={() => setPage(p => Math.max(1, p - 1))}
-                disabled={page === 1}
+                onClick={pagination.prevPage}
+                disabled={!pagination.hasPrev}
               >
                 Previous
               </PageButton>
               <PageInfo>
-                Page {page} of {totalPages}
+                Page {pagination.page} of {pagination.totalPages}
               </PageInfo>
               <PageButton
-                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages}
+                onClick={pagination.nextPage}
+                disabled={!pagination.hasNext}
               >
                 Next
               </PageButton>

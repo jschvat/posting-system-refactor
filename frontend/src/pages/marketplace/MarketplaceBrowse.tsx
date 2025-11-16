@@ -5,6 +5,7 @@ import marketplaceApi, { MarketplaceListing, MarketplaceCategory } from '../../s
 import { FilterSidebar, FilterState } from '../../components/marketplace/FilterSidebar';
 import { SearchBar } from '../../components/marketplace/browse/SearchBar';
 import { ListingGrid } from '../../components/marketplace/browse/ListingGrid';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const Container = styled.div`
   max-width: 100%;
@@ -294,13 +295,16 @@ export const MarketplaceBrowse: React.FC = () => {
     hasMore: false
   });
 
+  // Debounce search query to reduce API calls
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
   useEffect(() => {
     loadCategories();
   }, []);
 
   useEffect(() => {
     loadListings();
-  }, [searchQuery, selectedCategory, filters, page]);
+  }, [debouncedSearchQuery, selectedCategory, filters, page]);
 
   const loadCategories = async () => {
     try {
@@ -316,9 +320,9 @@ export const MarketplaceBrowse: React.FC = () => {
   const loadListings = async () => {
     setLoading(true);
     try {
-      // Build params from filters
+      // Build params from filters (using debounced search query)
       const params: any = {
-        query: searchQuery || undefined,
+        query: debouncedSearchQuery || undefined,
         category_id: selectedCategory,
         min_price: filters.minPrice,
         max_price: filters.maxPrice,

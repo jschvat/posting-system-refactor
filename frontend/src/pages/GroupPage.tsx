@@ -10,6 +10,7 @@ import GroupFeed from '../components/groups/GroupFeed';
 import GroupHeader from '../components/groups/GroupHeader';
 import GroupChatPopup from '../components/groups/GroupChatPopup';
 import { messagesApi, Conversation, Message } from '../services/api/messagesApi';
+import { usePagination } from '../hooks/usePagination';
 
 const getErrorMessage = (err: any): string => {
   const error = err.response?.data?.error;
@@ -32,8 +33,7 @@ const GroupPage: React.FC = () => {
   const [isMember, setIsMember] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<PostSortType>('hot');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const pagination = usePagination({ initialPage: 1, itemsPerPage: 20 });
   const [showComposer, setShowComposer] = useState(false);
   const [moderators, setModerators] = useState<any[]>([]);
 
@@ -54,7 +54,7 @@ const GroupPage: React.FC = () => {
     if (slug && group) {
       loadPosts();
     }
-  }, [slug, group, sortBy, page]);
+  }, [slug, group, sortBy, pagination.page]);
 
   const loadGroupData = async () => {
     if (!slug) return;
@@ -114,8 +114,8 @@ const GroupPage: React.FC = () => {
 
     try {
       const response = await groupPostsApi.getGroupPosts(slug, {
-        page,
-        limit: 20,
+        page: pagination.page,
+        limit: pagination.itemsPerPage,
         sort: sortBy
       });
 
@@ -123,7 +123,7 @@ const GroupPage: React.FC = () => {
         const data = response.data as any;
         setPosts(data.posts || []);
         if (data.total) {
-          setTotalPages(Math.ceil(data.total / 20));
+          pagination.setTotalItems(data.total);
         }
       }
     } catch (err: any) {
@@ -406,9 +406,9 @@ const GroupPage: React.FC = () => {
             onLock={handleLock}
             onRemove={handleRemove}
             groupSlug={slug!}
-            page={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
+            page={pagination.page}
+            totalPages={pagination.totalPages}
+            onPageChange={pagination.goToPage}
             user={user}
           />
         </MainContent>

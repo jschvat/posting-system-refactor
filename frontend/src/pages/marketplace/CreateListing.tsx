@@ -6,6 +6,7 @@ import { ImageUpload, ImageFile } from '../../components/marketplace/ImageUpload
 import { ListingBasicInfo } from '../../components/marketplace/forms/ListingBasicInfo';
 import { ListingPricing } from '../../components/marketplace/forms/ListingPricing';
 import { ListingLocation } from '../../components/marketplace/forms/ListingLocation';
+import { useGeolocation } from '../../hooks/useGeolocation';
 
 const Container = styled.div`
   max-width: 800px;
@@ -123,14 +124,29 @@ export const CreateListing: React.FC = () => {
   const [success, setSuccess] = useState('');
   const [categories, setCategories] = useState<Category[]>([]);
   const [images, setImages] = useState<ImageFile[]>([]);
-  const [locationDetecting, setLocationDetecting] = useState(false);
-  const [locationDetected, setLocationDetected] = useState(false);
   const [useManualLocation, setUseManualLocation] = useState(false);
-  const [detectedLocation, setDetectedLocation] = useState({
-    latitude: 0,
-    longitude: 0,
-    city: '',
-    state: ''
+
+  // Use geolocation hook for automatic location detection
+  const {
+    location: detectedLocation,
+    loading: locationDetecting,
+    isDetected: locationDetected,
+    detectLocation: detectUserLocation
+  } = useGeolocation({
+    autoDetect: true,
+    enableReverseGeocoding: true,
+    onSuccess: (location) => {
+      // Auto-fill the form with detected location
+      setFormData(prev => ({
+        ...prev,
+        location_city: location.city || '',
+        location_state: location.state || '',
+        location_zip: location.zip || ''
+      }));
+    },
+    onError: (error) => {
+      console.log('Location detection failed:', error);
+    }
   });
 
   // Form state
@@ -155,7 +171,6 @@ export const CreateListing: React.FC = () => {
 
   useEffect(() => {
     loadCategories();
-    detectUserLocation();
   }, []);
 
   const loadCategories = async () => {
@@ -167,79 +182,6 @@ export const CreateListing: React.FC = () => {
     } catch (error) {
       console.error('Error loading categories:', error);
     }
-  };
-
-  const detectUserLocation = async () => {
-    if (!navigator.geolocation) {
-      console.log('Geolocation is not supported by this browser');
-      return;
-    }
-
-    setLocationDetecting(true);
-
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-
-        try {
-          // Use reverse geocoding to get city and state from OpenStreetMap Nominatim
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
-            {
-              headers: {
-                'User-Agent': 'MarketplaceApp/1.0'
-              }
-            }
-          );
-          const data = await response.json();
-
-          const city = data.address.city ||
-                       data.address.town ||
-                       data.address.village ||
-                       data.address.county || '';
-          const state = data.address.state || '';
-          const zip = data.address.postcode || '';
-
-          setDetectedLocation({
-            latitude,
-            longitude,
-            city,
-            state
-          });
-
-          // Auto-fill the form with detected location
-          setFormData(prev => ({
-            ...prev,
-            location_city: city,
-            location_state: state,
-            location_zip: zip
-          }));
-
-          setLocationDetected(true);
-        } catch (error) {
-          console.error('Error getting location name:', error);
-          // Still save coordinates even if we can't get the name
-          setDetectedLocation({
-            latitude,
-            longitude,
-            city: '',
-            state: ''
-          });
-          setLocationDetected(true);
-        }
-
-        setLocationDetecting(false);
-      },
-      (error) => {
-        console.log('Location detection declined or failed:', error.message);
-        setLocationDetecting(false);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-      }
-    );
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -274,8 +216,8 @@ export const CreateListing: React.FC = () => {
       }
 
       // Use detected location coordinates, or geocode if user entered manually
-      let latitude = detectedLocation.latitude;
-      let longitude = detectedLocation.longitude;
+      let latitude = detectedLocation?.latitude || 0;
+      let longitude = detectedLocation?.longitude || 0;
 
       // If user manually entered location and we don't have coordinates, geocode it
       if (useManualLocation && (!latitude || !longitude)) {
