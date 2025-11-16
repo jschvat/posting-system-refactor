@@ -7,6 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import { followsApi } from '../services/api';
+import { formatCompactNumber } from '../utils/numberHelpers';
 
 interface UserStatsProps {
   userId: number;
@@ -59,15 +60,7 @@ const Separator = styled.span`
   margin: 0 ${({ theme }) => theme.spacing.sm};
 `;
 
-const formatNumber = (num: number): string => {
-  if (num >= 1000000) {
-    return `${(num / 1000000).toFixed(1)}M`;
-  }
-  if (num >= 1000) {
-    return `${(num / 1000).toFixed(1)}K`;
-  }
-  return num.toString();
-};
+// Number formatting now handled by centralized utility (utils/numberHelpers.ts)
 
 const UserStats: React.FC<UserStatsProps> = ({
   userId,
@@ -94,11 +87,11 @@ const UserStats: React.FC<UserStatsProps> = ({
     return (
       <StatsContainer $variant="compact">
         <CompactStat>
-          <strong>{formatNumber(followerCount)}</strong> followers
+          <strong>{formatCompactNumber(followerCount)}</strong> followers
         </CompactStat>
         <Separator>·</Separator>
         <CompactStat>
-          <strong>{formatNumber(followingCount)}</strong> following
+          <strong>{formatCompactNumber(followingCount)}</strong> following
         </CompactStat>
       </StatsContainer>
     );
@@ -107,17 +100,17 @@ const UserStats: React.FC<UserStatsProps> = ({
   return (
     <StatsContainer $variant="detailed">
       <StatItem $clickable>
-        <StatValue>{formatNumber(postCount)}</StatValue>
+        <StatValue>{formatCompactNumber(postCount)}</StatValue>
         <StatLabel>Posts</StatLabel>
       </StatItem>
 
       <StatItem $clickable>
-        <StatValue>{formatNumber(followerCount)}</StatValue>
+        <StatValue>{formatCompactNumber(followerCount)}</StatValue>
         <StatLabel>Followers</StatLabel>
       </StatItem>
 
       <StatItem $clickable>
-        <StatValue>{formatNumber(followingCount)}</StatValue>
+        <StatValue>{formatCompactNumber(followingCount)}</StatValue>
         <StatLabel>Following</StatLabel>
       </StatItem>
 

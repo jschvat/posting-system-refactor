@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../../contexts/AuthContext';
 import { Group } from '../../types/group';
+import { formatNumber } from '../../utils/numberHelpers';
 
 interface GroupHeaderProps {
   group: Group;
@@ -44,9 +45,9 @@ const GroupHeaderComponent: React.FC<GroupHeaderProps> = ({
           <GroupSlug>g/{group.name}</GroupSlug>
           {group.description && <GroupDescription>{group.description}</GroupDescription>}
           <GroupStats>
-            <Stat>{group.member_count.toLocaleString()} members</Stat>
+            <Stat>{formatNumber(group.member_count)} members</Stat>
             <Separator>•</Separator>
-            <Stat>{group.post_count.toLocaleString()} posts</Stat>
+            <Stat>{formatNumber(group.post_count)} posts</Stat>
             {moderators.length > 0 && (
               <>
                 <Separator>•</Separator>
