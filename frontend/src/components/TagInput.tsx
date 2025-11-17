@@ -198,7 +198,7 @@ const RemoveButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.error20};
+    background: ${({ theme }) => theme.colors.errorLight};
     color: ${({ theme }) => theme.colors.error};
   }
 `;
@@ -249,7 +249,7 @@ const SuggestionItem = styled.div<{ $isSelected: boolean }>`
       $isSelected ? theme.colors.primary : 'transparent'};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary10};
+    background: ${({ theme }) => theme.colors.primaryLight};
   }
 
   &:not(:last-child) {

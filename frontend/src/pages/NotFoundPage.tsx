@@ -35,7 +35,7 @@ const HomeLink = styled(Link)`
   transition: background 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primarydd};
+    background: ${({ theme }) => theme.colors.primaryDark};
     text-decoration: none;
   }
 `;

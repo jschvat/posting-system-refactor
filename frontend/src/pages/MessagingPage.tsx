@@ -50,7 +50,7 @@ const NewMessageButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background: ${props => props.theme.colors.primary}dd;
+    background: ${({ theme }) => theme.colors.primaryDark};
   }
 `;
 

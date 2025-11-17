@@ -124,7 +124,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
   margin-top: ${({ theme }) => theme.spacing.md};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primarydd};
+    background: ${({ theme }) => theme.colors.primaryDark};
   }
 
   &:disabled {
@@ -160,7 +160,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: ${({ theme }) => theme.colors.error20};
+  background: ${({ theme }) => theme.colors.errorLight};
   color: ${({ theme }) => theme.colors.error};
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};

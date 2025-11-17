@@ -106,7 +106,7 @@ const MediaSection = styled.div`
 
   &.dragover {
     border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.primary10};
+    background: ${({ theme }) => theme.colors.primaryLight};
   }
 `;
 
@@ -122,7 +122,7 @@ const MediaUploadButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primarydd};
+    background: ${({ theme }) => theme.colors.primaryDark};
   }
 `;
 
@@ -169,7 +169,7 @@ const RemoveMediaButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.errordd};
+    background: ${({ theme }) => theme.colors.errorDark};
   }
 `;
 
@@ -218,7 +218,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: ${({ theme }) => theme.colors.error20};
+  background: ${({ theme }) => theme.colors.errorLight};
   color: ${({ theme }) => theme.colors.error};
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};
