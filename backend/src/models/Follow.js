@@ -4,6 +4,8 @@
  */
 
 const BaseModel = require('./BaseModel');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class Follow extends BaseModel {
   constructor() {
@@ -33,6 +35,10 @@ class Follow extends BaseModel {
        RETURNING *`,
       [follower_id, following_id, status, notifications_enabled]
     );
+
+    // Invalidate follow count cache for both users
+    await cache.del(`follow:counts:${follower_id}`);
+    await cache.del(`follow:counts:${following_id}`);
 
     return result.rows[0];
   }
@@ -133,16 +139,26 @@ class Follow extends BaseModel {
    * @returns {Object} Counts object
    */
   async getCounts(userId) {
-    const result = await this.raw(
-      `SELECT
-        follower_count,
-        following_count
-       FROM user_stats
-       WHERE user_id = $1`,
-      [userId]
+    // Cache-aside pattern for follow counts
+    const cacheKey = `follow:counts:${userId}`;
+    const counts = await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const result = await this.raw(
+          `SELECT
+            follower_count,
+            following_count
+           FROM user_stats
+           WHERE user_id = $1`,
+          [userId]
+        );
+
+        return result.rows[0] || { follower_count: 0, following_count: 0 };
+      },
+      cacheConfig.defaultTTL.followCounts
     );
 
-    return result.rows[0] || { follower_count: 0, following_count: 0 };
+    return counts;
   }
 
   /**
@@ -158,6 +174,10 @@ class Follow extends BaseModel {
        RETURNING *`,
       [followerId, followingId]
     );
+
+    // Invalidate follow count cache for both users
+    await cache.del(`follow:counts:${followerId}`);
+    await cache.del(`follow:counts:${followingId}`);
 
     return result.rows.length > 0;
   }
