@@ -4,6 +4,8 @@
  */
 
 const BaseModel = require('./BaseModel');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class Reaction extends BaseModel {
   constructor() {
@@ -42,20 +44,28 @@ class Reaction extends BaseModel {
    * @returns {Promise<Array>} Array of reaction counts grouped by type
    */
   async getPostReactionCounts(postId) {
-    const result = await this.raw(
-      `SELECT emoji_name,
-              COUNT(*) as count
-       FROM reactions
-       WHERE post_id = $1
-       GROUP BY emoji_name
-       ORDER BY count DESC`,
-      [postId]
-    );
+    const cacheKey = `reaction:counts:post:${postId}`;
 
-    return result.rows.map(row => ({
-      emoji_name: row.emoji_name,
-      count: parseInt(row.count)
-    }));
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const result = await this.raw(
+          `SELECT emoji_name,
+                  COUNT(*) as count
+           FROM reactions
+           WHERE post_id = $1
+           GROUP BY emoji_name
+           ORDER BY count DESC`,
+          [postId]
+        );
+
+        return result.rows.map(row => ({
+          emoji_name: row.emoji_name,
+          count: parseInt(row.count)
+        }));
+      },
+      cacheConfig.defaultTTL.reactionCounts
+    );
   }
 
   /**
@@ -64,20 +74,28 @@ class Reaction extends BaseModel {
    * @returns {Promise<Array>} Array of reaction counts grouped by type
    */
   async getCommentReactionCounts(commentId) {
-    const result = await this.raw(
-      `SELECT emoji_name,
-              COUNT(*) as count
-       FROM reactions
-       WHERE comment_id = $1
-       GROUP BY emoji_name
-       ORDER BY count DESC`,
-      [commentId]
-    );
+    const cacheKey = `reaction:counts:comment:${commentId}`;
 
-    return result.rows.map(row => ({
-      emoji_name: row.emoji_name,
-      count: parseInt(row.count)
-    }));
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const result = await this.raw(
+          `SELECT emoji_name,
+                  COUNT(*) as count
+           FROM reactions
+           WHERE comment_id = $1
+           GROUP BY emoji_name
+           ORDER BY count DESC`,
+          [commentId]
+        );
+
+        return result.rows.map(row => ({
+          emoji_name: row.emoji_name,
+          count: parseInt(row.count)
+        }));
+      },
+      cacheConfig.defaultTTL.reactionCounts
+    );
   }
 
   /**
@@ -165,11 +183,12 @@ class Reaction extends BaseModel {
   async togglePostReaction(userId, postId, reactionType, emojiUnicode = '👍') {
     const existingReaction = await this.getUserPostReaction(userId, postId);
 
+    let result;
     if (existingReaction) {
       if (existingReaction.emoji_name === reactionType) {
         // Same reaction type - remove reaction
         await this.delete(existingReaction.id);
-        return {
+        result = {
           action: 'removed',
           reaction: null
         };
@@ -179,7 +198,7 @@ class Reaction extends BaseModel {
           emoji_name: reactionType,
           emoji_unicode: emojiUnicode
         });
-        return {
+        result = {
           action: 'updated',
           reaction: this.getReactionData(updatedReaction)
         };
@@ -192,11 +211,16 @@ class Reaction extends BaseModel {
         emoji_name: reactionType,
         emoji_unicode: emojiUnicode
       });
-      return {
+      result = {
         action: 'added',
         reaction: newReaction
       };
     }
+
+    // Invalidate reaction counts cache for this post
+    await this.invalidatePostReactionCache(postId);
+
+    return result;
   }
 
   /**
@@ -210,11 +234,12 @@ class Reaction extends BaseModel {
   async toggleCommentReaction(userId, commentId, reactionType, emojiUnicode = '👍') {
     const existingReaction = await this.getUserCommentReaction(userId, commentId);
 
+    let result;
     if (existingReaction) {
       if (existingReaction.emoji_name === reactionType) {
         // Same reaction type - remove reaction
         await this.delete(existingReaction.id);
-        return {
+        result = {
           action: 'removed',
           reaction: null
         };
@@ -224,7 +249,7 @@ class Reaction extends BaseModel {
           emoji_name: reactionType,
           emoji_unicode: emojiUnicode
         });
-        return {
+        result = {
           action: 'updated',
           reaction: this.getReactionData(updatedReaction)
         };
@@ -237,11 +262,16 @@ class Reaction extends BaseModel {
         emoji_name: reactionType,
         emoji_unicode: emojiUnicode
       });
-      return {
+      result = {
         action: 'added',
         reaction: newReaction
       };
     }
+
+    // Invalidate reaction counts cache for this comment
+    await this.invalidateCommentReactionCache(commentId);
+
+    return result;
   }
 
   /**
@@ -334,6 +364,22 @@ class Reaction extends BaseModel {
       is_post_reaction: this.isPostReaction(reaction),
       is_comment_reaction: this.isCommentReaction(reaction)
     };
+  }
+
+  /**
+   * Invalidate reaction counts cache for a post
+   * @param {number} postId - ID of the post
+   */
+  async invalidatePostReactionCache(postId) {
+    await cache.del(`reaction:counts:post:${postId}`);
+  }
+
+  /**
+   * Invalidate reaction counts cache for a comment
+   * @param {number} commentId - ID of the comment
+   */
+  async invalidateCommentReactionCache(commentId) {
+    await cache.del(`reaction:counts:comment:${commentId}`);
   }
 }
 
