@@ -185,9 +185,9 @@ const MethodCard = styled.div<{ selected: boolean; expired: boolean }>`
   display: flex;
   align-items: center;
   padding: 1rem;
-  border: 2px solid ${props => props.selected ? props.theme.colors.primary : props.expired ? props.theme.colors.error} : props.theme.colors.border};
+  border: 2px solid ${props => props.selected ? props.theme.colors.primary : props.expired ? props.theme.colors.error : props.theme.colors.border};
   border-radius: 8px;
-  background: ${props => props.selected ? props.theme.colors.infoLight : props.expired ? props.theme.colors.errorLight} : props.theme.colors.white};
+  background: ${props => props.selected ? props.theme.colors.infoLight : props.expired ? props.theme.colors.errorLight : props.theme.colors.white};
   cursor: pointer;
   transition: all 0.2s;
   opacity: ${props => props.expired ? 0.7 : 1};

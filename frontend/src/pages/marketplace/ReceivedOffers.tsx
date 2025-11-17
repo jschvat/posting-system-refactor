@@ -166,22 +166,22 @@ const StatusBadge = styled.span<{ status: string }>`
   text-transform: uppercase;
   background: ${props => {
     switch (props.status) {
-      case 'pending': return ${({ theme }) => theme.colors.statusPendingBg};
-      case 'accepted': return ${({ theme }) => theme.colors.statusAcceptedBg};
-      case 'rejected': return ${({ theme }) => theme.colors.statusRejectedBg};
-      case 'countered': return ${({ theme }) => theme.colors.statusInfoBg};
-      case 'expired': return ${({ theme }) => theme.colors.borderLight};
-      default: return ${({ theme }) => theme.colors.hover};
+      case 'pending': return props.theme.colors.statusPendingBg;
+      case 'accepted': return props.theme.colors.statusAcceptedBg;
+      case 'rejected': return props.theme.colors.statusRejectedBg;
+      case 'countered': return props.theme.colors.statusInfoBg;
+      case 'expired': return props.theme.colors.borderLight;
+      default: return props.theme.colors.hover;
     }
   }};
   color: ${props => {
     switch (props.status) {
-      case 'pending': return ${({ theme }) => theme.colors.statusPending};
-      case 'accepted': return ${({ theme }) => theme.colors.success};
-      case 'rejected': return ${({ theme }) => theme.colors.errorDark};
-      case 'countered': return ${({ theme }) => theme.colors.info};
-      case 'expired': return ${({ theme }) => theme.colors.text.secondary};
-      default: return ${({ theme }) => theme.colors.text.primary};
+      case 'pending': return props.theme.colors.statusPending;
+      case 'accepted': return props.theme.colors.success;
+      case 'rejected': return props.theme.colors.errorDark;
+      case 'countered': return props.theme.colors.info;
+      case 'expired': return props.theme.colors.text.secondary;
+      default: return props.theme.colors.text.primary;
     }
   }};
 `;

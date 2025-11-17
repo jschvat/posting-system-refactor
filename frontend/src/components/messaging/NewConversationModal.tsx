@@ -164,7 +164,7 @@ const Button = styled.button<{ $primary?: boolean }>`
   background: ${({ theme, $primary }) =>
     $primary ? theme.colors.primary : 'transparent'};
   color: ${({ theme, $primary }) =>
-    $primary ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary};
+    $primary ? theme.colors.white : theme.colors.text.primary};
 
   &:hover {
     background: ${({ theme, $primary }) =>

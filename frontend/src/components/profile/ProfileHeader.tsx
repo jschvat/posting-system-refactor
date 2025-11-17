@@ -173,7 +173,7 @@ const ActionButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary
+    $variant === 'primary' ? theme.colors.white : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 0.95rem;

@@ -67,8 +67,8 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   cursor: pointer;
   transition: all 0.2s;
   border: none;
-  background: ${props => props.variant === 'secondary' ? props.theme.colors.border} : props.theme.colors.info};
-  color: ${props => props.variant === 'secondary' ? props.theme.colors.text.primary} : props.theme.colors.white};
+  background: ${props => props.variant === 'secondary' ? props.theme.colors.border : props.theme.colors.info};
+  color: ${props => props.variant === 'secondary' ? props.theme.colors.text.primary : props.theme.colors.white};
 
   &:hover {
     transform: translateY(-2px);

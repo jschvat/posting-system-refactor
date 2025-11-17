@@ -171,7 +171,7 @@ export const PostStatus = styled.span<{ $status: string }>`
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  background: ${props => props.$status === 'removed' ? props.theme.colors.error} : props.theme.colors.warning};
+  background: ${props => props.$status === 'removed' ? props.theme.colors.error : props.theme.colors.warning};
   color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -282,9 +282,9 @@ export const MemberRoleBadge = styled.span<{ $role: string }>`
   font-weight: 600;
   text-transform: uppercase;
   background: ${props => {
-    if (props.$role === 'admin') return ${({ theme }) => theme.colors.error};
-    if (props.$role === 'moderator') return ${({ theme }) => theme.colors.success};
-    return ${({ theme }) => theme.colors.text.muted};
+    if (props.$role === 'admin') return props.theme.colors.error;
+    if (props.$role === 'moderator') return props.theme.colors.success;
+    return props.theme.colors.text.muted;
   }};
   color: ${({ theme }) => theme.colors.white};
 `;

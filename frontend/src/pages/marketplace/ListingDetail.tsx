@@ -213,10 +213,10 @@ const ConditionBadge = styled.span<{ condition: string }>`
   margin-left: 8px;
   background: ${props => {
     switch (props.condition) {
-      case 'new': return ${({ theme }) => theme.colors.success};
-      case 'like_new': return ${({ theme }) => theme.colors.info};
-      case 'good': return ${({ theme }) => theme.colors.warning};
-      default: return ${({ theme }) => theme.colors.text.muted};
+      case 'new': return props.theme.colors.success;
+      case 'like_new': return props.theme.colors.info;
+      case 'good': return props.theme.colors.warning;
+      default: return props.theme.colors.text.muted;
     }
   }};
   color: ${({ theme }) => theme.colors.white};

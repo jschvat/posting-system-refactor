@@ -195,7 +195,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary
+    $variant === 'primary' ? theme.colors.white : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 1rem;
@@ -406,7 +406,7 @@ const CreatePostPage: React.FC = () => {
             <Label>Add Photos or Videos</Label>
             <MediaSection>
               <div>
-                <p style={{ marginBottom: '16px', color: props.theme.colors.text.secondary }}>
+                <p style={{ marginBottom: '16px', color: '#888' }}>
                   Upload up to {MAX_FILES} files (images, videos, documents)
                 </p>
                 <MediaUploadButton type="button" onClick={handleFileSelect}>
@@ -436,7 +436,7 @@ const CreatePostPage: React.FC = () => {
                           fontSize: '0.8rem',
                           padding: '8px',
                           textAlign: 'center',
-                          background: ${({ theme }) => theme.colors.backgroundSecondary
+                          background: '#f5f5f5'
                         }}>
                           {file.name}
                         </div>

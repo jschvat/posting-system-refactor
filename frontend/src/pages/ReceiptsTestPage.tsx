@@ -103,7 +103,7 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   };
   color: ${props =>
     props.variant === 'primary'
-      ? ${({ theme }) => theme.colors.white}
+      ? props.theme.colors.white
       : props.theme.colors.text.primary
   };
   font-weight: 500;
@@ -273,7 +273,7 @@ export const ReceiptsTestPage: React.FC = () => {
             {typingUsers.length > 0 ? (
               <TypingIndicator usernames={typingUsers} />
             ) : (
-              <p style={{ color: props.theme.colors.text.muted, fontStyle: 'italic', marginTop: '12px' }}>
+              <p style={{ color: '#999', fontStyle: 'italic', marginTop: '12px' }}>
                 No one is typing
               </p>
             )}
@@ -399,7 +399,7 @@ socket.on('user:stop-typing', (data) => {
           </li>
         </ol>
 
-        <p style={{ marginTop: '16px', padding: '12px', background: props.theme.colors.infoLight, borderRadius: '6px' }}>
+        <p style={{ marginTop: '16px', padding: '12px', background: '#e3f2fd', borderRadius: '6px' }}>
           <strong>Note:</strong> Make sure the WebSocket server is running on port 3002 for real-time features to work!
         </p>
       </Section>

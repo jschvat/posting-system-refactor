@@ -256,7 +256,7 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   color: ${props =>
     props.$active
       ? props.$type === 'upvote'
-        ? ${({ theme }) => theme.colors.upvote}
+        ? props.theme.colors.upvote
         : props.theme.colors.downvote
       : props.theme.colors.text.secondary};
   font-size: 20px;
@@ -265,7 +265,7 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    color: ${props => props.$type === 'upvote' ? props.theme.colors.upvote} : props.theme.colors.downvote};
+    color: ${props => props.$type === 'upvote' ? props.theme.colors.upvote : props.theme.colors.downvote};
     transform: scale(1.1);
   }
 
@@ -280,9 +280,9 @@ const VoteCount = styled.span<{ $score: number }>`
   font-size: 14px;
   color: ${props =>
     props.$score > 0
-      ? ${({ theme }) => theme.colors.upvote}
+      ? props.theme.colors.upvote
       : props.$score < 0
-      ? ${({ theme }) => theme.colors.downvote}
+      ? props.theme.colors.downvote
       : props.theme.colors.text};
 `;
 

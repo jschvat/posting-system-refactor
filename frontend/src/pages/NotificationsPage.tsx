@@ -56,7 +56,7 @@ const FilterTab = styled.button<{ $active: boolean }>`
   background: ${({ theme, $active }) =>
     $active ? theme.colors.primary : theme.colors.background};
   color: ${({ theme, $active }) =>
-    $active ? ${({ theme }) => theme.colors.white} : theme.colors.text.secondary};
+    $active ? theme.colors.white : theme.colors.text.secondary};
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: 999px;

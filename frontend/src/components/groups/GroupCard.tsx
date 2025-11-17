@@ -170,8 +170,8 @@ const RoleBadge = styled.span<{ $role: 'admin' | 'moderator' | 'member' }>`
   white-space: nowrap;
   display: ${props => props.$role === 'member' ? 'none' : 'inline-block'};
   background: ${props => props.$role === 'admin'
-    ? 'linear-gradient(135deg, ${({ theme }) => theme.colors.gold} 0%, #FFA500 100%)'
-    : 'linear-gradient(135deg, ${({ theme }) => theme.colors.success} 0%, #2E7D32 100%)'};
+    ? 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'
+    : 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)'};
   color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
@@ -245,7 +245,7 @@ const Badge = styled.span<{ $visibility: string }>`
     ? 'rgba(255, 152, 0, 0.1)'
     : 'rgba(156, 39, 176, 0.1)'};
   color: ${props => props.$visibility === 'private'
-    ? ${({ theme }) => theme.colors.warning}
+    ? props.theme.colors.warning
     : props.theme.colors.contributor};
 `;
 
