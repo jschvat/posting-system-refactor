@@ -18,6 +18,9 @@ const { config } = require('../../config/app.config');
 // Import database connection
 const { initializeDatabase, testConnection, closeConnection } = require('./config/database');
 
+// Import cache service
+const cache = require('./services/CacheService');
+
 // Import routes
 const authRoutes = require('./routes/auth');
 const postsRoutes = require('./routes/posts/index');
@@ -182,6 +185,9 @@ async function startServer() {
     await testConnection();
     console.log('✅ Database connection established successfully.');
 
+    // Initialize cache service
+    await cache.connect();
+
     // Start HTTP server (WebSocket runs on separate server)
     app.listen(PORT, () => {
       console.log(`🚀 API Server is running on port ${PORT}`);
@@ -202,12 +208,14 @@ async function startServer() {
  */
 process.on('SIGTERM', async () => {
   console.log('🛑 SIGTERM received, shutting down gracefully...');
+  await cache.disconnect();
   await closeConnection();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('🛑 SIGINT received, shutting down gracefully...');
+  await cache.disconnect();
   await closeConnection();
   process.exit(0);
 });

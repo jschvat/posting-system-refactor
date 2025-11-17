@@ -18,6 +18,10 @@ const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const Reaction = require('../models/Reaction');
 
+// Import cache service
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
+
 const router = express.Router();
 
 /**
@@ -129,9 +133,77 @@ router.get('/:id',
     try {
       const userId = parseInt(req.params.id);
 
-      // Get user
-      const user = await User.findById(userId);
-      if (!user) {
+      // Cache-aside pattern for user profile
+      const cacheKey = `user:profile:${userId}`;
+      const userData = await cache.getOrSet(
+        cacheKey,
+        async () => {
+          // Get user
+          const user = await User.findById(userId);
+          if (!user) {
+            return null; // Cache miss for non-existent users
+          }
+
+          // Get recent posts with reaction counts (fixed to match new schema)
+          const postsResult = await Post.raw(
+            `SELECT p.*,
+                    COALESCE(reaction_counts.reactions, '[]'::json) as reactions
+             FROM posts p
+             LEFT JOIN (
+               SELECT post_id,
+                      json_agg(
+                        json_build_object(
+                          'emoji_name', emoji_name,
+                          'emoji_unicode', emoji_unicode,
+                          'count', count
+                        )
+                      ) as reactions
+               FROM (
+                 SELECT post_id, emoji_name, emoji_unicode, COUNT(*) as count
+                 FROM reactions
+                 WHERE post_id IS NOT NULL
+                 GROUP BY post_id, emoji_name, emoji_unicode
+               ) grouped_reactions
+               GROUP BY post_id
+             ) reaction_counts ON p.id = reaction_counts.post_id
+             WHERE p.user_id = $1 AND p.is_published = true
+             ORDER BY p.created_at DESC
+             LIMIT 10`,
+            [userId]
+          );
+
+          // Get user statistics
+          const statsResult = await User.raw(
+            `SELECT
+               (SELECT COUNT(*) FROM posts WHERE user_id = $1 AND is_published = true) as total_posts,
+               (SELECT COUNT(*) FROM comments WHERE user_id = $1 AND is_published = true) as total_comments`,
+            [userId]
+          );
+
+          const data = User.getUserData(user);
+          data.posts = postsResult.rows.map(post => ({
+            id: post.id,
+            content: post.content,
+            privacy_level: post.privacy_level,
+            is_published: post.is_published,
+            views_count: post.views_count || 0,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+            user_id: post.user_id,
+            reaction_counts: post.reactions || []
+          }));
+          data.stats = {
+            total_posts: parseInt(statsResult.rows[0]?.total_posts || 0),
+            total_comments: parseInt(statsResult.rows[0]?.total_comments || 0)
+          };
+
+          return data;
+        },
+        cacheConfig.defaultTTL.userProfile
+      );
+
+      // Handle non-existent users
+      if (!userData) {
         return res.status(404).json({
           success: false,
           error: {
@@ -140,59 +212,6 @@ router.get('/:id',
           }
         });
       }
-
-      // Get recent posts with reaction counts (fixed to match new schema)
-      const postsResult = await Post.raw(
-        `SELECT p.*,
-                COALESCE(reaction_counts.reactions, '[]'::json) as reactions
-         FROM posts p
-         LEFT JOIN (
-           SELECT post_id,
-                  json_agg(
-                    json_build_object(
-                      'emoji_name', emoji_name,
-                      'emoji_unicode', emoji_unicode,
-                      'count', count
-                    )
-                  ) as reactions
-           FROM (
-             SELECT post_id, emoji_name, emoji_unicode, COUNT(*) as count
-             FROM reactions
-             WHERE post_id IS NOT NULL
-             GROUP BY post_id, emoji_name, emoji_unicode
-           ) grouped_reactions
-           GROUP BY post_id
-         ) reaction_counts ON p.id = reaction_counts.post_id
-         WHERE p.user_id = $1 AND p.is_published = true
-         ORDER BY p.created_at DESC
-         LIMIT 10`,
-        [userId]
-      );
-
-      // Get user statistics
-      const statsResult = await User.raw(
-        `SELECT
-           (SELECT COUNT(*) FROM posts WHERE user_id = $1 AND is_published = true) as total_posts,
-           (SELECT COUNT(*) FROM comments WHERE user_id = $1 AND is_published = true) as total_comments`,
-        [userId]
-      );
-
-      const userData = User.getUserData(user);
-      userData.posts = postsResult.rows.map(post => ({
-        id: post.id,
-        content: post.content,
-        privacy_level: post.privacy_level,
-        is_published: post.is_published,
-        views_count: post.views_count || 0,
-        created_at: post.created_at,
-        updated_at: post.updated_at,
-        user_id: post.user_id,
-        reaction_counts: post.reactions || []
-      }));
-      userData.stats = {
-        total_posts: parseInt(statsResult.rows[0]?.total_posts || 0),
-        total_comments: parseInt(statsResult.rows[0]?.total_comments || 0)
-      };
 
       res.json({
         success: true,
@@ -361,6 +380,9 @@ router.put('/:id',
       }
 
       const updatedUser = await User.update(userId, updateData);
+
+      // Invalidate user profile cache after update
+      await cache.del(`user:profile:${userId}`);
 
       res.json({
         success: true,

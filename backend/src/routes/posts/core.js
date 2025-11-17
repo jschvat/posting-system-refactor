@@ -23,6 +23,9 @@ const User = require('../../models/User');
 const Comment = require('../../models/Comment');
 const Media = require('../../models/Media');
 
+// Import cache service
+const cache = require('../../services/CacheService');
+
 const router = express.Router();
 
 /**
@@ -416,6 +419,9 @@ router.post('/',
 
       const postData = postResult.rows[0];
 
+      // Invalidate user profile cache after creating a post
+      await cache.del(`user:profile:${user_id}`);
+
       res.status(201).json({
         success: true,
         data: {
@@ -571,6 +577,9 @@ router.delete('/:id',
 
       // Delete the post (cascading deletes will handle comments, reactions, media)
       await Post.delete(postId);
+
+      // Invalidate user profile cache after deleting a post
+      await cache.del(`user:profile:${post.user_id}`);
 
       res.json({
         success: true,
