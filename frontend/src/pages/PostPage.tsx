@@ -203,7 +203,7 @@ const CommentRenderer: React.FC<{ comment: Comment; depth?: number; maxDepth?: n
                 showScore={false}
               />
             )}
-            <span style={{ color: props.theme.colors.text.muted }}>•</span>
+            <span style={{ color: '#8a8d91' }}>•</span>
             <CommentTime>{formatTimeAgo(comment.created_at)}</CommentTime>
           </CommentHeader>
           {depth > 0 && (

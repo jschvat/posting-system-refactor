@@ -157,7 +157,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   if (!state.isAuthenticated) {
     return (
       <FormContainer>
-        <div style={{ textAlign: 'center', color: props.theme.colors.text.secondary, fontSize: '0.9rem' }}>
+        <div style={{ textAlign: 'center', color: '#65676b', fontSize: '0.9rem' }}>
           Please log in to comment on this post.
         </div>
       </FormContainer>

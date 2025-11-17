@@ -379,7 +379,7 @@ export const ListingDetail: React.FC = () => {
   if (loading) {
     return (
       <Container>
-        <div style={{ textAlign: 'center', padding: '60px 0', color: props.theme.colors.text.secondary }}>
+        <div style={{ textAlign: 'center', padding: '60px 0', color: '#65676b' }}>
           Loading...
         </div>
       </Container>

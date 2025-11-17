@@ -372,7 +372,7 @@ const PostCardComments: React.FC<PostCardCommentsProps> = ({ postId, isOpen, ini
   return (
     <CommentsSection $isOpen={isOpen} $isLoading={isLoadingMore} ref={commentsListRef}>
       {commentsLoading ? (
-        <div style={{ padding: '16px', textAlign: 'center', color: props.theme.colors.text.secondary }}>
+        <div style={{ padding: '16px', textAlign: 'center', color: '#65676b' }}>
           Loading comments...
         </div>
       ) : (
@@ -383,7 +383,7 @@ const PostCardComments: React.FC<PostCardCommentsProps> = ({ postId, isOpen, ini
             ))}
 
             {allComments.length === 0 && !commentsLoading && (
-              <div style={{ textAlign: 'center', color: props.theme.colors.text.secondary, padding: '16px' }}>
+              <div style={{ textAlign: 'center', color: '#65676b', padding: '16px' }}>
                 No comments yet. Be the first to comment!
               </div>
             )}

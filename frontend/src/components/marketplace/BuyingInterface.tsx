@@ -495,7 +495,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
         <Badge type="auction">Auction</Badge>
         <Price>
           {formatPrice(listing.auction.current_bid)}
-          <div style={{ fontSize: '14px', color: props.theme.colors.text.secondary, marginTop: '8px' }}>
+          <div style={{ fontSize: '14px', color: '#65676b', marginTop: '8px' }}>
             Current Bid
           </div>
         </Price>
@@ -567,7 +567,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
         <Badge type="raffle">Raffle</Badge>
         <Price>
           {formatPrice(listing.raffle.ticket_price)}
-          <div style={{ fontSize: '14px', color: props.theme.colors.text.secondary, marginTop: '8px' }}>
+          <div style={{ fontSize: '14px', color: '#65676b', marginTop: '8px' }}>
             per ticket
           </div>
         </Price>
@@ -615,7 +615,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
           max={listing.raffle.max_tickets_per_user || remaining}
         />
 
-        <div style={{ marginBottom: '12px', textAlign: 'center', fontSize: '14px', color: props.theme.colors.text.secondary }}>
+        <div style={{ marginBottom: '12px', textAlign: 'center', fontSize: '14px', color: '#65676b' }}>
           Total: {formatPrice(totalPrice)}
         </div>
 
