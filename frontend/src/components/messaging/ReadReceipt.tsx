@@ -26,9 +26,9 @@ const ReceiptIcon = styled.span<{ isRead?: boolean; isDelivered?: boolean }>`
   display: inline-flex;
   align-items: center;
   color: ${props =>
-    props.isRead ? '${props.theme.colors.info}' :
-    props.isDelivered ? '${props.theme.colors.text.secondary}' :
-    '${props.theme.colors.text.muted}'
+    props.isRead ? props.theme.colors.info :
+    props.isDelivered ? props.theme.colors.text.secondary :
+    props.theme.colors.text.muted
   };
   transition: color 0.3s ease;
   font-size: 0.7rem;
@@ -135,7 +135,7 @@ export const ReadReceipt: React.FC<ReadReceiptProps> = ({
           <ReadByList>
             {readBy.map((reader) => (
               <ReadByItem key={reader.userId}>
-                <FaCircle style={{ width: '10px', height: '10px' }} color="${props.theme.colors.success}" />
+                <FaCircle style={{ width: '10px', height: '10px' }} />
                 <span>
                   {reader.username} · {formatReadTime(reader.readAt)}
                 </span>

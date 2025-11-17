@@ -55,7 +55,7 @@ const ReactionCount = styled.span`
   bottom: -2px;
   right: -2px;
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 0.65rem;
   font-weight: 700;
   min-width: 16px;

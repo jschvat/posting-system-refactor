@@ -46,7 +46,7 @@ const RadiusSelect = styled.select`
   border: 1px solid ${props => getTheme(props).colors.border};
   border-radius: ${props => getTheme(props).borderRadius.md};
   font-size: ${props => getTheme(props).fontSize.md};
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   cursor: pointer;
 
   &:focus {
@@ -58,7 +58,7 @@ const RadiusSelect = styled.select`
 const SearchButton = styled.button`
   padding: ${props => getTheme(props).spacing.sm} ${props => getTheme(props).spacing.md};
   background: ${props => getTheme(props).colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: ${props => getTheme(props).borderRadius.md};
   font-weight: ${props => getTheme(props).fontWeight.medium};
@@ -114,7 +114,7 @@ const DefaultAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
   margin-right: ${props => getTheme(props).spacing.md};
 `;

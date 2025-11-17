@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Sidebar = styled.div`
   width: 280px;
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 12px;
   padding: 20px;
@@ -19,7 +19,7 @@ const Sidebar = styled.div`
 const SidebarTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 20px 0;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ const SidebarTitle = styled.h3`
 
 const ClearButton = styled.button`
   font-size: 13px;
-  color: ${props.theme.colors.info};
+  color: ${({ theme }) => theme.colors.info};
   background: none;
   border: none;
   cursor: pointer;
@@ -43,7 +43,7 @@ const ClearButton = styled.button`
 const FilterSection = styled.div`
   margin-bottom: 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid ${props.theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
   &:last-child {
     border-bottom: none;
@@ -56,7 +56,7 @@ const FilterLabel = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 12px;
 `;
 
@@ -75,7 +75,7 @@ const PriceInput = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 `;
 
@@ -93,12 +93,12 @@ const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    color: ${props.theme.colors.info};
+    color: ${({ theme }) => theme.colors.info};
   }
 `;
 
@@ -119,12 +119,12 @@ const RadioLabel = styled.label`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    color: ${props.theme.colors.info};
+    color: ${({ theme }) => theme.colors.info};
   }
 `;
 
@@ -140,7 +140,7 @@ const DistanceSlider = styled.input`
 
 const DistanceValue = styled.div`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-top: 8px;
   text-align: center;
 `;
@@ -148,9 +148,9 @@ const DistanceValue = styled.div`
 const LocationButton = styled.button`
   width: 100%;
   padding: 10px;
-  background: ${props.theme.colors.statusInfoBg};
-  color: ${props.theme.colors.info};
-  border: 1px solid ${props.theme.colors.info};
+  background: ${({ theme }) => theme.colors.statusInfoBg};
+  color: ${({ theme }) => theme.colors.info};
+  border: 1px solid ${({ theme }) => theme.colors.info};
   border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
@@ -159,8 +159,8 @@ const LocationButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: ${props.theme.colors.info};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
   }
 
   &:disabled {
@@ -171,14 +171,14 @@ const LocationButton = styled.button`
 
 const LocationStatus = styled.div`
   font-size: 12px;
-  color: ${props.theme.colors.success};
+  color: ${({ theme }) => theme.colors.success};
   margin-top: 8px;
   text-align: center;
 `;
 
 const ActiveFiltersCount = styled.span`
-  background: ${props.theme.colors.info};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.info};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   padding: 2px 8px;
   font-size: 12px;

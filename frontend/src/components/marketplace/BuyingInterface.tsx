@@ -8,7 +8,7 @@ import { MakeOfferModal } from './MakeOfferModal';
 import { CheckoutModal } from './CheckoutModal';
 
 const PriceCard = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -20,13 +20,13 @@ const PriceCard = styled.div`
 const Price = styled.div`
   font-size: 32px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 20px;
 `;
 
 const OriginalPrice = styled.span`
   font-size: 18px;
-  color: ${props.theme.colors.text.muted};
+  color: ${({ theme }) => theme.colors.text.muted};
   text-decoration: line-through;
   margin-left: 12px;
   font-weight: 400;
@@ -39,14 +39,14 @@ const Badge = styled.div<{ type?: 'auction' | 'raffle' }>`
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 16px;
-  background: ${props => props.type === 'auction' ? '${props.theme.colors.info}' : props.type === 'raffle' ? '${props.theme.colors.contributor}' : '${props.theme.colors.success}'};
-  color: ${props.theme.colors.white};
+  background: ${props => props.type === 'auction' ? props.theme.colors.info : props.type === 'raffle' ? props.theme.colors.contributor : props.theme.colors.success};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 12px;
@@ -54,7 +54,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 `;
 
@@ -67,8 +67,8 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   cursor: pointer;
   transition: all 0.2s;
   border: none;
-  background: ${props => props.variant === 'secondary' ? '${props.theme.colors.border}' : '${props.theme.colors.info}'};
-  color: ${props => props.variant === 'secondary' ? '${props.theme.colors.text.primary}' : '${props.theme.colors.white}'};
+  background: ${props => props.variant === 'secondary' ? props.theme.colors.border} : props.theme.colors.info};
+  color: ${props => props.variant === 'secondary' ? props.theme.colors.text.primary} : props.theme.colors.white};
 
   &:hover {
     transform: translateY(-2px);
@@ -84,7 +84,7 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 
 const AuctionInfo = styled.div`
   padding: 16px;
-  background: ${props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   margin-bottom: 16px;
 
@@ -99,11 +99,11 @@ const AuctionInfo = styled.div`
     }
 
     strong {
-      color: ${props.theme.colors.text.primary};
+      color: ${({ theme }) => theme.colors.text.primary};
     }
 
     span {
-      color: ${props.theme.colors.text.secondary};
+      color: ${({ theme }) => theme.colors.text.secondary};
     }
   }
 `;
@@ -113,13 +113,13 @@ const BidHistory = styled.div`
   overflow-y: auto;
   margin-top: 16px;
   padding: 12px;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 8px;
 
   h4 {
     margin: 0 0 12px 0;
     font-size: 14px;
-    color: ${props.theme.colors.text.primary};
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
 
@@ -129,21 +129,21 @@ const BidItem = styled.div<{ isWinning?: boolean }>`
   padding: 8px;
   margin-bottom: 4px;
   border-radius: 4px;
-  background: ${props => props.isWinning ? '${props.theme.colors.statusAcceptedBg}' : '${props.theme.colors.white}'};
+  background: ${props => props.isWinning ? props.theme.colors.statusAcceptedBg : props.theme.colors.white};
   font-size: 13px;
 
   strong {
-    color: ${props.theme.colors.text.primary};
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 
   span {
-    color: ${props.theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
   }
 `;
 
 const RaffleInfo = styled.div`
   padding: 16px;
-  background: ${props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   margin-bottom: 16px;
 
@@ -158,11 +158,11 @@ const RaffleInfo = styled.div`
     }
 
     strong {
-      color: ${props.theme.colors.text.primary};
+      color: ${({ theme }) => theme.colors.text.primary};
     }
 
     span {
-      color: ${props.theme.colors.text.secondary};
+      color: ${({ theme }) => theme.colors.text.secondary};
     }
   }
 `;
@@ -170,7 +170,7 @@ const RaffleInfo = styled.div`
 const ProgressBar = styled.div`
   width: 100%;
   height: 8px;
-  background: ${props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   margin-bottom: 12px;
   overflow: hidden;
@@ -179,14 +179,14 @@ const ProgressBar = styled.div`
 const ProgressFill = styled.div<{ percentage: number }>`
   height: 100%;
   width: ${props => props.percentage}%;
-  background: linear-gradient(90deg, ${props.theme.colors.contributor}, #8e44ad);
+  background: linear-gradient(90deg, ${({ theme }) => theme.colors.contributor}, #8e44ad);
   transition: width 0.3s;
 `;
 
 const ErrorMessage = styled.div`
   padding: 12px;
-  background: ${props.theme.colors.statusRejectedBg};
-  color: ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.statusRejectedBg};
+  color: ${({ theme }) => theme.colors.error};
   border-radius: 8px;
   margin-bottom: 12px;
   font-size: 14px;
@@ -194,8 +194,8 @@ const ErrorMessage = styled.div`
 
 const SuccessMessage = styled.div`
   padding: 12px;
-  background: ${props.theme.colors.statusAcceptedBg};
-  color: ${props.theme.colors.success};
+  background: ${({ theme }) => theme.colors.statusAcceptedBg};
+  color: ${({ theme }) => theme.colors.success};
   border-radius: 8px;
   margin-bottom: 12px;
   font-size: 14px;
@@ -209,9 +209,9 @@ const SaveButton = styled.button<{ isSaved?: boolean }>`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  border: 2px solid ${props => props.isSaved ? '${props.theme.colors.error}' : '${props.theme.colors.border}'};
-  background: ${props.theme.colors.white};
-  color: ${props => props.isSaved ? '${props.theme.colors.error}' : '${props.theme.colors.text.secondary}'};
+  border: 2px solid ${props => props.isSaved ? props.theme.colors.error : props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.white};
+  color: ${props => props.isSaved ? props.theme.colors.error : props.theme.colors.text.secondary};
   margin-top: 12px;
   display: flex;
   align-items: center;
@@ -219,8 +219,8 @@ const SaveButton = styled.button<{ isSaved?: boolean }>`
   gap: 8px;
 
   &:hover {
-    border-color: ${props.theme.colors.error};
-    color: ${props.theme.colors.error};
+    border-color: ${({ theme }) => theme.colors.error};
+    color: ${({ theme }) => theme.colors.error};
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
@@ -495,7 +495,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
         <Badge type="auction">Auction</Badge>
         <Price>
           {formatPrice(listing.auction.current_bid)}
-          <div style={{ fontSize: '14px', color: '${props.theme.colors.text.secondary}', marginTop: '8px' }}>
+          <div style={{ fontSize: '14px', color: props.theme.colors.text.secondary, marginTop: '8px' }}>
             Current Bid
           </div>
         </Price>
@@ -567,7 +567,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
         <Badge type="raffle">Raffle</Badge>
         <Price>
           {formatPrice(listing.raffle.ticket_price)}
-          <div style={{ fontSize: '14px', color: '${props.theme.colors.text.secondary}', marginTop: '8px' }}>
+          <div style={{ fontSize: '14px', color: props.theme.colors.text.secondary, marginTop: '8px' }}>
             per ticket
           </div>
         </Price>
@@ -615,7 +615,7 @@ export const BuyingInterface: React.FC<BuyingInterfaceProps> = ({ listing, onUpd
           max={listing.raffle.max_tickets_per_user || remaining}
         />
 
-        <div style={{ marginBottom: '12px', textAlign: 'center', fontSize: '14px', color: '${props.theme.colors.text.secondary}' }}>
+        <div style={{ marginBottom: '12px', textAlign: 'center', fontSize: '14px', color: props.theme.colors.text.secondary }}>
           Total: {formatPrice(totalPrice)}
         </div>
 

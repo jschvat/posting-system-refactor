@@ -38,7 +38,7 @@ const AuthorAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   font-size: 0.9rem;
   overflow: hidden;

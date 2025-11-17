@@ -120,22 +120,22 @@ const MethodCard = styled.div<{ selected: boolean; expired: boolean }>`
   display: flex;
   align-items: center;
   padding: 1rem;
-  border: 2px solid ${props => props.selected ? '${props.theme.colors.primary}' : props.expired ? '${props.theme.colors.error}' : '${props.theme.colors.border}'};
+  border: 2px solid ${props => props.selected ? props.theme.colors.primary : props.expired ? props.theme.colors.error} : props.theme.colors.border};
   border-radius: 8px;
-  background: ${props => props.selected ? '${props.theme.colors.infoLight}' : props.expired ? '${props.theme.colors.errorLight}' : '${props.theme.colors.white}'};
+  background: ${props => props.selected ? props.theme.colors.infoLight : props.expired ? props.theme.colors.errorLight} : props.theme.colors.white};
   cursor: pointer;
   transition: all 0.2s;
   opacity: ${props => props.expired ? 0.7 : 1};
 
   &:hover {
-    border-color: ${props => props.expired ? '${props.theme.colors.error}' : '${props.theme.colors.primary}'};
+    border-color: ${props => props.expired ? props.theme.colors.error : props.theme.colors.primary};
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 `;
 
 const MethodIcon = styled.div`
   font-size: 1.5rem;
-  color: ${props.theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary};
   margin-right: 1rem;
 `;
 
@@ -145,7 +145,7 @@ const MethodDetails = styled.div`
 
 const MethodName = styled.div`
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -155,8 +155,8 @@ const MethodName = styled.div`
 const DefaultBadge = styled.span`
   font-size: 0.7rem;
   padding: 0.2rem 0.5rem;
-  background: ${props.theme.colors.success};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.success};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
   font-weight: normal;
 `;
@@ -164,15 +164,15 @@ const DefaultBadge = styled.span`
 const ExpiredBadge = styled.span`
   font-size: 0.7rem;
   padding: 0.2rem 0.5rem;
-  background: ${props.theme.colors.error};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
   font-weight: normal;
 `;
 
 const MethodInfo = styled.div`
   font-size: 0.85rem;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-top: 0.25rem;
 `;
 
@@ -184,7 +184,7 @@ const MethodActions = styled.div`
 const ActionButton = styled.button<{ danger?: boolean }>`
   background: none;
   border: none;
-  color: ${props => props.danger ? '${props.theme.colors.error}' : '${props.theme.colors.text.secondary}'};
+  color: ${props => props.danger ? props.theme.colors.error : props.theme.colors.text.secondary};
   cursor: pointer;
   padding: 0.5rem;
   font-size: 1rem;
@@ -192,13 +192,13 @@ const ActionButton = styled.button<{ danger?: boolean }>`
   transition: all 0.2s;
 
   &:hover {
-    background: ${props => props.danger ? '${props.theme.colors.errorLight}' : '${props.theme.colors.hover}'};
-    color: ${props => props.danger ? '${props.theme.colors.errorDark}' : '${props.theme.colors.text.primary}'};
+    background: ${props => props.danger ? props.theme.colors.errorLight : props.theme.colors.hover};
+    color: ${props => props.danger ? props.theme.colors.errorDark : props.theme.colors.text.primary};
   }
 `;
 
 const DefaultStar = styled.div`
-  color: ${props.theme.colors.warning};
+  color: ${({ theme }) => theme.colors.warning};
   padding: 0.5rem;
   font-size: 1rem;
 `;

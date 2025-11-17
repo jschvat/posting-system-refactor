@@ -106,7 +106,7 @@ const Checkbox = styled.input`
 const SaveButton = styled.button`
   padding: ${props => getTheme(props).spacing.sm} ${props => getTheme(props).spacing.lg};
   background: ${props => getTheme(props).colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: ${props => getTheme(props).borderRadius.md};
   font-weight: ${props => getTheme(props).fontWeight.medium};

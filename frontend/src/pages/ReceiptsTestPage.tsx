@@ -68,8 +68,8 @@ const MessageBubble = styled.div<{ isOwn?: boolean }>`
 `;
 
 const BubbleContent = styled.div<{ isOwn?: boolean }>`
-  background: ${props => props.isOwn ? '${props.theme.colors.messageSent}' : '${props.theme.colors.border}'};
-  color: ${props => props.isOwn ? '${props.theme.colors.white}' : '${props.theme.colors.black}'};
+  background: ${props => props.isOwn ? props.theme.colors.messageSent : props.theme.colors.border};
+  color: ${props => props.isOwn ? props.theme.colors.white : props.theme.colors.black};
   border-radius: 18px;
   ${props => props.isOwn ? 'border-bottom-right-radius: 4px;' : 'border-bottom-left-radius: 4px;'}
   padding: 8px 12px;
@@ -103,7 +103,7 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   };
   color: ${props =>
     props.variant === 'primary'
-      ? '${props.theme.colors.white}'
+      ? ${({ theme }) => theme.colors.white}
       : props.theme.colors.text.primary
   };
   font-weight: 500;
@@ -121,7 +121,7 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 `;
 
 const CodeBlock = styled.pre`
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   padding: 12px;
   border-radius: 6px;
   overflow-x: auto;
@@ -273,7 +273,7 @@ export const ReceiptsTestPage: React.FC = () => {
             {typingUsers.length > 0 ? (
               <TypingIndicator usernames={typingUsers} />
             ) : (
-              <p style={{ color: '${props.theme.colors.text.muted}', fontStyle: 'italic', marginTop: '12px' }}>
+              <p style={{ color: props.theme.colors.text.muted, fontStyle: 'italic', marginTop: '12px' }}>
                 No one is typing
               </p>
             )}
@@ -399,7 +399,7 @@ socket.on('user:stop-typing', (data) => {
           </li>
         </ol>
 
-        <p style={{ marginTop: '16px', padding: '12px', background: '${props.theme.colors.infoLight}', borderRadius: '6px' }}>
+        <p style={{ marginTop: '16px', padding: '12px', background: props.theme.colors.infoLight, borderRadius: '6px' }}>
           <strong>Note:</strong> Make sure the WebSocket server is running on port 3002 for real-time features to work!
         </p>
       </Section>

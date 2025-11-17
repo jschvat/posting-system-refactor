@@ -293,19 +293,19 @@ const LoadingMessage = styled.div`
 
 const ErrorMessage = styled.div`
   padding: 16px;
-  background: ${props.theme.colors.errorLight};
-  border: 1px solid ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.errorLight};
+  border: 1px solid ${({ theme }) => theme.colors.error};
   border-radius: 8px;
-  color: ${props.theme.colors.error};
+  color: ${({ theme }) => theme.colors.error};
   margin-bottom: 24px;
 `;
 
 const SuccessMessage = styled.div`
   padding: 16px;
   background: rgba(76, 175, 80, 0.1);
-  border: 1px solid ${props.theme.colors.success};
+  border: 1px solid ${({ theme }) => theme.colors.success};
   border-radius: 8px;
-  color: ${props.theme.colors.success};
+  color: ${({ theme }) => theme.colors.success};
   margin-bottom: 24px;
 `;
 
@@ -341,7 +341,7 @@ const SaveButton = styled.button`
   border-radius: 8px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;

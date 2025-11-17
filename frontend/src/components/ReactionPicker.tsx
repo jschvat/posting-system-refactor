@@ -114,7 +114,7 @@ const CountBadge = styled.span`
   top: -2px;
   right: -2px;
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 0.7rem;
   font-weight: 600;
   min-width: 16px;

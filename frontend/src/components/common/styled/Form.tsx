@@ -27,11 +27,11 @@ const inputSizes = {
 };
 
 export const Input = styled.input<InputProps>`
-  border: 1px solid ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.border || '#d1d5db')};
+  border: 1px solid ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.border || '#d1d5db')};
   border-radius: 6px;
   font-family: inherit;
   transition: all 0.2s ease;
-  background: ${({ theme }) => theme.colors.backgroundPrimary || '${props.theme.colors.white}'};
+  background: ${({ theme }) => theme.colors.backgroundPrimary || ${({ theme }) => theme.colors.white}};
   color: ${({ theme }) => theme.colors.text.primary};
 
   ${({ size = 'medium' }) => inputSizes[size]}
@@ -44,29 +44,29 @@ export const Input = styled.input<InputProps>`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.primary)};
+    border-color: ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.primary)};
     box-shadow: 0 0 0 3px ${({ theme, error }) => (error ? 'rgba(220, 53, 69, 0.1)' : 'rgba(59, 130, 246, 0.1)')};
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.backgroundDisabled || '${props.theme.colors.backgroundDisabled}'};
+    background: ${({ theme }) => theme.colors.backgroundDisabled || ${({ theme }) => theme.colors.backgroundDisabled}};
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.text.muted || '${props.theme.colors.text.muted}'};
+    color: ${({ theme }) => theme.colors.text.muted || ${({ theme }) => theme.colors.text.muted}};
   }
 `;
 
 export const TextArea = styled.textarea<InputProps>`
-  border: 1px solid ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.border || '#d1d5db')};
+  border: 1px solid ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.border || '#d1d5db')};
   border-radius: 6px;
   font-family: inherit;
   resize: vertical;
   min-height: 100px;
   transition: all 0.2s ease;
-  background: ${({ theme }) => theme.colors.backgroundPrimary || '${props.theme.colors.white}'};
+  background: ${({ theme }) => theme.colors.backgroundPrimary || ${({ theme }) => theme.colors.white}};
   color: ${({ theme }) => theme.colors.text.primary};
 
   ${({ size = 'medium' }) => inputSizes[size]}
@@ -79,27 +79,27 @@ export const TextArea = styled.textarea<InputProps>`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.primary)};
+    border-color: ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.primary)};
     box-shadow: 0 0 0 3px ${({ theme, error }) => (error ? 'rgba(220, 53, 69, 0.1)' : 'rgba(59, 130, 246, 0.1)')};
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.backgroundDisabled || '${props.theme.colors.backgroundDisabled}'};
+    background: ${({ theme }) => theme.colors.backgroundDisabled || ${({ theme }) => theme.colors.backgroundDisabled}};
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.colors.text.muted || '${props.theme.colors.text.muted}'};
+    color: ${({ theme }) => theme.colors.text.muted || ${({ theme }) => theme.colors.text.muted}};
   }
 `;
 
 export const Select = styled.select<InputProps>`
-  border: 1px solid ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.border || '#d1d5db')};
+  border: 1px solid ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.border || '#d1d5db')};
   border-radius: 6px;
   font-family: inherit;
   transition: all 0.2s ease;
-  background: ${({ theme }) => theme.colors.backgroundPrimary || '${props.theme.colors.white}'};
+  background: ${({ theme }) => theme.colors.backgroundPrimary || ${({ theme }) => theme.colors.white}};
   color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
 
@@ -113,12 +113,12 @@ export const Select = styled.select<InputProps>`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.primary)};
+    border-color: ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.primary)};
     box-shadow: 0 0 0 3px ${({ theme, error }) => (error ? 'rgba(220, 53, 69, 0.1)' : 'rgba(59, 130, 246, 0.1)')};
   }
 
   &:disabled {
-    background: ${({ theme }) => theme.colors.backgroundDisabled || '${props.theme.colors.backgroundDisabled}'};
+    background: ${({ theme }) => theme.colors.backgroundDisabled || ${({ theme }) => theme.colors.backgroundDisabled}};
     cursor: not-allowed;
     opacity: 0.6;
   }
@@ -140,7 +140,7 @@ export const FormHelperText = styled.span<{ error?: boolean }>`
   display: block;
   margin-top: 6px;
   font-size: 13px;
-  color: ${({ theme, error }) => (error ? '${props.theme.colors.error}' : theme.colors.text.secondary)};
+  color: ${({ theme, error }) => (error ? ${({ theme }) => theme.colors.error} : theme.colors.text.secondary)};
 `;
 
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
@@ -183,5 +183,5 @@ export const FormActions = styled.div`
   justify-content: flex-end;
   margin-top: 24px;
   padding-top: 24px;
-  border-top: 1px solid ${({ theme }) => theme.colors.border || '${props.theme.colors.border}'};
+  border-top: 1px solid ${({ theme }) => theme.colors.border || ${({ theme }) => theme.colors.border}};
 `;

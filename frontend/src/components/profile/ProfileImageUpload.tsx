@@ -203,7 +203,7 @@ const AvatarPlaceholder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 3rem;
   font-weight: bold;
 `;
@@ -214,7 +214,7 @@ const AvatarOverlay = styled.div`
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.7);
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   padding: ${props => props.theme.spacing.sm};
   text-align: center;
   font-size: 0.875rem;

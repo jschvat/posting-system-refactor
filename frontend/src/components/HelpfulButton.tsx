@@ -134,11 +134,11 @@ const Button = styled.button<{ $marked: boolean; $size: 'small' | 'medium' }>`
 const Icon = styled.span<{ $marked: boolean }>`
   display: flex;
   align-items: center;
-  color: ${({ $marked, ...props }) => ($marked ? '${props.theme.colors.white}' : getTheme(props).colors.textLight)};
+  color: ${({ $marked, ...props }) => ($marked ? ${({ theme }) => theme.colors.white} : getTheme(props).colors.textLight)};
   transition: color 0.2s ease;
 
   ${Button}:hover:not(:disabled) & {
-    color: ${({ $marked, ...props }) => ($marked ? '${props.theme.colors.white}' : getTheme(props).colors.primary)};
+    color: ${({ $marked, ...props }) => ($marked ? ${({ theme }) => theme.colors.white} : getTheme(props).colors.primary)};
   }
 `;
 

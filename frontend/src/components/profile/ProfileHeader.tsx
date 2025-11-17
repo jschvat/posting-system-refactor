@@ -57,7 +57,7 @@ const Avatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   font-size: 2rem;
   overflow: hidden;
@@ -173,7 +173,7 @@ const ActionButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.primary
+    $variant === 'primary' ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 0.95rem;
@@ -220,7 +220,7 @@ const TagsContainer = styled.div`
 const Tag = styled.span`
   display: inline-block;
   padding: 4px 12px;
-  background: ${({ theme }) => theme.colors.primary}15;
+  background: ${({ theme }) => theme.colors.primary15};
   border: 1px solid ${({ theme }) => theme.colors.primary}30;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 0.875rem;

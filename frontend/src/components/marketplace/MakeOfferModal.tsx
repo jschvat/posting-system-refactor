@@ -18,7 +18,7 @@ const Overlay = styled.div`
 `;
 
 const Modal = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   max-width: 500px;
   width: 100%;
@@ -29,7 +29,7 @@ const Modal = styled.div`
 
 const Header = styled.div`
   padding: 24px;
-  border-bottom: 1px solid ${props.theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@ const Header = styled.div`
 const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
 `;
 
@@ -46,7 +46,7 @@ const CloseButton = styled.button`
   background: none;
   border: none;
   font-size: 28px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   cursor: pointer;
   padding: 0;
   width: 32px;
@@ -57,7 +57,7 @@ const CloseButton = styled.button`
   transition: color 0.2s;
 
   &:hover {
-    color: ${props.theme.colors.text.primary};
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
 
@@ -69,7 +69,7 @@ const ListingInfo = styled.div`
   display: flex;
   gap: 16px;
   padding: 16px;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 8px;
   margin-bottom: 24px;
 `;
@@ -84,7 +84,7 @@ const ListingImage = styled.img`
 const ListingImagePlaceholder = styled.div`
   width: 80px;
   height: 80px;
-  background: ${props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -99,19 +99,19 @@ const ListingDetails = styled.div`
 const ListingTitle = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const ListingPrice = styled.div`
   font-size: 18px;
   font-weight: 700;
-  color: ${props.theme.colors.success};
+  color: ${({ theme }) => theme.colors.success};
 `;
 
 const MinOfferNote = styled.div`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-top: 4px;
 `;
 
@@ -123,25 +123,25 @@ const Label = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 8px;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s;
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 
   &:disabled {
-    background: ${props.theme.colors.hover};
+    background: ${({ theme }) => theme.colors.hover};
     cursor: not-allowed;
   }
 `;
@@ -149,7 +149,7 @@ const Input = styled.input`
 const Textarea = styled.textarea`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
@@ -159,20 +159,20 @@ const Textarea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 `;
 
 const HelpText = styled.p`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 8px 0 0 0;
 `;
 
 const ErrorMessage = styled.div`
   padding: 12px 16px;
-  background: ${props.theme.colors.statusRejectedBg};
-  color: ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.statusRejectedBg};
+  color: ${({ theme }) => theme.colors.error};
   border-radius: 8px;
   margin-bottom: 16px;
   font-size: 14px;
@@ -180,8 +180,8 @@ const ErrorMessage = styled.div`
 
 const SuccessMessage = styled.div`
   padding: 12px 16px;
-  background: ${props.theme.colors.statusAcceptedBg};
-  color: ${props.theme.colors.success};
+  background: ${({ theme }) => theme.colors.statusAcceptedBg};
+  color: ${({ theme }) => theme.colors.success};
   border-radius: 8px;
   margin-bottom: 16px;
   font-size: 14px;
@@ -189,7 +189,7 @@ const SuccessMessage = styled.div`
 
 const Footer = styled.div`
   padding: 24px;
-  border-top: 1px solid ${props.theme.colors.border};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   gap: 12px;
   justify-content: flex-end;
@@ -205,17 +205,17 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   border: none;
 
   ${props => props.variant === 'primary' ? `
-    background: ${props.theme.colors.info};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
 
     &:hover:not(:disabled) {
-      background: ${props.theme.colors.infoDark};
+      background: ${({ theme }) => theme.colors.infoDark};
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
     }
   ` : `
-    background: ${props.theme.colors.border};
-    color: ${props.theme.colors.text.primary};
+    background: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.text.primary};
 
     &:hover:not(:disabled) {
       background: ${props => props.theme.colors.border};
@@ -234,20 +234,20 @@ const PriceInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 8px;
   margin-top: 8px;
 `;
 
 const PriceLabel = styled.span`
   font-size: 14px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 const PriceValue = styled.span<{ highlight?: boolean }>`
   font-size: 16px;
   font-weight: 700;
-  color: ${props => props.highlight ? '${props.theme.colors.success}' : '${props.theme.colors.text.primary}'};
+  color: ${props => props.highlight ? props.theme.colors.success : props.theme.colors.text.primary};
 `;
 
 interface MakeOfferModalProps {

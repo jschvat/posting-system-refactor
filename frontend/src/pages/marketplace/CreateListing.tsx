@@ -21,18 +21,18 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
 `;
 
 const Form = styled.form`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   padding: 32px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -49,10 +49,10 @@ const Section = styled.div`
 const SectionTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 16px 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid ${props.theme.colors.border};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.border};
 `;
 
 const ButtonGroup = styled.div`
@@ -72,15 +72,15 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   border: none;
 
   ${props => props.variant === 'primary' ? `
-    background: ${props.theme.colors.info};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
 
     &:hover:not(:disabled) {
-      background: ${props.theme.colors.infoDark};
+      background: ${({ theme }) => theme.colors.infoDark};
     }
   ` : `
-    background: ${props.theme.colors.border};
-    color: ${props.theme.colors.text.primary};
+    background: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.text.primary};
 
     &:hover:not(:disabled) {
       background: ${props => props.theme.colors.border};
@@ -94,8 +94,8 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: ${props.theme.colors.statusRejectedBg};
-  color: ${props.theme.colors.errorDark};
+  background: ${({ theme }) => theme.colors.statusRejectedBg};
+  color: ${({ theme }) => theme.colors.errorDark};
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -103,8 +103,8 @@ const ErrorMessage = styled.div`
 `;
 
 const SuccessMessage = styled.div`
-  background: ${props.theme.colors.successLight};
-  color: ${props.theme.colors.successDark};
+  background: ${({ theme }) => theme.colors.successLight};
+  color: ${({ theme }) => theme.colors.successDark};
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 20px;

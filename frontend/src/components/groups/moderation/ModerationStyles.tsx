@@ -58,7 +58,7 @@ export const MemberAvatarPlaceholder = styled.div`
   height: 48px;
   border-radius: 50%;
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +98,7 @@ export const ApproveButton = styled.button`
   border-radius: 6px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -171,14 +171,14 @@ export const PostStatus = styled.span<{ $status: string }>`
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  background: ${props => props.$status === 'removed' ? '${props.theme.colors.error}' : '${props.theme.colors.warning}'};
-  color: ${props.theme.colors.white};
+  background: ${props => props.$status === 'removed' ? props.theme.colors.error} : props.theme.colors.warning};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const RemovalReason = styled.div`
   padding: 8px;
-  background: ${props.theme.colors.errorLight};
-  border-left: 3px solid ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.errorLight};
+  border-left: 3px solid ${({ theme }) => theme.colors.error};
   color: ${props => props.theme.colors.text.secondary};
   font-size: 13px;
   border-radius: 4px;
@@ -263,7 +263,7 @@ export const RoleFilterButton = styled.button<{ $active: boolean }>`
   border-radius: 6px;
   border: 1px solid ${props => props.$active ? props.theme.colors.primary : props.theme.colors.border};
   background: ${props => props.$active ? props.theme.colors.primary : 'transparent'};
-  color: ${props => props.$active ? '${props.theme.colors.white}' : props.theme.colors.text};
+  color: ${props => props.$active ? props.theme.colors.white : props.theme.colors.text};
   font-size: 13px;
   font-weight: ${props => props.$active ? 600 : 400};
   cursor: pointer;
@@ -271,7 +271,7 @@ export const RoleFilterButton = styled.button<{ $active: boolean }>`
 
   &:hover {
     border-color: ${props => props.theme.colors.primary};
-    color: ${props => props.$active ? '${props.theme.colors.white}' : props.theme.colors.primary};
+    color: ${props => props.$active ? props.theme.colors.white : props.theme.colors.primary};
   }
 `;
 
@@ -282,11 +282,11 @@ export const MemberRoleBadge = styled.span<{ $role: string }>`
   font-weight: 600;
   text-transform: uppercase;
   background: ${props => {
-    if (props.$role === 'admin') return '${props.theme.colors.error}';
-    if (props.$role === 'moderator') return '${props.theme.colors.success}';
-    return '${props.theme.colors.text.muted}';
+    if (props.$role === 'admin') return ${({ theme }) => theme.colors.error};
+    if (props.$role === 'moderator') return ${({ theme }) => theme.colors.success};
+    return ${({ theme }) => theme.colors.text.muted};
   }};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const RoleSelect = styled.select`

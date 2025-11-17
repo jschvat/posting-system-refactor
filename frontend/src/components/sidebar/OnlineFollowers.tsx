@@ -12,7 +12,7 @@ import { FollowUser } from '../../services/api/followsApi';
 import { ChatPopup } from '../messaging/ChatPopup';
 
 const Container = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 16px;
@@ -29,15 +29,15 @@ const Header = styled.div`
 const Title = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
 `;
 
 const OnlineCount = styled.span`
   font-size: 12px;
   font-weight: 500;
-  color: ${props.theme.colors.success};
-  background: ${props.theme.colors.successLight};
+  color: ${({ theme }) => theme.colors.success};
+  background: ${({ theme }) => theme.colors.successLight};
   padding: 2px 8px;
   border-radius: 12px;
 `;
@@ -55,12 +55,12 @@ const UserList = styled.div`
   }
 
   &::-webkit-scrollbar-track {
-    background: ${props.theme.colors.borderLight};
+    background: ${({ theme }) => theme.colors.borderLight};
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${props.theme.colors.border};
+    background: ${({ theme }) => theme.colors.border};
     border-radius: 3px;
   }
 
@@ -79,7 +79,7 @@ const UserItem = styled.div`
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${props.theme.colors.hover};
+    background-color: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -103,7 +103,7 @@ const DefaultAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   font-size: 16px;
 `;
@@ -115,7 +115,7 @@ const UserInfo = styled.div`
 
 const Username = styled.div`
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
@@ -124,7 +124,7 @@ const Username = styled.div`
 
 const FullName = styled.div`
   font-size: 12px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -132,8 +132,8 @@ const FullName = styled.div`
 
 const MessageButton = styled.button`
   padding: 6px 12px;
-  background: ${props.theme.colors.info};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.info};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
   font-size: 12px;
@@ -142,28 +142,28 @@ const MessageButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${props.theme.colors.infoDark};
+    background: ${({ theme }) => theme.colors.infoDark};
   }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const LoadingState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const ErrorState = styled.div`
   text-align: center;
   padding: 24px 16px;
-  color: ${props.theme.colors.error};
+  color: ${({ theme }) => theme.colors.error};
   font-size: 14px;
 `;
 

@@ -26,14 +26,14 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
 `;
 
 const CreateButton = styled.button`
   padding: 12px 24px;
-  background: ${props.theme.colors.info};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.info};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -45,7 +45,7 @@ const CreateButton = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${props.theme.colors.infoDark};
+    background: ${({ theme }) => theme.colors.infoDark};
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
   }
@@ -60,7 +60,7 @@ const Tabs = styled.div`
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
-  border-bottom: 2px solid ${props.theme.colors.border};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.border};
   overflow-x: auto;
 
   &::-webkit-scrollbar {
@@ -68,17 +68,17 @@ const Tabs = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${props.theme.colors.backgroundDisabled};
+    background: ${({ theme }) => theme.colors.backgroundDisabled};
     border-radius: 2px;
   }
 `;
 
 const Tab = styled.button<{ active: boolean }>`
   padding: 12px 24px;
-  background: ${props => props.active ? '${props.theme.colors.white}' : 'transparent'};
-  color: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.text.secondary}'};
+  background: ${props => props.active ? props.theme.colors.white : 'transparent'};
+  color: ${props => props.active ? props.theme.colors.info : props.theme.colors.text.secondary};
   border: none;
-  border-bottom: 3px solid ${props => props.active ? '${props.theme.colors.info}' : 'transparent'};
+  border-bottom: 3px solid ${props => props.active ? props.theme.colors.info : 'transparent'};
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -86,8 +86,8 @@ const Tab = styled.button<{ active: boolean }>`
   transition: all 0.2s;
 
   &:hover {
-    color: ${props.theme.colors.info};
-    background: ${props.theme.colors.hover};
+    color: ${({ theme }) => theme.colors.info};
+    background: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -99,23 +99,23 @@ const Stats = styled.div`
 `;
 
 const StatCard = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid ${props.theme.colors.info};
+  border-left: 4px solid ${({ theme }) => theme.colors.info};
 `;
 
 const StatValue = styled.div`
   font-size: 32px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 4px;
 `;
 
 const StatLabel = styled.div`
   font-size: 14px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: 600;
   text-transform: uppercase;
 `;
@@ -130,7 +130,7 @@ const ListingsGrid = styled.div`
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 20px;
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 `;
@@ -143,26 +143,26 @@ const EmptyIcon = styled.div`
 const EmptyTitle = styled.h2`
   font-size: 24px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const EmptyText = styled.p`
   font-size: 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0 0 24px 0;
 `;
 
 const LoadingSpinner = styled.div`
   text-align: center;
   padding: 60px 20px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 18px;
 `;
 
 const ErrorMessage = styled.div`
-  background: ${props.theme.colors.statusRejectedBg};
-  color: ${props.theme.colors.errorDark};
+  background: ${({ theme }) => theme.colors.statusRejectedBg};
+  color: ${({ theme }) => theme.colors.errorDark};
   padding: 16px 20px;
   border-radius: 8px;
   margin-bottom: 20px;

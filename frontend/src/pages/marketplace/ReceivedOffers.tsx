@@ -17,18 +17,18 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const Subtitle = styled.p`
   font-size: 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
 `;
 
 const TabsContainer = styled.div`
-  border-bottom: 2px solid ${props.theme.colors.border};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.border};
   margin-bottom: 24px;
   display: flex;
   gap: 8px;
@@ -38,8 +38,8 @@ const Tab = styled.button<{ active: boolean }>`
   padding: 12px 24px;
   background: none;
   border: none;
-  border-bottom: 3px solid ${props => props.active ? '${props.theme.colors.info}' : 'transparent'};
-  color: ${props => props.active ? '${props.theme.colors.info}' : '${props.theme.colors.text.secondary}'};
+  border-bottom: 3px solid ${props => props.active ? props.theme.colors.info : 'transparent'};
+  color: ${props => props.active ? props.theme.colors.info : props.theme.colors.text.secondary};
   font-size: 15px;
   font-weight: ${props => props.active ? '600' : '500'};
   cursor: pointer;
@@ -47,8 +47,8 @@ const Tab = styled.button<{ active: boolean }>`
   white-space: nowrap;
 
   &:hover {
-    color: ${props.theme.colors.info};
-    background: ${props.theme.colors.hover};
+    color: ${({ theme }) => theme.colors.info};
+    background: ${({ theme }) => theme.colors.hover};
   }
 `;
 
@@ -59,7 +59,7 @@ const OffersList = styled.div`
 `;
 
 const OfferCard = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 12px;
   padding: 20px;
@@ -86,7 +86,7 @@ const ListingImage = styled.img`
 const ListingImagePlaceholder = styled.div`
   width: 100px;
   height: 100px;
-  background: ${props.theme.colors.border};
+  background: ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -101,12 +101,12 @@ const OfferContent = styled.div`
 const ListingTitle = styled.h3`
   font-size: 18px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
   cursor: pointer;
 
   &:hover {
-    color: ${props.theme.colors.info};
+    color: ${({ theme }) => theme.colors.info};
   }
 `;
 
@@ -126,12 +126,12 @@ const PriceCompare = styled.div`
 const OfferPrice = styled.div`
   font-size: 24px;
   font-weight: 700;
-  color: ${props.theme.colors.warning};
+  color: ${({ theme }) => theme.colors.warning};
 `;
 
 const ListingPrice = styled.div`
   font-size: 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   text-decoration: line-through;
 `;
 
@@ -139,22 +139,22 @@ const BuyerInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 14px;
 `;
 
 const TimeInfo = styled.div`
-  color: ${props.theme.colors.text.muted};
+  color: ${({ theme }) => theme.colors.text.muted};
   font-size: 13px;
 `;
 
 const Message = styled.div`
   padding: 12px;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 6px;
   margin: 12px 0;
   font-size: 14px;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-style: italic;
 `;
 
@@ -166,22 +166,22 @@ const StatusBadge = styled.span<{ status: string }>`
   text-transform: uppercase;
   background: ${props => {
     switch (props.status) {
-      case 'pending': return '${props.theme.colors.statusPendingBg}';
-      case 'accepted': return '${props.theme.colors.statusAcceptedBg}';
-      case 'rejected': return '${props.theme.colors.statusRejectedBg}';
-      case 'countered': return '${props.theme.colors.statusInfoBg}';
-      case 'expired': return '${props.theme.colors.borderLight}';
-      default: return '${props.theme.colors.hover}';
+      case 'pending': return ${({ theme }) => theme.colors.statusPendingBg};
+      case 'accepted': return ${({ theme }) => theme.colors.statusAcceptedBg};
+      case 'rejected': return ${({ theme }) => theme.colors.statusRejectedBg};
+      case 'countered': return ${({ theme }) => theme.colors.statusInfoBg};
+      case 'expired': return ${({ theme }) => theme.colors.borderLight};
+      default: return ${({ theme }) => theme.colors.hover};
     }
   }};
   color: ${props => {
     switch (props.status) {
-      case 'pending': return '${props.theme.colors.statusPending}';
-      case 'accepted': return '${props.theme.colors.success}';
-      case 'rejected': return '${props.theme.colors.errorDark}';
-      case 'countered': return '${props.theme.colors.info}';
-      case 'expired': return '${props.theme.colors.text.secondary}';
-      default: return '${props.theme.colors.text.primary}';
+      case 'pending': return ${({ theme }) => theme.colors.statusPending};
+      case 'accepted': return ${({ theme }) => theme.colors.success};
+      case 'rejected': return ${({ theme }) => theme.colors.errorDark};
+      case 'countered': return ${({ theme }) => theme.colors.info};
+      case 'expired': return ${({ theme }) => theme.colors.text.secondary};
+      default: return ${({ theme }) => theme.colors.text.primary};
     }
   }};
 `;
@@ -206,26 +206,26 @@ const Button = styled.button<{ variant?: 'accept' | 'reject' | 'counter' | 'seco
     switch (props.variant) {
       case 'accept':
         return `
-          background: ${props.theme.colors.success};
-          color: ${props.theme.colors.white};
+          background: ${({ theme }) => theme.colors.success};
+          color: ${({ theme }) => theme.colors.white};
           &:hover { background: ${props => props.theme.colors.success}; }
         `;
       case 'reject':
         return `
-          background: ${props.theme.colors.error};
-          color: ${props.theme.colors.white};
-          &:hover { background: ${props.theme.colors.errorDark}; }
+          background: ${({ theme }) => theme.colors.error};
+          color: ${({ theme }) => theme.colors.white};
+          &:hover { background: ${({ theme }) => theme.colors.errorDark}; }
         `;
       case 'counter':
         return `
-          background: ${props.theme.colors.info};
-          color: ${props.theme.colors.white};
-          &:hover { background: ${props.theme.colors.infoDark}; }
+          background: ${({ theme }) => theme.colors.info};
+          color: ${({ theme }) => theme.colors.white};
+          &:hover { background: ${({ theme }) => theme.colors.infoDark}; }
         `;
       default:
         return `
-          background: ${props.theme.colors.border};
-          color: ${props.theme.colors.text.primary};
+          background: ${({ theme }) => theme.colors.border};
+          color: ${({ theme }) => theme.colors.text.primary};
           &:hover { background: ${props => props.theme.colors.border}; }
         `;
     }
@@ -239,21 +239,21 @@ const Button = styled.button<{ variant?: 'accept' | 'reject' | 'counter' | 'seco
 
 const CounterOfferInput = styled.input`
   padding: 10px;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 6px;
   font-size: 14px;
   width: 150px;
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
   padding: 80px 20px;
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   border: 1px solid ${props => props.theme.colors.border};
 `;
@@ -266,13 +266,13 @@ const EmptyIcon = styled.div`
 const EmptyTitle = styled.h2`
   font-size: 24px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
 `;
 
 const EmptyText = styled.p`
   font-size: 16px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
 `;
 
@@ -280,7 +280,7 @@ const LoadingState = styled.div`
   text-align: center;
   padding: 60px 20px;
   font-size: 18px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 interface Offer {

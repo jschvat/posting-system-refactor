@@ -113,7 +113,7 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button<{ $loading?: boolean }>`
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -124,7 +124,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
   margin-top: ${({ theme }) => theme.spacing.md};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary}dd;
+    background: ${({ theme }) => theme.colors.primarydd};
   }
 
   &:disabled {
@@ -142,7 +142,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
       width: 20px;
       height: 20px;
       margin: auto;
-      border: 2px solid ${props.theme.colors.white};
+      border: 2px solid ${({ theme }) => theme.colors.white};
       border-top: 2px solid transparent;
       border-radius: 50%;
       animation: spin 1s linear infinite;
@@ -160,7 +160,7 @@ const SubmitButton = styled.button<{ $loading?: boolean }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: ${({ theme }) => theme.colors.error}20;
+  background: ${({ theme }) => theme.colors.error20};
   color: ${({ theme }) => theme.colors.error};
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};

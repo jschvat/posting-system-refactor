@@ -28,7 +28,7 @@ const Overlay = styled.div`
 `;
 
 const Modal = styled.div`
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   max-width: 600px;
   width: 100%;
@@ -39,7 +39,7 @@ const Modal = styled.div`
 
 const Header = styled.div`
   padding: 24px;
-  border-bottom: 1px solid ${props.theme.colors.border};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,7 +48,7 @@ const Header = styled.div`
 const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
 `;
 
@@ -56,7 +56,7 @@ const CloseButton = styled.button`
   background: none;
   border: none;
   font-size: 28px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   cursor: pointer;
   padding: 0;
   width: 32px;
@@ -67,7 +67,7 @@ const CloseButton = styled.button`
   transition: color 0.2s;
 
   &:hover {
-    color: ${props.theme.colors.text.primary};
+    color: ${({ theme }) => theme.colors.text.primary};
   }
 `;
 
@@ -82,7 +82,7 @@ const Section = styled.div`
 const SectionTitle = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 12px 0;
 `;
 
@@ -90,7 +90,7 @@ const ListingInfo = styled.div`
   display: flex;
   gap: 12px;
   padding: 12px;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 8px;
   margin-bottom: 20px;
 `;
@@ -111,7 +111,7 @@ const ListingImagePlaceholder = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
 `;
 
@@ -122,13 +122,13 @@ const ListingDetails = styled.div`
 const ListingTitle = styled.div`
   font-size: 14px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 4px;
 `;
 
 const ListingMeta = styled.div`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 const ButtonGroup = styled.div`
@@ -148,15 +148,15 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   border: none;
 
   ${props => props.variant === 'primary' ? `
-    background: ${props.theme.colors.info};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
 
     &:hover:not(:disabled) {
-      background: ${props.theme.colors.infoDark};
+      background: ${({ theme }) => theme.colors.infoDark};
     }
   ` : `
-    background: ${props.theme.colors.border};
-    color: ${props.theme.colors.text.primary};
+    background: ${({ theme }) => theme.colors.border};
+    color: ${({ theme }) => theme.colors.text.primary};
 
     &:hover:not(:disabled) {
       background: ${props => props.theme.colors.border};
@@ -170,8 +170,8 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
 `;
 
 const ErrorMessage = styled.div`
-  background: ${props.theme.colors.errorLight};
-  color: ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.errorLight};
+  color: ${({ theme }) => theme.colors.error};
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 16px;

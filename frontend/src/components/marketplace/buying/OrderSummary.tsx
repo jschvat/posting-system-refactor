@@ -14,12 +14,12 @@ const Section = styled.div`
 const SectionTitle = styled.h3`
   font-size: 16px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 12px 0;
 `;
 
 const OrderSummaryContainer = styled.div`
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   border-radius: 8px;
   padding: 16px;
 `;
@@ -31,10 +31,10 @@ const SummaryRow = styled.div<{ bold?: boolean }>`
   padding: 8px 0;
   font-weight: ${props => props.bold ? '700' : '400'};
   font-size: ${props => props.bold ? '18px' : '15px'};
-  color: ${props => props.bold ? '${props.theme.colors.text.primary}' : '${props.theme.colors.text.secondary}'};
+  color: ${props => props.bold ? props.theme.colors.text.primary : props.theme.colors.text.secondary};
 
   ${props => props.bold && `
-    border-top: 2px solid ${props.theme.colors.border};
+    border-top: 2px solid ${({ theme }) => theme.colors.border};
     margin-top: 8px;
     padding-top: 16px;
   `}

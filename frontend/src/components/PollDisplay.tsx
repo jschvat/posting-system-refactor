@@ -50,7 +50,7 @@ const OptionButton = styled.button<{ $isSelected: boolean; $hasVoted: boolean }>
   background: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primary : theme.colors.surface};
   color: ${({ theme, $isSelected }) =>
-    $isSelected ? '${props.theme.colors.white}' : theme.colors.text.primary};
+    $isSelected ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary};
   border: 1px solid ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.primary : theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -82,7 +82,7 @@ const ProgressBar = styled.div<{ $percentage: number }>`
   left: 0;
   height: 100%;
   width: ${({ $percentage }) => $percentage}%;
-  background: ${({ theme }) => theme.colors.primary}20;
+  background: ${({ theme }) => theme.colors.primary20};
   transition: width 0.3s ease;
   z-index: 0;
 `;
@@ -128,7 +128,7 @@ const EndedBadge = styled.span`
   display: inline-block;
   padding: 2px 8px;
   background: ${({ theme }) => theme.colors.error};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 12px;
   font-weight: 600;
@@ -137,7 +137,7 @@ const EndedBadge = styled.span`
 
 const ErrorMessage = styled.div`
   padding: ${({ theme }) => theme.spacing.sm};
-  background: ${({ theme }) => theme.colors.error}10;
+  background: ${({ theme }) => theme.colors.error10};
   border: 1px solid ${({ theme }) => theme.colors.error};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   color: ${({ theme }) => theme.colors.error};

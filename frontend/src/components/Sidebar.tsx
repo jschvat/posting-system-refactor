@@ -329,7 +329,7 @@ const Sidebar: React.FC = () => {
       </Section>
 
       {/* Footer Info */}
-      <Section style={{ marginTop: 'auto', fontSize: '0.8rem', color: '${props.theme.colors.text.muted}' }}>
+      <Section style={{ marginTop: 'auto', fontSize: '0.8rem', color: props.theme.colors.text.muted }}>
         <p>
           Built with React, TypeScript, and Node.js
         </p>

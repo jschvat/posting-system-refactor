@@ -102,13 +102,13 @@ const BubbleWrapper = styled.div<{ isOwn: boolean }>`
       right: -8px;
       width: 20px;
       height: 20px;
-      background: ${props.theme.colors.messageSent};
+      background: ${({ theme }) => theme.colors.messageSent};
       border-bottom-left-radius: 16px;
     ` : `
       left: -8px;
       width: 20px;
       height: 20px;
-      background: ${props.theme.colors.messageReceived};
+      background: ${({ theme }) => theme.colors.messageReceived};
       border-bottom-right-radius: 16px;
     `}
   }
@@ -121,13 +121,13 @@ const BubbleWrapper = styled.div<{ isOwn: boolean }>`
       right: -10px;
       width: 10px;
       height: 20px;
-      background: ${props.theme.colors.white};
+      background: ${({ theme }) => theme.colors.white};
       border-bottom-left-radius: 10px;
     ` : `
       left: -10px;
       width: 10px;
       height: 20px;
-      background: ${props.theme.colors.white};
+      background: ${({ theme }) => theme.colors.white};
       border-bottom-right-radius: 10px;
     `}
   }

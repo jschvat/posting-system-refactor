@@ -105,7 +105,7 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.is_pinned && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${props.theme.colors.success}">
+                <Badge $color="${({ theme }) => theme.colors.success}">
                   <FaThumbtack /> Pinned
                 </Badge>
               </>
@@ -113,7 +113,7 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.is_locked && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${props.theme.colors.warning}">
+                <Badge $color="${({ theme }) => theme.colors.warning}">
                   <FaLock /> Locked
                 </Badge>
               </>
@@ -121,7 +121,7 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.status === 'pending' && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${props.theme.colors.info}">Pending Approval</Badge>
+                <Badge $color="${({ theme }) => theme.colors.info}">Pending Approval</Badge>
               </>
             )}
             {post.status === 'removed' && (
@@ -256,8 +256,8 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   color: ${props =>
     props.$active
       ? props.$type === 'upvote'
-        ? '${props.theme.colors.upvote}'
-        : '${props.theme.colors.downvote}'
+        ? ${({ theme }) => theme.colors.upvote}
+        : props.theme.colors.downvote
       : props.theme.colors.text.secondary};
   font-size: 20px;
   cursor: pointer;
@@ -265,7 +265,7 @@ const VoteButton = styled.button<{ $active: boolean; $type: 'upvote' | 'downvote
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    color: ${props => props.$type === 'upvote' ? '${props.theme.colors.upvote}' : '${props.theme.colors.downvote}'};
+    color: ${props => props.$type === 'upvote' ? props.theme.colors.upvote} : props.theme.colors.downvote};
     transform: scale(1.1);
   }
 
@@ -280,9 +280,9 @@ const VoteCount = styled.span<{ $score: number }>`
   font-size: 14px;
   color: ${props =>
     props.$score > 0
-      ? '${props.theme.colors.upvote}'
+      ? ${({ theme }) => theme.colors.upvote}
       : props.$score < 0
-      ? '${props.theme.colors.downvote}'
+      ? ${({ theme }) => theme.colors.downvote}
       : props.theme.colors.text};
 `;
 
@@ -430,7 +430,7 @@ const VideoOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
   pointer-events: none;
 `;
@@ -445,7 +445,7 @@ const MoreOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
   font-weight: 600;
 `;
@@ -500,10 +500,10 @@ const ExpandButton = styled.button`
 
 const RemovalNotice = styled.div`
   padding: 8px 12px;
-  background: ${props.theme.colors.errorLight};
-  border: 1px solid ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.errorLight};
+  border: 1px solid ${({ theme }) => theme.colors.error};
   border-radius: 4px;
-  color: ${props.theme.colors.error};
+  color: ${({ theme }) => theme.colors.error};
   font-size: 14px;
   margin-bottom: 8px;
 `;

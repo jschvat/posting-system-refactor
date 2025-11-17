@@ -467,10 +467,10 @@ const LoadingMessage = styled.div`
 
 const ErrorMessage = styled.div`
   padding: 16px;
-  background: ${props.theme.colors.errorLight};
-  border: 1px solid ${props.theme.colors.error};
+  background: ${({ theme }) => theme.colors.errorLight};
+  border: 1px solid ${({ theme }) => theme.colors.error};
   border-radius: 8px;
-  color: ${props.theme.colors.error};
+  color: ${({ theme }) => theme.colors.error};
   margin: 24px;
 `;
 

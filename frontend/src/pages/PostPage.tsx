@@ -83,7 +83,7 @@ const BackButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${props.theme.colors.hover};
+    background: ${({ theme }) => theme.colors.hover};
   }
 
   &:before {
@@ -112,7 +112,7 @@ const CommentAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   font-size: 0.85rem;
   overflow: hidden;
@@ -203,7 +203,7 @@ const CommentRenderer: React.FC<{ comment: Comment; depth?: number; maxDepth?: n
                 showScore={false}
               />
             )}
-            <span style={{ color: '${props.theme.colors.text.muted}' }}>•</span>
+            <span style={{ color: props.theme.colors.text.muted }}>•</span>
             <CommentTime>{formatTimeAgo(comment.created_at)}</CommentTime>
           </CommentHeader>
           {depth > 0 && (

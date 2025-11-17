@@ -209,7 +209,7 @@ const RemoveMediaButton = styled.button`
   border-radius: 50%;
   border: none;
   background: rgba(244, 67, 54, 0.9);
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -218,7 +218,7 @@ const RemoveMediaButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${props.theme.colors.error};
+    background: ${({ theme }) => theme.colors.error};
   }
 `;
 
@@ -237,7 +237,7 @@ const AttachButton = styled.button`
   border-radius: 50%;
   border: 2px solid ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
   font-weight: 300;
   cursor: pointer;

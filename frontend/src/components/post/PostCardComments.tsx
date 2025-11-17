@@ -68,7 +68,7 @@ const CommentAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   font-size: 0.7rem;
   overflow: hidden;
@@ -124,7 +124,7 @@ const ReplyAvatar = styled.div<{ $hasImage?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   font-size: 0.6rem;
   overflow: hidden;
@@ -372,7 +372,7 @@ const PostCardComments: React.FC<PostCardCommentsProps> = ({ postId, isOpen, ini
   return (
     <CommentsSection $isOpen={isOpen} $isLoading={isLoadingMore} ref={commentsListRef}>
       {commentsLoading ? (
-        <div style={{ padding: '16px', textAlign: 'center', color: '${props.theme.colors.text.secondary}' }}>
+        <div style={{ padding: '16px', textAlign: 'center', color: props.theme.colors.text.secondary }}>
           Loading comments...
         </div>
       ) : (
@@ -383,7 +383,7 @@ const PostCardComments: React.FC<PostCardCommentsProps> = ({ postId, isOpen, ini
             ))}
 
             {allComments.length === 0 && !commentsLoading && (
-              <div style={{ textAlign: 'center', color: '${props.theme.colors.text.secondary}', padding: '16px' }}>
+              <div style={{ textAlign: 'center', color: props.theme.colors.text.secondary, padding: '16px' }}>
                 No comments yet. Be the first to comment!
               </div>
             )}

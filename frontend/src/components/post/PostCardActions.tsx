@@ -218,7 +218,7 @@ const PostCardActions: React.FC<PostCardActionsProps> = ({
             reactionCounts={reactions}
             totalReactions={totalReactions}
           >
-            <div style={{ marginLeft: 'auto', fontSize: '0.85rem', color: '${props.theme.colors.text.secondary}' }}>
+            <div style={{ marginLeft: 'auto', fontSize: '0.85rem', color: props.theme.colors.text.secondary }}>
               {totalReactions} reaction{totalReactions === 1 ? '' : 's'}
             </div>
           </ReactionsPopup>

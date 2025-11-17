@@ -27,7 +27,7 @@ const Message = styled.h2`
 const HomeLink = styled(Link)`
   display: inline-block;
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   text-decoration: none;
@@ -35,7 +35,7 @@ const HomeLink = styled(Link)`
   transition: background 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary}dd;
+    background: ${({ theme }) => theme.colors.primarydd};
     text-decoration: none;
   }
 `;

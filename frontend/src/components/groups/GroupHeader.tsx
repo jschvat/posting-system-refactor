@@ -138,7 +138,7 @@ const DefaultIcon = styled.div`
   border-radius: 12px;
   border: 4px solid ${props => props.theme.colors.surface};
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,13 +205,13 @@ const ModeratorAvatar = styled.img`
 `;
 
 const ModeratorLink = styled(Link)<{ $isAdmin?: boolean }>`
-  color: ${props => props.$isAdmin ? '${props.theme.colors.error}' : '${props.theme.colors.success}'};
+  color: ${props => props.$isAdmin ? props.theme.colors.error : props.theme.colors.success};
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
 
   &:hover {
-    color: ${props => props.$isAdmin ? '${props.theme.colors.errorDark}' : '${props => props.theme.colors.success}'};
+    color: ${props => props.$isAdmin ? props.theme.colors.errorDark : props.theme.colors.success};
     text-decoration: underline;
   }
 `;
@@ -226,7 +226,7 @@ const ActionButton = styled.button<{ $secondary?: boolean }>`
   border-radius: 20px;
   border: 1px solid ${props => props.$secondary ? props.theme.colors.border : props.theme.colors.primary};
   background: ${props => props.$secondary ? 'transparent' : props.theme.colors.primary};
-  color: ${props => props.$secondary ? props.theme.colors.text : '${props.theme.colors.white}'};
+  color: ${props => props.$secondary ? props.theme.colors.text : props.theme.colors.white};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -235,7 +235,7 @@ const ActionButton = styled.button<{ $secondary?: boolean }>`
   &:hover {
     background: ${props => props.$secondary ? props.theme.colors.error : props.theme.colors.primary};
     border-color: ${props => props.$secondary ? props.theme.colors.error : props.theme.colors.primary};
-    color: ${props => props.$secondary ? props.theme.colors.error : '${props.theme.colors.white}'};
+    color: ${props => props.$secondary ? props.theme.colors.error : props.theme.colors.white};
   }
 `;
 

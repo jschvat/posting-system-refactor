@@ -16,41 +16,41 @@ export interface ButtonProps {
 const buttonVariants = {
   primary: css`
     background: ${({ theme }) => theme.colors.primary};
-    color: ${props.theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.primaryDark || '${props.theme.colors.primaryDark}'};
+      background: ${({ theme }) => theme.colors.primaryDark || ${({ theme }) => theme.colors.primaryDark}};
     }
   `,
 
   secondary: css`
-    background: ${({ theme }) => theme.colors.secondary || '${props.theme.colors.text.secondary}'};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.secondary || ${({ theme }) => theme.colors.text.secondary}};
+    color: ${({ theme }) => theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.secondaryDark || '${props.theme.colors.text.primary}'};
+      background: ${({ theme }) => theme.colors.secondaryDark || ${({ theme }) => theme.colors.text.primary}};
     }
   `,
 
   danger: css`
     background: ${({ theme }) => theme.colors.error};
-    color: ${props.theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${props.theme.colors.errorDark};
+      background: ${({ theme }) => theme.colors.errorDark};
     }
   `,
 
   success: css`
     background: ${({ theme }) => theme.colors.success};
-    color: ${props.theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     border: none;
 
     &:hover:not(:disabled) {
-      background: ${props.theme.colors.successDark};
+      background: ${({ theme }) => theme.colors.successDark};
     }
   `,
 
@@ -61,7 +61,7 @@ const buttonVariants = {
 
     &:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.primary};
-      color: ${props.theme.colors.white};
+      color: ${({ theme }) => theme.colors.white};
     }
   `,
 
@@ -83,7 +83,7 @@ const buttonVariants = {
     text-decoration: underline;
 
     &:hover:not(:disabled) {
-      color: ${({ theme }) => theme.colors.primaryDark || '${props.theme.colors.primaryDark}'};
+      color: ${({ theme }) => theme.colors.primaryDark || ${({ theme }) => theme.colors.primaryDark}};
     }
   `,
 };

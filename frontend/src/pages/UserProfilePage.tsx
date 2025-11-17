@@ -62,7 +62,7 @@ const EmptyState = styled.div`
 `;
 
 const ErrorState = styled.div`
-  background: ${({ theme }) => theme.colors.error}20;
+  background: ${({ theme }) => theme.colors.error20};
   border: 1px solid ${({ theme }) => theme.colors.error}40;
   border-radius: ${({ theme }) => theme.borderRadius.md};
   padding: ${({ theme }) => theme.spacing.xl};
@@ -76,7 +76,7 @@ const ErrorState = styled.div`
 
 const RetryButton = styled.button`
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -87,7 +87,7 @@ const RetryButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary}dd;
+    background: ${({ theme }) => theme.colors.primarydd};
   }
 `;
 

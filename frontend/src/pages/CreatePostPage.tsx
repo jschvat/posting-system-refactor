@@ -106,13 +106,13 @@ const MediaSection = styled.div`
 
   &.dragover {
     border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.primary}10;
+    background: ${({ theme }) => theme.colors.primary10};
   }
 `;
 
 const MediaUploadButton = styled.button`
   background: ${({ theme }) => theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -122,7 +122,7 @@ const MediaUploadButton = styled.button`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary}dd;
+    background: ${({ theme }) => theme.colors.primarydd};
   }
 `;
 
@@ -157,7 +157,7 @@ const RemoveMediaButton = styled.button`
   top: 4px;
   right: 4px;
   background: ${({ theme }) => theme.colors.error};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   width: 20px;
   height: 20px;
@@ -169,7 +169,7 @@ const RemoveMediaButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.error}dd;
+    background: ${({ theme }) => theme.colors.errordd};
   }
 `;
 
@@ -195,7 +195,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.primary : theme.colors.surface
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.primary
+    $variant === 'primary' ? ${({ theme }) => theme.colors.white} : theme.colors.text.primary
   };
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: 1rem;
@@ -212,13 +212,13 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   &:disabled {
     background: ${({ theme }) => theme.colors.text.muted};
     border-color: ${({ theme }) => theme.colors.text.muted};
-    color: ${props.theme.colors.white};
+    color: ${({ theme }) => theme.colors.white};
     cursor: not-allowed;
   }
 `;
 
 const ErrorMessage = styled.div`
-  background: ${({ theme }) => theme.colors.error}20;
+  background: ${({ theme }) => theme.colors.error20};
   color: ${({ theme }) => theme.colors.error};
   padding: ${({ theme }) => theme.spacing.md};
   border-radius: ${({ theme }) => theme.borderRadius.md};
@@ -406,7 +406,7 @@ const CreatePostPage: React.FC = () => {
             <Label>Add Photos or Videos</Label>
             <MediaSection>
               <div>
-                <p style={{ marginBottom: '16px', color: '${props.theme.colors.text.secondary}' }}>
+                <p style={{ marginBottom: '16px', color: props.theme.colors.text.secondary }}>
                   Upload up to {MAX_FILES} files (images, videos, documents)
                 </p>
                 <MediaUploadButton type="button" onClick={handleFileSelect}>
@@ -436,7 +436,7 @@ const CreatePostPage: React.FC = () => {
                           fontSize: '0.8rem',
                           padding: '8px',
                           textAlign: 'center',
-                          background: '${props.theme.colors.backgroundSecondary}'
+                          background: ${({ theme }) => theme.colors.backgroundSecondary
                         }}>
                           {file.name}
                         </div>

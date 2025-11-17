@@ -169,7 +169,7 @@ const Tag = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xs};
   padding: 4px 8px;
-  background: ${({ theme }) => theme.colors.primary}20;
+  background: ${({ theme }) => theme.colors.primary20};
   border: 1px solid ${({ theme }) => theme.colors.primary}40;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 14px;
@@ -198,7 +198,7 @@ const RemoveButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.error}20;
+    background: ${({ theme }) => theme.colors.error20};
     color: ${({ theme }) => theme.colors.error};
   }
 `;
@@ -249,7 +249,7 @@ const SuggestionItem = styled.div<{ $isSelected: boolean }>`
       $isSelected ? theme.colors.primary : 'transparent'};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary}10;
+    background: ${({ theme }) => theme.colors.primary10};
   }
 
   &:not(:last-child) {

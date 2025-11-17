@@ -17,14 +17,14 @@ const QuantityContainer = styled.div`
 const QuantityLabel = styled.label`
   font-size: 14px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-right: 8px;
 `;
 
 const QuantityControls = styled.div`
   display: flex;
   align-items: center;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   overflow: hidden;
 `;
@@ -33,8 +33,8 @@ const QuantityButton = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  background: ${props.theme.colors.hover};
-  color: ${props.theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.hover};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -61,17 +61,17 @@ const QuantityInput = styled.input`
   width: 60px;
   height: 40px;
   border: none;
-  border-left: 1px solid ${props.theme.colors.border};
-  border-right: 1px solid ${props.theme.colors.border};
+  border-left: 1px solid ${({ theme }) => theme.colors.border};
+  border-right: 1px solid ${({ theme }) => theme.colors.border};
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
-  background: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.white};
 
   &:focus {
     outline: none;
-    background: ${props.theme.colors.hover};
+    background: ${({ theme }) => theme.colors.hover};
   }
 
   /* Remove number input arrows */
@@ -85,7 +85,7 @@ const QuantityInput = styled.input`
 
 const QuantityInfo = styled.span`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin-left: 8px;
 `;
 

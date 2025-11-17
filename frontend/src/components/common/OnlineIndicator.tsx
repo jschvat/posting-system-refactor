@@ -68,8 +68,8 @@ const IndicatorDot = styled.div<IndicatorDotProps>`
   width: ${props => getSizePixels(props.$size)}px;
   height: ${props => getSizePixels(props.$size)}px;
   border-radius: 50%;
-  background-color: ${props => props.$isOnline ? '${props.theme.colors.success}' : '${props.theme.colors.text.muted}'};
-  border: 2px solid ${props.theme.colors.white};
+  background-color: ${props => props.$isOnline ? props.theme.colors.success : props.theme.colors.text.muted};
+  border: 2px solid ${({ theme }) => theme.colors.white};
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
   z-index: 1;
 

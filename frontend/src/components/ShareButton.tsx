@@ -36,7 +36,7 @@ const ShareBtn = styled.button<{ $isShared: boolean }>`
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.colors.success}15;
+    background: ${({ theme }) => theme.colors.success15};
     color: ${({ theme }) => theme.colors.success};
   }
 
@@ -131,7 +131,7 @@ const ModalButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
     $variant === 'primary' ? theme.colors.success : 'transparent'
   };
   color: ${({ theme, $variant }) =>
-    $variant === 'primary' ? '${props.theme.colors.white}' : theme.colors.text.secondary
+    $variant === 'primary' ? ${({ theme }) => theme.colors.white} : theme.colors.text.secondary
   };
 
   &:hover:not(:disabled) {

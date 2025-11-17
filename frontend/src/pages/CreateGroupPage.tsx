@@ -563,7 +563,7 @@ const SubmitButton = styled.button`
   border-radius: 8px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;

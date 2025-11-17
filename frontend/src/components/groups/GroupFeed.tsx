@@ -153,7 +153,7 @@ const SortButton = styled.button<{ $active: boolean }>`
   border-radius: 20px;
   border: 1px solid ${props => props.$active ? props.theme.colors.primary : props.theme.colors.border};
   background: ${props => props.$active ? props.theme.colors.primary : 'transparent'};
-  color: ${props => props.$active ? '${props.theme.colors.white}' : props.theme.colors.text};
+  color: ${props => props.$active ? props.theme.colors.white : props.theme.colors.text};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -168,7 +168,7 @@ const CreatePostButton = styled.button`
   border-radius: 20px;
   border: none;
   background: ${props => props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;

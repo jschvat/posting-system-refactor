@@ -12,15 +12,15 @@ const Section = styled.div`
 const SectionTitle = styled.h2`
   font-size: 18px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 16px 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid ${props.theme.colors.border};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.border};
 `;
 
 const LocationStatus = styled.div`
-  background: ${props.theme.colors.successLight};
-  border: 1px solid ${props.theme.colors.success};
+  background: ${({ theme }) => theme.colors.successLight};
+  border: 1px solid ${({ theme }) => theme.colors.success};
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -45,12 +45,12 @@ const LocationStatusTitle = styled.div`
 
 const LocationStatusSubtitle = styled.div`
   font-size: 13px;
-  color: ${props.theme.colors.successDark};
+  color: ${({ theme }) => theme.colors.successDark};
 `;
 
 const LocationDetecting = styled.div`
-  background: ${props.theme.colors.warningLight};
-  border: 1px solid ${props.theme.colors.warning};
+  background: ${({ theme }) => theme.colors.warningLight};
+  border: 1px solid ${({ theme }) => theme.colors.warning};
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -66,8 +66,8 @@ const DetectingText = styled.div`
 
 const ChangeLocationButton = styled.button`
   background: transparent;
-  color: ${props.theme.colors.info};
-  border: 1px solid ${props.theme.colors.info};
+  color: ${({ theme }) => theme.colors.info};
+  border: 1px solid ${({ theme }) => theme.colors.info};
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 13px;
@@ -76,14 +76,14 @@ const ChangeLocationButton = styled.button`
   white-space: nowrap;
 
   &:hover {
-    background: ${props.theme.colors.info};
-    color: ${props.theme.colors.white};
+    background: ${({ theme }) => theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
 const DetectLocationButton = styled.button`
-  background: ${props.theme.colors.info};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.info};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -95,11 +95,11 @@ const DetectLocationButton = styled.button`
   gap: 8px;
 
   &:hover {
-    background: ${props.theme.colors.infoDark};
+    background: ${({ theme }) => theme.colors.infoDark};
   }
 
   &:disabled {
-    background: ${props.theme.colors.backgroundDisabled};
+    background: ${({ theme }) => theme.colors.backgroundDisabled};
     cursor: not-allowed;
   }
 `;
@@ -116,14 +116,14 @@ const Label = styled.label`
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-bottom: 8px;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid ${props.theme.colors.border};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   font-size: 15px;
   transition: border-color 0.2s;
@@ -131,18 +131,18 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.info};
+    border-color: ${({ theme }) => theme.colors.info};
   }
 
   &:disabled {
-    background: ${props.theme.colors.hover};
+    background: ${({ theme }) => theme.colors.hover};
     cursor: not-allowed;
   }
 `;
 
 const HelpText = styled.p`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 6px 0 0 0;
 `;
 

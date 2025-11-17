@@ -54,7 +54,7 @@ const Input = styled.input`
   font-size: 14px;
   font-family: inherit;
   color: ${({ theme }) => theme.colors.text.primary};
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
 
   &:focus {
     outline: none;
@@ -85,7 +85,7 @@ const OptionInput = styled(Input)`
 const RemoveButton = styled.button`
   padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.error};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 13px;
@@ -105,7 +105,7 @@ const RemoveButton = styled.button`
 const AddButton = styled.button`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => theme.colors.secondary};
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: 14px;

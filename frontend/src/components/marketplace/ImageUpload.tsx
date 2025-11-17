@@ -6,37 +6,37 @@ const Container = styled.div`
 `;
 
 const UploadArea = styled.div<{ isDragging: boolean }>`
-  border: 3px dashed ${props => props.isDragging ? '${props.theme.colors.info}' : '${props.theme.colors.backgroundDisabled}'};
+  border: 3px dashed ${props => props.isDragging ? props.theme.colors.info : props.theme.colors.backgroundDisabled};
   border-radius: 12px;
   padding: 40px 20px;
   text-align: center;
-  background: ${props => props.isDragging ? '${props.theme.colors.infoLight}' : '${props.theme.colors.hover}'};
+  background: ${props => props.isDragging ? props.theme.colors.infoLight : props.theme.colors.hover};
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 24px;
 
   &:hover {
-    border-color: ${props.theme.colors.info};
-    background: ${props.theme.colors.infoLight};
+    border-color: ${({ theme }) => theme.colors.info};
+    background: ${({ theme }) => theme.colors.infoLight};
   }
 `;
 
 const UploadIcon = styled.div`
   font-size: 48px;
   margin-bottom: 12px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
 const UploadText = styled.p`
   font-size: 16px;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin: 0 0 8px 0;
   font-weight: 600;
 `;
 
 const UploadSubtext = styled.p`
   font-size: 14px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
 `;
 
@@ -56,7 +56,7 @@ const ImageCard = styled.div<{ isDragging?: boolean }>`
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   cursor: move;
   opacity: ${props => props.isDragging ? 0.5 : 1};
@@ -93,8 +93,8 @@ const TopControls = styled.div`
 `;
 
 const PrimaryBadge = styled.div<{ isPrimary: boolean }>`
-  background: ${props => props.isPrimary ? '${props.theme.colors.warning}' : 'rgba(255, 255, 255, 0.9)'};
-  color: ${props => props.isPrimary ? '${props.theme.colors.white}' : '${props.theme.colors.text.secondary}'};
+  background: ${props => props.isPrimary ? props.theme.colors.warning : 'rgba(255, 255, 255, 0.9)'};
+  color: ${props => props.isPrimary ? props.theme.colors.white : props.theme.colors.text.secondary};
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -104,14 +104,14 @@ const PrimaryBadge = styled.div<{ isPrimary: boolean }>`
   transition: all 0.2s;
 
   &:hover {
-    background: ${props => props.isPrimary ? '#e67e22' : '${props.theme.colors.info}'};
-    color: ${props.theme.colors.white};
+    background: ${props => props.isPrimary ? '#e67e22' : props.theme.colors.info};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
 const DeleteButton = styled.button`
   background: rgba(231, 76, 60, 0.9);
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 50%;
   width: 28px;
@@ -125,7 +125,7 @@ const DeleteButton = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    background: ${props.theme.colors.errorDark};
+    background: ${({ theme }) => theme.colors.errorDark};
     transform: scale(1.1);
   }
 `;
@@ -138,7 +138,7 @@ const BottomInfo = styled.div`
 
 const OrderBadge = styled.div`
   background: rgba(52, 152, 219, 0.9);
-  color: ${props.theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 12px;
@@ -160,14 +160,14 @@ const ProgressBar = styled.div<{ progress: number }>`
     top: 0;
     bottom: 0;
     width: ${props => props.progress}%;
-    background: ${props.theme.colors.info};
+    background: ${({ theme }) => theme.colors.info};
     transition: width 0.3s ease;
   }
 `;
 
 const ErrorMessage = styled.div`
-  background: ${props.theme.colors.statusRejectedBg};
-  color: ${props.theme.colors.errorDark};
+  background: ${({ theme }) => theme.colors.statusRejectedBg};
+  color: ${({ theme }) => theme.colors.errorDark};
   padding: 12px 16px;
   border-radius: 8px;
   margin-top: 12px;
@@ -176,7 +176,7 @@ const ErrorMessage = styled.div`
 
 const HelpText = styled.p`
   font-size: 13px;
-  color: ${props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 12px 0 0 0;
 `;
 

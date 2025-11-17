@@ -147,7 +147,7 @@ export const AddPaymentMethodForm: React.FC<AddPaymentMethodFormProps> = ({
 
 // Styled Components
 const AddMethodForm = styled.form`
-  background: ${props.theme.colors.hover};
+  background: ${({ theme }) => theme.colors.hover};
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -174,7 +174,7 @@ const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 0.9rem;
 `;
 
@@ -188,7 +188,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -198,12 +198,12 @@ const Select = styled.select`
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 4px;
   font-size: 1rem;
-  background: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
 
   &:focus {
     outline: none;
-    border-color: ${props.theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -219,7 +219,7 @@ const Checkbox = styled.input`
 
 const CheckboxLabel = styled.label`
   font-size: 0.9rem;
-  color: ${props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   cursor: pointer;
 `;
 
@@ -231,8 +231,8 @@ const FormActions = styled.div`
 
 const CancelButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background: ${props.theme.colors.text.secondary};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -246,8 +246,8 @@ const CancelButton = styled.button`
 
 const SubmitButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background: ${props.theme.colors.primary};
-  color: ${props.theme.colors.white};
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -255,11 +255,11 @@ const SubmitButton = styled.button`
   transition: background 0.2s;
 
   &:disabled {
-    background: ${props.theme.colors.border};
+    background: ${({ theme }) => theme.colors.border};
     cursor: not-allowed;
   }
 
   &:hover:not(:disabled) {
-    background: ${props.theme.colors.primaryDark};
+    background: ${({ theme }) => theme.colors.primaryDark};
   }
 `;

@@ -187,7 +187,7 @@ export const ModeratorsTab: React.FC<ModeratorsTabProps> = ({ slug }) => {
               <MemberUsername>@{moderator.username}</MemberUsername>
               <MemberRoleBadge $role={moderator.role}>{moderator.role}</MemberRoleBadge>
               {moderator.joined_at && (
-                <div style={{ fontSize: '12px', color: '${props.theme.colors.text.secondary}', marginTop: '4px' }}>
+                <div style={{ fontSize: '12px', color: props.theme.colors.text.secondary, marginTop: '4px' }}>
                   Joined {new Date(moderator.joined_at).toLocaleDateString()}
                 </div>
               )}
@@ -203,7 +203,7 @@ export const ModeratorsTab: React.FC<ModeratorsTabProps> = ({ slug }) => {
               </RemoveButton>
             )}
             {moderator.role === 'admin' && (
-              <div style={{ fontSize: '12px', color: '${props.theme.colors.text.secondary}', fontStyle: 'italic' }}>
+              <div style={{ fontSize: '12px', color: props.theme.colors.text.secondary, fontStyle: 'italic' }}>
                 Group Admin (cannot be demoted)
               </div>
             )}
