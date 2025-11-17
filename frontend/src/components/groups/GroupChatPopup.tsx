@@ -183,7 +183,7 @@ const GroupChatPopup: React.FC<GroupChatPopupProps> = ({
                   No one else is active in this chat right now
                 </EmptyMembersMessage>
               ) : (
-                participants
+                (participants || [])
                   .filter(participant => activeUserIds.has(participant.user_id || participant.id))
                   .map((participant) => (
                   <MemberItem key={participant.user_id || participant.id}>

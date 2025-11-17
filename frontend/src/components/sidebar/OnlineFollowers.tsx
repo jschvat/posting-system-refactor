@@ -181,7 +181,7 @@ export const OnlineFollowers: React.FC<OnlineFollowersProps> = ({
   const [chatUser, setChatUser] = useState<{ id: number; username: string; avatarUrl?: string } | null>(null);
 
   // Filter online users
-  const onlineFollowers = followedUsers.filter(user => onlineUsers[user.id]);
+  const onlineFollowers = (followedUsers || []).filter(user => onlineUsers[user.id]);
 
   // Limit visible users
   const visibleOnlineFollowers = onlineFollowers.slice(0, maxVisible);

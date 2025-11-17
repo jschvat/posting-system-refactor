@@ -195,9 +195,9 @@ const HomePage: React.FC = () => {
       } else {
         // Subsequent pages - append new posts, avoiding duplicates
         setAllPosts(prev => {
-          const existingIds = new Set(prev.map(p => p.id));
-          const uniqueNewPosts = newPosts.filter(p => !existingIds.has(p.id));
-          return [...prev, ...uniqueNewPosts];
+          const existingIds = new Set((prev || []).map(p => p.id));
+          const uniqueNewPosts = (newPosts || []).filter(p => !existingIds.has(p.id));
+          return [...(prev || []), ...uniqueNewPosts];
         });
       }
 

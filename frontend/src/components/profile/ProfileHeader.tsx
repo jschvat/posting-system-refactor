@@ -280,7 +280,8 @@ const formatLocation = (user: any): string | null => {
 interface ProfileHeaderProps {
   user: any;
   isOwnProfile: boolean;
-  stats: {
+  // New interface (preferred)
+  stats?: {
     postsCount: number;
     followingCount: number;
     followersCount: number;
@@ -294,10 +295,21 @@ interface ProfileHeaderProps {
     totalRatings: number;
   };
   onEditProfile: () => void;
-  onSendMessage: () => void;
-  onReputationRefetch: () => void;
-  onRatingsRefetch: () => void;
-  onStatClick: (tab: 'posts' | 'following' | 'followers') => void;
+  onSendMessage?: () => void;
+  onReputationRefetch?: () => void;
+  onRatingsRefetch?: () => void;
+  onStatClick?: (tab: 'posts' | 'following' | 'followers') => void;
+  // Legacy interface (backwards compatibility)
+  avatarUrl?: string;
+  postsCount?: number;
+  followingCount?: number;
+  followersCount?: number;
+  averageRating?: number;
+  totalRatings?: number;
+  onMessage?: () => void;
+  onFollowingClick?: () => void;
+  onFollowersClick?: () => void;
+  onRatingSubmitted?: () => void;
 }
 
 const ProfileHeaderComponent: React.FC<ProfileHeaderProps> = ({
@@ -311,8 +323,49 @@ const ProfileHeaderComponent: React.FC<ProfileHeaderProps> = ({
   onReputationRefetch,
   onRatingsRefetch,
   onStatClick,
+  // Legacy props
+  avatarUrl: legacyAvatarUrl,
+  postsCount,
+  followingCount,
+  followersCount,
+  averageRating,
+  totalRatings,
+  onMessage,
+  onFollowingClick,
+  onFollowersClick,
+  onRatingSubmitted,
 }) => {
-  const avatarUrl = getUserAvatarUrl(user);
+  // Support both new and legacy interfaces
+  const actualStats = stats || {
+    postsCount: postsCount || 0,
+    followingCount: followingCount || 0,
+    followersCount: followersCount || 0
+  };
+
+  const actualRatings = ratings || (averageRating !== undefined && totalRatings !== undefined ? {
+    averageRating,
+    totalRatings
+  } : undefined);
+
+  const handleMessageClick = onSendMessage || onMessage;
+  const handleReputationRefetch = onReputationRefetch || (() => {
+    if (onRatingSubmitted) onRatingSubmitted();
+  });
+  const handleRatingsRefetch = onRatingsRefetch || (() => {
+    if (onRatingSubmitted) onRatingSubmitted();
+  });
+
+  const handleStatClick = (tab: 'posts' | 'following' | 'followers') => {
+    if (onStatClick) {
+      onStatClick(tab);
+    } else {
+      // Legacy callbacks
+      if (tab === 'following' && onFollowingClick) onFollowingClick();
+      if (tab === 'followers' && onFollowersClick) onFollowersClick();
+    }
+  };
+
+  const avatarUrl = legacyAvatarUrl || getUserAvatarUrl(user);
   const hasAvatar = Boolean(user.avatar_url) && user.avatar_url !== avatarUrl;
   const formattedLocation = formatLocation(user);
 
@@ -338,10 +391,10 @@ const ProfileHeaderComponent: React.FC<ProfileHeaderProps> = ({
                   score={reputation.reputation_score}
                   size="medium"
                 />
-                {ratings && ratings.totalRatings > 0 && (
+                {actualRatings && actualRatings.totalRatings > 0 && (
                   <RatingDisplay
-                    rating={ratings.averageRating}
-                    totalRatings={ratings.totalRatings}
+                    rating={actualRatings.averageRating}
+                    totalRatings={actualRatings.totalRatings}
                     size="small"
                   />
                 )}
@@ -410,26 +463,26 @@ const ProfileHeaderComponent: React.FC<ProfileHeaderProps> = ({
             <StatsContainer>
               <StatItem
                 $clickable
-                onClick={() => onStatClick('posts')}
+                onClick={() => handleStatClick('posts')}
                 title="Click to see posts"
               >
-                <StatNumber>{stats.postsCount}</StatNumber>
+                <StatNumber>{actualStats.postsCount}</StatNumber>
                 <StatLabel>Posts</StatLabel>
               </StatItem>
               <StatItem
                 $clickable
-                onClick={() => onStatClick('following')}
+                onClick={() => handleStatClick('following')}
                 title="Click to see who they're following"
               >
-                <StatNumber>{stats.followingCount}</StatNumber>
+                <StatNumber>{actualStats.followingCount}</StatNumber>
                 <StatLabel>Following</StatLabel>
               </StatItem>
               <StatItem
                 $clickable
-                onClick={() => onStatClick('followers')}
+                onClick={() => handleStatClick('followers')}
                 title="Click to see their followers"
               >
-                <StatNumber>{stats.followersCount}</StatNumber>
+                <StatNumber>{actualStats.followersCount}</StatNumber>
                 <StatLabel>Followers</StatLabel>
               </StatItem>
             </StatsContainer>
@@ -447,13 +500,15 @@ const ProfileHeaderComponent: React.FC<ProfileHeaderProps> = ({
                   userId={user.id}
                   username={user.username}
                   onRatingSubmitted={() => {
-                    onReputationRefetch();
-                    onRatingsRefetch();
+                    handleReputationRefetch();
+                    handleRatingsRefetch();
                   }}
                   variant="outline"
                   size="medium"
                 />
-                <ActionButton $variant="secondary" onClick={onSendMessage}>Message</ActionButton>
+                {handleMessageClick && (
+                  <ActionButton $variant="secondary" onClick={handleMessageClick}>Message</ActionButton>
+                )}
               </ActionButtons>
             )}
           </UserDetails>

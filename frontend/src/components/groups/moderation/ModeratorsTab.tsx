@@ -45,10 +45,10 @@ export const ModeratorsTab: React.FC<ModeratorsTabProps> = ({ slug }) => {
       setFilteredMembers(allMembers);
     } else {
       const query = searchQuery.toLowerCase();
-      setFilteredMembers(allMembers.filter(member =>
+      setFilteredMembers((allMembers || []).filter(member =>
         member.username?.toLowerCase().includes(query) ||
         member.display_name?.toLowerCase().includes(query) ||
-        `${member.first_name} ${member.last_name}`.toLowerCase().includes(query)
+        `${member.first_name || ''} ${member.last_name || ''}`.toLowerCase().includes(query)
       ));
     }
   }, [searchQuery, allMembers]);

@@ -200,7 +200,7 @@ const UserProfilePage: React.FC = () => {
   }
 
   const user = userData.data;
-  const posts = Array.isArray(postsData?.data?.posts) ? postsData!.data.posts : [];
+  const posts = Array.isArray(postsData?.data?.posts) ? postsData.data.posts : [];
   const avatarUrl = getUserAvatarUrl(user);
   const hasAvatar = Boolean(user.avatar_url) && user.avatar_url !== avatarUrl;
 

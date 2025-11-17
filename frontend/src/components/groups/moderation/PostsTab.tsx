@@ -43,7 +43,7 @@ export const PostsTab: React.FC<PostsTabProps> = ({ slug }) => {
       setFilteredPosts(posts);
     } else {
       const query = searchQuery.toLowerCase();
-      setFilteredPosts(posts.filter(post =>
+      setFilteredPosts((posts || []).filter(post =>
         post.title?.toLowerCase().includes(query) ||
         post.content?.toLowerCase().includes(query) ||
         post.username?.toLowerCase().includes(query)

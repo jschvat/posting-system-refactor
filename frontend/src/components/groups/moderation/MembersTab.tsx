@@ -48,10 +48,10 @@ export const MembersTab: React.FC<MembersTabProps> = ({ slug, userRole }) => {
       setFilteredMembers(members);
     } else {
       const query = searchQuery.toLowerCase();
-      setFilteredMembers(members.filter(member =>
+      setFilteredMembers((members || []).filter(member =>
         member.username?.toLowerCase().includes(query) ||
         member.display_name?.toLowerCase().includes(query) ||
-        `${member.first_name} ${member.last_name}`.toLowerCase().includes(query)
+        `${member.first_name || ''} ${member.last_name || ''}`.toLowerCase().includes(query)
       ));
     }
   }, [searchQuery, members]);

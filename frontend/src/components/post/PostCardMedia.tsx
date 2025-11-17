@@ -174,6 +174,11 @@ const PostCardMedia: React.FC<PostCardMediaProps> = ({ media, postId }) => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Early return if no media
+  if (!media || media.length === 0) {
+    return null;
+  }
+
   // Filter out only image media for modal viewing
   const imageMedia = media.filter(m => m.media_type === 'image');
 
@@ -203,10 +208,6 @@ const PostCardMedia: React.FC<PostCardMediaProps> = ({ media, postId }) => {
   const getMediaUrl = (mediaItem: MediaItem) => {
     return `${getApiBaseUrl()}${mediaItem.file_url || `/uploads/${mediaItem.file_path}`}`;
   };
-
-  if (!media || media.length === 0) {
-    return null;
-  }
 
   return (
     <>
