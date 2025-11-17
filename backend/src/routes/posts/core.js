@@ -22,6 +22,7 @@ const Post = require('../../models/Post');
 const User = require('../../models/User');
 const Comment = require('../../models/Comment');
 const Media = require('../../models/Media');
+const TimelineCache = require('../../models/TimelineCache');
 
 // Import cache service
 const cache = require('../../services/CacheService');
@@ -422,6 +423,9 @@ router.post('/',
       // Invalidate user profile cache after creating a post
       await cache.del(`user:profile:${user_id}`);
 
+      // Invalidate timeline cache for the user (their own timeline shows their posts)
+      await TimelineCache.invalidateTimelineCache(user_id);
+
       res.status(201).json({
         success: true,
         data: {
@@ -580,6 +584,9 @@ router.delete('/:id',
 
       // Invalidate user profile cache after deleting a post
       await cache.del(`user:profile:${post.user_id}`);
+
+      // Invalidate timeline cache for the user
+      await TimelineCache.invalidateTimelineCache(post.user_id);
 
       res.json({
         success: true,

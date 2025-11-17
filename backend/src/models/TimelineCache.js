@@ -4,6 +4,8 @@
  */
 
 const BaseModel = require('./BaseModel');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class TimelineCache extends BaseModel {
   constructor() {
@@ -124,43 +126,53 @@ class TimelineCache extends BaseModel {
       minScore = 0
     } = options;
 
-    const result = await this.raw(
-      `SELECT
-        tc.*,
-        p.id as post_id,
-        p.content,
-        p.privacy_level,
-        p.created_at as post_created_at,
-        p.user_id as author_id,
-        u.username,
-        u.first_name,
-        u.last_name,
-        u.avatar_url,
-        (SELECT COUNT(*) FROM reactions WHERE post_id = p.id) as reaction_count,
-        (SELECT COUNT(*) FROM comments WHERE post_id = p.id AND is_published = true) as comment_count,
-        (SELECT COUNT(*) FROM shares WHERE post_id = p.id) as share_count,
-        COALESCE(
-          (SELECT json_agg(json_build_object(
-            'id', m.id,
-            'filename', m.filename,
-            'file_url', m.file_url,
-            'media_type', m.media_type
-          )) FROM media m WHERE m.post_id = p.id),
-          '[]'::json
-        ) as media
-       FROM timeline_cache tc
-       JOIN posts p ON tc.post_id = p.id
-       JOIN users u ON p.user_id = u.id
-       WHERE tc.user_id = $1
-         AND tc.score >= $2
-         AND tc.expires_at > CURRENT_TIMESTAMP
-         AND p.is_published = true
-       ORDER BY tc.score DESC, tc.created_at DESC
-       LIMIT $3 OFFSET $4`,
-      [userId, minScore, limit, offset]
-    );
+    // Create cache key with options for proper cache segmentation
+    const cacheKey = `timeline:${userId}:${limit}:${offset}:${minScore}`;
 
-    return result.rows;
+    // Use cache-aside pattern
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const result = await this.raw(
+          `SELECT
+            tc.*,
+            p.id as post_id,
+            p.content,
+            p.privacy_level,
+            p.created_at as post_created_at,
+            p.user_id as author_id,
+            u.username,
+            u.first_name,
+            u.last_name,
+            u.avatar_url,
+            (SELECT COUNT(*) FROM reactions WHERE post_id = p.id) as reaction_count,
+            (SELECT COUNT(*) FROM comments WHERE post_id = p.id AND is_published = true) as comment_count,
+            (SELECT COUNT(*) FROM shares WHERE post_id = p.id) as share_count,
+            COALESCE(
+              (SELECT json_agg(json_build_object(
+                'id', m.id,
+                'filename', m.filename,
+                'file_url', m.file_url,
+                'media_type', m.media_type
+              )) FROM media m WHERE m.post_id = p.id),
+              '[]'::json
+            ) as media
+           FROM timeline_cache tc
+           JOIN posts p ON tc.post_id = p.id
+           JOIN users u ON p.user_id = u.id
+           WHERE tc.user_id = $1
+             AND tc.score >= $2
+             AND tc.expires_at > CURRENT_TIMESTAMP
+             AND p.is_published = true
+           ORDER BY tc.score DESC, tc.created_at DESC
+           LIMIT $3 OFFSET $4`,
+          [userId, minScore, limit, offset]
+        );
+
+        return result.rows;
+      },
+      cacheConfig.defaultTTL.timeline
+    );
   }
 
   /**
@@ -232,7 +244,21 @@ class TimelineCache extends BaseModel {
       entriesCreated++;
     }
 
+    // Invalidate Redis timeline cache for this user
+    await this.invalidateTimelineCache(userId);
+
     return entriesCreated;
+  }
+
+  /**
+   * Invalidate timeline cache for a user
+   * Removes all cached timeline entries for the user
+   * @param {number} userId - User ID
+   */
+  async invalidateTimelineCache(userId) {
+    // Delete all timeline cache keys for this user
+    // Pattern matches: timeline:userId:*
+    await cache.delPattern(`timeline:${userId}:*`);
   }
 
   /**
