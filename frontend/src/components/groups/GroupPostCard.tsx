@@ -105,7 +105,7 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.is_pinned && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${({ theme }) => theme.colors.success}">
+                <Badge $color={props => props.theme.colors.success}>
                   <FaThumbtack /> Pinned
                 </Badge>
               </>
@@ -113,7 +113,7 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.is_locked && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${({ theme }) => theme.colors.warning}">
+                <Badge $color={props => props.theme.colors.warning}>
                   <FaLock /> Locked
                 </Badge>
               </>
@@ -121,13 +121,13 @@ const GroupPostCard: React.FC<GroupPostCardProps> = ({
             {post.status === 'pending' && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${({ theme }) => theme.colors.info}">Pending Approval</Badge>
+                <Badge $color={props => props.theme.colors.info}>Pending Approval</Badge>
               </>
             )}
             {post.status === 'removed' && (
               <>
                 <Separator>•</Separator>
-                <Badge $color="${props => props.theme.colors.error}">Removed</Badge>
+                <Badge $color={props => props.theme.colors.error}>Removed</Badge>
               </>
             )}
           </PostMeta>

@@ -32,7 +32,7 @@ const ShippingOption = styled.label<{ selected: boolean }>`
   align-items: center;
   gap: 12px;
   padding: 16px;
-  border: 2px solid ${props => props.selected ? props.theme.colors.info : props.theme.colors.border};
+  border: ${props => props.selected ? `2px solid ${props.theme.colors.info}` : `2px solid ${props.theme.colors.border}`};
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;

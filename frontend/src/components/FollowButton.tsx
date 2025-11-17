@@ -40,7 +40,7 @@ const Button = styled.button<{ $size: string; $variant: string; $isFollowing: bo
   };
   color: ${({ theme, $isFollowing, $variant }) =>
     $isFollowing ? theme.colors.text.primary :
-    $variant === 'secondary' ? theme.colors.primary : props.theme.colors.white
+    $variant === 'secondary' ? theme.colors.primary : theme.colors.white
   };
   cursor: pointer;
   transition: all 0.2s ease;
@@ -58,7 +58,7 @@ const Button = styled.button<{ $size: string; $variant: string; $isFollowing: bo
     };
     color: ${({ theme, $isFollowing, $variant }) =>
       $isFollowing ? theme.colors.error :
-      $variant === 'secondary' ? theme.colors.primary : props.theme.colors.white
+      $variant === 'secondary' ? theme.colors.primary : theme.colors.white
     };
   }
 

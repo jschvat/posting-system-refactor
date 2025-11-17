@@ -34,7 +34,7 @@ const SummaryRow = styled.div<{ bold?: boolean }>`
   color: ${props => props.bold ? props.theme.colors.text.primary : props.theme.colors.text.secondary};
 
   ${props => props.bold && `
-    border-top: 2px solid ${({ theme }) => theme.colors.border};
+    border-top: 2px solid ${props.theme.colors.border};
     margin-top: 8px;
     padding-top: 16px;
   `}

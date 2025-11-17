@@ -197,7 +197,7 @@ const Thumbnail = styled.div<{ active: boolean }>`
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
-  border: 3px solid ${props => props.active ? props.theme.colors.white : 'transparent'};
+  border: ${props => props.active ? `3px solid ${props.theme.colors.white}` : '3px solid transparent'};
   opacity: ${props => props.active ? 1 : 0.6};
   transition: all 0.2s;
 

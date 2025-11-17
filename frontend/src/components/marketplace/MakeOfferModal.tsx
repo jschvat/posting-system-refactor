@@ -205,20 +205,20 @@ const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
   border: none;
 
   ${props => props.variant === 'primary' ? `
-    background: ${({ theme }) => theme.colors.info};
-    color: ${({ theme }) => theme.colors.white};
+    background: ${props.theme.colors.info};
+    color: ${props.theme.colors.white};
 
     &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.infoDark};
+      background: ${props.theme.colors.infoDark};
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
     }
   ` : `
-    background: ${({ theme }) => theme.colors.border};
-    color: ${({ theme }) => theme.colors.text.primary};
+    background: ${props.theme.colors.border};
+    color: ${props.theme.colors.text.primary};
 
     &:hover:not(:disabled) {
-      background: ${props => props.theme.colors.border};
+      background: ${props.theme.colors.border};
     }
   `}
 

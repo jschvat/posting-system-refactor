@@ -347,7 +347,7 @@ const CancelButton = styled(Button)`
 const SubmitButton = styled(Button)`
   background: ${(props) => getTheme(props).colors.primary};
   border: none;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${(props) => getTheme(props).colors.white};
 
   &:hover:not(:disabled) {
     background: ${(props) => getTheme(props).colors.primaryDark || getTheme(props).colors.primary};
