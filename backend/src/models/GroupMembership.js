@@ -1,4 +1,6 @@
 const db = require('../config/database');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class GroupMembership {
   /**
@@ -19,6 +21,10 @@ class GroupMembership {
 
     const values = [group_id, user_id, role, status, invited_by];
     const result = await db.query(query, values);
+
+    // Invalidate group member count cache
+    await this.invalidateGroupMemberCache(group_id);
+
     return result.rows[0];
   }
 
@@ -126,6 +132,10 @@ class GroupMembership {
     `;
 
     const result = await db.query(query, values);
+
+    // Invalidate group member count cache
+    await this.invalidateGroupMemberCache(group_id);
+
     return result.rows[0];
   }
 
@@ -135,6 +145,10 @@ class GroupMembership {
   static async delete(group_id, user_id) {
     const query = 'DELETE FROM group_memberships WHERE group_id = $1 AND user_id = $2 RETURNING *';
     const result = await db.query(query, [group_id, user_id]);
+
+    // Invalidate group member count cache
+    await this.invalidateGroupMemberCache(group_id);
+
     return result.rows[0];
   }
 
@@ -356,18 +370,33 @@ class GroupMembership {
    * Get member count by role
    */
   static async getMemberCountByRole(group_id) {
-    const query = `
-      SELECT role, COUNT(*) as count
-      FROM group_memberships
-      WHERE group_id = $1 AND status = 'active'
-      GROUP BY role
-    `;
+    const cacheKey = `group:members:count:${group_id}`;
 
-    const result = await db.query(query, [group_id]);
-    return result.rows.reduce((acc, row) => {
-      acc[row.role] = parseInt(row.count);
-      return acc;
-    }, {});
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const query = `
+          SELECT role, COUNT(*) as count
+          FROM group_memberships
+          WHERE group_id = $1 AND status = 'active'
+          GROUP BY role
+        `;
+
+        const result = await db.query(query, [group_id]);
+        return result.rows.reduce((acc, row) => {
+          acc[row.role] = parseInt(row.count);
+          return acc;
+        }, {});
+      },
+      cacheConfig.defaultTTL.groupInfo
+    );
+  }
+
+  /**
+   * Invalidate group member count cache
+   */
+  static async invalidateGroupMemberCache(group_id) {
+    await cache.del(`group:members:count:${group_id}`);
   }
 }
 
