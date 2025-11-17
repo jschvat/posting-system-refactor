@@ -355,15 +355,21 @@ export const CreateListing: React.FC = () => {
         />
 
         <ListingLocation
-          formData={formData}
-          onChange={handleChange}
-          locationDetecting={locationDetecting}
-          locationDetected={locationDetected}
-          detectedLocation={detectedLocation}
-          useManualLocation={useManualLocation}
-          onDetectLocation={detectUserLocation}
-          onChangeLocation={() => setUseManualLocation(true)}
-          onManualEdit={() => setUseManualLocation(true)}
+          location={{
+            latitude: detectedLocation?.latitude || null,
+            longitude: detectedLocation?.longitude || null,
+            city: formData.location_city,
+            state: formData.location_state,
+            country: 'USA'
+          }}
+          onLocationDetected={(location) => {
+            setFormData(prev => ({
+              ...prev,
+              location_city: location.city,
+              location_state: location.state,
+              location_zip: location.zip || ''
+            }));
+          }}
         />
 
         <ButtonGroup>
