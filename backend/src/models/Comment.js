@@ -4,6 +4,8 @@
  */
 
 const BaseModel = require('./BaseModel');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class Comment extends BaseModel {
   constructor() {
@@ -40,6 +42,12 @@ class Comment extends BaseModel {
     }
 
     const comment = await super.create(commentData);
+
+    // Invalidate comment tree cache for the post
+    if (comment.post_id) {
+      await this.invalidateCommentTreeCache(comment.post_id);
+    }
+
     return this.getCommentData(comment);
   }
 
@@ -92,50 +100,58 @@ class Comment extends BaseModel {
    * @returns {Promise<Array>} Hierarchical array of comments
    */
   async getCommentTree(postId) {
-    // Get all comments for the post
-    const result = await this.raw(
-      `SELECT c.*,
-              u.username, u.first_name, u.last_name, u.avatar_url,
-              COALESCE(ur.reputation_score, 0) as reputation_score,
-              COUNT(r.id) as reaction_count
-       FROM comments c
-       JOIN users u ON c.user_id = u.id
-       LEFT JOIN user_reputation ur ON u.id = ur.user_id
-       LEFT JOIN reactions r ON c.id = r.comment_id
-       WHERE c.post_id = $1 AND c.is_published = true
-       GROUP BY c.id, u.id, ur.reputation_score
-       ORDER BY c.created_at ASC`,
-      [postId]
+    const cacheKey = `comments:post:${postId}:tree`;
+
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        // Get all comments for the post
+        const result = await this.raw(
+          `SELECT c.*,
+                  u.username, u.first_name, u.last_name, u.avatar_url,
+                  COALESCE(ur.reputation_score, 0) as reputation_score,
+                  COUNT(r.id) as reaction_count
+           FROM comments c
+           JOIN users u ON c.user_id = u.id
+           LEFT JOIN user_reputation ur ON u.id = ur.user_id
+           LEFT JOIN reactions r ON c.id = r.comment_id
+           WHERE c.post_id = $1 AND c.is_published = true
+           GROUP BY c.id, u.id, ur.reputation_score
+           ORDER BY c.created_at ASC`,
+          [postId]
+        );
+
+        const comments = result.rows.map(comment => {
+          const commentData = this.getCommentData(comment);
+          commentData.replies = [];
+          return commentData;
+        });
+
+        // Build hierarchical structure
+        const commentMap = new Map();
+        const rootComments = [];
+
+        // Create map of all comments
+        comments.forEach(comment => {
+          commentMap.set(comment.id, comment);
+        });
+
+        // Build parent-child relationships
+        comments.forEach(comment => {
+          if (comment.parent_id) {
+            const parent = commentMap.get(comment.parent_id);
+            if (parent) {
+              parent.replies.push(comment);
+            }
+          } else {
+            rootComments.push(comment);
+          }
+        });
+
+        return rootComments;
+      },
+      cacheConfig.defaultTTL.commentTree // 180 seconds (3 minutes)
     );
-
-    const comments = result.rows.map(comment => {
-      const commentData = this.getCommentData(comment);
-      commentData.replies = [];
-      return commentData;
-    });
-
-    // Build hierarchical structure
-    const commentMap = new Map();
-    const rootComments = [];
-
-    // Create map of all comments
-    comments.forEach(comment => {
-      commentMap.set(comment.id, comment);
-    });
-
-    // Build parent-child relationships
-    comments.forEach(comment => {
-      if (comment.parent_id) {
-        const parent = commentMap.get(comment.parent_id);
-        if (parent) {
-          parent.replies.push(comment);
-        }
-      } else {
-        rootComments.push(comment);
-      }
-    });
-
-    return rootComments;
   }
 
   /**
@@ -263,6 +279,49 @@ class Comment extends BaseModel {
         file_size: normalizedComment.file_size
       } : null
     };
+  }
+
+  /**
+   * Invalidate comment tree cache for a post
+   * @param {number} postId - Post ID
+   */
+  async invalidateCommentTreeCache(postId) {
+    await cache.del(`comments:post:${postId}:tree`);
+  }
+
+  /**
+   * Override update to invalidate cache
+   * @param {number} id - Comment ID
+   * @param {Object} updates - Updates to apply
+   * @returns {Object} Updated comment
+   */
+  async update(id, updates) {
+    const comment = await super.update(id, updates);
+
+    // Invalidate comment tree cache for the post
+    if (comment && comment.post_id) {
+      await this.invalidateCommentTreeCache(comment.post_id);
+    }
+
+    return comment;
+  }
+
+  /**
+   * Override delete to invalidate cache
+   * @param {number} id - Comment ID
+   * @returns {Object} Deleted comment
+   */
+  async delete(id) {
+    // Get the comment first to know which post's cache to invalidate
+    const comment = await this.findById(id);
+    const result = await super.delete(id);
+
+    // Invalidate comment tree cache for the post
+    if (comment && comment.post_id) {
+      await this.invalidateCommentTreeCache(comment.post_id);
+    }
+
+    return result;
   }
 }
 
