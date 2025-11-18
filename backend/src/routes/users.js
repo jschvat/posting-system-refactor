@@ -225,6 +225,179 @@ router.get('/:id',
 );
 
 /**
+ * GET /api/users/:id/profile
+ * Get comprehensive user profile with all related data in a single request
+ * Optimized endpoint to reduce multiple API calls from frontend
+ * Includes: user data, posts, stats, follow counts, reputation, and ratings
+ */
+router.get('/:id/profile',
+  [
+    param('id').isInt({ min: 1 }).withMessage('User ID must be a positive integer'),
+    query('include_posts').optional().isBoolean().withMessage('include_posts must be boolean'),
+    query('posts_limit').optional().isInt({ min: 1, max: 50 }).withMessage('posts_limit must be between 1 and 50')
+  ],
+  handleValidationErrors,
+  async (req, res, next) => {
+    try {
+      const userId = parseInt(req.params.id);
+      const includePosts = req.query.include_posts !== 'false'; // default true
+      const postsLimit = parseInt(req.query.posts_limit) || 10;
+
+      // Cache-aside pattern for aggregated profile
+      const cacheKey = `user:profile:aggregated:${userId}:${includePosts}:${postsLimit}`;
+      const profileData = await cache.getOrSet(
+        cacheKey,
+        async () => {
+          // Get user data
+          const user = await User.findById(userId);
+          if (!user) {
+            return null;
+          }
+
+          // Run all queries in parallel for optimal performance
+          const [
+            postsResult,
+            statsResult,
+            followCountsResult,
+            reputationResult,
+            ratingsResult
+          ] = await Promise.all([
+            // Posts with reactions
+            includePosts ? Post.raw(
+              `SELECT p.*,
+                      COALESCE(reaction_counts.reactions, '[]'::json) as reactions
+               FROM posts p
+               LEFT JOIN (
+                 SELECT post_id,
+                        json_agg(
+                          json_build_object(
+                            'emoji_name', emoji_name,
+                            'emoji_unicode', emoji_unicode,
+                            'count', count
+                          )
+                        ) as reactions
+                 FROM (
+                   SELECT post_id, emoji_name, emoji_unicode, COUNT(*) as count
+                   FROM reactions
+                   WHERE post_id IS NOT NULL
+                   GROUP BY post_id, emoji_name, emoji_unicode
+                 ) grouped_reactions
+                 GROUP BY post_id
+               ) reaction_counts ON p.id = reaction_counts.post_id
+               WHERE p.user_id = $1 AND p.is_published = true
+               ORDER BY p.created_at DESC
+               LIMIT $2`,
+              [userId, postsLimit]
+            ) : Promise.resolve({ rows: [] }),
+
+            // User statistics
+            User.raw(
+              `SELECT
+                 (SELECT COUNT(*) FROM posts WHERE user_id = $1 AND is_published = true) as total_posts,
+                 (SELECT COUNT(*) FROM comments WHERE user_id = $1 AND is_published = true) as total_comments`,
+              [userId]
+            ),
+
+            // Follow counts
+            User.raw(
+              `SELECT
+                 (SELECT COUNT(*) FROM follows WHERE followee_id = $1) as follower_count,
+                 (SELECT COUNT(*) FROM follows WHERE follower_id = $1) as following_count`,
+              [userId]
+            ),
+
+            // Reputation score (if exists)
+            User.raw(
+              `SELECT reputation_score, level, badges
+               FROM user_reputation
+               WHERE user_id = $1`,
+              [userId]
+            ).catch(() => ({ rows: [] })),
+
+            // Ratings (if exists)
+            User.raw(
+              `SELECT AVG(rating) as average_rating, COUNT(*) as total_ratings
+               FROM user_ratings
+               WHERE rated_user_id = $1`,
+              [userId]
+            ).catch(() => ({ rows: [] }))
+          ]);
+
+          // Build comprehensive response
+          const data = User.getUserData(user);
+
+          // Add posts if included
+          if (includePosts) {
+            data.posts = postsResult.rows.map(post => ({
+              id: post.id,
+              content: post.content,
+              privacy_level: post.privacy_level,
+              is_published: post.is_published,
+              views_count: post.views_count || 0,
+              created_at: post.created_at,
+              updated_at: post.updated_at,
+              user_id: post.user_id,
+              reaction_counts: post.reactions || []
+            }));
+          }
+
+          // Add stats
+          data.stats = {
+            total_posts: parseInt(statsResult.rows[0]?.total_posts || 0),
+            total_comments: parseInt(statsResult.rows[0]?.total_comments || 0),
+            follower_count: parseInt(followCountsResult.rows[0]?.follower_count || 0),
+            following_count: parseInt(followCountsResult.rows[0]?.following_count || 0)
+          };
+
+          // Add reputation if exists
+          if (reputationResult.rows.length > 0) {
+            data.reputation = {
+              score: parseInt(reputationResult.rows[0].reputation_score || 0),
+              level: reputationResult.rows[0].level || 'novice',
+              badges: reputationResult.rows[0].badges || []
+            };
+          } else {
+            data.reputation = { score: 0, level: 'novice', badges: [] };
+          }
+
+          // Add ratings if exists
+          if (ratingsResult.rows.length > 0 && ratingsResult.rows[0].total_ratings > 0) {
+            data.ratings = {
+              average_rating: parseFloat(ratingsResult.rows[0].average_rating || 0).toFixed(1),
+              total_ratings: parseInt(ratingsResult.rows[0].total_ratings || 0)
+            };
+          } else {
+            data.ratings = { average_rating: 0, total_ratings: 0 };
+          }
+
+          return data;
+        },
+        cacheConfig.defaultTTL.userProfile
+      );
+
+      // Handle non-existent users
+      if (!profileData) {
+        return res.status(404).json({
+          success: false,
+          error: {
+            message: 'User not found',
+            type: 'NOT_FOUND'
+          }
+        });
+      }
+
+      res.json({
+        success: true,
+        data: profileData
+      });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+/**
  * POST /api/users
  * Create a new user (removed - use auth/register instead)
  */
