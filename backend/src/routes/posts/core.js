@@ -34,6 +34,8 @@ const router = express.Router();
 /**
  * GET /api/posts
  * Get all posts with pagination, filtering, and sorting
+ * OPTIMIZED: Includes embedded reactions, media, and comment counts in single query
+ * This eliminates N+1 query problem - no separate API calls needed for reactions
  */
 router.get('/',
   optionalAuthenticate, // Optional authentication to show appropriate content
