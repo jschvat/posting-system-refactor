@@ -4,8 +4,60 @@
  */
 
 const { query } = require('../config/database');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class Reputation {
+  /**
+   * Sync leaderboard to Redis sorted set
+   * @returns {Promise<void>}
+   */
+  static async syncLeaderboardToCache() {
+    // Get all users with reputation
+    const result = await query(
+      'SELECT user_id, reputation_score FROM user_reputation ORDER BY reputation_score DESC'
+    );
+
+    if (result.rows.length === 0) return;
+
+    // Build sorted set entries
+    const entries = result.rows.flatMap(row => [
+      row.reputation_score, // score
+      row.user_id.toString() // member
+    ]);
+
+    // Use Redis ZADD to create/update sorted set
+    const redis = cache.getClient();
+    const leaderboardKey = 'reputation:leaderboard';
+
+    // Delete old sorted set and create new one
+    await redis.del(leaderboardKey);
+
+    // Add all entries (ZADD key score member score member ...)
+    if (entries.length > 0) {
+      await redis.zadd(leaderboardKey, ...entries);
+
+      // Set expiration (10 minutes)
+      await redis.expire(leaderboardKey, cacheConfig.defaultTTL.leaderboard);
+    }
+  }
+
+  /**
+   * Update single user in leaderboard cache
+   * @param {number} userId - User ID
+   * @param {number} score - Reputation score
+   * @returns {Promise<void>}
+   */
+  static async updateLeaderboardCache(userId, score) {
+    const redis = cache.getClient();
+    const leaderboardKey = 'reputation:leaderboard';
+
+    // Update user's score in sorted set
+    await redis.zadd(leaderboardKey, score, userId.toString());
+
+    // Refresh expiration
+    await redis.expire(leaderboardKey, cacheConfig.defaultTTL.leaderboard);
+  }
   /**
    * Get reputation for user
    * @param {number} userId - User ID
@@ -46,7 +98,12 @@ class Reputation {
       'SELECT calculate_reputation_score($1) as score',
       [userId]
     );
-    return result.rows[0].score;
+    const score = result.rows[0].score;
+
+    // Update leaderboard cache
+    await this.updateLeaderboardCache(userId, score);
+
+    return score;
   }
 
   /**
@@ -86,9 +143,32 @@ class Reputation {
    * @returns {Promise<Array>} Leaderboard
    */
   static async getLeaderboard({ limit = 50, offset = 0 } = {}) {
+    const redis = cache.getClient();
+    const leaderboardKey = 'reputation:leaderboard';
+
+    // Try to get from Redis sorted set first
+    const exists = await redis.exists(leaderboardKey);
+
+    if (!exists) {
+      // Cache miss - sync leaderboard to Redis
+      await this.syncLeaderboardToCache();
+    }
+
+    // Get user IDs from sorted set (highest scores first)
+    // ZREVRANGE returns members in descending score order
+    const userIds = await redis.zrevrange(
+      leaderboardKey,
+      offset,
+      offset + limit - 1
+    );
+
+    if (userIds.length === 0) {
+      return [];
+    }
+
+    // Get full user data from database
     const result = await query(
       `SELECT
-        ROW_NUMBER() OVER (ORDER BY ur.reputation_score DESC) as rank,
         ur.*,
         u.username,
         u.first_name,
@@ -97,11 +177,24 @@ class Reputation {
         u.bio
       FROM user_reputation ur
       JOIN users u ON ur.user_id = u.id
-      ORDER BY ur.reputation_score DESC
-      LIMIT $1 OFFSET $2`,
-      [limit, offset]
+      WHERE ur.user_id = ANY($1::int[])`,
+      [userIds.map(id => parseInt(id))]
     );
-    return result.rows;
+
+    // Create a map for quick lookup
+    const userMap = new Map();
+    result.rows.forEach(user => {
+      userMap.set(user.user_id, user);
+    });
+
+    // Return users in the correct order with ranks
+    return userIds.map((userId, index) => {
+      const user = userMap.get(parseInt(userId));
+      return {
+        rank: offset + index + 1,
+        ...user
+      };
+    });
   }
 
   /**
@@ -110,17 +203,23 @@ class Reputation {
    * @returns {Promise<number>} Rank (1-indexed)
    */
   static async getUserRank(userId) {
-    const result = await query(
-      `WITH ranked_users AS (
-        SELECT
-          user_id,
-          ROW_NUMBER() OVER (ORDER BY reputation_score DESC) as rank
-        FROM user_reputation
-      )
-      SELECT rank FROM ranked_users WHERE user_id = $1`,
-      [userId]
-    );
-    return result.rows[0]?.rank || null;
+    const redis = cache.getClient();
+    const leaderboardKey = 'reputation:leaderboard';
+
+    // Try to get from Redis sorted set first
+    const exists = await redis.exists(leaderboardKey);
+
+    if (!exists) {
+      // Cache miss - sync leaderboard to Redis
+      await this.syncLeaderboardToCache();
+    }
+
+    // Get user's rank from sorted set
+    // ZREVRANK returns 0-indexed rank (highest score = rank 0)
+    const rank = await redis.zrevrank(leaderboardKey, userId.toString());
+
+    // Return 1-indexed rank, or null if user not found
+    return rank !== null ? rank + 1 : null;
   }
 
   /**
