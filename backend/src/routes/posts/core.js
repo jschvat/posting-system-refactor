@@ -23,9 +23,11 @@ const User = require('../../models/User');
 const Comment = require('../../models/Comment');
 const Media = require('../../models/Media');
 const TimelineCache = require('../../models/TimelineCache');
+const Reaction = require('../../models/Reaction');
 
 // Import cache service
 const cache = require('../../services/CacheService');
+const cacheConfig = require('../../config/cache');
 
 const router = express.Router();
 
@@ -198,7 +200,9 @@ router.get('/',
 
 /**
  * GET /api/posts/:id
- * Get a single post by ID with all details
+ * Get a single post by ID with all details including comments, media, and reactions
+ * This optimized endpoint reduces 3 separate API calls (post, comments, reactions) to 1
+ * Returns: post data, hierarchical comments, media attachments, reaction counts, and user's reaction
  */
 router.get('/:id',
   optionalAuthenticate, // Optional authentication for privacy checks
@@ -265,37 +269,46 @@ router.get('/:id',
         });
       }
 
-      // Get comments for this post with hierarchical structure
-      const commentsResult = await Comment.raw(
-        `WITH RECURSIVE comment_tree AS (
-           -- Root comments (no parent)
-           SELECT c.*, u.username, u.first_name, u.last_name, u.avatar_url, 0 as level
-           FROM comments c
-           LEFT JOIN users u ON c.user_id = u.id
-           WHERE c.post_id = $1 AND c.parent_id IS NULL AND c.is_published = true
+      // Get comments, media, and reactions in parallel for optimal performance
+      const [commentsResult, mediaResult, reactionCounts, userReaction] = await Promise.all([
+        // Get comments for this post with hierarchical structure
+        Comment.raw(
+          `WITH RECURSIVE comment_tree AS (
+             -- Root comments (no parent)
+             SELECT c.*, u.username, u.first_name, u.last_name, u.avatar_url, 0 as level
+             FROM comments c
+             LEFT JOIN users u ON c.user_id = u.id
+             WHERE c.post_id = $1 AND c.parent_id IS NULL AND c.is_published = true
 
-           UNION ALL
+             UNION ALL
 
-           -- Child comments (with parent)
-           SELECT c.*, u.username, u.first_name, u.last_name, u.avatar_url, ct.level + 1
-           FROM comments c
-           LEFT JOIN users u ON c.user_id = u.id
-           INNER JOIN comment_tree ct ON c.parent_id = ct.id
-           WHERE c.is_published = true
-         )
-         SELECT * FROM comment_tree ORDER BY level, created_at ASC`,
-        [postId]
-      );
+             -- Child comments (with parent)
+             SELECT c.*, u.username, u.first_name, u.last_name, u.avatar_url, ct.level + 1
+             FROM comments c
+             LEFT JOIN users u ON c.user_id = u.id
+             INNER JOIN comment_tree ct ON c.parent_id = ct.id
+             WHERE c.is_published = true
+           )
+           SELECT * FROM comment_tree ORDER BY level, created_at ASC`,
+          [postId]
+        ),
 
-      // Get media for this post
-      const mediaResult = await Media.raw(
-        `SELECT m.*, u.username as uploader_username
-         FROM media m
-         LEFT JOIN users u ON m.user_id = u.id
-         WHERE m.post_id = $1
-         ORDER BY m.created_at ASC`,
-        [postId]
-      );
+        // Get media for this post
+        Media.raw(
+          `SELECT m.*, u.username as uploader_username
+           FROM media m
+           LEFT JOIN users u ON m.user_id = u.id
+           WHERE m.post_id = $1
+           ORDER BY m.created_at ASC`,
+          [postId]
+        ),
+
+        // Get reaction counts (uses cached method from Reaction model)
+        Reaction.getPostReactionCounts(postId),
+
+        // Get user's reaction if authenticated
+        req.user ? Reaction.getUserPostReaction(req.user.id, postId) : Promise.resolve(null)
+      ]);
 
       // Build hierarchical comments structure
       const comments = [];
@@ -368,7 +381,15 @@ router.get('/:id',
           avatar_url: post.avatar_url
         },
         comments: comments,
-        media: media
+        media: media,
+        // Reaction data - aggregated counts and user's specific reaction
+        reactions: {
+          counts: reactionCounts, // Array of {emoji_name, count}
+          user_reaction: userReaction ? {
+            emoji_name: userReaction.emoji_name,
+            emoji_unicode: userReaction.emoji_unicode
+          } : null
+        }
       };
 
       res.json({
