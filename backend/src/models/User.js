@@ -6,6 +6,8 @@
 const BaseModel = require('./BaseModel');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 // Use require directly to avoid potential circular dependencies
 let config;
@@ -19,6 +21,45 @@ try {
 class User extends BaseModel {
   constructor() {
     super('users');
+  }
+
+  /**
+   * Find user by ID with caching
+   * @param {number} id - User ID
+   * @returns {Object|null} User or null if not found
+   */
+  async findById(id) {
+    const cacheKey = `user:profile:${id}`;
+
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        // Call parent's findById
+        return await super.findById(id);
+      },
+      cacheConfig.defaultTTL.userProfile
+    );
+  }
+
+  /**
+   * Invalidate user profile cache
+   * @param {number} userId - User ID
+   */
+  async invalidateUserCache(userId) {
+    await cache.del(`user:profile:${userId}`);
+  }
+
+  /**
+   * Update user with cache invalidation
+   * @param {number} id - User ID
+   * @param {Object} updates - Updates to apply
+   * @returns {Object} Updated user
+   */
+  async update(id, updates) {
+    const user = await super.update(id, updates);
+    // Invalidate cache after update
+    await this.invalidateUserCache(id);
+    return user;
   }
 
   /**
