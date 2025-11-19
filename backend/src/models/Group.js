@@ -1,4 +1,6 @@
 const db = require('../config/database');
+const cache = require('../services/CacheService');
+const cacheConfig = require('../config/cache');
 
 class Group {
   /**
@@ -44,21 +46,37 @@ class Group {
   }
 
   /**
-   * Find group by ID
+   * Find group by ID with caching
    */
   static async findById(id) {
-    const query = 'SELECT * FROM groups WHERE id = $1';
-    const result = await db.query(query, [id]);
-    return result.rows[0];
+    const cacheKey = `group:id:${id}`;
+
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const query = 'SELECT * FROM groups WHERE id = $1';
+        const result = await db.query(query, [id]);
+        return result.rows[0];
+      },
+      cacheConfig.defaultTTL.groupInfo
+    );
   }
 
   /**
-   * Find group by slug
+   * Find group by slug with caching
    */
   static async findBySlug(slug) {
-    const query = 'SELECT * FROM groups WHERE slug = $1';
-    const result = await db.query(query, [slug]);
-    return result.rows[0];
+    const cacheKey = `group:slug:${slug}`;
+
+    return await cache.getOrSet(
+      cacheKey,
+      async () => {
+        const query = 'SELECT * FROM groups WHERE slug = $1';
+        const result = await db.query(query, [slug]);
+        return result.rows[0];
+      },
+      cacheConfig.defaultTTL.groupInfo
+    );
   }
 
   /**
@@ -108,16 +126,30 @@ class Group {
     `;
 
     const result = await db.query(query, values);
-    return result.rows[0];
+    const updatedGroup = result.rows[0];
+
+    // Invalidate group cache
+    if (updatedGroup) {
+      await this.invalidateGroupCache(updatedGroup);
+    }
+
+    return updatedGroup;
   }
 
   /**
-   * Delete group
+   * Delete group with cache invalidation
    */
   static async delete(id) {
     const query = 'DELETE FROM groups WHERE id = $1 RETURNING *';
     const result = await db.query(query, [id]);
-    return result.rows[0];
+    const deletedGroup = result.rows[0];
+
+    // Invalidate group cache
+    if (deletedGroup) {
+      await this.invalidateGroupCache(deletedGroup);
+    }
+
+    return deletedGroup;
   }
 
   /**
@@ -314,6 +346,20 @@ class Group {
     }
 
     return newSlug;
+  }
+
+  /**
+   * Invalidate group cache
+   * @param {Object} group - Group object with id and slug
+   */
+  static async invalidateGroupCache(group) {
+    if (!group) return;
+
+    // Invalidate both ID and slug caches
+    await cache.del(`group:id:${group.id}`);
+    if (group.slug) {
+      await cache.del(`group:slug:${group.slug}`);
+    }
   }
 }
 
