@@ -268,6 +268,14 @@ class CacheService {
   }
 
   /**
+   * Get raw Redis client (for advanced operations like sorted sets)
+   * Returns null if Redis is not ready
+   */
+  getClient() {
+    return this.isReady() ? this.client : null;
+  }
+
+  /**
    * Close Redis connection
    */
   async disconnect() {

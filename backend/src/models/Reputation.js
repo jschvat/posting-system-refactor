@@ -13,6 +13,9 @@ class Reputation {
    * @returns {Promise<void>}
    */
   static async syncLeaderboardToCache() {
+    const redis = cache.getClient();
+    if (!redis) return; // Redis not available, skip caching
+
     // Get all users with reputation
     const result = await query(
       'SELECT user_id, reputation_score FROM user_reputation ORDER BY reputation_score DESC'
@@ -27,7 +30,6 @@ class Reputation {
     ]);
 
     // Use Redis ZADD to create/update sorted set
-    const redis = cache.getClient();
     const leaderboardKey = 'reputation:leaderboard';
 
     // Delete old sorted set and create new one
@@ -50,6 +52,8 @@ class Reputation {
    */
   static async updateLeaderboardCache(userId, score) {
     const redis = cache.getClient();
+    if (!redis) return; // Redis not available, skip caching
+
     const leaderboardKey = 'reputation:leaderboard';
 
     // Update user's score in sorted set
@@ -144,31 +148,66 @@ class Reputation {
    */
   static async getLeaderboard({ limit = 50, offset = 0 } = {}) {
     const redis = cache.getClient();
-    const leaderboardKey = 'reputation:leaderboard';
 
-    // Try to get from Redis sorted set first
-    const exists = await redis.exists(leaderboardKey);
+    // If Redis is available, use sorted set for fast lookup
+    if (redis) {
+      const leaderboardKey = 'reputation:leaderboard';
 
-    if (!exists) {
-      // Cache miss - sync leaderboard to Redis
-      await this.syncLeaderboardToCache();
+      // Try to get from Redis sorted set first
+      const exists = await redis.exists(leaderboardKey);
+
+      if (!exists) {
+        // Cache miss - sync leaderboard to Redis
+        await this.syncLeaderboardToCache();
+      }
+
+      // Get user IDs from sorted set (highest scores first)
+      // ZREVRANGE returns members in descending score order
+      const userIds = await redis.zrevrange(
+        leaderboardKey,
+        offset,
+        offset + limit - 1
+      );
+
+      if (userIds.length === 0) {
+        return [];
+      }
+
+      // Get full user data from database
+      const result = await query(
+        `SELECT
+          ur.*,
+          u.username,
+          u.first_name,
+          u.last_name,
+          u.avatar_url,
+          u.bio
+        FROM user_reputation ur
+        JOIN users u ON ur.user_id = u.id
+        WHERE ur.user_id = ANY($1::int[])`,
+        [userIds.map(id => parseInt(id))]
+      );
+
+      // Create a map for quick lookup
+      const userMap = new Map();
+      result.rows.forEach(user => {
+        userMap.set(user.user_id, user);
+      });
+
+      // Return users in the correct order with ranks
+      return userIds.map((userId, index) => {
+        const user = userMap.get(parseInt(userId));
+        return {
+          rank: offset + index + 1,
+          ...user
+        };
+      });
     }
 
-    // Get user IDs from sorted set (highest scores first)
-    // ZREVRANGE returns members in descending score order
-    const userIds = await redis.zrevrange(
-      leaderboardKey,
-      offset,
-      offset + limit - 1
-    );
-
-    if (userIds.length === 0) {
-      return [];
-    }
-
-    // Get full user data from database
+    // Fallback to SQL window function when Redis not available
     const result = await query(
       `SELECT
+        ROW_NUMBER() OVER (ORDER BY ur.reputation_score DESC) as rank,
         ur.*,
         u.username,
         u.first_name,
@@ -177,24 +216,12 @@ class Reputation {
         u.bio
       FROM user_reputation ur
       JOIN users u ON ur.user_id = u.id
-      WHERE ur.user_id = ANY($1::int[])`,
-      [userIds.map(id => parseInt(id))]
+      ORDER BY ur.reputation_score DESC
+      LIMIT $1 OFFSET $2`,
+      [limit, offset]
     );
 
-    // Create a map for quick lookup
-    const userMap = new Map();
-    result.rows.forEach(user => {
-      userMap.set(user.user_id, user);
-    });
-
-    // Return users in the correct order with ranks
-    return userIds.map((userId, index) => {
-      const user = userMap.get(parseInt(userId));
-      return {
-        rank: offset + index + 1,
-        ...user
-      };
-    });
+    return result.rows;
   }
 
   /**
@@ -204,22 +231,38 @@ class Reputation {
    */
   static async getUserRank(userId) {
     const redis = cache.getClient();
-    const leaderboardKey = 'reputation:leaderboard';
 
-    // Try to get from Redis sorted set first
-    const exists = await redis.exists(leaderboardKey);
+    // If Redis is available, use sorted set for fast lookup
+    if (redis) {
+      const leaderboardKey = 'reputation:leaderboard';
 
-    if (!exists) {
-      // Cache miss - sync leaderboard to Redis
-      await this.syncLeaderboardToCache();
+      // Try to get from Redis sorted set first
+      const exists = await redis.exists(leaderboardKey);
+
+      if (!exists) {
+        // Cache miss - sync leaderboard to Redis
+        await this.syncLeaderboardToCache();
+      }
+
+      // Get user's rank from sorted set
+      // ZREVRANK returns 0-indexed rank (highest score = rank 0)
+      const rank = await redis.zrevrank(leaderboardKey, userId.toString());
+
+      // Return 1-indexed rank, or null if user not found
+      return rank !== null ? rank + 1 : null;
     }
 
-    // Get user's rank from sorted set
-    // ZREVRANK returns 0-indexed rank (highest score = rank 0)
-    const rank = await redis.zrevrank(leaderboardKey, userId.toString());
+    // Fallback to SQL window function when Redis not available
+    const result = await query(
+      `SELECT rank FROM (
+        SELECT user_id, ROW_NUMBER() OVER (ORDER BY reputation_score DESC) as rank
+        FROM user_reputation
+      ) ranks
+      WHERE user_id = $1`,
+      [userId]
+    );
 
-    // Return 1-indexed rank, or null if user not found
-    return rank !== null ? rank + 1 : null;
+    return result.rows[0]?.rank || null;
   }
 
   /**
