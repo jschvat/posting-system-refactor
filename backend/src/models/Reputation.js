@@ -111,6 +111,54 @@ class Reputation {
   }
 
   /**
+   * Update reputation score incrementally based on a delta
+   * This is much faster than full recalculation for single actions
+   * @param {number} userId - User ID
+   * @param {string} action - Action type: 'quality_post', 'quality_comment', 'helpful', 'reported'
+   * @param {number} delta - Change amount (+1 for add, -1 for remove)
+   * @returns {Promise<number>} New reputation score
+   */
+  static async updateScoreDelta(userId, action, delta = 1) {
+    // Calculate score change based on action type (matches database function logic)
+    let scoreChange = 0;
+
+    switch (action) {
+      case 'quality_post':
+        scoreChange = delta * 5; // Max 150 points total
+        break;
+      case 'quality_comment':
+        scoreChange = delta * 3; // Max 100 points total
+        break;
+      case 'helpful':
+        scoreChange = delta * 2; // Max 100 points total
+        break;
+      case 'reported':
+        scoreChange = delta * -10; // Penalty
+        break;
+      default:
+        // Unknown action, fall back to full recalculation
+        return await this.recalculateScore(userId);
+    }
+
+    // Update score incrementally in database
+    const result = await query(
+      `UPDATE user_reputation
+       SET reputation_score = GREATEST(0, reputation_score + $2),
+           updated_at = CURRENT_TIMESTAMP
+       WHERE user_id = $1
+       RETURNING reputation_score`,
+      [userId, scoreChange]
+    );
+
+    const newScore = result.rows[0]?.reputation_score || 0;
+
+    // Update leaderboard cache
+    await this.updateLeaderboardCache(userId, newScore);
+
+    return newScore;
+  }
+
+  /**
    * Get top users by reputation
    * @param {Object} options - Query options
    * @returns {Promise<Array>} Top users
@@ -286,8 +334,9 @@ class Reputation {
       [userId, value]
     );
 
-    // Recalculate score
-    await this.recalculateScore(userId);
+    // Update score incrementally (much faster than full recalculation)
+    const action = type === 'post' ? 'quality_post' : 'quality_comment';
+    await this.updateScoreDelta(userId, action, increment ? 1 : -1);
 
     return result.rows[0];
   }
@@ -346,7 +395,8 @@ class Reputation {
           'UPDATE user_reputation SET helpful_count = GREATEST(0, helpful_count - 1), updated_at = CURRENT_TIMESTAMP WHERE user_id = $1',
           [targetUserId]
         );
-        await this.recalculateScore(targetUserId);
+        // Update score incrementally (much faster than full recalculation)
+        await this.updateScoreDelta(targetUserId, 'helpful', -1);
       }
     }
 
@@ -398,8 +448,8 @@ class Reputation {
       [userId]
     );
 
-    // Recalculate score
-    await this.recalculateScore(userId);
+    // Update score incrementally (much faster than full recalculation)
+    await this.updateScoreDelta(userId, 'reported', 1);
 
     return result.rows[0];
   }
