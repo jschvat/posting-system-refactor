@@ -443,12 +443,19 @@ export const BirdBreederMarketplace: React.FC = () => {
   const fetchListings = async () => {
     try {
       setLoading(true);
-      // TODO: Call API with bird-specific filters
-      // For now, fetch all listings and filter client-side
-      const response = await marketplaceApi.getListings({
-        category: 'birds', // Assuming there's a birds category
-        sort: sortBy,
-        search: searchQuery
+      // Call bird-specific API with filters
+      const response = await marketplaceApi.getBirdListings({
+        query: searchQuery,
+        species: filters.species,
+        sex: filters.sex,
+        color_mutation: filters.colorMutation,
+        temperament: filters.temperament,
+        hand_fed: filters.handFed || undefined,
+        dna_sexed: filters.dnaSexed || undefined,
+        health_certified: filters.healthCertified || undefined,
+        location: filters.location,
+        sort_by: sortBy,
+        sort_order: 'DESC'
       });
       // API returns { success: true, data: [...] }
       setListings(response?.data || []);

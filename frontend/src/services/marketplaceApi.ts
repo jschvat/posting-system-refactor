@@ -544,6 +544,70 @@ const marketplaceApi = {
   getPayoutStats: async () => {
     const response = await apiClient.get('/marketplace/payouts/stats');
     return response.data;
+  },
+
+  // Bird Marketplace
+  getBirdListings: async (params?: {
+    query?: string;
+    species?: string;
+    subspecies?: string;
+    sex?: string;
+    color_mutation?: string;
+    temperament?: string;
+    min_age_months?: number;
+    max_age_months?: number;
+    hand_fed?: boolean;
+    dna_sexed?: boolean;
+    health_certified?: boolean;
+    proven_breeder?: boolean;
+    can_talk?: boolean;
+    min_price?: number;
+    max_price?: number;
+    location?: string;
+    sort_by?: string;
+    sort_order?: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const queryString = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          queryString.append(key, value.toString());
+        }
+      });
+    }
+    const response = await apiClient.get(`/marketplace/birds?${queryString.toString()}`);
+    const data = response.data;
+
+    // Transform listings to include full image URLs
+    if (data.success && data.data) {
+      data.data = data.data.map(transformListing);
+    }
+
+    return data;
+  },
+
+  getBirdSpecies: async () => {
+    const response = await apiClient.get('/marketplace/birds/species');
+    return response.data;
+  },
+
+  getBirdColors: async (species: string) => {
+    const response = await apiClient.get(`/marketplace/birds/colors/${encodeURIComponent(species)}`);
+    return response.data;
+  },
+
+  getBirdListing: async (id: number) => {
+    const response = await apiClient.get(`/marketplace/birds/${id}`);
+    const data = response.data;
+
+    // Transform listing to include full image URLs
+    if (data.success && data.data) {
+      data.data = transformListing(data.data);
+    }
+
+    return data;
   }
 };
 
