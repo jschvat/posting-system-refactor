@@ -445,14 +445,16 @@ export const BirdBreederMarketplace: React.FC = () => {
       setLoading(true);
       // TODO: Call API with bird-specific filters
       // For now, fetch all listings and filter client-side
-      const data = await marketplaceApi.getListings({
+      const response = await marketplaceApi.getListings({
         category: 'birds', // Assuming there's a birds category
         sort: sortBy,
         search: searchQuery
       });
-      setListings(data);
+      // API returns { success: true, data: [...] }
+      setListings(response?.data || []);
     } catch (error) {
       console.error('Failed to fetch bird listings:', error);
+      setListings([]);
     } finally {
       setLoading(false);
     }
