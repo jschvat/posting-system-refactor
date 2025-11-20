@@ -42,6 +42,7 @@ import { MyListings } from './pages/marketplace/MyListings';
 import { SavedListings } from './pages/marketplace/SavedListings';
 import { ReceivedOffers } from './pages/marketplace/ReceivedOffers';
 import { SentOffers } from './pages/marketplace/SentOffers';
+import { BirdBreederMarketplace } from './pages/marketplace/BirdBreederMarketplace';
 
 // Import components
 import Header from './components/Header';
@@ -262,6 +263,7 @@ const AuthenticatedApp: React.FC = () => {
 
             {/* Marketplace */}
             <Route path="/marketplace" element={<MarketplaceBrowse />} />
+            <Route path="/marketplace/birds" element={<BirdBreederMarketplace />} />
             <Route path="/marketplace/create" element={<CreateListing />} />
             <Route path="/marketplace/my-listings" element={<MyListings />} />
             <Route path="/marketplace/saved" element={<SavedListings />} />
