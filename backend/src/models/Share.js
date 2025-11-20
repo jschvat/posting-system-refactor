@@ -4,6 +4,7 @@
  */
 
 const BaseModel = require('./BaseModel');
+const cache = require('../services/CacheService');
 
 class Share extends BaseModel {
   constructor() {
@@ -318,6 +319,107 @@ class Share extends BaseModel {
     );
 
     return result.rows;
+  }
+
+  /**
+   * Increment trending score for a post (add to Redis sorted set)
+   * @param {number} postId - Post ID
+   * @param {string} timeframe - Timeframe key ('24h', '7d', '30d')
+   * @returns {Promise<void>}
+   */
+  async incrementTrending(postId, timeframe = '24h') {
+    const redis = cache.getClient();
+    if (!redis) return; // Redis not available
+
+    const key = `trending:${timeframe}`;
+    const ttlMap = {
+      '24h': 86400,    // 24 hours
+      '7d': 604800,    // 7 days
+      '30d': 2592000   // 30 days
+    };
+
+    try {
+      // Increment post score in sorted set
+      await redis.zincrby(key, 1, postId.toString());
+
+      // Set expiration if not already set
+      const ttl = await redis.ttl(key);
+      if (ttl === -1) {
+        await redis.expire(key, ttlMap[timeframe] || 86400);
+      }
+    } catch (error) {
+      console.error(`[Share] Error incrementing trending for post ${postId}:`, error.message);
+    }
+  }
+
+  /**
+   * Get trending posts from Redis (fast path)
+   * Falls back to database query if Redis is unavailable
+   * @param {Object} options - Query options
+   * @returns {Promise<Array>} Array of trending posts
+   */
+  async getTrendingPosts(options = {}) {
+    const {
+      limit = 10,
+      timeframe = '24 hours'
+    } = options;
+
+    // Map timeframe string to Redis key
+    const timeframeMap = {
+      '24 hours': '24h',
+      '7 days': '7d',
+      '30 days': '30d'
+    };
+    const redisKey = `trending:${timeframeMap[timeframe] || '24h'}`;
+
+    const redis = cache.getClient();
+
+    // Try Redis first
+    if (redis) {
+      try {
+        // Get top post IDs from sorted set (highest scores first)
+        const postIds = await redis.zrevrange(redisKey, 0, limit - 1);
+
+        if (postIds && postIds.length > 0) {
+          // Get full post data from database
+          const result = await this.raw(
+            `SELECT
+              p.id as post_id,
+              p.content as post_content,
+              p.user_id as post_author_id,
+              u.username as post_author_username,
+              u.first_name as post_author_first_name,
+              u.last_name as post_author_last_name,
+              u.avatar_url as post_author_avatar,
+              (SELECT COUNT(*) FROM shares WHERE post_id = p.id) as share_count,
+              COALESCE(
+                (SELECT json_agg(
+                  json_build_object(
+                    'id', m.id,
+                    'filename', m.filename,
+                    'file_url', m.file_url,
+                    'media_type', m.media_type
+                  )
+                ) FROM media m WHERE m.post_id = p.id),
+                '[]'::json
+              ) as post_media
+             FROM posts p
+             JOIN users u ON p.user_id = u.id
+             WHERE p.id = ANY($1::int[]) AND p.is_published = true
+             ORDER BY array_position($1::int[], p.id)`,
+            [postIds.map(id => parseInt(id))]
+          );
+
+          return result.rows;
+        }
+      } catch (error) {
+        console.error('[Share] Error getting trending from Redis:', error.message);
+        // Fall through to database query
+      }
+    }
+
+    // Fallback to database query
+    return await this.getPopularShares(options);
   }
 
   /**

@@ -67,6 +67,18 @@ router.post('/:postId', authenticate, async (req, res, next) => {
       visibility
     });
 
+    // Increment trending counters in Redis for all timeframes
+    try {
+      await Promise.all([
+        Share.incrementTrending(postId, '24h'),
+        Share.incrementTrending(postId, '7d'),
+        Share.incrementTrending(postId, '30d')
+      ]);
+    } catch (trendingError) {
+      console.error('Failed to update trending counters:', trendingError);
+      // Don't fail the request if trending update fails
+    }
+
     // Create notification for the post author
     try {
       await Notification.create({

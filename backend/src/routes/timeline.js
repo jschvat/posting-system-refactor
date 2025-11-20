@@ -188,7 +188,8 @@ router.get('/trending', async (req, res, next) => {
     const { limit = 10, timeframe = '24 hours' } = req.query;
 
     const Share = require('../models/Share');
-    const trendingPosts = await Share.getPopularShares({
+    // Use Redis-based trending (falls back to database query if Redis unavailable)
+    const trendingPosts = await Share.getTrendingPosts({
       limit: parseInt(limit),
       timeframe
     });
