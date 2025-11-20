@@ -318,7 +318,7 @@ UNION ALL
 SELECT 'Blue', id, 'recessive', 'Blue body instead of green', 'common'
 FROM marketplace_bird_species WHERE species_name = 'Budgerigar'
 UNION ALL
-SELECT 'Normal Grey', id, 'wild_type', 'Natural grey with yellow face', 'common'
+SELECT 'Normal Grey', id, 'dominant', 'Natural grey with yellow face', 'common'
 FROM marketplace_bird_species WHERE species_name = 'Cockatiel'
 UNION ALL
 SELECT 'Lutino', id, 'sex_linked', 'Yellow and white with red eyes', 'common'
