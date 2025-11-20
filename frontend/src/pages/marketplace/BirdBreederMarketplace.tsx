@@ -653,7 +653,7 @@ export const BirdBreederMarketplace: React.FC = () => {
                           <span>✓</span> <strong>DNA Sexed</strong>
                         </BirdDetail>
                       </BirdDetails>
-                      <BirdPrice>${listing.price?.toFixed(2)}</BirdPrice>
+                      <BirdPrice>${parseFloat(listing.price || '0').toFixed(2)}</BirdPrice>
                       <BirdLocation>
                         📍 {listing.location_city}, {listing.location_state}
                       </BirdLocation>
