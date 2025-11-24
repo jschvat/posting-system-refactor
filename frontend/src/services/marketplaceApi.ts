@@ -76,6 +76,9 @@ export interface MarketplaceListing {
   seller_rating?: string;
   seller_review_count?: number;
   seller_level?: string;
+  seller_total_reviews?: number;
+  seller_average_rating?: string;
+  seller_tier?: string;
   primary_image?: string;
   media?: Array<{
     id: number;
@@ -564,6 +567,9 @@ const marketplaceApi = {
     min_price?: number;
     max_price?: number;
     location?: string;
+    user_latitude?: number;
+    user_longitude?: number;
+    radius?: number;
     sort_by?: string;
     sort_order?: string;
     page?: number;
@@ -608,6 +614,147 @@ const marketplaceApi = {
     }
 
     return data;
+  },
+
+  // Seller Ratings
+  getSellerRatings: async (sellerId: number, params?: { page?: number; limit?: number }) => {
+    const queryString = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) {
+          queryString.append(key, value.toString());
+        }
+      });
+    }
+    const response = await apiClient.get(`/marketplace/ratings/seller/${sellerId}?${queryString.toString()}`);
+    return response.data;
+  },
+
+  createSellerRating: async (ratingData: {
+    seller_id: number;
+    listing_id?: number;
+    transaction_id?: number;
+    rating: number;
+    review_title?: string;
+    review_text?: string;
+    communication_rating?: number;
+    shipping_speed_rating?: number;
+    item_as_described_rating?: number;
+    packaging_rating?: number;
+    bird_health_rating?: number;
+    bird_temperament_accurate?: boolean;
+    bird_documentation_provided?: boolean;
+  }) => {
+    const response = await apiClient.post('/marketplace/ratings', ratingData);
+    return response.data;
+  },
+
+  respondToRating: async (ratingId: number, seller_response: string) => {
+    const response = await apiClient.put(`/marketplace/ratings/${ratingId}/response`, { seller_response });
+    return response.data;
+  },
+
+  flagRating: async (ratingId: number, reason: string) => {
+    const response = await apiClient.post(`/marketplace/ratings/${ratingId}/flag`, { reason });
+    return response.data;
+  },
+
+  getMySellerStats: async () => {
+    const response = await apiClient.get('/marketplace/ratings/my-stats');
+    return response.data;
+  },
+
+  // Bird Supplies
+  getBirdSupplyCategories: async () => {
+    const response = await apiClient.get('/marketplace/bird-supplies/categories');
+    return response.data;
+  },
+
+  getBirdSupplies: async (params?: {
+    query?: string;
+    category?: string;
+    brand?: string;
+    min_price?: number;
+    max_price?: number;
+    is_wholesale?: boolean;
+    location?: string;
+    user_latitude?: number;
+    user_longitude?: number;
+    radius?: number;
+    sort_by?: string;
+    sort_order?: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const queryString = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          queryString.append(key, value.toString());
+        }
+      });
+    }
+    const response = await apiClient.get(`/marketplace/bird-supplies?${queryString.toString()}`);
+    const data = response.data;
+
+    // Transform listings to include full image URLs
+    if (data.success && data.data) {
+      data.data = data.data.map(transformListing);
+    }
+
+    return data;
+  },
+
+  getBirdSupplyListing: async (id: number) => {
+    const response = await apiClient.get(`/marketplace/bird-supplies/${id}`);
+    const data = response.data;
+
+    // Transform listing to include full image URLs
+    if (data.success && data.data) {
+      data.data = transformListing(data.data);
+    }
+
+    return data;
+  },
+
+  createBirdSupplyListing: async (data: {
+    title: string;
+    description: string;
+    price: number;
+    quantity?: number;
+    location_city?: string;
+    location_state?: string;
+    location_latitude?: number;
+    location_longitude?: number;
+    shipping_available?: boolean;
+    shipping_cost?: number;
+    supply_category_id?: number;
+    brand?: string;
+    model?: string;
+    is_wholesale?: boolean;
+    minimum_order_quantity?: number;
+    bulk_discount_available?: boolean;
+    bulk_discount_tiers?: Array<{ qty: number; discount_pct: number }>;
+    warranty_months?: number;
+    // Category-specific fields
+    cage_bar_spacing?: number;
+    cage_material?: string;
+    suitable_bird_sizes?: string[];
+    food_type?: string;
+    food_weight_oz?: number;
+    ingredients?: string;
+    suitable_species?: string[];
+    toy_type?: string;
+    toy_materials?: string[];
+    health_product_type?: string;
+  }) => {
+    const response = await apiClient.post('/marketplace/bird-supplies', data);
+    return response.data;
+  },
+
+  getBirdSupplyBrands: async () => {
+    const response = await apiClient.get('/marketplace/bird-supplies/brands/list');
+    return response.data;
   }
 };
 

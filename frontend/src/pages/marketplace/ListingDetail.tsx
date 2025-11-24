@@ -4,6 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import marketplaceApi, { MarketplaceListing } from '../../services/marketplaceApi';
 import { BuyingInterface } from '../../components/marketplace/BuyingInterface';
 import { ImageModal } from '../../components/marketplace/ImageModal';
+import { SellerRatingDisplay } from '../../components/marketplace/SellerRatingDisplay';
+import { SellerReviewsModal } from '../../components/marketplace/SellerReviewsModal';
+import { AddReviewModal } from '../../components/marketplace/AddReviewModal';
 // Using Unicode symbols instead of react-icons for compatibility
 const LocationIcon = () => <span>📍</span>;
 const ArrowLeftIcon = () => <span>←</span>;
@@ -256,6 +259,37 @@ const InfoItem = styled.div`
   }
 `;
 
+const BirdAttributesSection = styled.div`
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 20px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin: 0 0 16px 0;
+`;
+
+const BirdBadges = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+const BirdBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: ${({ theme }) => theme.colors.statusAcceptedBg};
+  color: ${({ theme }) => theme.colors.success};
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+`;
+
 const RightColumn = styled.div``;
 
 const SellerCard = styled.div`
@@ -324,6 +358,56 @@ const Location = styled.div`
   }
 `;
 
+const RatingSection = styled.div`
+  padding: 16px 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+  margin-top: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin: 16px -24px 0;
+  padding: 16px 24px;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.hover};
+  }
+`;
+
+const ReviewActions = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const ReviewButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ${({ variant, theme }) => variant === 'primary' ? `
+    background: ${theme.colors.primary};
+    color: white;
+    border: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  ` : `
+    background: white;
+    color: ${theme.colors.text.primary};
+    border: 1px solid ${theme.colors.border};
+
+    &:hover {
+      background: ${theme.colors.hover};
+    }
+  `}
+`;
+
 export const ListingDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -331,6 +415,9 @@ export const ListingDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sellerStats, setSellerStats] = useState<any>(null);
+  const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
+  const [addReviewModalOpen, setAddReviewModalOpen] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -344,11 +431,26 @@ export const ListingDetail: React.FC = () => {
       const response = await marketplaceApi.getListing(listingId);
       if (response.success) {
         setListing(response.data);
+        // Load seller ratings
+        if (response.data.user_id) {
+          loadSellerRatings(response.data.user_id);
+        }
       }
     } catch (error) {
       console.error('Error loading listing:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadSellerRatings = async (sellerId: number) => {
+    try {
+      const response = await marketplaceApi.getSellerRatings(sellerId);
+      if (response.success) {
+        setSellerStats(response.data.stats);
+      }
+    } catch (error) {
+      console.error('Error loading seller ratings:', error);
     }
   };
 
@@ -372,7 +474,8 @@ export const ListingDetail: React.FC = () => {
     return num === 0 ? 'Free' : `$${num.toFixed(2)}`;
   };
 
-  const formatCondition = (condition: string) => {
+  const formatCondition = (condition: string | null | undefined) => {
+    if (!condition) return 'N/A';
     return condition.replace('_', ' ');
   };
 
@@ -465,9 +568,11 @@ export const ListingDetail: React.FC = () => {
             <Title>{listing.title}</Title>
             <div>
               <Category>{listing.category_name || 'Uncategorized'}</Category>
-              <ConditionBadge condition={listing.condition}>
-                {formatCondition(listing.condition)}
-              </ConditionBadge>
+              {listing.condition && (
+                <ConditionBadge condition={listing.condition}>
+                  {formatCondition(listing.condition)}
+                </ConditionBadge>
+              )}
             </div>
 
             <InfoGrid>
@@ -475,22 +580,122 @@ export const ListingDetail: React.FC = () => {
                 <h4>Price</h4>
                 <p>{formatPrice(listing.price)}</p>
               </InfoItem>
-              <InfoItem>
-                <h4>Condition</h4>
-                <p>{formatCondition(listing.condition)}</p>
-              </InfoItem>
+              {listing.condition && (
+                <InfoItem>
+                  <h4>Condition</h4>
+                  <p>{formatCondition(listing.condition)}</p>
+                </InfoItem>
+              )}
               <InfoItem>
                 <h4>Shipping</h4>
                 <p>{listing.shipping_available ? `$${listing.shipping_cost}` : 'Pickup only'}</p>
               </InfoItem>
               <InfoItem>
                 <h4>Quantity</h4>
-                <p>{listing.quantity} available</p>
+                <p>{listing.quantity || 1} available</p>
               </InfoItem>
             </InfoGrid>
 
             <h3 style={{ marginTop: '24px', marginBottom: '12px', fontSize: '18px' }}>Description</h3>
             <Description>{listing.description}</Description>
+
+            {/* Display bird-specific attributes if this is a bird listing */}
+            {(listing as any).bird_species && (
+              <BirdAttributesSection>
+                <SectionTitle>Bird Details</SectionTitle>
+
+                <BirdBadges>
+                  {(listing as any).is_hand_fed && <BirdBadge>✋ Hand-Fed</BirdBadge>}
+                  {(listing as any).is_hand_tamed && <BirdBadge>🤝 Hand-Tamed</BirdBadge>}
+                  {(listing as any).dna_sexed && <BirdBadge>🧬 DNA Sexed</BirdBadge>}
+                  {(listing as any).health_certificate_available && <BirdBadge>📋 Health Certificate</BirdBadge>}
+                  {(listing as any).can_talk && <BirdBadge>🗣️ Can Talk</BirdBadge>}
+                  {(listing as any).proven_breeder && <BirdBadge>🏆 Proven Breeder</BirdBadge>}
+                  {(listing as any).includes_health_guarantee && <BirdBadge>💚 Health Guarantee</BirdBadge>}
+                </BirdBadges>
+
+                <InfoGrid>
+                  <InfoItem>
+                    <h4>Species</h4>
+                    <p>{(listing as any).bird_species}</p>
+                  </InfoItem>
+                  {(listing as any).bird_subspecies && (
+                    <InfoItem>
+                      <h4>Subspecies</h4>
+                      <p>{(listing as any).bird_subspecies}</p>
+                    </InfoItem>
+                  )}
+                  {(listing as any).sex && (
+                    <InfoItem>
+                      <h4>Sex</h4>
+                      <p style={{ textTransform: 'capitalize' }}>{(listing as any).sex}</p>
+                    </InfoItem>
+                  )}
+                  {((listing as any).age_years || (listing as any).age_months) && (
+                    <InfoItem>
+                      <h4>Age</h4>
+                      <p>
+                        {(listing as any).age_years ? `${(listing as any).age_years} year${(listing as any).age_years > 1 ? 's' : ''}` : ''}
+                        {(listing as any).age_years && (listing as any).age_months ? ' ' : ''}
+                        {(listing as any).age_months ? `${(listing as any).age_months} month${(listing as any).age_months > 1 ? 's' : ''}` : ''}
+                      </p>
+                    </InfoItem>
+                  )}
+                  {(listing as any).color_mutation && (
+                    <InfoItem>
+                      <h4>Color Mutation</h4>
+                      <p>{(listing as any).color_mutation}</p>
+                    </InfoItem>
+                  )}
+                  {(listing as any).temperament && (
+                    <InfoItem>
+                      <h4>Temperament</h4>
+                      <p style={{ textTransform: 'capitalize' }}>{(listing as any).temperament}</p>
+                    </InfoItem>
+                  )}
+                  {(listing as any).health_status && (
+                    <InfoItem>
+                      <h4>Health Status</h4>
+                      <p style={{ textTransform: 'capitalize' }}>{(listing as any).health_status}</p>
+                    </InfoItem>
+                  )}
+                  {(listing as any).talks_vocabulary && (
+                    <InfoItem>
+                      <h4>Vocabulary</h4>
+                      <p>{(listing as any).talks_vocabulary}</p>
+                    </InfoItem>
+                  )}
+                </InfoGrid>
+
+                {(listing as any).color_description && (
+                  <div>
+                    <h4 style={{ fontSize: '14px', color: '#65676b', marginBottom: '8px' }}>Color Description</h4>
+                    <p style={{ fontSize: '15px', marginBottom: '16px' }}>{(listing as any).color_description}</p>
+                  </div>
+                )}
+
+                {(listing as any).breeding_history && (
+                  <div>
+                    <h4 style={{ fontSize: '14px', color: '#65676b', marginBottom: '8px' }}>Breeding History</h4>
+                    <p style={{ fontSize: '15px', marginBottom: '16px' }}>{(listing as any).breeding_history}</p>
+                  </div>
+                )}
+
+                {(listing as any).breeder_certification && (
+                  <div>
+                    <h4 style={{ fontSize: '14px', color: '#65676b', marginBottom: '8px' }}>Breeder Certification</h4>
+                    <p style={{ fontSize: '15px', marginBottom: '16px' }}>{(listing as any).breeder_certification}</p>
+                  </div>
+                )}
+
+                {(listing as any).shipping_methods && (
+                  <div>
+                    <h4 style={{ fontSize: '14px', color: '#65676b', marginBottom: '8px' }}>Shipping Methods</h4>
+                    <p style={{ fontSize: '15px', marginBottom: '16px' }}>{(listing as any).shipping_methods}</p>
+                  </div>
+                )}
+              </BirdAttributesSection>
+            )}
           </DetailsCard>
         </LeftColumn>
 
@@ -509,6 +714,28 @@ export const ListingDetail: React.FC = () => {
               </SellerDetails>
             </SellerInfo>
 
+            {sellerStats && (
+              <RatingSection onClick={() => setReviewsModalOpen(true)}>
+                <SellerRatingDisplay
+                  stats={sellerStats}
+                  size="medium"
+                  showTier={true}
+                />
+                <div style={{ marginTop: '8px', fontSize: '13px', color: '#1877f2' }}>
+                  Click to view all reviews
+                </div>
+              </RatingSection>
+            )}
+
+            <ReviewActions>
+              <ReviewButton onClick={() => setReviewsModalOpen(true)}>
+                View Reviews
+              </ReviewButton>
+              <ReviewButton variant="primary" onClick={() => setAddReviewModalOpen(true)}>
+                Write Review
+              </ReviewButton>
+            </ReviewActions>
+
             <Location>
               <LocationIcon />
               {listing.location_city}, {listing.location_state}
@@ -524,6 +751,31 @@ export const ListingDetail: React.FC = () => {
           currentIndex={currentImageIndex}
           onClose={() => setIsModalOpen(false)}
           onNavigate={(index) => setCurrentImageIndex(index)}
+        />
+      )}
+
+      {/* Seller Reviews Modal */}
+      {listing.user_id && (
+        <SellerReviewsModal
+          sellerId={listing.user_id}
+          sellerName={listing.seller_username || 'Seller'}
+          isOpen={reviewsModalOpen}
+          onClose={() => setReviewsModalOpen(false)}
+        />
+      )}
+
+      {/* Add Review Modal */}
+      {listing.user_id && (
+        <AddReviewModal
+          sellerId={listing.user_id}
+          sellerName={listing.seller_username || 'Seller'}
+          listingId={listing.id}
+          listingTitle={listing.title}
+          isOpen={addReviewModalOpen}
+          onClose={() => setAddReviewModalOpen(false)}
+          onSuccess={() => {
+            loadSellerRatings(listing.user_id);
+          }}
         />
       )}
     </Container>

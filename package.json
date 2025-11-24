@@ -1,0 +1,25 @@
+{
+  "name": "posting-system-refactor",
+  "version": "1.0.0",
+  "description": "Social Media Posting Platform - Monorepo",
+  "private": true,
+  "scripts": {
+    "monitor": "node system-monitor.js",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && npm start",
+    "start:websocket": "cd backend && node src/websocket-server.js",
+    "start:docker": "docker-compose up -d",
+    "stop:docker": "docker-compose down",
+    "install:all": "cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": [
+    "social-media",
+    "monorepo",
+    "system-monitor"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}

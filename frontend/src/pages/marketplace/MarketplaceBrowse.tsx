@@ -6,6 +6,7 @@ import { FilterSidebar, FilterState } from '../../components/marketplace/FilterS
 import { SearchBar } from '../../components/marketplace/browse/SearchBar';
 import { ListingGrid } from '../../components/marketplace/browse/ListingGrid';
 import { useDebounce } from '../../hooks/useDebounce';
+import { SellerReviewsModal } from '../../components/marketplace/SellerReviewsModal';
 
 const Container = styled.div`
   max-width: 100%;
@@ -295,6 +296,10 @@ export const MarketplaceBrowse: React.FC = () => {
     hasMore: false
   });
 
+  // Reviews modal state
+  const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
+  const [selectedSeller, setSelectedSeller] = useState<{ id: number; name: string } | null>(null);
+
   // Debounce search query to reduce API calls
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
@@ -421,6 +426,11 @@ export const MarketplaceBrowse: React.FC = () => {
     setFilters(newFilters);
   };
 
+  const handleViewReviews = (sellerId: number, sellerName: string) => {
+    setSelectedSeller({ id: sellerId, name: sellerName });
+    setReviewsModalOpen(true);
+  };
+
   return (
     <Container>
       <Header>
@@ -470,6 +480,7 @@ export const MarketplaceBrowse: React.FC = () => {
             loading={loading}
             onListingClick={handleListingClick}
             onSaveListing={handleSaveListing}
+            onViewReviews={handleViewReviews}
           />
 
           {!loading && pagination.pages > 1 && (
@@ -508,6 +519,19 @@ export const MarketplaceBrowse: React.FC = () => {
           <FilterSidebar filters={filters} onFiltersChange={handleFiltersChange} />
         </FilterSidebarWrapper>
       </MainLayout>
+
+      {/* Seller Reviews Modal */}
+      {selectedSeller && (
+        <SellerReviewsModal
+          sellerId={selectedSeller.id}
+          sellerName={selectedSeller.name}
+          isOpen={reviewsModalOpen}
+          onClose={() => {
+            setReviewsModalOpen(false);
+            setSelectedSeller(null);
+          }}
+        />
+      )}
     </Container>
   );
 };

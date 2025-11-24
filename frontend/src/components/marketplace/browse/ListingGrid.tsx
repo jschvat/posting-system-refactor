@@ -8,6 +8,7 @@ export interface ListingGridProps {
   loading: boolean;
   onListingClick: (id: number) => void;
   onSaveListing?: (id: number) => void;
+  onViewReviews?: (sellerId: number, sellerName: string) => void;
 }
 
 const GridContainer = styled.div`
@@ -68,7 +69,8 @@ export const ListingGrid: React.FC<ListingGridProps> = ({
   listings,
   loading,
   onListingClick,
-  onSaveListing
+  onSaveListing,
+  onViewReviews
 }) => {
   if (loading) {
     return <LoadingMessage>Loading listings...</LoadingMessage>;
@@ -92,6 +94,7 @@ export const ListingGrid: React.FC<ListingGridProps> = ({
             listing={listing}
             onSave={onSaveListing || (() => {})}
             onClick={onListingClick}
+            onViewReviews={onViewReviews}
           />
         ))}
       </ListingsGrid>

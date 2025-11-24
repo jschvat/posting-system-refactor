@@ -9,6 +9,7 @@ interface ListingCardProps {
   listing: MarketplaceListing;
   onSave?: (id: number) => void;
   onClick?: (id: number) => void;
+  onViewReviews?: (sellerId: number, sellerName: string) => void;
 }
 
 const Card = styled.div`
@@ -180,7 +181,45 @@ const Distance = styled.span`
   font-weight: 600;
 `;
 
-export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onClick }) => {
+const SellerRating = styled.div<{ clickable?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  margin-top: 8px;
+  ${({ clickable }) => clickable && `
+    cursor: pointer;
+    padding: 4px 8px;
+    margin: 4px -8px 0;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  `}
+`;
+
+const Stars = styled.span`
+  color: #FFD700;
+  font-size: 12px;
+`;
+
+const RatingValue = styled.span`
+  font-weight: 600;
+  color: ${props => props.theme.colors.text.primary};
+`;
+
+const ReviewCount = styled.span`
+  color: ${props => props.theme.colors.text.muted};
+`;
+
+const NewSellerBadge = styled.span`
+  font-size: 11px;
+  color: ${props => props.theme.colors.text.muted};
+`;
+
+export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onClick, onViewReviews }) => {
   const handleSaveClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (onSave) {
@@ -194,13 +233,33 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onCli
     }
   };
 
+  const handleRatingClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onViewReviews && listing.user_id) {
+      onViewReviews(listing.user_id, listing.seller_username || 'Seller');
+    }
+  };
+
   const formatPrice = (price: string) => {
     const num = parseFloat(price);
     return num === 0 ? 'Free' : `$${num.toFixed(2)}`;
   };
 
-  const formatCondition = (condition: string) => {
+  const formatCondition = (condition: string | null | undefined) => {
+    if (!condition) return 'N/A';
     return condition.replace('_', ' ');
+  };
+
+  // Get seller rating from various possible field names
+  const sellerRating = listing.seller_average_rating || listing.seller_rating;
+  const sellerReviews = listing.seller_total_reviews ?? listing.seller_review_count ?? 0;
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating - fullStars >= 0.5;
+    let stars = '\u2605'.repeat(fullStars);
+    if (halfStar && fullStars < 5) stars += '\u00BD';
+    return stars || '\u2606';
   };
 
   return (
@@ -213,9 +272,11 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onCli
             {listing.title.charAt(0).toUpperCase()}
           </PlaceholderImage>
         )}
-        <ConditionBadge condition={listing.condition}>
-          {formatCondition(listing.condition)}
-        </ConditionBadge>
+        {listing.condition && (
+          <ConditionBadge condition={listing.condition}>
+            {formatCondition(listing.condition)}
+          </ConditionBadge>
+        )}
         <SaveButton isSaved={listing.is_saved} onClick={handleSaveClick}>
           {listing.is_saved ? <HeartIcon filled /> : <HeartIcon />}
         </SaveButton>
@@ -231,6 +292,19 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onCli
             <OriginalPrice>{formatPrice(listing.original_price)}</OriginalPrice>
           )}
         </PriceRow>
+
+        {/* Seller Rating */}
+        {sellerRating && sellerReviews > 0 ? (
+          <SellerRating clickable={!!onViewReviews} onClick={handleRatingClick}>
+            <Stars>{renderStars(parseFloat(sellerRating))}</Stars>
+            <RatingValue>{parseFloat(sellerRating).toFixed(1)}</RatingValue>
+            <ReviewCount>({sellerReviews} reviews)</ReviewCount>
+          </SellerRating>
+        ) : (
+          <SellerRating>
+            <NewSellerBadge>New seller</NewSellerBadge>
+          </SellerRating>
+        )}
       </Content>
 
       <Footer>

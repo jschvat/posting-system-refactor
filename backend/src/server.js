@@ -54,6 +54,8 @@ const marketplaceTransactionsRoutes = require('./routes/marketplaceTransactions'
 const marketplacePaymentMethodsRoutes = require('./routes/marketplacePaymentMethods');
 const marketplacePayoutsRoutes = require('./routes/marketplacePayouts');
 const marketplaceBirdsRoutes = require('./routes/marketplaceBirds');
+const marketplaceRatingsRoutes = require('./routes/marketplaceRatings');
+const marketplaceBirdSuppliesRoutes = require('./routes/marketplaceBirdSupplies');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -168,6 +170,8 @@ app.use('/api/marketplace/transactions', marketplaceTransactionsRoutes);
 app.use('/api/marketplace/payment-methods', marketplacePaymentMethodsRoutes);
 app.use('/api/marketplace/payouts', marketplacePayoutsRoutes);
 app.use('/api/marketplace/birds', marketplaceBirdsRoutes);
+app.use('/api/marketplace/ratings', marketplaceRatingsRoutes);
+app.use('/api/marketplace/bird-supplies', marketplaceBirdSuppliesRoutes);
 
 // Catch-all route for undefined endpoints
 app.use(notFound);

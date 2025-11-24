@@ -43,6 +43,10 @@ import { SavedListings } from './pages/marketplace/SavedListings';
 import { ReceivedOffers } from './pages/marketplace/ReceivedOffers';
 import { SentOffers } from './pages/marketplace/SentOffers';
 import { BirdBreederMarketplace } from './pages/marketplace/BirdBreederMarketplace';
+import { CreateBirdListing } from './pages/marketplace/CreateBirdListing';
+import { BirdSuppliesMarketplace } from './pages/marketplace/BirdSuppliesMarketplace';
+import { CreateSupplyListing } from './pages/marketplace/CreateSupplyListing';
+import { SupplyDetail } from './pages/marketplace/SupplyDetail';
 
 // Import components
 import Header from './components/Header';
@@ -264,6 +268,10 @@ const AuthenticatedApp: React.FC = () => {
             {/* Marketplace */}
             <Route path="/marketplace" element={<MarketplaceBrowse />} />
             <Route path="/marketplace/birds" element={<BirdBreederMarketplace />} />
+            <Route path="/marketplace/birds/create" element={<CreateBirdListing />} />
+            <Route path="/marketplace/birds/supplies" element={<BirdSuppliesMarketplace />} />
+            <Route path="/marketplace/birds/supplies/create" element={<CreateSupplyListing />} />
+            <Route path="/marketplace/supplies/:id" element={<SupplyDetail />} />
             <Route path="/marketplace/create" element={<CreateListing />} />
             <Route path="/marketplace/my-listings" element={<MyListings />} />
             <Route path="/marketplace/saved" element={<SavedListings />} />

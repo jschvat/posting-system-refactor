@@ -160,6 +160,9 @@ class MarketplaceListing {
         c.name as category_name,
         c.slug as category_slug,
         ss.average_rating as seller_rating,
+        ss.average_rating as seller_average_rating,
+        ss.total_reviews as seller_total_reviews,
+        ss.seller_level as seller_tier,
         (SELECT file_url FROM marketplace_media WHERE listing_id = l.id AND is_primary = TRUE LIMIT 1) as primary_image,
         (SELECT COUNT(*) FROM marketplace_media WHERE listing_id = l.id) as media_count
     `;

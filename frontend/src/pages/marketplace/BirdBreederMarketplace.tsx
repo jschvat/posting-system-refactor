@@ -205,6 +205,67 @@ const ContentArea = styled.div`
   min-width: 0;
 `;
 
+const ButtonRow = styled.div`
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+`;
+
+const CreateListingButton = styled.button`
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const ShopSuppliesButton = styled.button`
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
 const SearchBar = styled.input`
   width: 100%;
   padding: 16px 20px;
@@ -368,6 +429,33 @@ const BirdLocation = styled.div`
   gap: 4px;
 `;
 
+const SellerRating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  margin-top: 8px;
+`;
+
+const Stars = styled.span`
+  color: #FFD700;
+  font-size: 12px;
+`;
+
+const RatingValue = styled.span`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const ReviewCount = styled.span`
+  color: ${({ theme }) => theme.colors.text.muted};
+`;
+
+const NewSellerBadge = styled.span`
+  font-size: 11px;
+  color: ${({ theme }) => theme.colors.text.muted};
+`;
+
 const LoadingMessage = styled.div`
   text-align: center;
   padding: 60px 20px;
@@ -413,6 +501,7 @@ interface BirdFilters {
   healthCertified: boolean;
   priceRange: string;
   location: string;
+  radius: string;
 }
 
 export const BirdBreederMarketplace: React.FC = () => {
@@ -422,6 +511,7 @@ export const BirdBreederMarketplace: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
 
   const [filters, setFilters] = useState<BirdFilters>({
     species: '',
@@ -433,12 +523,31 @@ export const BirdBreederMarketplace: React.FC = () => {
     dnaSexed: false,
     healthCertified: false,
     priceRange: '',
-    location: ''
+    location: '',
+    radius: '100'
   });
+
+  // Get user's location on component mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          });
+        },
+        (error) => {
+          console.log('Geolocation permission denied or unavailable:', error.message);
+          // Continue without geolocation - distance will just be null
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     fetchListings();
-  }, [filters, sortBy]);
+  }, [filters, sortBy, userLocation]);
 
   const fetchListings = async () => {
     try {
@@ -454,6 +563,9 @@ export const BirdBreederMarketplace: React.FC = () => {
         dna_sexed: filters.dnaSexed || undefined,
         health_certified: filters.healthCertified || undefined,
         location: filters.location,
+        user_latitude: userLocation?.latitude,
+        user_longitude: userLocation?.longitude,
+        radius: filters.radius ? parseInt(filters.radius) : undefined,
         sort_by: sortBy,
         sort_order: 'DESC'
       });
@@ -468,11 +580,20 @@ export const BirdBreederMarketplace: React.FC = () => {
   };
 
   const handleCardClick = (listingId: number) => {
-    navigate(`/marketplace/listing/${listingId}`);
+    navigate(`/marketplace/${listingId}`);
   };
 
   const handleFilterChange = (key: keyof BirdFilters, value: any) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  // Helper function to render star rating
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating - fullStars >= 0.5;
+    let stars = '\u2605'.repeat(fullStars);
+    if (halfStar && fullStars < 5) stars += '\u00BD';
+    return stars || '\u2606';
   };
 
   return (
@@ -490,6 +611,15 @@ export const BirdBreederMarketplace: React.FC = () => {
             <FeatureBadge>✓ Hand-Fed Birds</FeatureBadge>
             <FeatureBadge>✓ Verified Breeders</FeatureBadge>
           </FeatureBadges>
+
+          <ButtonRow>
+            <CreateListingButton onClick={() => navigate('/marketplace/birds/create')}>
+              + Create Bird Listing
+            </CreateListingButton>
+            <ShopSuppliesButton onClick={() => navigate('/marketplace/birds/supplies')}>
+              Shop Bird Supplies
+            </ShopSuppliesButton>
+          </ButtonRow>
 
           <SearchBar
             type="text"
@@ -611,6 +741,28 @@ export const BirdBreederMarketplace: React.FC = () => {
                 <option value="1000+">$1,000+</option>
               </Select>
             </FilterSection>
+
+            <FilterSection>
+              <FilterLabel>📍 Distance {userLocation && '(from your location)'}</FilterLabel>
+              <Select
+                value={filters.radius}
+                onChange={(e) => handleFilterChange('radius', e.target.value)}
+                disabled={!userLocation}
+              >
+                <option value="">Any Distance</option>
+                <option value="10">Within 10 miles</option>
+                <option value="25">Within 25 miles</option>
+                <option value="50">Within 50 miles</option>
+                <option value="100">Within 100 miles</option>
+                <option value="250">Within 250 miles</option>
+                <option value="500">Within 500 miles</option>
+              </Select>
+              {!userLocation && (
+                <div style={{ fontSize: '12px', color: '#999', marginTop: '8px' }}>
+                  Enable location to filter by distance
+                </div>
+              )}
+            </FilterSection>
           </FilterSidebarWrapper>
 
           <ContentArea>
@@ -661,6 +813,18 @@ export const BirdBreederMarketplace: React.FC = () => {
                         </BirdDetail>
                       </BirdDetails>
                       <BirdPrice>${parseFloat(listing.price || '0').toFixed(2)}</BirdPrice>
+                      {/* Seller Rating */}
+                      {listing.seller_average_rating && (listing.seller_total_reviews ?? 0) > 0 ? (
+                        <SellerRating>
+                          <Stars>{renderStars(parseFloat(listing.seller_average_rating))}</Stars>
+                          <RatingValue>{parseFloat(listing.seller_average_rating).toFixed(1)}</RatingValue>
+                          <ReviewCount>({listing.seller_total_reviews})</ReviewCount>
+                        </SellerRating>
+                      ) : (
+                        <SellerRating>
+                          <NewSellerBadge>New seller</NewSellerBadge>
+                        </SellerRating>
+                      )}
                       <BirdLocation>
                         📍 {listing.location_city}, {listing.location_state}
                       </BirdLocation>

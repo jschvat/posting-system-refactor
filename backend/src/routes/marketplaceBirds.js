@@ -31,6 +31,9 @@ router.get('/', async (req, res) => {
       min_price,
       max_price,
       location,
+      user_latitude,
+      user_longitude,
+      radius,
       sort_by = 'created_at',
       sort_order = 'DESC',
       page = 1,
@@ -143,9 +146,35 @@ router.get('/', async (req, res) => {
 
     // Location filter
     if (location) {
-      conditions.push(`ml.location ILIKE $${paramIndex}`);
+      conditions.push(`(ml.location_city ILIKE $${paramIndex} OR ml.location_state ILIKE $${paramIndex})`);
       params.push(`%${location}%`);
       paramIndex++;
+    }
+
+    // Distance/radius filter (if user coordinates provided)
+    let distanceCalculation = 'NULL';
+    if (user_latitude && user_longitude) {
+      // Haversine formula for distance calculation in miles
+      distanceCalculation = `
+        (3959 * acos(
+          cos(radians($${paramIndex})) *
+          cos(radians(ml.location_latitude)) *
+          cos(radians(ml.location_longitude) - radians($${paramIndex + 1})) +
+          sin(radians($${paramIndex})) *
+          sin(radians(ml.location_latitude))
+        ))
+      `;
+
+      params.push(parseFloat(user_latitude));
+      params.push(parseFloat(user_longitude));
+      paramIndex += 2;
+
+      // Add radius filter if specified
+      if (radius) {
+        conditions.push(`${distanceCalculation} <= $${paramIndex}`);
+        params.push(parseFloat(radius));
+        paramIndex++;
+      }
     }
 
     // Validate sort column
@@ -153,7 +182,8 @@ router.get('/', async (req, res) => {
       'created_at': 'ml.created_at',
       'price': 'ml.price',
       'views': 'ml.views',
-      'species': 'mba.bird_species'
+      'species': 'mba.bird_species',
+      'distance': 'distance_miles'
     };
 
     const sortColumn = validSortColumns[sort_by] || 'ml.created_at';
@@ -188,10 +218,27 @@ router.get('/', async (req, res) => {
         u.first_name as seller_first_name,
         u.last_name as seller_last_name,
         u.avatar_url as seller_avatar,
+        mss.total_reviews as seller_total_reviews,
+        mss.average_rating as seller_average_rating,
+        mss.seller_level as seller_tier,
+        (SELECT file_url FROM marketplace_media
+         WHERE listing_id = ml.id AND is_primary = true
+         LIMIT 1) as primary_image,
+        (SELECT json_agg(json_build_object(
+          'id', mm.id,
+          'file_url', mm.file_url,
+          'display_order', mm.display_order,
+          'is_primary', mm.is_primary
+        ) ORDER BY mm.display_order)
+        FROM marketplace_media mm
+        WHERE mm.listing_id = ml.id
+        ) as images,
+        ${distanceCalculation} as distance_miles,
         COUNT(*) OVER() as total_count
       FROM marketplace_listings ml
       INNER JOIN marketplace_bird_attributes mba ON ml.id = mba.listing_id
-      LEFT JOIN users u ON ml.seller_id = u.id
+      LEFT JOIN users u ON ml.user_id = u.id
+      LEFT JOIN marketplace_seller_stats mss ON ml.user_id = mss.user_id
       ${whereClause}
       ORDER BY ${sortColumn} ${sortDirection}
       LIMIT $${paramIndex} OFFSET $${paramIndex + 1}
@@ -344,7 +391,7 @@ router.get('/:id', async (req, res) => {
         ) as images
       FROM marketplace_listings ml
       INNER JOIN marketplace_bird_attributes mba ON ml.id = mba.listing_id
-      LEFT JOIN users u ON ml.seller_id = u.id
+      LEFT JOIN users u ON ml.user_id = u.id
       WHERE ml.id = $1
     `;
 
@@ -435,16 +482,17 @@ router.post('/', authenticate, async (req, res) => {
     // Create marketplace listing
     const listingResult = await client.query(`
       INSERT INTO marketplace_listings (
-        seller_id, title, description, price, location, latitude, longitude,
+        user_id, title, description, price, location_city, location_state, location_latitude, location_longitude,
         category_id, listing_type, status
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'sale', 'active')
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'sale', 'active')
       RETURNING *
     `, [
       req.user.id,
       title,
       description,
       parseFloat(price),
-      location,
+      location_city || null,
+      location_state || null,
       latitude ? parseFloat(latitude) : null,
       longitude ? parseFloat(longitude) : null,
       category_id ? parseInt(category_id) : null
