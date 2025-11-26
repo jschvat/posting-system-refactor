@@ -181,13 +181,13 @@ const Distance = styled.span`
   font-weight: 600;
 `;
 
-const SellerRating = styled.div<{ clickable?: boolean }>`
+const SellerRating = styled.div<{ $clickable?: boolean }>`
   display: flex;
   align-items: center;
   gap: 4px;
   font-size: 13px;
   margin-top: 8px;
-  ${({ clickable }) => clickable && `
+  ${({ $clickable }) => $clickable && `
     cursor: pointer;
     padding: 4px 8px;
     margin: 4px -8px 0;
@@ -295,7 +295,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ listing, onSave, onCli
 
         {/* Seller Rating */}
         {sellerRating && sellerReviews > 0 ? (
-          <SellerRating clickable={!!onViewReviews} onClick={handleRatingClick}>
+          <SellerRating $clickable={!!onViewReviews} onClick={handleRatingClick}>
             <Stars>{renderStars(parseFloat(sellerRating))}</Stars>
             <RatingValue>{parseFloat(sellerRating).toFixed(1)}</RatingValue>
             <ReviewCount>({sellerReviews} reviews)</ReviewCount>

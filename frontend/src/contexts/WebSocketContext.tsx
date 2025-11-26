@@ -83,9 +83,36 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }
     }
 
     // Create socket connection
-    console.log('🔌 Connecting to WebSocket...');
+    console.log('🔌 Connecting to WebSocket...', WS_URL);
+
+    // Debug: Decode token to check if it's valid (without verification)
+    try {
+      const tokenParts = state.token.split('.');
+      if (tokenParts.length === 3) {
+        const payload = JSON.parse(atob(tokenParts[1]));
+        console.log('🔐 Token payload:', {
+          userId: payload.userId,
+          username: payload.username,
+          exp: payload.exp ? new Date(payload.exp * 1000).toISOString() : 'none',
+          iss: payload.iss,
+          aud: payload.aud
+        });
+
+        // Check if token is expired
+        if (payload.exp && payload.exp * 1000 < Date.now()) {
+          console.warn('⚠️ Token is expired! User should log in again.');
+        }
+      }
+    } catch (e) {
+      console.error('❌ Failed to decode token:', e);
+    }
+
     const newSocket = io(WS_URL, {
-      auth: { token: state.token }
+      auth: { token: state.token },
+      autoConnect: true,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000
     });
 
     newSocket.on('connect', () => {
@@ -93,14 +120,21 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }
       setConnected(true);
     });
 
-    newSocket.on('disconnect', () => {
-      console.log('❌ WebSocket disconnected');
+    newSocket.on('disconnect', (reason) => {
+      console.log('❌ WebSocket disconnected:', reason);
       setConnected(false);
     });
 
     newSocket.on('connect_error', (error) => {
       console.error('❌ WebSocket connection error:', error.message);
       setConnected(false);
+
+      // If authentication failed, we should not retry
+      if (error.message === 'Authentication failed') {
+        console.warn('⚠️ WebSocket authentication failed - stopping reconnection attempts');
+        console.info('💡 Try logging out and logging back in to get a fresh authentication token');
+        newSocket.disconnect();
+      }
     });
 
     newSocket.on('error', (error) => {

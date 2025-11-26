@@ -195,11 +195,11 @@ const CategoryTags = styled.div`
   }
 `;
 
-const CategoryTag = styled.button<{ active?: boolean }>`
+const CategoryTag = styled.button<{ $active?: boolean }>`
   padding: 8px 16px;
-  background: ${props => props.active ? props.theme.colors.info : props.theme.colors.white};
-  color: ${props => props.active ? props.theme.colors.white : props.theme.colors.text.primary};
-  border: 2px solid ${props => props.active ? props.theme.colors.info : props.theme.colors.border};
+  background: ${props => props.$active ? props.theme.colors.info : props.theme.colors.white};
+  color: ${props => props.$active ? props.theme.colors.white : props.theme.colors.text.primary};
+  border: 2px solid ${props => props.$active ? props.theme.colors.info : props.theme.colors.border};
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
@@ -208,8 +208,8 @@ const CategoryTag = styled.button<{ active?: boolean }>`
   white-space: nowrap;
 
   &:hover {
-    background: ${props => props.active ? props.theme.colors.infoDark : props.theme.colors.hover};
-    border-color: ${props => props.active ? props.theme.colors.infoDark : props.theme.colors.info};
+    background: ${props => props.$active ? props.theme.colors.infoDark : props.theme.colors.hover};
+    border-color: ${props => props.$active ? props.theme.colors.infoDark : props.theme.colors.info};
   }
 
   @media (max-width: 480px) {
@@ -449,7 +449,7 @@ export const MarketplaceBrowse: React.FC = () => {
       {categories.length > 0 && (
         <CategoryTags>
           <CategoryTag
-            active={!selectedCategory}
+            $active={!selectedCategory}
             onClick={() => handleCategoryClick(0)}
           >
             All Categories
@@ -457,7 +457,7 @@ export const MarketplaceBrowse: React.FC = () => {
           {categories.slice(0, 8).map((cat) => (
             <CategoryTag
               key={cat.id}
-              active={selectedCategory === cat.id}
+              $active={selectedCategory === cat.id}
               onClick={() => handleCategoryClick(cat.id)}
             >
               {cat.name}

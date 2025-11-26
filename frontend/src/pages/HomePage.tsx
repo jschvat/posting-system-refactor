@@ -14,20 +14,25 @@ import { OnlineFollowers } from '../components/sidebar/OnlineFollowers';
 
 const PageContainer = styled.div`
   display: flex;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.md};
   gap: 24px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
+    max-width: 1200px;
   }
 `;
 
 const MainContent = styled.div`
   flex: 1;
   min-width: 0;
-  max-width: 680px;
+  max-width: 900px;
+
+  @media (max-width: 1440px) {
+    max-width: 680px;
+  }
 
   @media (max-width: 1024px) {
     max-width: 100%;
