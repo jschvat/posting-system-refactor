@@ -6,6 +6,8 @@
 const express = require('express');
 const { body, param, query } = require('express-validator');
 const path = require('path');
+const fs = require('fs').promises;
+const sharp = require('sharp');
 const { authenticate } = require('../middleware/auth');
 const { handleValidationErrors } = require('../middleware/validation');
 const { uploads, processImage } = require('../services/fileUploadService');

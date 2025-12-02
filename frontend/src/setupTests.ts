@@ -7,6 +7,9 @@ import '@testing-library/jest-dom';
 // Mock axios
 jest.mock('axios');
 
+// Mock react-router-dom (v7 has ES module issues with Jest)
+jest.mock('react-router-dom');
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

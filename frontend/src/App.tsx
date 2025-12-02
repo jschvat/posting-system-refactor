@@ -16,6 +16,7 @@ import { config } from './config/app.config';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { WebSocketProvider } from './contexts/WebSocketContext';
 import { ToastProvider } from './components/Toast';
+import { CartProvider } from './contexts/CartContext';
 
 // Import pages
 import LoginPage from './pages/LoginPage';
@@ -47,6 +48,9 @@ import { CreateBirdListing } from './pages/marketplace/CreateBirdListing';
 import { BirdSuppliesMarketplace } from './pages/marketplace/BirdSuppliesMarketplace';
 import { CreateSupplyListing } from './pages/marketplace/CreateSupplyListing';
 import { SupplyDetail } from './pages/marketplace/SupplyDetail';
+import { Cart } from './pages/marketplace/Cart';
+import { Checkout } from './pages/marketplace/Checkout';
+import MarketplacePermissionsAdmin from './pages/admin/MarketplacePermissionsAdmin';
 
 // Import components
 import Header from './components/Header';
@@ -272,12 +276,17 @@ const AuthenticatedApp: React.FC = () => {
             <Route path="/marketplace/birds/supplies" element={<BirdSuppliesMarketplace />} />
             <Route path="/marketplace/birds/supplies/create" element={<CreateSupplyListing />} />
             <Route path="/marketplace/supplies/:id" element={<SupplyDetail />} />
+            <Route path="/marketplace/cart" element={<Cart />} />
+            <Route path="/marketplace/checkout" element={<Checkout />} />
             <Route path="/marketplace/create" element={<CreateListing />} />
             <Route path="/marketplace/my-listings" element={<MyListings />} />
             <Route path="/marketplace/saved" element={<SavedListings />} />
             <Route path="/marketplace/offers/received" element={<ReceivedOffers />} />
             <Route path="/marketplace/offers/sent" element={<SentOffers />} />
             <Route path="/marketplace/:id" element={<ListingDetail />} />
+
+            {/* Admin Pages */}
+            <Route path="/admin/marketplace-permissions" element={<MarketplacePermissionsAdmin />} />
 
             {/* Messaging Test Page */}
             <Route path="/test/messaging" element={<MessagingTestPage />} />
@@ -305,8 +314,9 @@ const App: React.FC = () => {
         <ToastProvider>
           <Router>
             <AuthProvider>
-              <WebSocketProvider>
-                <Routes>
+              <CartProvider>
+                <WebSocketProvider>
+                  <Routes>
                   {/* Login page for unauthenticated users */}
                   <Route path="/login" element={<LoginPage />} />
 
@@ -316,8 +326,9 @@ const App: React.FC = () => {
                       <AuthenticatedApp />
                     </ProtectedRoute>
                   } />
-                </Routes>
-              </WebSocketProvider>
+                  </Routes>
+                </WebSocketProvider>
+              </CartProvider>
             </AuthProvider>
           </Router>
         </ToastProvider>

@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import marketplaceApi from '../../services/marketplaceApi';
+import { ImageUpload } from '../../components/marketplace/ImageUpload';
 
 interface SupplyCategory {
   id: number;
@@ -228,6 +229,7 @@ export const CreateSupplyListing: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [images, setImages] = useState<File[]>([]);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -337,9 +339,23 @@ export const CreateSupplyListing: React.FC = () => {
         return;
       }
 
+      // Create the listing
       const response = await marketplaceApi.createBirdSupplyListing(formData);
 
       if (response.success) {
+        const listingId = response.data.id;
+
+        // Upload images if any were provided
+        if (images.length > 0) {
+          try {
+            await marketplaceApi.uploadImages(listingId, images);
+          } catch (imageErr) {
+            console.error('Error uploading images:', imageErr);
+            // Don't fail the entire listing creation if images fail
+            setError('Listing created but some images failed to upload. You can add them later.');
+          }
+        }
+
         setSuccess('Listing created successfully!');
         setTimeout(() => {
           navigate('/marketplace/birds/supplies');
@@ -438,6 +454,18 @@ export const CreateSupplyListing: React.FC = () => {
               />
             </FormGroup>
           </Row>
+        </Section>
+
+        {/* Product Images */}
+        <Section>
+          <SectionTitle>Product Images</SectionTitle>
+          <ImageUpload
+            images={images}
+            onImagesChange={setImages}
+            maxImages={8}
+            maxSizeMB={5}
+          />
+          <HelpText>Upload up to 8 images. First image will be the primary listing photo.</HelpText>
         </Section>
 
         {/* Pricing & Inventory */}

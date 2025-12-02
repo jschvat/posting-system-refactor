@@ -408,6 +408,53 @@ const ReviewButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
   `}
 `;
 
+const SaveButton = styled.button<{ $isSaved: boolean }>`
+  width: 100%;
+  background: ${props => props.$isSaved ? '#ffa41c' : 'transparent'};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: ${props => props.$isSaved ? 'white' : '#007185'};
+
+  &:hover {
+    background: ${props => props.$isSaved ? '#fa8900' : '#f7f7f7'};
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
+const ShareButton = styled.button`
+  width: 100%;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #007185;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+`;
+
 export const ListingDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -418,12 +465,27 @@ export const ListingDetail: React.FC = () => {
   const [sellerStats, setSellerStats] = useState<any>(null);
   const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
   const [addReviewModalOpen, setAddReviewModalOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [savingListing, setSavingListing] = useState(false);
 
   useEffect(() => {
     if (id) {
       loadListing(parseInt(id));
+      checkSavedStatus();
     }
   }, [id]);
+
+  const checkSavedStatus = async () => {
+    if (!id) return;
+    try {
+      const res = await marketplaceApi.isListingSaved(parseInt(id));
+      if (res.success && res.data) {
+        setIsSaved(res.data.isSaved);
+      }
+    } catch (e) {
+      console.log('Could not check saved status:', e);
+    }
+  };
 
   const loadListing = async (listingId: number) => {
     setLoading(true);
@@ -454,18 +516,53 @@ export const ListingDetail: React.FC = () => {
     }
   };
 
-  const handleSave = async () => {
+  const handleToggleSave = async () => {
     if (!listing) return;
-
+    setSavingListing(true);
     try {
-      if (listing.is_saved) {
+      if (isSaved) {
         await marketplaceApi.unsaveListing(listing.id);
+        setIsSaved(false);
       } else {
         await marketplaceApi.saveListing(listing.id);
+        setIsSaved(true);
       }
-      loadListing(listing.id);
-    } catch (error) {
-      console.error('Error saving listing:', error);
+    } catch (e: any) {
+      console.error('Error toggling save:', e);
+      if (e.response?.status === 401) {
+        alert('Please log in to save listings');
+      } else {
+        alert('Failed to save listing');
+      }
+    } finally {
+      setSavingListing(false);
+    }
+  };
+
+  const handleShare = async () => {
+    if (!listing) return;
+
+    const shareData = {
+      title: listing.title,
+      text: `Check out this bird: ${listing.title}`,
+      url: window.location.href
+    };
+
+    // Try to use native share API if available
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        console.log('Share cancelled');
+      }
+    } else {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Listing link copied to clipboard!');
+      } catch (e) {
+        alert(`Share this link:\n${window.location.href}`);
+      }
     }
   };
 
@@ -701,6 +798,22 @@ export const ListingDetail: React.FC = () => {
 
         <RightColumn>
           <BuyingInterface listing={listing} onUpdate={() => loadListing(listing.id)} />
+
+          <div style={{ marginTop: '16px' }}>
+            <SaveButton
+              $isSaved={isSaved}
+              onClick={handleToggleSave}
+              disabled={savingListing}
+            >
+              <span>{isSaved ? '❤️' : '🤍'}</span>
+              {isSaved ? 'Saved' : 'Save for later'}
+            </SaveButton>
+
+            <ShareButton onClick={handleShare}>
+              <span>🔗</span>
+              Share
+            </ShareButton>
+          </div>
 
           <SellerCard>
             <SellerTitle>Seller Information</SellerTitle>

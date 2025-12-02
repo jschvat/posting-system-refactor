@@ -2,7 +2,7 @@ import React from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { WebSocketProvider, useWebSocket } from '../../contexts/WebSocketContext';
 import { AuthProvider } from '../../contexts/AuthContext';
-import { mockUser, mockMessage } from '../utils/testUtils';
+import { mockUser, mockMessage } from '../../test-utils';
 import { io } from 'socket.io-client';
 
 // Mock socket.io-client

@@ -35,7 +35,7 @@ const CONFIG = {
   },
   backend: {
     name: 'Backend API',
-    port: parseInt(process.env.API_PORT) || 3002,
+    port: parseInt(process.env.API_PORT) || 3001,
     host: process.env.API_HOST || 'localhost',
     healthPath: '/health',
     startCommand: 'cd backend && npm start',
@@ -60,12 +60,6 @@ const CONFIG = {
     port: parseInt(process.env.REDIS_PORT) || 6379,
     host: process.env.REDIS_HOST || 'localhost'
   },
-  pgadmin: {
-    name: 'pgAdmin',
-    container: 'posting_system_pgadmin',
-    port: 8080,
-    host: 'localhost'
-  }
 };
 
 // ANSI color codes
@@ -241,11 +235,22 @@ async function checkDockerContainer(containerName) {
 async function checkRedis(host, port) {
   return new Promise((resolve) => {
     const { exec } = require('child_process');
-    exec(`redis-cli -h ${host} -p ${port} ping`, (error, stdout) => {
-      if (error || !stdout.includes('PONG')) {
-        resolve({ healthy: false, status: 'DOWN' });
-      } else {
+    const redisPassword = process.env.REDIS_PASSWORD || '';
+    const authArg = redisPassword ? `-a "${redisPassword}"` : '';
+
+    // First try with password, then try docker exec as fallback
+    exec(`redis-cli -h ${host} -p ${port} ${authArg} ping 2>/dev/null`, (error, stdout) => {
+      if (!error && stdout.includes('PONG')) {
         resolve({ healthy: true, status: 'UP' });
+      } else {
+        // Fallback: try via docker exec
+        exec(`docker exec redis redis-cli -a "${redisPassword || 'redis_password'}" PING 2>/dev/null`, (err2, stdout2) => {
+          if (!err2 && stdout2.includes('PONG')) {
+            resolve({ healthy: true, status: 'UP' });
+          } else {
+            resolve({ healthy: false, status: 'DOWN' });
+          }
+        });
       }
     });
   });
@@ -445,13 +450,19 @@ async function checkAllServices() {
     statuses.backend = { running: false, healthy: false, pid: null, uptime: 0 };
   }
 
-  // Check WebSocket (usually same port as backend)
-  statuses.websocket = {
-    running: backendProcess.running,
-    healthy: statuses.backend.healthy,
-    pid: backendProcess.pid,
-    uptime: statuses.backend.uptime
-  };
+  // Check WebSocket Server (separate port from backend)
+  const wsProcess = await getProcessByPort(CONFIG.websocket.port);
+  if (wsProcess.running) {
+    const health = await checkHttpHealth(CONFIG.websocket.host, CONFIG.websocket.port, CONFIG.websocket.healthPath);
+    statuses.websocket = {
+      running: true,
+      healthy: health.healthy,
+      pid: wsProcess.pid,
+      uptime: health.uptime
+    };
+  } else {
+    statuses.websocket = { running: false, healthy: false, pid: null, uptime: 0 };
+  }
 
   // Check PostgreSQL
   const postgres = await checkDockerContainer(CONFIG.postgres.container);
@@ -461,9 +472,6 @@ async function checkAllServices() {
   const redis = await checkRedis(CONFIG.redis.host, CONFIG.redis.port);
   statuses.redis = redis;
 
-  // Check pgAdmin
-  const pgadmin = await checkDockerContainer(CONFIG.pgadmin.container);
-  statuses.pgadmin = pgadmin;
 
   return statuses;
 }
@@ -507,11 +515,6 @@ function displayStatus(statuses) {
   print(`${redisIcon} Redis Cache      : ${statuses.redis.healthy ? 'RUNNING' : 'STOPPED'}`, redisColor);
   print(`   └─ ${CONFIG.redis.host}:${CONFIG.redis.port}`, 'dim');
 
-  // pgAdmin
-  const pgadminIcon = statuses.pgadmin.running ? icons.running : icons.stopped;
-  const pgadminColor = statuses.pgadmin.running ? 'green' : 'red';
-  print(`${pgadminIcon} pgAdmin          : ${statuses.pgadmin.running ? 'RUNNING' : 'STOPPED'}`, pgadminColor);
-  if (statuses.pgadmin.status) print(`   └─ ${statuses.pgadmin.status}`, 'dim');
 
   print('─────────────────────────────────────────────────────────', 'dim');
 }
@@ -538,7 +541,6 @@ async function startAllServices() {
   // Start Docker services first
   await startService('postgres');
   await startService('redis');
-  await startService('pgadmin');
 
   // Wait for databases to be ready
   await new Promise(resolve => setTimeout(resolve, 5000));
@@ -568,7 +570,6 @@ async function stopAllServices() {
   // Stop Docker services
   await stopService('postgres');
   await stopService('redis');
-  await stopService('pgadmin');
 
   print('─────────────────────────────────────────────────────────', 'dim');
   print('✅ All services stopped!', 'green');
@@ -594,7 +595,6 @@ async function selectService(action, rl) {
     print('  [3] WebSocket Server', 'white');
     print('  [4] PostgreSQL', 'white');
     print('  [5] Redis', 'white');
-    print('  [6] pgAdmin', 'white');
     print('  [0] Cancel', 'white');
     print('');
 
@@ -605,8 +605,7 @@ async function selectService(action, rl) {
         '2': 'backend',
         '3': 'websocket',
         '4': 'postgres',
-        '5': 'redis',
-        '6': 'pgadmin'
+        '5': 'redis'
       };
 
       const service = serviceMap[choice];

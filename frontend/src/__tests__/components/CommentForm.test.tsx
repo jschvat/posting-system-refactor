@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CommentForm from '../../components/CommentForm';
-import { renderWithProviders } from '../utils/testUtils';
+import { renderWithProviders } from '../../test-utils';
 
 // Mock the API module
 const mockCreateComment = jest.fn();

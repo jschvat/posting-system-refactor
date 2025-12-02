@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { AuthProvider, useAuth } from '../../contexts/AuthContext';
-import { mockUser } from '../utils/testUtils';
+import { mockUser } from '../../test-utils';
 
 // Mock the API module
 const mockLogin = jest.fn();

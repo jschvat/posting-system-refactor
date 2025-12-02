@@ -261,16 +261,6 @@ const marketplaceApi = {
     return response.data;
   },
 
-  saveListing: async (id: number, folder?: string, notes?: string) => {
-    const response = await apiClient.post(`/marketplace/listings/${id}/save`, { folder, notes });
-    return response.data;
-  },
-
-  unsaveListing: async (id: number) => {
-    const response = await apiClient.delete(`/marketplace/listings/${id}/save`);
-    return response.data;
-  },
-
   // Auction methods
   placeBid: async (listingId: number, bidAmount: number, maxBidAmount?: number) => {
     const response = await apiClient.post(`/marketplace/auctions/${listingId}/bid`, {
@@ -331,6 +321,24 @@ const marketplaceApi = {
       enabled,
       threshold
     });
+    return response.data;
+  },
+
+  saveListing: async (listingId: number, folder?: string, notes?: string) => {
+    const response = await apiClient.post(`/marketplace/saved/${listingId}`, {
+      folder,
+      notes
+    });
+    return response.data;
+  },
+
+  unsaveListing: async (listingId: number) => {
+    const response = await apiClient.delete(`/marketplace/saved/${listingId}`);
+    return response.data;
+  },
+
+  isListingSaved: async (listingId: number) => {
+    const response = await apiClient.get(`/marketplace/saved/${listingId}/status`);
     return response.data;
   },
 
@@ -754,6 +762,28 @@ const marketplaceApi = {
 
   getBirdSupplyBrands: async () => {
     const response = await apiClient.get('/marketplace/bird-supplies/brands/list');
+    return response.data;
+  },
+
+  // Product Q&A
+  getListingQuestions: async (listingId: number, page: number = 1, limit: number = 10) => {
+    const response = await apiClient.get(`/marketplace/listings/${listingId}/questions`, {
+      params: { page, limit }
+    });
+    return response.data;
+  },
+
+  askQuestion: async (listingId: number, questionText: string) => {
+    const response = await apiClient.post(`/marketplace/listings/${listingId}/questions`, {
+      question_text: questionText
+    });
+    return response.data;
+  },
+
+  answerQuestion: async (questionId: number, answerText: string) => {
+    const response = await apiClient.post(`/marketplace/questions/${questionId}/answers`, {
+      answer_text: answerText
+    });
     return response.data;
   }
 };

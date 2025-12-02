@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import marketplaceApi from '../../services/marketplaceApi';
+import { useCart } from '../../contexts/CartContext';
 
 interface Review {
   id: number;
@@ -18,6 +19,28 @@ interface Review {
   created_at: string;
   listing_title?: string;
   is_verified_purchase: boolean;
+}
+
+interface Answer {
+  answer_id: number;
+  answer_text: string;
+  is_seller: boolean;
+  answerer_id: number;
+  answerer_username: string;
+  answerer_first_name: string;
+  answerer_avatar: string | null;
+  created_at: string;
+}
+
+interface Question {
+  question_id: number;
+  question_text: string;
+  question_created_at: string;
+  asker_id: number;
+  asker_username: string;
+  asker_first_name: string;
+  asker_avatar: string | null;
+  answers: Answer[] | null;
 }
 
 interface SupplyProduct {
@@ -364,6 +387,53 @@ const BuyNowButton = styled.button`
   }
 `;
 
+const SaveButton = styled.button<{ $isSaved: boolean }>`
+  width: 100%;
+  background: ${props => props.$isSaved ? '#ffa41c' : 'transparent'};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: ${props => props.$isSaved ? 'white' : '#007185'};
+
+  &:hover {
+    background: ${props => props.$isSaved ? '#fa8900' : '#f7f7f7'};
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
+const ShareButton = styled.button`
+  width: 100%;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #007185;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+`;
+
 const SecureTransaction = styled.div`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.text.muted};
@@ -541,6 +611,203 @@ const LoadingMsg = styled.div`
   color: ${({ theme }) => theme.colors.text.muted};
 `;
 
+// Q&A Section
+const QASection = styled.div`
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const QAHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+`;
+
+const AskQuestionButton = styled.button`
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.text.primary};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.hover};
+  }
+`;
+
+const QuestionForm = styled.div`
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+`;
+
+const QuestionTextarea = styled.textarea`
+  width: 100%;
+  padding: 12px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 12px;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const FormButtons = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+const QuestionButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+
+  ${props => props.variant === 'primary' ? `
+    background: #ffd814;
+    border: 1px solid #fcd200;
+    &:hover {
+      background: #f7ca00;
+    }
+  ` : `
+    background: transparent;
+    border: 1px solid ${props.theme.colors.border};
+    &:hover {
+      background: ${props.theme.colors.hover};
+    }
+  `}
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`;
+
+const QuestionsList = styled.div``;
+
+const QuestionCard = styled.div`
+  padding: 20px 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const QuestionHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+`;
+
+const QAvatar = styled.div`
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #007185;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+`;
+
+const QuestionContent = styled.div`
+  flex: 1;
+`;
+
+const QuestionerName = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const QuestionText = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin: 8px 0 4px 0;
+`;
+
+const QuestionMeta = styled.div`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.text.muted};
+`;
+
+const AnswersList = styled.div`
+  margin-top: 12px;
+  margin-left: 48px;
+`;
+
+const AnswerCard = styled.div`
+  padding: 12px 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const AnswerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+`;
+
+const AnswererName = styled.span`
+  font-weight: 600;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.text.primary};
+`;
+
+const SellerBadge = styled.span`
+  background: #ffa41c;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+`;
+
+const AnswerText = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.text.primary};
+  margin-bottom: 4px;
+`;
+
+const AnswerForm = styled.div`
+  margin-top: 12px;
+`;
+
+const AnswerButton = styled.button`
+  background: none;
+  border: none;
+  color: #007185;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+
+  &:hover {
+    color: #c7511f;
+  }
+`;
+
 // Related Products Section
 const RelatedSection = styled.div`
   margin-top: 48px;
@@ -620,14 +887,23 @@ const getRatingDistribution = (reviews: Review[]) => {
 export const SupplyDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { addItem } = useCart();
 
   const [product, setProduct] = useState<SupplyProduct | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [showQuestionForm, setShowQuestionForm] = useState(false);
+  const [questionText, setQuestionText] = useState('');
+  const [submittingQuestion, setSubmittingQuestion] = useState(false);
+  const [answeringQuestionId, setAnsweringQuestionId] = useState<number | null>(null);
+  const [answerText, setAnswerText] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
+  const [savingListing, setSavingListing] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -636,16 +912,35 @@ export const SupplyDetail: React.FC = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    // TODO: Implement actual cart storage (localStorage or API)
-    console.log(`Adding ${quantity}x of product ${product?.id} to cart`);
+    if (!product) return;
+
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: parseFloat(product.price),
+      image: product.primary_image,
+      seller_username: product.seller_username,
+      listing_type: 'supply'
+    }, quantity);
+
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 3000);
   };
 
   const handleBuyNow = () => {
-    // TODO: Navigate to checkout with this item
-    console.log(`Buying now: ${quantity}x of product ${product?.id}`);
-    alert('Buy Now functionality coming soon!');
+    if (!product) return;
+
+    // Add to cart and navigate to checkout
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: parseFloat(product.price),
+      image: product.primary_image,
+      seller_username: product.seller_username,
+      listing_type: 'supply'
+    }, quantity);
+
+    navigate('/marketplace/cart');
   };
 
   const fetchProduct = async () => {
@@ -675,11 +970,128 @@ export const SupplyDetail: React.FC = () => {
             setRelatedProducts(relatedRes.data.filter((p: any) => p.id !== parseInt(id!)));
           }
         }
+
+        // Fetch Q&A
+        fetchQuestions();
+
+        // Check if saved
+        checkSavedStatus();
       }
     } catch (e) {
       console.error('Error fetching product:', e);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkSavedStatus = async () => {
+    try {
+      const res = await marketplaceApi.isListingSaved(parseInt(id!));
+      if (res.success && res.data) {
+        setIsSaved(res.data.isSaved);
+      }
+    } catch (e) {
+      // User might not be logged in, ignore error
+      console.log('Could not check saved status:', e);
+    }
+  };
+
+  const handleToggleSave = async () => {
+    setSavingListing(true);
+    try {
+      if (isSaved) {
+        await marketplaceApi.unsaveListing(parseInt(id!));
+        setIsSaved(false);
+      } else {
+        await marketplaceApi.saveListing(parseInt(id!));
+        setIsSaved(true);
+      }
+    } catch (e: any) {
+      console.error('Error toggling save:', e);
+      if (e.response?.status === 401) {
+        alert('Please log in to save listings');
+      } else {
+        alert('Failed to save listing');
+      }
+    } finally {
+      setSavingListing(false);
+    }
+  };
+
+  const handleShare = async () => {
+    if (!product) return;
+
+    const shareData = {
+      title: product.title,
+      text: `Check out this product: ${product.title}`,
+      url: window.location.href
+    };
+
+    // Try to use native share API if available
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        // User cancelled or share failed
+        console.log('Share cancelled');
+      }
+    } else {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Product link copied to clipboard!');
+      } catch (e) {
+        // Fallback: show the URL
+        alert(`Share this link:\n${window.location.href}`);
+      }
+    }
+  };
+
+  const fetchQuestions = async () => {
+    try {
+      const res = await marketplaceApi.getListingQuestions(parseInt(id!), 1, 20);
+      if (res.success && res.data) {
+        setQuestions(res.data.questions || []);
+      }
+    } catch (e) {
+      console.error('Error fetching questions:', e);
+    }
+  };
+
+  const handleAskQuestion = async () => {
+    if (!questionText.trim() || questionText.length < 5) {
+      alert('Question must be at least 5 characters long');
+      return;
+    }
+
+    setSubmittingQuestion(true);
+    try {
+      await marketplaceApi.askQuestion(parseInt(id!), questionText);
+      setQuestionText('');
+      setShowQuestionForm(false);
+      await fetchQuestions();
+    } catch (e) {
+      console.error('Error posting question:', e);
+      alert('Failed to post question');
+    } finally {
+      setSubmittingQuestion(false);
+    }
+  };
+
+  const handleAnswerQuestion = async (questionId: number) => {
+    if (!answerText.trim()) {
+      alert('Answer cannot be empty');
+      return;
+    }
+
+    try {
+      await marketplaceApi.answerQuestion(questionId, answerText);
+      setAnswerText('');
+      setAnsweringQuestionId(null);
+      await fetchQuestions();
+    } catch (e) {
+      console.error('Error posting answer:', e);
+      alert('Failed to post answer');
     }
   };
 
@@ -807,6 +1219,20 @@ export const SupplyDetail: React.FC = () => {
           </AddToCartButton>
           <BuyNowButton onClick={handleBuyNow}>Buy Now</BuyNowButton>
 
+          <SaveButton
+            $isSaved={isSaved}
+            onClick={handleToggleSave}
+            disabled={savingListing}
+          >
+            <span>{isSaved ? '❤️' : '🤍'}</span>
+            {isSaved ? 'Saved' : 'Save for later'}
+          </SaveButton>
+
+          <ShareButton onClick={handleShare}>
+            <span>🔗</span>
+            Share
+          </ShareButton>
+
           <SecureTransaction>🔒 Secure transaction</SecureTransaction>
 
           <SellerInfo>
@@ -886,6 +1312,131 @@ export const SupplyDetail: React.FC = () => {
           )}
         </ReviewsList>
       </ReviewsSection>
+
+      {/* Q&A Section */}
+      <QASection>
+        <QAHeader>
+          <SectionTitle>Customer questions & answers</SectionTitle>
+          <AskQuestionButton onClick={() => setShowQuestionForm(!showQuestionForm)}>
+            Ask a question
+          </AskQuestionButton>
+        </QAHeader>
+
+        {showQuestionForm && (
+          <QuestionForm>
+            <QuestionTextarea
+              value={questionText}
+              onChange={(e) => setQuestionText(e.target.value)}
+              placeholder="Ask a question about this product..."
+              maxLength={1000}
+            />
+            <FormButtons>
+              <QuestionButton
+                variant="primary"
+                onClick={handleAskQuestion}
+                disabled={submittingQuestion}
+              >
+                {submittingQuestion ? 'Submitting...' : 'Submit Question'}
+              </QuestionButton>
+              <QuestionButton
+                variant="secondary"
+                onClick={() => {
+                  setShowQuestionForm(false);
+                  setQuestionText('');
+                }}
+              >
+                Cancel
+              </QuestionButton>
+            </FormButtons>
+          </QuestionForm>
+        )}
+
+        <QuestionsList>
+          {questions.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+              No questions yet. Be the first to ask!
+            </div>
+          ) : (
+            questions.map(question => (
+              <QuestionCard key={question.question_id}>
+                <QuestionHeader>
+                  <QAvatar>
+                    {question.asker_first_name?.[0]?.toUpperCase() || 'U'}
+                  </QAvatar>
+                  <QuestionContent>
+                    <QuestionerName>{question.asker_first_name || question.asker_username}</QuestionerName>
+                    <QuestionMeta>
+                      Asked on {new Date(question.question_created_at).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </QuestionMeta>
+                  </QuestionContent>
+                </QuestionHeader>
+
+                <QuestionText>{question.question_text}</QuestionText>
+
+                {question.answers && question.answers.length > 0 && (
+                  <AnswersList>
+                    {question.answers.map(answer => (
+                      <AnswerCard key={answer.answer_id}>
+                        <AnswerHeader>
+                          <AnswererName>
+                            {answer.answerer_first_name || answer.answerer_username}
+                          </AnswererName>
+                          {answer.is_seller && <SellerBadge>SELLER</SellerBadge>}
+                        </AnswerHeader>
+                        <AnswerText>{answer.answer_text}</AnswerText>
+                        <QuestionMeta>
+                          {new Date(answer.created_at).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </QuestionMeta>
+                      </AnswerCard>
+                    ))}
+                  </AnswersList>
+                )}
+
+                {answeringQuestionId === question.question_id ? (
+                  <AnswerForm>
+                    <QuestionTextarea
+                      value={answerText}
+                      onChange={(e) => setAnswerText(e.target.value)}
+                      placeholder="Write your answer..."
+                      maxLength={1000}
+                      style={{ minHeight: '60px' }}
+                    />
+                    <FormButtons>
+                      <QuestionButton
+                        variant="primary"
+                        onClick={() => handleAnswerQuestion(question.question_id)}
+                      >
+                        Post Answer
+                      </QuestionButton>
+                      <QuestionButton
+                        variant="secondary"
+                        onClick={() => {
+                          setAnsweringQuestionId(null);
+                          setAnswerText('');
+                        }}
+                      >
+                        Cancel
+                      </QuestionButton>
+                    </FormButtons>
+                  </AnswerForm>
+                ) : (
+                  <AnswerButton onClick={() => setAnsweringQuestionId(question.question_id)}>
+                    Answer this question
+                  </AnswerButton>
+                )}
+              </QuestionCard>
+            ))
+          )}
+        </QuestionsList>
+      </QASection>
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (

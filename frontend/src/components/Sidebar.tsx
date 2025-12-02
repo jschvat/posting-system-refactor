@@ -2,9 +2,12 @@
  * Sidebar component - left navigation panel
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import { marketplacePermissionsApi } from '../services/marketplacePermissionsApi';
+import { useAuth } from '../contexts/AuthContext';
 
 // Styled components
 const SidebarContent = styled.div`
@@ -178,13 +181,33 @@ const StatValue = styled.span`
  */
 const Sidebar: React.FC = () => {
   const location = useLocation();
+  const { state } = useAuth();
   const [isMarketplaceOpen, setIsMarketplaceOpen] = useState(false);
 
-  // Mock user data
-  const mockUser = {
+  // Use actual user if logged in, fallback to mock
+  const currentUser = state.user || {
     id: 1,
     username: 'demouser'
   };
+
+  // Check if user is admin
+  const isAdmin = state.user?.id === 1;
+
+  // Fetch marketplace permissions
+  const { data: permissionsData } = useQuery({
+    queryKey: ['marketplace-permissions'],
+    queryFn: marketplacePermissionsApi.getMyPermissions,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  const accessibleMarketplaces = permissionsData?.accessible_marketplaces || [];
+
+  // Auto-open marketplace dropdown if on a marketplace page
+  useEffect(() => {
+    if (location.pathname.startsWith('/marketplace')) {
+      setIsMarketplaceOpen(true);
+    }
+  }, [location.pathname]);
 
   const isActive = (path: string): boolean => {
     if (path === '/') {
@@ -197,6 +220,11 @@ const Sidebar: React.FC = () => {
 
   const toggleMarketplace = () => {
     setIsMarketplaceOpen(!isMarketplaceOpen);
+  };
+
+  // Helper to check if user has access to a marketplace
+  const hasMarketplaceAccess = (slug: string): boolean => {
+    return accessibleMarketplaces.some(m => m.slug === slug);
   };
 
   return (
@@ -244,6 +272,25 @@ const Sidebar: React.FC = () => {
                   Browse Marketplace
                 </SubNavLink>
               </li>
+
+              {/* Show bird marketplace if user has access */}
+              {hasMarketplaceAccess('birds') && (
+                <li>
+                  <SubNavLink to="/marketplace/birds" $isActive={isActive('/marketplace/birds')}>
+                    🦜 Bird Breeders
+                  </SubNavLink>
+                </li>
+              )}
+
+              {/* Show bird supplies marketplace if user has access */}
+              {hasMarketplaceAccess('bird-supplies') && (
+                <li>
+                  <SubNavLink to="/marketplace/birds/supplies" $isActive={isActive('/marketplace/birds/supplies')}>
+                    🪶 Bird Supplies
+                  </SubNavLink>
+                </li>
+              )}
+
               <li>
                 <SubNavLink to="/marketplace/create" $isActive={isActive('/marketplace/create')}>
                   Create Listing
@@ -276,8 +323,8 @@ const Sidebar: React.FC = () => {
 
           <NavItem>
             <NavLink
-              to={`/user/${mockUser.id}`}
-              $isActive={isActive(`/user/${mockUser.id}`)}
+              to={`/user/${currentUser.id}`}
+              $isActive={isActive(`/user/${currentUser.id}`)}
             >
               <IconPlaceholder>👤</IconPlaceholder>
               My Profile
@@ -285,6 +332,21 @@ const Sidebar: React.FC = () => {
           </NavItem>
         </NavList>
       </Section>
+
+      {/* Admin Section - only visible to admin */}
+      {isAdmin && (
+        <Section>
+          <SectionTitle>Admin</SectionTitle>
+          <NavList>
+            <NavItem>
+              <NavLink to="/admin/marketplace-permissions" $isActive={isActive('/admin/marketplace-permissions')}>
+                <IconPlaceholder>🔑</IconPlaceholder>
+                Marketplace Permissions
+              </NavLink>
+            </NavItem>
+          </NavList>
+        </Section>
+      )}
 
       {/* Quick Stats */}
       <Section>

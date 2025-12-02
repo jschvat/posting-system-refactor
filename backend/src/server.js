@@ -56,6 +56,8 @@ const marketplacePayoutsRoutes = require('./routes/marketplacePayouts');
 const marketplaceBirdsRoutes = require('./routes/marketplaceBirds');
 const marketplaceRatingsRoutes = require('./routes/marketplaceRatings');
 const marketplaceBirdSuppliesRoutes = require('./routes/marketplaceBirdSupplies');
+const marketplaceQuestionsRoutes = require('./routes/marketplaceQuestions');
+const marketplacePermissionsRoutes = require('./routes/marketplacePermissions');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -120,10 +122,8 @@ if (config.database.logging) {
 }
 
 // Static file serving for uploaded media
-// Note: Files are uploaded to src/uploads by the media routes
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// Serve marketplace uploads from project root
-app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
+// Files are uploaded to backend/uploads directory
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/media', express.static(path.join(__dirname, '../public/media')));
 
 // Health check endpoint
@@ -172,6 +172,8 @@ app.use('/api/marketplace/payouts', marketplacePayoutsRoutes);
 app.use('/api/marketplace/birds', marketplaceBirdsRoutes);
 app.use('/api/marketplace/ratings', marketplaceRatingsRoutes);
 app.use('/api/marketplace/bird-supplies', marketplaceBirdSuppliesRoutes);
+app.use('/api/marketplace', marketplaceQuestionsRoutes);
+app.use('/api/marketplace-permissions', marketplacePermissionsRoutes);
 
 // Catch-all route for undefined endpoints
 app.use(notFound);

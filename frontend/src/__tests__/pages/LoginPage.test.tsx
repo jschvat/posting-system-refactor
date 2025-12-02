@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoginPage from '../../pages/LoginPage';
-import { renderWithProviders, mockUser } from '../utils/testUtils';
+import { renderWithProviders, mockUser } from '../../test-utils';
 
 // Mock the API module
 const mockLogin = jest.fn();

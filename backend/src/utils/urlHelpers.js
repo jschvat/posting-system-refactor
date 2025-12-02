@@ -14,11 +14,13 @@ const getApiBaseUrl = () => {
 /**
  * Converts a relative path to a full URL
  * If the path is already a full URL, returns it unchanged
+ * In development, returns relative paths to allow mobile devices to work
  *
  * @param {string|null|undefined} relativePath - The relative path to convert
- * @returns {string|null} The full URL or null if no path provided
+ * @param {boolean} forceAbsolute - Force absolute URL even in development
+ * @returns {string|null} The full URL or relative path, or null if no path provided
  */
-const getFullUrl = (relativePath) => {
+const getFullUrl = (relativePath, forceAbsolute = false) => {
   if (!relativePath) return null;
 
   // If already a full URL, return as-is
@@ -28,6 +30,13 @@ const getFullUrl = (relativePath) => {
 
   // Ensure path starts with /
   const path = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+
+  // In development, return relative URLs unless forced, so mobile devices can use their network IP
+  // In production, return absolute URLs
+  if (process.env.NODE_ENV === 'development' && !forceAbsolute) {
+    return path;
+  }
+
   return `${getApiBaseUrl()}${path}`;
 };
 

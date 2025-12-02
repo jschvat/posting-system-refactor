@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import GroupCard from '../../../components/groups/GroupCard';
-import { renderWithProviders, mockGroup, mockUser } from '../../utils/testUtils';
+import { renderWithProviders, mockGroup, mockUser } from '../../../test-utils';
 
 describe('GroupCard', () => {
   const mockOnJoin = jest.fn();

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 import MessageBubble from '../../../components/messaging/MessageBubble';
-import { mockMessage, mockUser } from '../../utils/testUtils';
+import { mockMessage, mockUser } from '../../../test-utils';
 import { theme } from '../../../styles/theme';
 
 const renderWithTheme = (component: React.ReactElement) => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import marketplaceApi from '../../services/marketplaceApi';
+import { ImageUpload } from '../../components/marketplace/ImageUpload';
 
 const Container = styled.div`
   max-width: 900px;
@@ -179,10 +180,18 @@ const ErrorMessage = styled.div`
   margin-bottom: 20px;
 `;
 
+const HelpText = styled.span`
+  display: block;
+  font-size: 12px;
+  color: ${props => props.theme.colors.text.muted};
+  margin-top: 4px;
+`;
+
 export const CreateBirdListing: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [images, setImages] = useState<File[]>([]);
 
   const [formData, setFormData] = useState({
     // Basic listing fields
@@ -268,6 +277,17 @@ export const CreateBirdListing: React.FC = () => {
 
       if (!data.success) {
         throw new Error(data.error || 'Failed to create listing');
+      }
+
+      // Upload images if any were provided
+      const listingId = data.data.id;
+      if (images.length > 0) {
+        try {
+          await marketplaceApi.uploadImages(listingId, images);
+        } catch (imageErr) {
+          console.error('Error uploading images:', imageErr);
+          // Don't fail the entire listing creation if images fail
+        }
       }
 
       // Navigate to the bird marketplace
@@ -375,6 +395,18 @@ export const CreateBirdListing: React.FC = () => {
               />
             </FormGroup>
           </Row>
+        </Section>
+
+        {/* Bird Images */}
+        <Section>
+          <SectionTitle>Bird Images</SectionTitle>
+          <ImageUpload
+            images={images}
+            onImagesChange={setImages}
+            maxImages={8}
+            maxSizeMB={5}
+          />
+          <HelpText>Upload up to 8 images of your bird. First image will be the primary listing photo.</HelpText>
         </Section>
 
         <Section>

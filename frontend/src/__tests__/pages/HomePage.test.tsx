@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import HomePage from '../../pages/HomePage';
-import { renderWithProviders, mockPost, mockUser } from '../utils/testUtils';
+import { renderWithProviders, mockPost, mockUser } from '../../test-utils';
 
 // Mock the API module
 const mockGetPosts = jest.fn();

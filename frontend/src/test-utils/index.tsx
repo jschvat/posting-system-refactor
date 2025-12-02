@@ -1,19 +1,19 @@
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'styled-components';
-import { AuthProvider } from '../../contexts/AuthContext';
-import { WebSocketProvider } from '../../contexts/WebSocketContext';
-import { ToastProvider } from '../../components/Toast';
-import { theme } from '../../styles/theme';
+import { AuthProvider } from '../contexts/AuthContext';
+import { WebSocketProvider } from '../contexts/WebSocketContext';
+import { ToastProvider } from '../components/Toast';
+import { theme } from '../styles/theme';
 
 // Create a fresh QueryClient for each test
 const createTestQueryClient = () => new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
-      cacheTime: 0,
+      gcTime: 0, // React Query v5 renamed cacheTime to gcTime
     },
     mutations: {
       retry: false,
@@ -31,7 +31,7 @@ export const AllProviders: React.FC<AllProvidersProps> = ({ children, queryClien
   const testQueryClient = queryClient || createTestQueryClient();
 
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <QueryClientProvider client={testQueryClient}>
         <ThemeProvider theme={theme}>
           <AuthProvider>
@@ -43,7 +43,7 @@ export const AllProviders: React.FC<AllProvidersProps> = ({ children, queryClien
           </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
-    </BrowserRouter>
+    </MemoryRouter>
   );
 };
 
@@ -111,16 +111,37 @@ export const mockComment = {
 
 // Mock group data
 export const mockGroup = {
-  group_id: 1,
+  id: 1,
   name: 'Test Group',
   slug: 'test-group',
+  display_name: 'Test Group',
   description: 'Test description',
-  icon_url: null,
+  icon_url: undefined,
+  avatar_url: undefined,
+  banner_url: undefined,
   visibility: 'public' as const,
-  created_at: '2024-01-01T00:00:00Z',
+  post_approval_required: false,
+  allow_text_posts: true,
+  allow_link_posts: true,
+  allow_image_posts: true,
+  allow_video_posts: true,
+  allow_poll_posts: true,
+  moderator_can_remove_posts: true,
+  moderator_can_remove_comments: true,
+  moderator_can_ban_members: true,
+  moderator_can_approve_posts: true,
+  moderator_can_approve_members: true,
+  moderator_can_pin_posts: true,
+  moderator_can_lock_posts: true,
+  creator_id: 1,
   member_count: 10,
   post_count: 5,
-  creator_id: 1,
+  rules: undefined,
+  conversation_id: undefined,
+  settings: undefined,
+  created_at: '2024-01-01T00:00:00Z',
+  updated_at: '2024-01-01T00:00:00Z',
+  user_membership: undefined,
 };
 
 // Mock message data

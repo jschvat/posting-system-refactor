@@ -123,6 +123,95 @@ router.put('/:listingId/notes', authenticate, async (req, res) => {
 });
 
 /**
+ * POST /api/marketplace/saved/:listingId
+ * Save a listing
+ */
+router.post('/:listingId', authenticate, async (req, res) => {
+  try {
+    const listingId = parseInt(req.params.listingId);
+    const { folder, notes } = req.body;
+
+    const saved = await MarketplaceSaved.save(
+      req.user.id,
+      listingId,
+      folder || null,
+      notes || null
+    );
+
+    res.status(201).json({
+      success: true,
+      data: saved,
+      message: 'Listing saved successfully'
+    });
+  } catch (error) {
+    console.error('Error saving listing:', error);
+    if (error.code === '23505') { // Unique constraint violation
+      return res.status(400).json({
+        success: false,
+        error: 'Listing already saved'
+      });
+    }
+    res.status(500).json({
+      success: false,
+      error: 'Failed to save listing'
+    });
+  }
+});
+
+/**
+ * DELETE /api/marketplace/saved/:listingId
+ * Unsave a listing
+ */
+router.delete('/:listingId', authenticate, async (req, res) => {
+  try {
+    const listingId = parseInt(req.params.listingId);
+
+    const deleted = await MarketplaceSaved.unsave(req.user.id, listingId);
+
+    if (!deleted) {
+      return res.status(404).json({
+        success: false,
+        error: 'Saved listing not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Listing removed from saved'
+    });
+  } catch (error) {
+    console.error('Error unsaving listing:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to unsave listing'
+    });
+  }
+});
+
+/**
+ * GET /api/marketplace/saved/:listingId/status
+ * Check if listing is saved
+ */
+router.get('/:listingId/status', authenticate, async (req, res) => {
+  try {
+    const listingId = parseInt(req.params.listingId);
+
+    const isSaved = await MarketplaceSaved.isSaved(req.user.id, listingId);
+
+    res.json({
+      success: true,
+      data: { isSaved }
+    });
+  } catch (error) {
+    console.error('Error checking saved status:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to check saved status'
+    });
+  }
+});
+
+/**
  * PUT /api/marketplace/saved/:listingId/price-alert
  * Set price alert for saved listing
  */
