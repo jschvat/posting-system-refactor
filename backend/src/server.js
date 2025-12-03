@@ -21,6 +21,9 @@ const { initializeDatabase, testConnection, closeConnection } = require('./confi
 // Import cache service
 const cache = require('./services/CacheService');
 
+// Import upload configuration
+const uploadConfig = require('./config/uploads');
+
 // Import routes
 const authRoutes = require('./routes/auth');
 const postsRoutes = require('./routes/posts/index');
@@ -122,8 +125,8 @@ if (config.database.logging) {
 }
 
 // Static file serving for uploaded media
-// Files are uploaded to backend/uploads directory
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// Files are served from centralized uploads directory at project root
+app.use('/uploads', express.static(uploadConfig.baseDir));
 app.use('/media', express.static(path.join(__dirname, '../public/media')));
 
 // Health check endpoint

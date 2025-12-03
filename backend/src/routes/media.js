@@ -10,7 +10,7 @@ const fs = require('fs').promises;
 const sharp = require('sharp');
 const { authenticate } = require('../middleware/auth');
 const { handleValidationErrors } = require('../middleware/validation');
-const { uploads, processImage } = require('../services/fileUploadService');
+const { uploads, processImage, uploadConfig } = require('../services/fileUploadService');
 
 // Import centralized configuration
 const { config } = require('../../../config/app.config');
@@ -140,9 +140,8 @@ router.post('/upload',
               .toFile(thumbnailPath);
           }
 
-          // Get relative path for database storage
-          const relativePath = path.relative(path.join(__dirname, config.upload.uploadDir), processedPath);
-          const fileUrl = `/uploads/${relativePath.replace(/\\/g, '/')}`;
+          // Get URL path for database storage using centralized config
+          const fileUrl = uploadConfig.filePathToUrl(processedPath);
 
           // Create media record in database
           const media = await Media.create({
@@ -456,8 +455,8 @@ router.delete('/:id',
         });
       }
 
-      // Delete the physical file
-      const filePath = path.join(__dirname, '../../../uploads', media.file_path);
+      // Delete the physical file using centralized config
+      const filePath = path.join(uploadConfig.baseDir, media.file_path);
       try {
         await fs.unlink(filePath);
 

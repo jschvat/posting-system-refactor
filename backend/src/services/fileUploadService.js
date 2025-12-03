@@ -9,17 +9,21 @@ const path = require('path');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
 
+// Import centralized upload configuration
+const uploadConfig = require('../config/uploads');
+
 /**
  * Create a multer storage configuration for file uploads
  *
- * @param {string} uploadPath - Relative path from routes directory (e.g., '../uploads/avatars')
+ * @param {string} uploadType - Upload type key from uploadConfig (e.g., 'avatars', 'posts')
  * @param {string} filePrefix - Prefix for generated filenames (e.g., 'user-avatar', 'group-banner')
  * @returns {multer.StorageEngine} Configured multer storage engine
  */
-const createStorage = (uploadPath, filePrefix) => {
+const createStorage = (uploadType, filePrefix) => {
   return multer.diskStorage({
     destination: async (req, file, cb) => {
-      const uploadDir = path.join(__dirname, '..', uploadPath);
+      // Use centralized config to get upload directory
+      const uploadDir = uploadConfig.getUploadDir(uploadType);
       try {
         await fs.mkdir(uploadDir, { recursive: true });
         cb(null, uploadDir);
@@ -81,7 +85,7 @@ const createMediaFilter = () => {
  * Create a configured multer upload instance
  *
  * @param {object} options - Configuration options
- * @param {string} options.uploadPath - Upload directory path
+ * @param {string} options.uploadType - Upload type key from uploadConfig (e.g., 'avatars', 'posts')
  * @param {string} options.filePrefix - Filename prefix
  * @param {number} options.maxSize - Max file size in bytes (default: 5MB)
  * @param {string} options.filterType - 'image' or 'media' (default: 'image')
@@ -90,14 +94,14 @@ const createMediaFilter = () => {
  * @returns {multer.Multer} Configured multer instance
  */
 const createUploadMiddleware = ({
-  uploadPath,
+  uploadType,
   filePrefix,
   maxSize = 5 * 1024 * 1024, // 5MB default
   filterType = 'image',
   single = true,
   fieldName = 'file'
 }) => {
-  const storage = createStorage(uploadPath, filePrefix);
+  const storage = createStorage(uploadType, filePrefix);
   const fileFilter = filterType === 'media' ? createMediaFilter() : createImageFilter();
 
   const upload = multer({
@@ -202,10 +206,11 @@ const deleteFile = async (filePath) => {
 
 /**
  * Common upload configurations for different use cases
+ * Uses uploadType keys that map to uploadConfig.getUploadDir()
  */
 const uploadConfigs = {
   userAvatar: {
-    uploadPath: '../uploads/users/avatars',
+    uploadType: 'avatars',
     filePrefix: 'user-avatar',
     maxSize: 5 * 1024 * 1024, // 5MB
     filterType: 'image',
@@ -218,7 +223,7 @@ const uploadConfigs = {
   },
 
   userBanner: {
-    uploadPath: '../uploads/users/banners',
+    uploadType: 'avatars', // User banners stored in avatars for now
     filePrefix: 'user-banner',
     maxSize: 10 * 1024 * 1024, // 10MB
     filterType: 'image',
@@ -231,7 +236,7 @@ const uploadConfigs = {
   },
 
   groupAvatar: {
-    uploadPath: '../uploads/groups/avatars',
+    uploadType: 'groupAvatars',
     filePrefix: 'group-avatar',
     maxSize: 5 * 1024 * 1024,
     filterType: 'image',
@@ -244,7 +249,7 @@ const uploadConfigs = {
   },
 
   groupBanner: {
-    uploadPath: '../uploads/groups/banners',
+    uploadType: 'groupBanners',
     filePrefix: 'group-banner',
     maxSize: 10 * 1024 * 1024,
     filterType: 'image',
@@ -257,7 +262,7 @@ const uploadConfigs = {
   },
 
   postMedia: {
-    uploadPath: '../uploads/posts',
+    uploadType: 'posts',
     filePrefix: 'post-media',
     maxSize: 50 * 1024 * 1024, // 50MB
     filterType: 'media',
@@ -268,14 +273,14 @@ const uploadConfigs = {
   },
 
   messageAttachment: {
-    uploadPath: '../uploads/messages',
+    uploadType: 'messages',
     filePrefix: 'message-attachment',
     maxSize: 20 * 1024 * 1024, // 20MB
     filterType: 'media'
   },
 
   marketplaceImage: {
-    uploadPath: '../uploads/marketplace',
+    uploadType: 'marketplace',
     filePrefix: 'listing-image',
     maxSize: 10 * 1024 * 1024,
     filterType: 'image',
@@ -308,5 +313,6 @@ module.exports = {
   createThumbnail,
   deleteFile,
   uploadConfigs,
-  uploads
+  uploads,
+  uploadConfig // Export centralized config for routes that need direct access
 };

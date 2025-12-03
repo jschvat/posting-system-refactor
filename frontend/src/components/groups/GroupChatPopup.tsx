@@ -4,6 +4,16 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useWebSocket } from '../../contexts/WebSocketContext';
 import { ConversationView } from '../messaging/ConversationView';
 import { Conversation, Message } from '../../services/api/messagesApi';
+import { getApiBaseUrl } from '../../config/app.config';
+
+// Helper function to get full image URL
+const getFullImageUrl = (url: string | undefined): string | undefined => {
+  if (!url) return undefined;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return `${getApiBaseUrl()}${url}`;
+};
 
 interface GroupChatPopupProps {
   conversation: Conversation;
@@ -189,7 +199,7 @@ const GroupChatPopup: React.FC<GroupChatPopupProps> = ({
                   <MemberItem key={participant.user_id || participant.id}>
                     <MemberAvatar>
                       {participant.avatar_url ? (
-                        <img src={participant.avatar_url} alt={participant.username} />
+                        <img src={getFullImageUrl(participant.avatar_url)} alt={participant.username} />
                       ) : (
                         <div>{participant.username?.[0]?.toUpperCase() || '?'}</div>
                       )}

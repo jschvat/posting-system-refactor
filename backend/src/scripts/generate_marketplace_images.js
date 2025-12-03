@@ -7,6 +7,12 @@ const fs = require('fs');
 const path = require('path');
 const { Client } = require('pg');
 
+// Load environment variables
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
+// Base uploads directory (from .env or default to project root /uploads)
+const UPLOADS_BASE = path.resolve(__dirname, '..', process.env.UPLOADS_BASE_DIR || '../uploads');
+
 // Database configuration
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
@@ -101,7 +107,7 @@ async function generateMarketplaceImages() {
     await client.connect();
     console.log('Connected to database');
 
-    const uploadsDir = path.join(__dirname, '../../../uploads/marketplace/images');
+    const uploadsDir = path.join(UPLOADS_BASE, 'marketplace/images');
 
     // Ensure directory exists
     if (!fs.existsSync(uploadsDir)) {

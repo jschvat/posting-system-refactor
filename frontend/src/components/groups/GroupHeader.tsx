@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useAuth } from '../../contexts/AuthContext';
 import { Group } from '../../types/group';
 import { formatNumber } from '../../utils/numberHelpers';
+import { getApiBaseUrl } from '../../config/app.config';
 
 interface GroupHeaderProps {
   group: Group;
@@ -16,6 +17,17 @@ interface GroupHeaderProps {
   canModerate: boolean;
   groupSlug: string;
 }
+
+// Helper function to get full image URL
+const getFullImageUrl = (url: string | undefined): string | undefined => {
+  if (!url) return undefined;
+  // If URL is already absolute (starts with http:// or https://), return as-is
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  // Otherwise, prepend API base URL
+  return `${getApiBaseUrl()}${url}`;
+};
 
 const GroupHeaderComponent: React.FC<GroupHeaderProps> = ({
   group,
@@ -34,10 +46,10 @@ const GroupHeaderComponent: React.FC<GroupHeaderProps> = ({
 
   return (
     <GroupHeader>
-      {group.banner_url && <Banner src={group.banner_url} alt={group.display_name} />}
+      {group.banner_url && <Banner src={getFullImageUrl(group.banner_url)} alt={group.display_name} />}
       <GroupInfo>
         <GroupIconSection>
-          {group.avatar_url && <GroupIcon src={group.avatar_url} alt={group.display_name} />}
+          {group.avatar_url && <GroupIcon src={getFullImageUrl(group.avatar_url)} alt={group.display_name} />}
           {!group.avatar_url && <DefaultIcon>{group.name.charAt(0).toUpperCase()}</DefaultIcon>}
         </GroupIconSection>
         <GroupMeta>

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { authenticate: authenticateToken } = require('../../middleware/auth');
-const { uploads, processImage } = require('../../services/fileUploadService');
+const { uploads, processImage, uploadConfig } = require('../../services/fileUploadService');
 const Group = require('../../models/Group');
 const GroupMembership = require('../../models/GroupMembership');
 const db = require('../../config/database');
@@ -286,8 +286,8 @@ router.post('/:slug/avatar', authenticateToken, uploads.groupAvatar.single('avat
       quality: 85
     });
 
-    // Update group avatar URL
-    const avatar_url = `/uploads/groups/avatars/${path.basename(processedPath)}`;
+    // Update group avatar URL using centralized config
+    const avatar_url = uploadConfig.getUrlPath('groupAvatars', path.basename(processedPath));
     const updatedGroup = await Group.update(group.id, { avatar_url });
 
     res.json({
@@ -347,8 +347,8 @@ router.post('/:slug/banner', authenticateToken, uploads.groupBanner.single('bann
       quality: 85
     });
 
-    // Update group banner URL
-    const banner_url = `/uploads/groups/banners/${path.basename(processedPath)}`;
+    // Update group banner URL using centralized config
+    const banner_url = uploadConfig.getUrlPath('groupBanners', path.basename(processedPath));
     const updatedGroup = await Group.update(group.id, { banner_url });
 
     res.json({

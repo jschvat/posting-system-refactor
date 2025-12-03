@@ -3,6 +3,12 @@ const path = require('path');
 const https = require('https');
 const { Client } = require('pg');
 
+// Load environment variables
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+
+// Base uploads directory (from .env or default to project root /uploads)
+const UPLOADS_BASE = path.resolve(__dirname, '..', process.env.UPLOADS_BASE_DIR || '../uploads');
+
 // Database configuration
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
@@ -151,7 +157,7 @@ async function downloadMarketplaceImages() {
 
   try {
     // Create uploads directory
-    const uploadsDir = path.join(__dirname, '../../../uploads/marketplace/images');
+    const uploadsDir = path.join(UPLOADS_BASE, 'marketplace/images');
     fs.mkdirSync(uploadsDir, { recursive: true });
 
     // Delete old images

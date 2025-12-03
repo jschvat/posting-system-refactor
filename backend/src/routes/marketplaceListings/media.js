@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const sharp = require('sharp');
 const { authenticate } = require('../../middleware/auth');
-const { uploads, processImage } = require('../../services/fileUploadService');
+const { uploads, processImage, uploadConfig } = require('../../services/fileUploadService');
 const { config } = require('../../../config/app.config');
 const db = require('../../config/database');
 
@@ -60,9 +60,9 @@ router.post('/:id/images', authenticate, uploads.marketplaceImage.array('images'
           .jpeg({ quality: 80 })
           .toFile(thumbnailPath);
 
-        // Store relative paths
-        const fileUrl = `/uploads/marketplace/${path.basename(file.path)}`;
-        const thumbnailUrl = `/uploads/marketplace/${thumbnailFilename}`;
+        // Store relative paths using centralized config
+        const fileUrl = uploadConfig.getUrlPath('marketplace', path.basename(file.path));
+        const thumbnailUrl = uploadConfig.getUrlPath('marketplace', thumbnailFilename);
 
         // Check if this should be the primary image (first image uploaded)
         const isPrimary = displayOrder === 0;

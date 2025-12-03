@@ -7,6 +7,7 @@ const express = require('express');
 const { body, param, query } = require('express-validator');
 const { authenticate } = require('../middleware/auth');
 const { handleValidationErrors } = require('../middleware/validation');
+const { requirePlatformAdmin, requireAdminOrSelf } = require('../middleware/adminCheck');
 const { query: dbQuery } = require('../config/database');
 
 const router = express.Router();
@@ -130,10 +131,10 @@ router.get('/marketplace-types', authenticate, async (req, res, next) => {
 /**
  * POST /api/marketplace-permissions/grant
  * Grant marketplace access to a user (admin only)
- * TODO: Add admin check middleware
  */
 router.post('/grant',
   authenticate,
+  requirePlatformAdmin,
   [
     body('user_id').isInt({ min: 1 }).withMessage('Valid user ID is required'),
     body('marketplace_slug').trim().notEmpty().withMessage('Marketplace slug is required'),
@@ -145,22 +146,6 @@ router.post('/grant',
     try {
       const grantedBy = req.user.id;
       const { user_id, marketplace_slug, expires_at, notes } = req.body;
-
-      // Check if admin (basic check - enhance this later with proper admin middleware)
-      // For now, only user_id 1 (or users in admin table) can grant permissions
-      const adminCheck = await dbQuery(`
-        SELECT id FROM users WHERE id = $1 AND id = 1
-      `, [grantedBy]);
-
-      if (adminCheck.rows.length === 0) {
-        return res.status(403).json({
-          success: false,
-          error: {
-            message: 'Only administrators can grant marketplace permissions',
-            type: 'FORBIDDEN'
-          }
-        });
-      }
 
       // Get marketplace type ID
       const marketplaceResult = await dbQuery(`
@@ -215,6 +200,7 @@ router.post('/grant',
  */
 router.delete('/revoke',
   authenticate,
+  requirePlatformAdmin,
   [
     body('user_id').isInt({ min: 1 }).withMessage('Valid user ID is required'),
     body('marketplace_slug').trim().notEmpty().withMessage('Marketplace slug is required'),
@@ -222,23 +208,7 @@ router.delete('/revoke',
   ],
   async (req, res, next) => {
     try {
-      const revokedBy = req.user.id;
       const { user_id, marketplace_slug } = req.body;
-
-      // Check if admin
-      const adminCheck = await dbQuery(`
-        SELECT id FROM users WHERE id = $1 AND id = 1
-      `, [revokedBy]);
-
-      if (adminCheck.rows.length === 0) {
-        return res.status(403).json({
-          success: false,
-          error: {
-            message: 'Only administrators can revoke marketplace permissions',
-            type: 'FORBIDDEN'
-          }
-        });
-      }
 
       // Get marketplace type ID
       const marketplaceResult = await dbQuery(`
@@ -295,6 +265,7 @@ router.delete('/revoke',
  */
 router.get('/all-permissions',
   authenticate,
+  requirePlatformAdmin,
   [
     query('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
     query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limit must be between 1 and 100'),
@@ -304,19 +275,6 @@ router.get('/all-permissions',
   ],
   async (req, res, next) => {
     try {
-      const requesterId = req.user.id;
-
-      // Check if admin
-      if (requesterId !== 1) {
-        return res.status(403).json({
-          success: false,
-          error: {
-            message: 'Only administrators can view all permissions',
-            type: 'FORBIDDEN'
-          }
-        });
-      }
-
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 20;
       const offset = (page - 1) * limit;
@@ -403,6 +361,7 @@ router.get('/all-permissions',
  */
 router.get('/search-users',
   authenticate,
+  requirePlatformAdmin,
   [
     query('q').trim().notEmpty().withMessage('Search query is required'),
     query('limit').optional().isInt({ min: 1, max: 50 }).withMessage('Limit must be between 1 and 50'),
@@ -410,19 +369,6 @@ router.get('/search-users',
   ],
   async (req, res, next) => {
     try {
-      const requesterId = req.user.id;
-
-      // Check if admin
-      if (requesterId !== 1) {
-        return res.status(403).json({
-          success: false,
-          error: {
-            message: 'Only administrators can search users',
-            type: 'FORBIDDEN'
-          }
-        });
-      }
-
       const searchQuery = req.query.q;
       const limit = parseInt(req.query.limit) || 10;
 
@@ -457,30 +403,18 @@ router.get('/search-users',
 
 /**
  * GET /api/marketplace-permissions/users/:userId
- * Get marketplace permissions for a specific user (admin only)
+ * Get marketplace permissions for a specific user (admin or self)
  */
 router.get('/users/:userId',
   authenticate,
+  requireAdminOrSelf('userId'),
   [
     param('userId').isInt({ min: 1 }).withMessage('Valid user ID is required'),
     handleValidationErrors
   ],
   async (req, res, next) => {
     try {
-      const requesterId = req.user.id;
       const { userId } = req.params;
-
-      // Check if admin or requesting own permissions
-      const isAdmin = requesterId === 1; // Basic admin check
-      if (!isAdmin && requesterId !== parseInt(userId)) {
-        return res.status(403).json({
-          success: false,
-          error: {
-            message: 'Access denied',
-            type: 'FORBIDDEN'
-          }
-        });
-      }
 
       const result = await dbQuery(`
         SELECT

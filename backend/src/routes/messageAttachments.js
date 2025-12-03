@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { authenticate } = require('../middleware/auth');
-const { uploads } = require('../services/fileUploadService');
+const { uploads, uploadConfig } = require('../services/fileUploadService');
 
 /**
  * @route   POST /api/message-attachments/upload
@@ -22,7 +22,7 @@ router.post('/upload', authenticate, uploads.messageAttachment.single('file'), a
     res.json({
       success: true,
       data: {
-        attachment_url: `/uploads/messages/${req.file.filename}`,
+        attachment_url: uploadConfig.getUrlPath('messages', req.file.filename),
         attachment_type: req.file.mimetype,
         attachment_size: req.file.size,
         attachment_name: req.file.originalname,

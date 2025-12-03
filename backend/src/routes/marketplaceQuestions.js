@@ -4,19 +4,29 @@
  */
 
 const express = require('express');
+const { param, query, body } = require('express-validator');
 const router = express.Router();
 const db = require('../config/database');
-const { authenticate, optionalAuthenticate } = require('../middleware/auth');
+const { authenticate } = require('../middleware/auth');
+const { handleValidationErrors } = require('../middleware/validation');
 
 /**
  * GET /api/marketplace/listings/:listingId/questions
  * Get all questions and answers for a listing
  */
-router.get('/listings/:listingId/questions', async (req, res) => {
+router.get('/listings/:listingId/questions',
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    query('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
+    query('limit').optional().isInt({ min: 1, max: 50 }).withMessage('Limit must be between 1 and 50'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const { listingId } = req.params;
-    const { page = 1, limit = 10 } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
 
     // Get questions with answers
     const result = await db.query(`
@@ -49,7 +59,7 @@ router.get('/listings/:listingId/questions', async (req, res) => {
       GROUP BY lq.id, asker.id
       ORDER BY lq.created_at DESC
       LIMIT $2 OFFSET $3
-    `, [listingId, parseInt(limit), offset]);
+    `, [listingId, limit, offset]);
 
     const totalCount = result.rows.length > 0 ? parseInt(result.rows[0].total_count) : 0;
 
@@ -59,9 +69,9 @@ router.get('/listings/:listingId/questions', async (req, res) => {
         questions: result.rows,
         pagination: {
           total: totalCount,
-          page: parseInt(page),
-          limit: parseInt(limit),
-          totalPages: Math.ceil(totalCount / parseInt(limit))
+          page,
+          limit,
+          totalPages: Math.ceil(totalCount / limit)
         }
       }
     });
@@ -78,26 +88,21 @@ router.get('/listings/:listingId/questions', async (req, res) => {
  * POST /api/marketplace/listings/:listingId/questions
  * Ask a question about a listing
  */
-router.post('/listings/:listingId/questions', authenticate, async (req, res) => {
+router.post('/listings/:listingId/questions',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    body('question_text')
+      .trim()
+      .isLength({ min: 5, max: 1000 })
+      .withMessage('Question must be between 5 and 1000 characters'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const { listingId } = req.params;
     const { question_text } = req.body;
-    const userId = req.user.userId;
-
-    // Validate question text
-    if (!question_text || question_text.trim().length < 5) {
-      return res.status(400).json({
-        success: false,
-        error: 'Question must be at least 5 characters long'
-      });
-    }
-
-    if (question_text.length > 1000) {
-      return res.status(400).json({
-        success: false,
-        error: 'Question must not exceed 1000 characters'
-      });
-    }
+    const userId = req.user.userId || req.user.id;
 
     // Verify listing exists
     const listingCheck = await db.query(
@@ -148,26 +153,21 @@ router.post('/listings/:listingId/questions', authenticate, async (req, res) => 
  * POST /api/marketplace/questions/:questionId/answers
  * Answer a question
  */
-router.post('/questions/:questionId/answers', authenticate, async (req, res) => {
+router.post('/questions/:questionId/answers',
+  authenticate,
+  [
+    param('questionId').isInt({ min: 1 }).withMessage('Valid question ID is required'),
+    body('answer_text')
+      .trim()
+      .isLength({ min: 1, max: 1000 })
+      .withMessage('Answer must be between 1 and 1000 characters'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const { questionId } = req.params;
     const { answer_text } = req.body;
-    const userId = req.user.userId;
-
-    // Validate answer text
-    if (!answer_text || answer_text.trim().length < 1) {
-      return res.status(400).json({
-        success: false,
-        error: 'Answer cannot be empty'
-      });
-    }
-
-    if (answer_text.length > 1000) {
-      return res.status(400).json({
-        success: false,
-        error: 'Answer must not exceed 1000 characters'
-      });
-    }
+    const userId = req.user.userId || req.user.id;
 
     // Get question and listing details
     const questionResult = await db.query(`

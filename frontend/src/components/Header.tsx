@@ -200,6 +200,26 @@ const UserInfo = styled.div`
   }
 `;
 
+const IconButton = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+  }
+`;
+
 /**
  * Header Component
  */
@@ -242,6 +262,7 @@ const Header: React.FC = () => {
 
   const avatarUrl = getUserAvatarUrl(user);
   const hasAvatar: boolean = Boolean(user.avatar_url);
+  const isAdmin = user.id === 1; // Admin check - user ID 1 is admin
 
   return (
     <HeaderContainer>
@@ -269,6 +290,11 @@ const Header: React.FC = () => {
 
         {/* User Section */}
         <UserSection>
+          {isAdmin && (
+            <IconButton to="/admin/marketplace-permissions" title="Admin Settings">
+              ⚙️
+            </IconButton>
+          )}
           <NotificationsPanel />
           <DropdownContainer ref={dropdownRef}>
             <UserAvatar

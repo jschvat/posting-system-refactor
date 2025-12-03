@@ -8,7 +8,7 @@ const express = require('express');
 const { body, param, query } = require('express-validator');
 const { authenticate, requireModifyPermission } = require('../middleware/auth');
 const { handleValidationErrors } = require('../middleware/validation');
-const { uploads, processImage } = require('../services/fileUploadService');
+const { uploads, processImage, uploadConfig } = require('../services/fileUploadService');
 const { buildPagination, buildSearchWhere, buildOrderBy } = require('../utils/queryHelpers');
 const path = require('path');
 
@@ -763,8 +763,8 @@ router.post('/:id/avatar',
         quality: 85
       });
 
-      // Update user avatar URL
-      const avatar_url = `/uploads/users/avatars/${path.basename(processedPath)}`;
+      // Update user avatar URL using centralized config
+      const avatar_url = uploadConfig.getUrlPath('avatars', path.basename(processedPath));
       const updatedUser = await User.update(userId, { avatar_url });
 
       if (!updatedUser) {

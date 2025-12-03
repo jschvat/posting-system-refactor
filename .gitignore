@@ -82,12 +82,15 @@ jspm_packages/
 Thumbs.db
 
 # Uploads (development only - in production, use cloud storage)
-/uploads/images/*
-/uploads/avatars/*
-/uploads/media/*
-!uploads/images/.gitkeep
-!uploads/avatars/.gitkeep
-!uploads/media/.gitkeep
+# Root uploads directory (all uploaded files)
+/uploads/**/*
+!/uploads/.gitkeep
+!/uploads/*/.gitkeep
+!/uploads/**/.gitkeep
+
+# Legacy backend uploads directories (to be removed)
+/backend/uploads/
+/backend/src/uploads/
 
 # Database
 *.sqlite

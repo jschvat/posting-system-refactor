@@ -1,20 +1,32 @@
 const express = require('express');
+const { param, query, body } = require('express-validator');
 const router = express.Router();
 const { authenticate } = require('../middleware/auth');
+const { handleValidationErrors } = require('../middleware/validation');
 const MarketplaceSaved = require('../models/MarketplaceSaved');
 
 /**
  * GET /api/marketplace/saved
  * Get user's saved listings
  */
-router.get('/', authenticate, async (req, res) => {
+router.get('/',
+  authenticate,
+  [
+    query('page').optional().isInt({ min: 1 }).withMessage('Page must be a positive integer'),
+    query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limit must be between 1 and 100'),
+    query('folder').optional().trim().isLength({ max: 100 }).withMessage('Folder name too long'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
-    const { folder, page = 1, limit = 20 } = req.query;
-    const offset = (parseInt(page) - 1) * parseInt(limit);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const folder = req.query.folder;
+    const offset = (page - 1) * limit;
 
     const savedListings = await MarketplaceSaved.findByUser(req.user.id, {
       folder: folder === 'null' ? null : folder,
-      limit: parseInt(limit),
+      limit,
       offset
     });
 
@@ -56,7 +68,14 @@ router.get('/folders', authenticate, async (req, res) => {
  * PUT /api/marketplace/saved/:listingId/folder
  * Update folder for saved listing
  */
-router.put('/:listingId/folder', authenticate, async (req, res) => {
+router.put('/:listingId/folder',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    body('folder').optional({ nullable: true }).trim().isLength({ max: 100 }).withMessage('Folder name too long'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
     const { folder } = req.body;
@@ -91,7 +110,14 @@ router.put('/:listingId/folder', authenticate, async (req, res) => {
  * PUT /api/marketplace/saved/:listingId/notes
  * Update notes for saved listing
  */
-router.put('/:listingId/notes', authenticate, async (req, res) => {
+router.put('/:listingId/notes',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    body('notes').optional({ nullable: true }).trim().isLength({ max: 2000 }).withMessage('Notes cannot exceed 2000 characters'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
     const { notes } = req.body;
@@ -126,7 +152,15 @@ router.put('/:listingId/notes', authenticate, async (req, res) => {
  * POST /api/marketplace/saved/:listingId
  * Save a listing
  */
-router.post('/:listingId', authenticate, async (req, res) => {
+router.post('/:listingId',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    body('folder').optional({ nullable: true }).trim().isLength({ max: 100 }).withMessage('Folder name too long'),
+    body('notes').optional({ nullable: true }).trim().isLength({ max: 2000 }).withMessage('Notes cannot exceed 2000 characters'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
     const { folder, notes } = req.body;
@@ -162,7 +196,13 @@ router.post('/:listingId', authenticate, async (req, res) => {
  * DELETE /api/marketplace/saved/:listingId
  * Unsave a listing
  */
-router.delete('/:listingId', authenticate, async (req, res) => {
+router.delete('/:listingId',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
 
@@ -192,7 +232,13 @@ router.delete('/:listingId', authenticate, async (req, res) => {
  * GET /api/marketplace/saved/:listingId/status
  * Check if listing is saved
  */
-router.get('/:listingId/status', authenticate, async (req, res) => {
+router.get('/:listingId/status',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
 
@@ -215,7 +261,15 @@ router.get('/:listingId/status', authenticate, async (req, res) => {
  * PUT /api/marketplace/saved/:listingId/price-alert
  * Set price alert for saved listing
  */
-router.put('/:listingId/price-alert', authenticate, async (req, res) => {
+router.put('/:listingId/price-alert',
+  authenticate,
+  [
+    param('listingId').isInt({ min: 1 }).withMessage('Valid listing ID is required'),
+    body('enabled').isBoolean().withMessage('Enabled must be a boolean'),
+    body('threshold').optional().isFloat({ min: 0 }).withMessage('Threshold must be a positive number'),
+    handleValidationErrors
+  ],
+  async (req, res) => {
   try {
     const listingId = parseInt(req.params.listingId);
     const { enabled, threshold } = req.body;
